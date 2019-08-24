@@ -2,12 +2,21 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <!--<bean id="sessionRepository" class="org.springframework.session.MapSessionRepository"/>-->
+    <bean id="sessionStrategy" class="seoul.democracy.common.config.SmartHttpSessionStrategy"/>
+    <bean id="multiSessionStrategy"
+            class="org.springframework.session.web.http.SessionRepositoryFilter$MultiHttpSessionStrategyAdapter">
+        <constructor-arg ref="sessionStrategy"/>
+    </bean>
+
+    <bean id="springSessionRepositoryFilter" class="org.springframework.session.web.http.SessionRepositoryFilter">
+        <constructor-arg ref="sessionRepository"/>
+        <property name="httpSessionStrategy" ref="multiSessionStrategy"/>
+    </bean>
 
     <bean id="sessionRepository" class="org.springframework.session.jdbc.JdbcOperationsSessionRepository">
         <constructor-arg index="0" type="javax.sql.DataSource" ref="dataSource-mysql"/>
         <constructor-arg index="1" type="org.springframework.transaction.PlatformTransactionManager"
-                         ref="transactionManager"/>
+                        ref="transactionManager"/>
         <property name="defaultMaxInactiveInterval" value="36000"/>
     </bean>
 
@@ -19,15 +28,4 @@
         <property name="port" value="6379"/>
     </bean>
     -->
-
-    <bean id="sessionStrategy" class="seoul.democracy.common.config.SmartHttpSessionStrategy"/>
-    <bean id="multiSessionStrategy"
-          class="org.springframework.session.web.http.SessionRepositoryFilter$MultiHttpSessionStrategyAdapter">
-        <constructor-arg ref="sessionStrategy"/>
-    </bean>
-
-    <bean id="springSessionRepositoryFilter" class="org.springframework.session.web.http.SessionRepositoryFilter">
-        <constructor-arg ref="sessionRepository"/>
-        <property name="httpSessionStrategy" ref="multiSessionStrategy"/>
-    </bean>
 </beans>

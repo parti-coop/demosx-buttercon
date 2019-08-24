@@ -62,14 +62,6 @@
         <beans:property name="defaultTargetUrl" value="/index.do"/>
     </beans:bean>
 
-    <beans:bean id="authenticationFailureHandler"
-                class="seoul.democracy.common.handler.SiteAuthenticationFailureHandler">
-        <beans:property name="defaultFailureUrl" value="/login.do?login_error=1"/>
-    </beans:bean>
-
-    <beans:bean id="encoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
-    <!--<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>-->
-
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userLoginService">
             <password-encoder ref="encoder"/>
@@ -103,4 +95,9 @@
         <beans:property name="socialService" ref="socialService"/>
     </beans:bean>
 
+    <beans:bean id="authenticationFailureHandler"
+            class="seoul.democracy.common.handler.SiteAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/login.do?login_error=1"/>
+    </beans:bean>
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans:beans>

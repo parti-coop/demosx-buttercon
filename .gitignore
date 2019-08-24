@@ -8,4 +8,6 @@ target/
 .classpath
 .factorypath
 
-src/main/resources/egovframework/egovProps/local.properties
+.vscode
+
+globals-override-*.properties

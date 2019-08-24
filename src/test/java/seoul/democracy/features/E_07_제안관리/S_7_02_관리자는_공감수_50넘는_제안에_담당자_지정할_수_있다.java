@@ -5,13 +5,20 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import seoul.democracy.common.exception.BadRequestException;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalDto;
@@ -30,12 +37,15 @@ import static seoul.democracy.proposal.predicate.ProposalPredicate.equalId;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
+    "file:src/main/resources/egovframework/spring/context-*.xml",
     "file:src/test/resources/egovframework/spring-test/context-*.xml",
     "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
 })
+@Sql({"file:src/test/resources/sql/test-data.sql"})
 @Transactional
 @Rollback
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ActiveProfiles("test")
 public class S_7_02_관리자는_공감수_50넘는_제안에_담당자_지정할_수_있다 {
 
     @Autowired
@@ -51,9 +61,14 @@ public class S_7_02_관리자는_공감수_50넘는_제안에_담당자_지정�
     private final Long otherManagerId = 12L;
     private final Long userId = 21L;
 
+    @Mock
+    private ServletRequestAttributes attrs;
+
+
     @Before
     public void setUp() throws Exception {
-
+        MockitoAnnotations.initMocks(this);
+        RequestContextHolder.setRequestAttributes(attrs);
     }
 
     /**

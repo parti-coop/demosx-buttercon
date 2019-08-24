@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -34,12 +36,15 @@ import static seoul.democracy.opinion.predicate.OpinionPredicate.equalId;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
+    "file:src/main/resources/egovframework/spring/context-*.xml",
     "file:src/test/resources/egovframework/spring-test/context-*.xml",
     "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
 })
+@Sql({"file:src/test/resources/sql/test-data.sql"})
 @Transactional
 @Rollback
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ActiveProfiles("test")
 public class S_8_6_사용자는_토론의견에_공감_및_해제할_수_있다 {
 
     private final static String ip = "127.0.0.2";

@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import seoul.democracy.user.domain.Role;
@@ -24,12 +26,15 @@ import static seoul.democracy.user.predicate.UserPredicate.equalId;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
+    "file:src/main/resources/egovframework/spring/context-*.xml",
     "file:src/test/resources/egovframework/spring-test/context-*.xml",
     "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
 })
+@Sql({"file:src/test/resources/sql/test-data.sql"})
 @Transactional
 @Rollback
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ActiveProfiles("test")
 public class UserRepository_IntegrationTest {
 
     @Autowired

@@ -4,12 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.Filter;
 
@@ -23,9 +28,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {
+    "file:src/main/resources/egovframework/spring/context-*.xml",
     "file:src/test/resources/egovframework/spring-test/context-*.xml",
     "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
 })
+@Sql({"file:src/test/resources/sql/test-data.sql"})
+@Transactional
+@Rollback
+@ActiveProfiles("test")
 public class LoginController_IntegrationTest {
 
     @Autowired
@@ -44,7 +54,7 @@ public class LoginController_IntegrationTest {
                            .build();
     }
 
-    @Test
+	@Test
     public void login_success() throws Exception {
         mockMvc
             .perform(formLogin("/loginProcess.do")

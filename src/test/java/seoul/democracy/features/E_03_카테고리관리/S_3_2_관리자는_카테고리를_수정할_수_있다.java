@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import seoul.democracy.common.exception.AlreadyExistsException;
@@ -30,12 +32,15 @@ import static seoul.democracy.issue.predicate.CategoryPredicate.equalId;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
+    "file:src/main/resources/egovframework/spring/context-*.xml",
     "file:src/test/resources/egovframework/spring-test/context-*.xml",
     "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
 })
+@Sql({"file:src/test/resources/sql/test-data.sql"})
 @Transactional
 @Rollback
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ActiveProfiles("test")
 public class S_3_2_관리자는_카테고리를_수정할_수_있다 {
 
     @Autowired

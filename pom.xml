@@ -242,6 +242,14 @@
         </dependency>
         <!-- social login end -->
 
+        <!-- db migration -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+        <!-- db migration end -->
+
         <!-- 테스트 라이브러리 -->
         <dependency>
             <groupId>junit</groupId>
@@ -287,6 +295,7 @@
     </dependencies>
 
     <build>
+        <finalName>ROOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

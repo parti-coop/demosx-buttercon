@@ -4,8 +4,18 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
 
+    <bean id="flywayConfig" class="org.flywaydb.core.api.configuration.ClassicConfiguration">
+        <property name="baselineOnMigrate" value="true" />
+        <property name="locations" value="classpath:/db/migration" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+        <constructor-arg ref="flywayConfig"/>
+    </bean>
+
     <!-- 컨테이너가 관리하는 EntityManager 생성, @PersistenceContext와 함께 사용 -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="flyway">
         <property name="dataSource" ref="dataSource"/>
         <!-- 어노테이션 매핑정보 스캔 -->
         <property name="packagesToScan" value="seoul.democracy.**.domain"/>

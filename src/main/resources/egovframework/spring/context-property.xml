@@ -8,15 +8,14 @@
         <property name="properties">
             <map>
                 <entry key="uploadFilePath" value="${Globals.uploadFilePath}"/>
-                <!--<entry key="host" value="http://sandbox.demosx.org"/>-->
-                <entry key="host" value="${Globals.host"/>
-                <entry key="naverClientId" value="CKwvCn0kJExGi_he4fYs"/>
-                <entry key="naverClientSecret" value="dg47BLqsja"/>
-                <entry key="kakaoClientId" value="109a2160fd3c1e39af333ea69181d15a"/>
-                <entry key="twitterClientId" value="Qyupcyghdb56axbNPcbP8DUUL"/>
-                <entry key="twitterClientSecret" value="Rwu3tTZSNhXGsZkmE1LVLWOT2Rqo7kBS1h7owWnk1rhNwpZE1Z"/>
-                <entry key="facebookClientId" value="805472376511853"/>
-                <entry key="facebookClientSecret" value="a97ac6716b8d42462199b73352c5b6fe"/>
+                <entry key="host" value="${Globals.host}"/>
+                <entry key="naverClientId" value="${Globals.naverClientId}"/>
+                <entry key="naverClientSecret" value="${Globals.naverClientSecret}"/>
+                <entry key="kakaoClientId" value="${Globals.kakaoClientId}"/>
+                <entry key="twitterClientId" value="${Globals.twitterClientId}"/>
+                <entry key="twitterClientSecret" value="${Globals.twitterClientSecret}"/>
+                <entry key="facebookClientId" value="${Globals.facebookClientId}"/>
+                <entry key="facebookClientSecret" value="${Globals.facebookClientSecret}"/>
             </map>
         </property>
     </bean>
