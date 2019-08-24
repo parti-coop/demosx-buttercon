@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>seoul</groupId>
-    <artifactId>democracy</artifactId>
+    <artifactId>buttercon</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>democracy</name>
+    <name>buttercon</name>
 
     <licenses>
         <license>

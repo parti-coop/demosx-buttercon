@@ -1,3 +1,11 @@
 .idea/
 
 target/
+
+.metadata
+.settings
+.project
+.classpath
+.factorypath
+
+src/main/resources/egovframework/egovProps/local.properties
