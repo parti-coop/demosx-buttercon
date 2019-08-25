@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${group eq 'USER' ? '토론' : '기관제안'} - 민주주의 서울</title>
+  <title>${group eq 'USER' ? '토론' : '기관제안'} - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">

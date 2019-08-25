@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>실행 - 민주주의 서울</title>
+  <title>실행 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">

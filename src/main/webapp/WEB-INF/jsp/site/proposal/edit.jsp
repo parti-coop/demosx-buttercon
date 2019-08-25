@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>제안수정하기 - 민주주의 서울</title>
+  <title>제안수정하기 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 
   <!-- jquery serialize object -->

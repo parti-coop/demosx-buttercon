@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>제안 - 민주주의 서울</title>
+  <title>제안 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">

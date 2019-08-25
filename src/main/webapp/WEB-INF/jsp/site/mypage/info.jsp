@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>내 정보 수정 - 민주주의 서울</title>
+  <title>내 정보 수정 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 
   <!-- 파일 업로드 -->

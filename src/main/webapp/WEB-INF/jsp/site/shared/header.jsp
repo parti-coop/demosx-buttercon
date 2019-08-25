@@ -41,32 +41,32 @@
         <i class="xi-bars xi-2x demo-toggle demo-toggle--open"></i>
         <i class="xi-close xi-2x demo-toggle demo-toggle--close"></i>
       </button>
-      <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">민주주의 서울 오픈소스</a>
+      <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">청년 참여 플랫폼</a>
     </div>
 
     <div class="demo-collapse collapse navbar-collapse" id="demo-navbar-collapse">
-      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">민주주의 서울 오픈소스</a>
+      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">청년 참여 플랫</a>
       <ul class="nav navbar-nav navbar-right demo-nav">
-        <li class="demo-nav-li"><a href="<c:url value="/intro.do"/>">오픈소스
+        <li class="demo-nav-li"><a href="<c:url value="/intro.do"/>">청년 참여 플랫폼이란?
           <div class="nav-li-active-bar"></div>
         </a></li>
         <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true"
-             aria-expanded="false">시민제안
+             aria-expanded="false">아이디어
             <div class="nav-li-active-bar"></div>
           </a>
-          <a href="#" class="dropdown-toggle visible-xs">시민제안<div class="nav-li-active-bar"></div></a>
+          <a href="#" class="dropdown-toggle visible-xs">아이디어<div class="nav-li-active-bar"></div></a>
           <ul class="dropdown-menu">
-            <li><a href="<c:url value="/proposal-list.do"/>"><i class="xi-angle-right-min"></i> 제안</a></li>
+            <li><a href="<c:url value="/proposal-list.do"/>"><i class="xi-angle-right-min"></i> 아이디어</a></li>
             <li><a href="<c:url value="/debate-list.do"/>"><i class="xi-angle-right-min"></i> 토론</a></li>
             <li><a href="<c:url value="/action-list.do"/>"><i class="xi-angle-right-min"></i> 실행</a></li>
           </ul>
         </li>
-        <li class="li-middle"><span class="li-middle-line">|</span></li>
+        <%-- <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안
           <div class="nav-li-active-bar"></div>
-        </a></li>
+        </a></li> --%>
       </ul>
 
       <div class="nav-login-m">

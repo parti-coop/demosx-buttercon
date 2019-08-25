@@ -11,3 +11,4 @@ target/
 .vscode
 
 globals-override-*.properties
+hotswap-agent.properties

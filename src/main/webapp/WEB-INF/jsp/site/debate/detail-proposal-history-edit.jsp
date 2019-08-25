@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${debate.title} - 민주주의 서울</title>
+  <title>${debate.title} - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">

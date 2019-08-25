@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>민주주의 서울</title>
+  <title>버터콘 - 청년 참여 플랫폼</title>
   <%@ include file="./shared/head.jsp" %>
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css"/>
@@ -21,8 +21,8 @@
           <img src="/images/main-slider1.jpg" class="hidden-xs" alt="메인 슬라이더1">
           <img src="/images/mobile-slider1.jpg" class="visible-xs" alt="메인 슬라이더1">
           <div class="slide-text-wrapper">
-            <p>민주주의 ㅇㅇ은<br>시민과 기관이 함께 정책에 대해<br class="visible-xs"> 의견을 나누고<br class="hidden-xs">함께 실행하는<br
-                class="visible-xs"> 시민참여 플랫폼입니다.</p>
+            <p>버터콘은<br>청년이 주도하는<br class="visible-xs"> 의견을 나누고<br class="hidden-xs">함께 실행하는<br
+                class="visible-xs">청년 참여 플랫폼입니다.</p>
             <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary">자세히보기</a>
           </div>
         </div>
@@ -59,7 +59,7 @@
       </form>
     </div>
     <div class="top-search__right">
-      <a href="<c:url value="/new-proposal.do"/>" class="btn demo-btn demo-btn--primary d-btn-lg btn-block">시민제안<i
+      <a href="<c:url value="/new-proposal.do"/>" class="btn demo-btn demo-btn--primary d-btn-lg btn-block">아이디어 제안<i
           class="xi-angle-right"></i></a>
     </div>
   </div>

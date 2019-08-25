@@ -216,7 +216,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
+            <version>1.18.2</version>
             <scope>provided</scope>
         </dependency>
         <!-- Lombok 라이브러리 end -->

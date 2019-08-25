@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>저작권 및 컨텐츠 관련안내 - 민주주의 서울</title>
+  <title>저작권 및 컨텐츠 관련안내 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">

@@ -61,7 +61,7 @@ public class EmailService {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        helper.setFrom("민주주의 서울<hans@slowalk.co.kr>");
+        helper.setFrom("버터나이프크루<hans@slowalk.co.kr>");
         helper.setTo(email);
         helper.setSubject(title);
 
@@ -76,7 +76,7 @@ public class EmailService {
      */
     public void resetPassword(String email, String token) throws MessagingException {
         String content = String.format(resetPasswordEmailContent, host + "/reset-password.do?token=" + token);
-        sendEmail(email, "[민주주의 서울] 비밀번호를 설정해 주세요.", content);
+        sendEmail(email, "[버터나이프크루] 비밀번호를 설정해 주세요.", content);
     }
 
     /**
@@ -88,7 +88,7 @@ public class EmailService {
     }
 
     /**
-     * 민주주의 서울 시민 제안에 50공감을 얻어 부서 검토로 넘어 갔을시
+     * 버터나이프크루 시민 제안에 50공감을 얻어 부서 검토로 넘어 갔을시
      */
     public void assignedProposal(String email, String name) throws MessagingException {
         String content = String.format(assignProposalEmailContent, name, host);
@@ -96,7 +96,7 @@ public class EmailService {
     }
 
     /**
-     * 민주주의 서울 시민 제안에 대한 부서 의견 등록시
+     * 버터나이프크루 시민 제안에 대한 부서 의견 등록시
      */
     public void completedProposal(String email, String name) throws MessagingException {
         String content = String.format(passProposalEmailContent, name, host);
@@ -104,12 +104,12 @@ public class EmailService {
     }
 
     /**
-     * 민주주의 서울 시민 제안에 50공감을 얻지 못하였을 시, 매일 2시에
+     * 버터나이프크루 시민 제안에 50공감을 얻지 못하였을 시, 매일 2시에
      * (제안등록 후 20일 이후)
      */
     public void dropProposal(String email, String name) throws MessagingException {
         String content = String.format(dropProposalEmailContent, name, host);
-        sendEmail(email, "[서울특별시 민주주의 서울]제안 투표 탈락 알림", content);
+        sendEmail(email, "[서울특별시 버터나이프크루]제안 투표 탈락 알림", content);
     }
 
     /**
@@ -117,7 +117,7 @@ public class EmailService {
      */
     public void newOpinionProposal(String email, String name) throws MessagingException {
         String content = String.format(opinionProposalEmailContent, name, host);
-        sendEmail(email, "[민주주의 서울] 댓글 등록 알림", content);
+        sendEmail(email, "[버터나이프크루] 댓글 등록 알림", content);
     }
 
 

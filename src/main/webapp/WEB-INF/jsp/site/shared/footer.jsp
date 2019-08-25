@@ -13,9 +13,9 @@
           이용약관</a></p>
       </div>
       <div class="col-sm-9 col-sm-pull-3">
-        <address class="demo-address">04524 서울특별시 중구 세종대로 110</address>
-        <p class="footer-name">민주주의서울 오픈소스</p>
-        <p class="footer-copyright">© Seoul Metropolitan Goverment. all rights reserved.</p>
+        <address class="demo-address">0XXX 주소주소</address>
+        <p class="footer-name">데모스X</p>
+        <p class="footer-copyright">© XXX all rights reserved.</p>
       </div>
     </div>
   </div>

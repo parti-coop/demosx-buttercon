@@ -50,7 +50,7 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">시민제안</li>
+        <li class="header">시민 제안</li>
         <li>
           <a href="<c:url value="/admin/issue/proposal.do"/>">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>공지사항 - 민주주의 서울</title>
+  <title>공지사항 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body>

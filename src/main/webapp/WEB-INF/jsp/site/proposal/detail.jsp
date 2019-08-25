@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${proposal.title} - 민주주의 서울</title>
+  <title>${proposal.title} - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body>
