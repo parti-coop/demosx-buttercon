@@ -250,6 +250,15 @@
         </dependency>
         <!-- db migration end -->
 
+        <!-- properties 파일 암호화 복호화 -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-spring31</artifactId>
+            <version>1.9.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- properties 파일 암호화 복호화 end -->
+
         <!-- 테스트 라이브러리 -->
         <dependency>
             <groupId>junit</groupId>
