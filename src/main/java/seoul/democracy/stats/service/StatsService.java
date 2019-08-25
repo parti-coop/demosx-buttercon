@@ -70,6 +70,9 @@ public class StatsService {
         log.info("통계 처리 날짜 : {}", now);
 
         Page<StatsIssue> statsIssues = statsIssueRepository.findAll(pageByDateLimit1);
+        if(statsIssues.getContent().isEmpty()) {
+            return;
+        }
         StatsIssue latestStatsIssue = statsIssues.getContent().get(0);
         LocalDate date = latestStatsIssue.getDate().plusDays(1);
 
@@ -101,6 +104,9 @@ public class StatsService {
         LocalDate now = LocalDate.now();
 
         Page<StatsOpinion> statsOpinions = statsOpinionRepository.findAll(pageByDateLimit1);
+        if(statsOpinions.getContent().isEmpty()) {
+            return;
+        }
         StatsOpinion latestStatsOpinion = statsOpinions.getContent().get(0);
         LocalDate date = latestStatsOpinion.getDate().plusDays(1);
 
