@@ -19,4 +19,6 @@ public class ProposalCreateDto {
     @NotBlank
     private String content;
 
+    @NotBlank
+    private String category;
 }

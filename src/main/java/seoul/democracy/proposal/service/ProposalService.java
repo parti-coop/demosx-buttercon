@@ -19,6 +19,7 @@ import seoul.democracy.issue.repository.IssueLikeRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
 import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.proposal.domain.Proposal;
+import seoul.democracy.issue.domain.Category;
 import seoul.democracy.proposal.dto.*;
 import seoul.democracy.proposal.event.ProposalAssignedManagerEvent;
 import seoul.democracy.proposal.event.ProposalCompletedEvent;
@@ -93,6 +94,9 @@ public class ProposalService {
     @Transactional
     public Proposal create(ProposalCreateDto createDto) {
         Proposal proposal = Proposal.create(createDto);
+        Category category = categoryService.getCategory(createDto.getCategory());
+        proposal.updateCategory(category);
+
         proposal = proposalRepository.save(proposal);
 
         eventPublisher.publishEvent(ProposalCreatedEvent.of(proposal));

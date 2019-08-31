@@ -71,7 +71,7 @@ public class S_6_1_사용자는_제안을_등록할_수_있다 {
     @WithUserDetails("user1@googl.co.kr")
     public void T_1_사용자는_제목_내용으로_제안을_등록할_수_있다() {
         final String now = LocalDateTime.now().format(dateTimeFormatter);
-        ProposalCreateDto createDto = ProposalCreateDto.of("제안합니다.", "제안내용입니다.");
+        ProposalCreateDto createDto = ProposalCreateDto.of("제안합니다.", "제안내용입니다.", "환경");
         Proposal proposal = proposalService.create(createDto);
         assertThat(proposal.getId(), is(notNullValue()));
 
@@ -96,6 +96,8 @@ public class S_6_1_사용자는_제안을_등록할_수_있다 {
 
         assertThat(proposalDto.getTitle(), is(createDto.getTitle()));
         assertThat(proposalDto.getContent(), is(createDto.getContent()));
+
+        assertThat(proposalDto.getCategory().getName(), is(createDto.getCategory()));
     }
 
 }

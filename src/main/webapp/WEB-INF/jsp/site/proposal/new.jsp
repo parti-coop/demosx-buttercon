@@ -20,38 +20,31 @@
       <form class="demo-form" id="form-new-proposal">
         <div class="form-input-container">
           <div class="form-warning-text">
-            <p>・ 민원, 불편, 개선, 부조리 신고, 홍보 등은 해당 부서로 연락하여 주시기 바라며 본 플랫폼에서는 처리되지 않습니다.</p>
             <p>・ 제안 게시기준에 맞지 않는 부적절한 게시물은 이동 또는 삭제 조치됩니다.
               <a href="<c:url value="/copyright.do"/>">[저작권 및 컨텐츠 관련안내 바로가기]</a>
             </p>
           </div>
 
           <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="inputTitle">제목</label>
+            <label class="demo-form-label" for="inputTitle">제목<span> *</span></label>
             <input type="text" class="form-control demo-input" id="inputTitle" placeholder="제목" autocomplete="off"
                    name="title" data-parsley-required="true" data-parsley-maxlength="100">
           </div>
+
           <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="inputContent">내용</label>
+            <label class="demo-control-label" for="category">분류<span> *</span></label>
+            <select class="form-control demo-input" name="category" title="분류">
+                <option value="">선택...</option>
+                <c:forEach var="item" items="${categories}">
+                  <option value="${item.name}">${item.name}</option>
+                </c:forEach>
+              </select>
+          </div>
+
+          <div class="form-group form-group--demo">
+            <label class="demo-form-label" for="inputContent">내용<span> *</span></label>
             <textarea class="form-control" name="content" id="inputContent" rows="10"
                       data-parsley-required="true"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="demo-form-label demo-form-label--check" for="inputContent">동의여부 확인</label>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="agree" data-parsley-required="true" data-parsley-mincheck="2"
-                       data-parsley-error-message="동의여부를 확인해 주세요." data-parsley-errors-container="#agreeError">
-                <span class="check-required">(필수)</span> 본인이 제안한 제안내용이 담당부서의 검토 결과
-                민원으로 처리될 수 있음에 동의합니다.
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="agree"><span class="check-required">(필수)</span> 개인정보 수집에 동의합니다.
-              </label>
-            </div>
-            <div id="agreeError"></div>
           </div>
         </div>
         <div class="form-action text-right">

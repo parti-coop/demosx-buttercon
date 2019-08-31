@@ -78,7 +78,10 @@ public class ProposalController {
     }
 
     @RequestMapping(value = "/new-proposal.do", method = RequestMethod.GET)
-    public String newProposal() {
+    public String newProposal(Model model) {
+
+        List<CategoryDto> categories = categoryService.getCategories(enabled(), projectionForFilter);
+        model.addAttribute("categories", categories);
 
         return "/site/proposal/new";
     }
