@@ -77,6 +77,11 @@ public class ProposalService {
         return proposal;
     }
 
+    public ProposalDto getProposalWithTags(Predicate predicate, Expression<ProposalDto> projection) {
+        boolean withTag = true;
+        return proposalRepository.findOne(predicate, projection, withTag);
+    }
+
     public Page<ProposalDto> getProposals(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection) {
         return proposalRepository.findAll(predicate, pageable, projection);
     }

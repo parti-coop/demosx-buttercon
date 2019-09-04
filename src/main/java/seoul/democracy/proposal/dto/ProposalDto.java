@@ -9,6 +9,7 @@ import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.dto.CategoryDto;
 import seoul.democracy.issue.dto.IssueStatsDto;
+import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.opinion.domain.OpinionType;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.domain.ProposalType;
@@ -145,6 +146,8 @@ public class ProposalDto {
     private String title;
     private String excerpt;
     private String content;
+
+    private List<IssueTagDto> tags;
 
     // 제안에 대해 공감 표시 여부
     private Boolean liked;

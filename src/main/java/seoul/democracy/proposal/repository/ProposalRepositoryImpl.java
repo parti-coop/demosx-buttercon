@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
+
+import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalDto;
 
@@ -17,6 +19,10 @@ import static seoul.democracy.proposal.domain.QProposal.proposal;
 import static seoul.democracy.user.domain.QUser.user;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
+
+import java.util.List;
+
+import static seoul.democracy.issue.domain.QIssueTag.issueTag;
 
 public class ProposalRepositoryImpl extends QueryDslRepositorySupport implements ProposalRepositoryCustom {
 
@@ -61,8 +67,25 @@ public class ProposalRepositoryImpl extends QueryDslRepositorySupport implements
 
     @Override
     public ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection) {
-        return getQuery(projection)
-                   .where(predicate)
-                   .uniqueResult(projection);
+        return findOne(predicate, projection, false);
+    }
+
+    @Override
+    public ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection, boolean withTags) {
+        ProposalDto proposalDto = getQuery(projection)
+                                    .where(predicate)
+                                    .uniqueResult(projection);
+        if (proposalDto == null) return null;
+
+        if (withTags) {
+            List<IssueTagDto> tags = from(proposal)
+                                .innerJoin(proposal.tags, issueTag)
+                                .where(predicate)
+                                .orderBy(issueTag.name.asc())
+                                .list(IssueTagDto.projection);
+            proposalDto.setTags(tags);
+        }
+
+        return proposalDto;
     }
 }

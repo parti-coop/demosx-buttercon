@@ -20,13 +20,16 @@ import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.opinion.domain.OpinionType;
 import seoul.democracy.opinion.dto.OpinionCreateDto;
 import seoul.democracy.proposal.domain.Proposal;
+import seoul.democracy.issue.domain.IssueTag;
 import seoul.democracy.user.domain.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -172,6 +175,17 @@ public abstract class Issue {
     })
     protected List<IssueRelation> relations = new ArrayList<>();
 
+    /**
+     * 태그
+     */
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "TB_ISSUE_TAGGING",
+      joinColumns = @JoinColumn(name = "ISSUE_ID",
+      referencedColumnName = "ISSUE_ID"),
+      inverseJoinColumns = @JoinColumn(name = "TAG_ID",
+      referencedColumnName = "TAG_ID"))
+    private Set<IssueTag> tags = new HashSet<>();
+
     protected void updateFiles(List<IssueFileDto> updateFiles) {
         if(CollectionUtils.isEmpty(this.files) && CollectionUtils.isEmpty(updateFiles)) return;
 
@@ -229,4 +243,21 @@ public abstract class Issue {
             return this == DELETE;
         }
     }
+
+    /**
+     * 태그 추가
+     */
+    public void addTag(IssueTag issueTag) {
+        this.tags.add(issueTag);
+        issueTag.getIssues().add(this);
+    }
+
+    /**
+     * 태그 삭제
+     */
+    public void removeTag(IssueTag issueTag) {
+        this.tags.remove(issueTag);
+        issueTag.getIssues().remove(this);
+    }
+
 }

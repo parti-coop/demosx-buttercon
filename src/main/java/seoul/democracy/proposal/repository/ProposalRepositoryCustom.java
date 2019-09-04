@@ -9,6 +9,6 @@ import seoul.democracy.proposal.dto.ProposalDto;
 public interface ProposalRepositoryCustom {
 
     Page<ProposalDto> findAll(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection);
-
     ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection);
+    ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection, boolean withTags);
 }

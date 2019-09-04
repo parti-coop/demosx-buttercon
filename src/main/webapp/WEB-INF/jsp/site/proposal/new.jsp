@@ -32,7 +32,7 @@
           </div>
 
           <div class="form-group form-group--demo">
-            <label class="demo-control-label" for="category">분류<span> *</span></label>
+            <label class="demo-form-label" for="category">분류<span> *</span></label>
             <select class="form-control demo-input" name="category" title="분류">
                 <option value="">선택...</option>
                 <c:forEach var="item" items="${categories}">
