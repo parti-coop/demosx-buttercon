@@ -36,7 +36,7 @@ public class IssueTag {
     /**
      * 관련 이슈
      */
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "issueTags")
     private Set<Issue> issues = new HashSet<>();
 
     private IssueTag(String name) {

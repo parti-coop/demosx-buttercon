@@ -23,7 +23,7 @@ public class AuditingIpListener {
         if (ipField == null) {
             Field createdIpField = null;
             Field modifiedIpField = null;
-            for (Class clazz = target.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Class<?> clazz = target.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
                 Field[] fields = clazz.getDeclaredFields();
                 for (Field field : fields) {
                     if (field.getAnnotation(CreatedIp.class) != null) {

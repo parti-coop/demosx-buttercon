@@ -18,6 +18,7 @@ import seoul.democracy.issue.predicate.IssueLikePredicate;
 import seoul.democracy.issue.repository.IssueLikeRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
 import seoul.democracy.issue.service.CategoryService;
+import seoul.democracy.issue.service.IssueTagService;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.issue.domain.Category;
 import seoul.democracy.proposal.dto.*;
@@ -41,22 +42,20 @@ public class ProposalService {
 
     private final CategoryService categoryService;
     private final UserService userService;
+    private final IssueTagService issueTagService;
 
     private final ApplicationEventPublisher eventPublisher;
 
-
     @Autowired
-    public ProposalService(ProposalRepository proposalRepository,
-                           IssueLikeRepository likeRepository,
-                           IssueStatsRepository statsRepository,
-                           CategoryService categoryService,
-                           UserService userService,
-                           ApplicationEventPublisher eventPublisher) {
+    public ProposalService(ProposalRepository proposalRepository, IssueLikeRepository likeRepository,
+            IssueStatsRepository statsRepository, CategoryService categoryService, UserService userService,
+            IssueTagService issueTagService, ApplicationEventPublisher eventPublisher) {
         this.proposalRepository = proposalRepository;
         this.likeRepository = likeRepository;
         this.statsRepository = statsRepository;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.issueTagService = issueTagService;
         this.eventPublisher = eventPublisher;
     }
 
@@ -64,22 +63,25 @@ public class ProposalService {
         return proposalRepository.findOne(predicate, projection);
     }
 
-    public ProposalDto getProposalWithLiked(Predicate predicate, Expression<ProposalDto> projection) {
-        ProposalDto proposal = proposalRepository.findOne(predicate, projection);
+    public ProposalDto getProposalDetail(Predicate predicate, Expression<ProposalDto> projection) {
+        boolean withIssueTag = true;
+        ProposalDto proposal = proposalRepository.findOne(predicate, projection, withIssueTag);
 
-        if (proposal == null) return null;
+        if (proposal == null)
+            return null;
 
         Long userId = UserUtils.getUserId();
-        if (userId == null) return proposal;
+        if (userId == null)
+            return proposal;
 
         proposal.setLiked(likeRepository.exists(IssueLikePredicate.equalUserIdAndIssueId(userId, proposal.getId())));
 
         return proposal;
     }
 
-    public ProposalDto getProposalWithTags(Predicate predicate, Expression<ProposalDto> projection) {
-        boolean withTag = true;
-        return proposalRepository.findOne(predicate, projection, withTag);
+    public ProposalDto getProposalWithIssueTags(Predicate predicate, Expression<ProposalDto> projection) {
+        boolean withIssueTag = true;
+        return proposalRepository.findOne(predicate, projection, withIssueTag);
     }
 
     public Page<ProposalDto> getProposals(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection) {
@@ -88,7 +90,8 @@ public class ProposalService {
 
     private Proposal getProposal(Long proposalId) {
         Proposal proposal = proposalRepository.findOne(proposalId);
-        if (proposal == null) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (proposal == null)
+            throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
 
         return proposal;
     }
@@ -104,6 +107,8 @@ public class ProposalService {
 
         proposal = proposalRepository.save(proposal);
 
+		issueTagService.changeIssueTags(proposal.getId(), createDto.getIssueTagNames());
+
         eventPublisher.publishEvent(ProposalCreatedEvent.of(proposal));
 
         return proposal;
@@ -113,9 +118,12 @@ public class ProposalService {
      * 제안 수정
      */
     @Transactional
-    @PostAuthorize("returnObject.createdById == authentication.principal.user.id")
+    @PostAuthorize("returnObject.createdById == authentication.principal.user.id || returnObject.createdBy == authentication.principal.user")
     public Proposal update(ProposalUpdateDto updateDto) {
         Proposal proposal = getProposal(updateDto.getId());
+
+        issueTagService.changeIssueTags(proposal.getId(), updateDto.getIssueTagNames());
+
         return proposal.update(updateDto);
     }
 
@@ -123,7 +131,7 @@ public class ProposalService {
      * 제안 삭제
      */
     @Transactional
-    @PostAuthorize("returnObject.createdById == authentication.principal.user.id")
+    @PostAuthorize("returnObject.createdById == authentication.principal.user.id || returnObject.createdBy == authentication.principal.user")
     public Proposal delete(Long proposalId) {
         Proposal proposal = getProposal(proposalId);
         return proposal.delete();

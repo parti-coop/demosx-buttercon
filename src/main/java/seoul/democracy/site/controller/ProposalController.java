@@ -15,7 +15,7 @@ import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.proposal.domain.ProposalSort;
 import seoul.democracy.proposal.dto.ProposalDto;
-import seoul.democracy.proposal.dto.ProposalUpdateDto;
+import seoul.democracy.proposal.dto.ProposalEditDto;
 import seoul.democracy.proposal.service.ProposalService;
 import seoul.democracy.user.utils.UserUtils;
 
@@ -67,7 +67,7 @@ public class ProposalController {
     @RequestMapping(value = "/proposal.do", method = RequestMethod.GET)
     public String proposal(@RequestParam("id") Long id,
                            Model model) {
-        ProposalDto proposalDto = proposalService.getProposalWithLiked(equalIdAndStatus(id, OPEN), projectionForSiteDetail);
+        ProposalDto proposalDto = proposalService.getProposalDetail(equalIdAndStatus(id, OPEN), projectionForSiteDetail);
         if (proposalDto == null) throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
         model.addAttribute("proposal", proposalDto);
@@ -90,11 +90,14 @@ public class ProposalController {
     public String editProposal(@RequestParam("id") Long id,
                                Model model) {
 
-        ProposalDto proposalDto = proposalService.getProposal(predicateForEdit(id, UserUtils.getUserId()), projectionForSiteEdit);
+        ProposalDto proposalDto = proposalService.getProposalWithIssueTags(predicateForEdit(id, UserUtils.getUserId()), projectionForSiteEdit);
         if (proposalDto == null) throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(proposalDto.getId(), proposalDto.getTitle(), proposalDto.getContent());
-        model.addAttribute("updateDto", updateDto);
+        ProposalEditDto updateDto = ProposalEditDto.of(proposalDto.getId(), proposalDto.getTitle(), proposalDto.getContent(), proposalDto.getIssueTags());
+        model.addAttribute("editDto", updateDto);
+
+        List<CategoryDto> categories = categoryService.getCategories(enabled(), projectionForFilter);
+        model.addAttribute("categories", categories);
 
         return "/site/proposal/edit";
     }

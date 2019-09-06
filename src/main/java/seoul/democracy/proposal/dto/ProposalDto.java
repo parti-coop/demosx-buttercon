@@ -147,7 +147,7 @@ public class ProposalDto {
     private String excerpt;
     private String content;
 
-    private List<IssueTagDto> tags;
+    private List<IssueTagDto> issueTags;
 
     // 제안에 대해 공감 표시 여부
     private Boolean liked;

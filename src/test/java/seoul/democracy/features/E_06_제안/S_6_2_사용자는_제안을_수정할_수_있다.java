@@ -71,7 +71,7 @@ public class S_6_2_사용자는_제안을_수정할_수_있다 {
     @WithUserDetails("user1@googl.co.kr")
     public void T_1_사용자는_제목_내용을_수정할_수_있다() {
         final String now = LocalDateTime.now().format(dateTimeFormatter);
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(1L, "제안 수정합니다.", "제안 수정내용입니다.");
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(1L, "제안 수정합니다.", "제안 수정내용입니다.", new String[0]);
         Proposal proposal = proposalService.update(updateDto);
 
         ProposalDto proposalDto = proposalService.getProposal(equalId(proposal.getId()), projection);
@@ -89,7 +89,7 @@ public class S_6_2_사용자는_제안을_수정할_수_있다 {
     @Test(expected = AccessDeniedException.class)
     @WithUserDetails("user2@googl.co.kr")
     public void T_2_다른_사람의_제안을_수정할_수_없다() {
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(1L, "다른 사람이 제안을 수정합니다.", "제안 수정내용입니다.");
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(1L, "다른 사람이 제안을 수정합니다.", "제안 수정내용입니다.", new String[0]);
         proposalService.update(updateDto);
     }
 
@@ -99,7 +99,7 @@ public class S_6_2_사용자는_제안을_수정할_수_있다 {
     @Test(expected = NotFoundException.class)
     @WithUserDetails("user1@googl.co.kr")
     public void T_3_존재하지_않는_제안을_수정할_수_없다() {
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(999L, "없는 제안을 수정합니다.", "제안 수정내용입니다.");
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(999L, "없는 제안을 수정합니다.", "제안 수정내용입니다.", new String[0]);
         proposalService.update(updateDto);
     }
 
@@ -109,7 +109,7 @@ public class S_6_2_사용자는_제안을_수정할_수_있다 {
     @Test(expected = NotFoundException.class)
     @WithUserDetails("user1@googl.co.kr")
     public void T_4_삭제된_제안을_수정할_수_없다() {
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(2L, "삭제된 제안을 수정합니다.", "제안 수정내용입니다.");
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(2L, "삭제된 제안을 수정합니다.", "제안 수정내용입니다.", new String[0]);
         proposalService.update(updateDto);
     }
 
@@ -119,7 +119,7 @@ public class S_6_2_사용자는_제안을_수정할_수_있다 {
     @Test(expected = NotFoundException.class)
     @WithUserDetails("user1@googl.co.kr")
     public void T_5_블럭된_제안을_수정할_수_없다() {
-        ProposalUpdateDto updateDto = ProposalUpdateDto.of(3L, "블럭된 제안을 수정합니다.", "제안 수정내용입니다.");
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(3L, "블럭된 제안을 수정합니다.", "제안 수정내용입니다.", new String[0]);
         proposalService.update(updateDto);
     }
 }

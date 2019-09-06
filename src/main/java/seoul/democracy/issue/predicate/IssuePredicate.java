@@ -15,6 +15,6 @@ public class IssuePredicate {
     }
 
     public static Predicate containsIssueTag(IssueTag issueTag) {
-        return issue.tags.contains(issueTag);
+        return issue.issueTags.contains(issueTag);
     }
 }

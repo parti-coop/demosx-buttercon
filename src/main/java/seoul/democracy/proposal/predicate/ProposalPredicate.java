@@ -1,5 +1,6 @@
 package seoul.democracy.proposal.predicate;
 
+import com.mysema.query.jpa.JPASubQuery;
 import com.mysema.query.types.ExpressionUtils;
 import com.mysema.query.types.Predicate;
 import org.springframework.util.StringUtils;
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
 import static seoul.democracy.proposal.domain.QProposal.proposal;
+import static seoul.democracy.issue.domain.QIssueTag.issueTag;
 
 public class ProposalPredicate {
 
@@ -68,7 +70,20 @@ public class ProposalPredicate {
         Predicate predicate = proposal.status.eq(OPEN);
 
         if (StringUtils.hasText(search))
-            predicate = ExpressionUtils.and(predicate, proposal.title.contains(search));
+            for(String word : search.split("\\s")) {
+                if(word.startsWith("#")) {
+                    predicate = ExpressionUtils.and(predicate,
+                        proposal.issueTags.any().in(
+                            new JPASubQuery()
+                                .from(issueTag)
+                                .where(issueTag.name.eq(word.substring(1)))
+                                .list(issueTag)
+                        ));
+                } else {
+                    predicate = ExpressionUtils.and(predicate, proposal.title.contains(search));
+                    predicate = ExpressionUtils.and(predicate, proposal.content.contains(search));
+                }
+            }
 
         if (StringUtils.hasText(category))
             predicate = ExpressionUtils.and(predicate, proposal.category.name.eq(category));

@@ -21,4 +21,6 @@ public class ProposalCreateDto {
 
     @NotBlank
     private String category;
+
+    private String[] issueTagNames;
 }

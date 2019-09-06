@@ -1,6 +1,7 @@
 package seoul.democracy.site.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import seoul.democracy.common.dto.ResultInfo;
 import seoul.democracy.common.dto.ResultRedirectInfo;
@@ -8,6 +9,12 @@ import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalCreateDto;
 import seoul.democracy.proposal.dto.ProposalUpdateDto;
 import seoul.democracy.proposal.service.ProposalService;
+import seoul.democracy.issue.service.IssueTagService;
+import seoul.democracy.issue.dto.IssueTagDto;
+
+import static seoul.democracy.issue.predicate.IssueTagPredicate.containsName;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,10 +23,13 @@ import javax.validation.Valid;
 public class ProposalAjaxController {
 
     private final ProposalService proposalService;
+    private final IssueTagService issueTagService;
 
     @Autowired
-    public ProposalAjaxController(ProposalService proposalService) {
+    public ProposalAjaxController(ProposalService proposalService,
+                                  IssueTagService issueTagService) {
         this.proposalService = proposalService;
+        this.issueTagService = issueTagService;
     }
 
     @RequestMapping(value = "/proposals", method = RequestMethod.POST)
@@ -56,5 +66,11 @@ public class ProposalAjaxController {
         proposalService.deselectLike(id);
 
         return ResultInfo.of("공감해제하였습니다.");
+    }
+
+    @RequestMapping(value = "/issuetags", method = RequestMethod.GET)
+    public List<IssueTagDto> tagProposal(@RequestParam("q") String search,
+                                         Model model) {
+        return issueTagService.getIssueTags(containsName(search));
     }
 }

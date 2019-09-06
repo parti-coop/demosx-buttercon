@@ -68,11 +68,21 @@
         </c:if>
         <div class="contents-box__contents">${proposal.contentWithBr()}</div>
 
+        <div>
+          <h3>태그</h3>
+          <c:forEach var="issueTag" items="${proposal.issueTags}">
+            <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>">${issueTag.name}</a>
+          </c:forEach>
+        </div>
+
+        <hr/>
+
         <button
             class="content-thumbs-up-btn${proposal.liked eq true ? ' active' : ''}${empty loginUser ? ' show-login-modal' : ''}"
             id="proposal-like-btn">
           <i class="xi-thumbs-up"></i> 공감 <strong>${proposal.stats.likeCount}</strong>개
         </button>
+
 
         <div class="demo-progress">
           <div class="progress-container">

@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
@@ -16,13 +19,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import seoul.democracy.issue.dto.IssueTagsAddDto;
 import seoul.democracy.issue.service.IssueTagService;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalCreateDto;
+import seoul.democracy.proposal.dto.ProposalUpdateDto;
 import seoul.democracy.proposal.dto.ProposalDto;
 import seoul.democracy.proposal.service.ProposalService;
 
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +36,9 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static seoul.democracy.proposal.dto.ProposalDto.projection;
 import static seoul.democracy.proposal.predicate.ProposalPredicate.equalId;
+import static seoul.democracy.issue.predicate.IssueTagPredicate.containsName;
+import static seoul.democracy.proposal.predicate.ProposalPredicate.predicateForSiteList;
+import static seoul.democracy.proposal.dto.ProposalDto.projectionForSiteList;
 
 /**
  * epic : 6. 제안
@@ -50,7 +57,6 @@ import static seoul.democracy.proposal.predicate.ProposalPredicate.equalId;
 @ActiveProfiles("test")
 public class S_6_10_제안한_사용자는_제안에_태그할_수_있다 {
 
-    private final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm");
     private final static String ip = "127.0.0.1";
 
     @Autowired
@@ -67,61 +73,64 @@ public class S_6_10_제안한_사용자는_제안에_태그할_수_있다 {
     }
 
     /**
-     * 10. 제안한 사용자는 제안에 태그할 수 있다
+     * 1. 제안한 사용자는 제안에 태그할 수 있다
      */
     @Test
     @WithUserDetails("user1@googl.co.kr")
-    public void T_10_제안한_사용자는_제안에_태그할_수_있다() {
-        ProposalCreateDto createDto = ProposalCreateDto.of("제안합니다.", "제안내용입니다.", "환경");
-        Proposal proposal = proposalService.create(createDto);
-
-        assertThat(proposal.getId(), is(notNullValue()));
-
+    public void T_1_제안한_사용자는_제안에_태그할_수_있다() {
         String[] tagNames1 = { "AB","BC","CD","AE", "FE" };
-        IssueTagsAddDto issueTagsAddDto1 = IssueTagsAddDto.of(proposal.getId(), tagNames1);
-        issueTagService.changeIssueTags(issueTagsAddDto1);
 
-        ProposalDto proposalDto1 = proposalService.getProposalWithTags(equalId(proposal.getId()), projection);
-        String[] resultTagNames1 = proposalDto1.getTags()
-                                .stream()
-                                .map(issueTagDto -> issueTagDto.getName())
-                                .toArray(String[]::new);
+        ProposalCreateDto createDto = ProposalCreateDto.of("제안합니다.", "제안내용입니다.", "환경", tagNames1);
+        Proposal proposal = proposalService.create(createDto);
+        assertThat(proposal.getId(), is(notNullValue()));
+        assertThat(proposal.getCreatedBy().getEmail(), is("user1@googl.co.kr"));
+
+        ProposalDto proposalDto1 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projection);
+        assertThat(proposalDto1.getCreatedBy().getEmail(), is("user1@googl.co.kr"));
+        String[] resultTagNames1 = proposalDto1.getIssueTags().stream()
+                                    .map(issueTagDto -> issueTagDto.getName())
+                                    .toArray(String[]::new);
         assertThat(resultTagNames1, is(Arrays.stream(tagNames1).sorted().toArray(String[]::new)));
 
-        List<String> allTagName = issueTagService.getIssueTags().stream()
+        List<String> allTagNames = issueTagService.getIssueTags().stream()
                                         .map(issueTagDto -> issueTagDto.getName())
                                         .collect(Collectors.toList());
-        assertThat(allTagName, hasItems("AB", "FE"));
+        assertThat(allTagNames, hasItems("AB", "FE"));
 
         // 다른 제안
-        ProposalCreateDto createDto2 = ProposalCreateDto.of("제안합니다.2", "제안내용입니다.2", "환경");
-        Proposal proposal2 = proposalService.create(createDto);
-
-        assertThat(proposal2.getId(), is(notNullValue()));
-
-        // 다른 제안에 태깅
         String[] tagNamesX = { "BC","FE" };
-        IssueTagsAddDto issueTagsAddDtoX = IssueTagsAddDto.of(proposal.getId(), tagNamesX);
-        issueTagService.changeIssueTags(issueTagsAddDtoX);
+        ProposalCreateDto createDtoX = ProposalCreateDto.of("제안합니다.2", "제안내용입니다.2", "환경", tagNamesX);
+        Proposal proposalX = proposalService.create(createDtoX);
+        assertThat(proposalX.getId(), is(notNullValue()));
 
         // 원래 제안에 태그 변경
-
         String[] tagNames2 = { "FF","BC","FE","AE" };
-        IssueTagsAddDto issueTagsAddDto2 = IssueTagsAddDto.of(proposal.getId(), tagNames2);
-        issueTagService.changeIssueTags(issueTagsAddDto2);
+        ProposalUpdateDto updateDto = ProposalUpdateDto.of(proposal.getId(), "제안 수정합니다.", "제안 수정내용입니다.", tagNames2);
+        proposalService.update(updateDto);
 
-        ProposalDto proposalDto2 = proposalService.getProposalWithTags(equalId(proposal.getId()), projection);
-        String[] resultTagNames2 = proposalDto2.getTags()
+        ProposalDto proposalDto2 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projection);
+        String[] resultTagNames2 = proposalDto2.getIssueTags()
                                 .stream()
                                 .map(issueTagDto -> issueTagDto.getName())
                                 .toArray(String[]::new);
         assertThat(resultTagNames2, is(Arrays.stream(tagNames2).sorted().toArray(String[]::new)));
 
-        allTagName = issueTagService.getIssueTags().stream()
+        allTagNames = issueTagService.getIssueTags().stream()
                                         .map(issueTagDto -> issueTagDto.getName())
                                         .collect(Collectors.toList());
-        assertThat(allTagName, not(hasItems("AB")));
-        assertThat(allTagName, hasItems("FE"));
-    }
+        assertThat(allTagNames, not(hasItems("AB")));
+        assertThat(allTagNames, hasItems("FE"));
 
+        List<String> searchTagNames = issueTagService.getIssueTags(containsName("F")).stream()
+                                                            .map(issueTagDto -> issueTagDto.getName())
+                                                            .collect(Collectors.toList());
+
+        assertThat(searchTagNames, not(hasItems("AB")));
+        assertThat(searchTagNames, contains("FE", "FF"));
+
+        // 태그 검색
+        Pageable pageable = new PageRequest(0, 10);
+        Page<ProposalDto> proposals = proposalService.getProposals(predicateForSiteList("#FE", "환경"), pageable, projectionForSiteList);
+        assertThat(proposals.getNumberOfElements(), is(2));
+    }
 }

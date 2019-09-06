@@ -3,8 +3,11 @@ package seoul.democracy.proposal.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import seoul.democracy.issue.dto.IssueTagDto;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +15,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
-public class ProposalUpdateDto {
+public class ProposalEditDto {
 
     @NotNull
     private Long id;
@@ -23,5 +26,5 @@ public class ProposalUpdateDto {
 
     private String content;
 
-    private String[] issueTagNames;
+    private List<IssueTagDto> issueTags;
 }

@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueTag;
-import seoul.democracy.issue.dto.IssueTagsAddDto;
 import seoul.democracy.issue.dto.IssueTagCreateDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.issue.repository.IssueRepository;
@@ -40,7 +39,7 @@ public class IssueTagService {
         return issueTagRepository.findAll(projection);
     }
 
-    public Iterable<IssueTagDto> getIssueTags(Predicate predicate) {
+    public List<IssueTagDto> getIssueTags(Predicate predicate) {
         return issueTagRepository.findAll(predicate, projection);
     }
 
@@ -48,9 +47,14 @@ public class IssueTagService {
      * 태그 추가
      */
     @Transactional
-    public Set<IssueTag> changeIssueTags(IssueTagsAddDto addDto) {
-        Issue issue = issueRepository.findOne(addDto.getIssueId());
-        for (String name : addDto.getNames()) {
+    public Set<IssueTag> changeIssueTags(Long issueId, final String[] names) {
+        Issue issue = issueRepository.findOne(issueId);
+        if(names == null || names.length == 0) {
+            issue.removeTagAll();
+            return issue.getIssueTags();
+        }
+
+        for (String name : names) {
             IssueTag issueTag = issueTagRepository.findOne(equalName(name));
             if (issueTag == null) {
                 IssueTagCreateDto createDto = new IssueTagCreateDto();
@@ -60,8 +64,8 @@ public class IssueTagService {
             issue.addTag(issueTag);
         }
 
-        List<IssueTag> detaggedIssueTags = issue.getTags().stream()
-                .filter(issueTag -> !Arrays.stream(addDto.getNames()).anyMatch(issueTag.getName()::equals))
+        List<IssueTag> detaggedIssueTags = issue.getIssueTags().stream()
+                .filter(issueTag -> !Arrays.stream(names).anyMatch(issueTag.getName()::equals))
                 .collect(Collectors.toList());
         for (IssueTag detaggedIssueTag : detaggedIssueTags) {
             issue.removeTag(detaggedIssueTag);
@@ -72,7 +76,7 @@ public class IssueTagService {
         }
 
         issueRepository.save(issue);
-        return issue.getTags();
+        return issue.getIssueTags();
     }
 
     /**

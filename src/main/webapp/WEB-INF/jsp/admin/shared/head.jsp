@@ -21,6 +21,9 @@
         crossorigin="anonymous"></script>
 <script src="<c:url value="/js/jquery.slimscroll.min.js"/>"></script>
 
+<script type="text/javascript" src="<c:url value="/js/select2.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/select2-ko.js"/>"></script>
+
 <script src="<c:url value="/js/adminlte.min.js"/>"></script>
 <script src="<c:url value="/js/admin.js"/>"></script>
 

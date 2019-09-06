@@ -12,11 +12,15 @@ public class IssueTagPredicate {
         return issueTag.id.eq(id);
     }
 
-    public static Predicate equalIdIn(List<Long> tags) {
-        return issueTag.id.in(tags);
+    public static Predicate equalIdIn(List<Long> issueTags) {
+        return issueTag.id.in(issueTags);
     }
 
     public static Predicate equalName(String name) {
         return issueTag.name.eq(name);
+    }
+
+    public static Predicate containsName(String search) {
+        return issueTag.name.contains(search);
     }
 }

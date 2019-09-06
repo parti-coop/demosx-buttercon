@@ -184,7 +184,7 @@ public abstract class Issue {
       referencedColumnName = "ISSUE_ID"),
       inverseJoinColumns = @JoinColumn(name = "TAG_ID",
       referencedColumnName = "TAG_ID"))
-    private Set<IssueTag> tags = new HashSet<>();
+    private Set<IssueTag> issueTags = new HashSet<>();
 
     protected void updateFiles(List<IssueFileDto> updateFiles) {
         if(CollectionUtils.isEmpty(this.files) && CollectionUtils.isEmpty(updateFiles)) return;
@@ -248,7 +248,7 @@ public abstract class Issue {
      * 태그 추가
      */
     public void addTag(IssueTag issueTag) {
-        this.tags.add(issueTag);
+        this.issueTags.add(issueTag);
         issueTag.getIssues().add(this);
     }
 
@@ -256,8 +256,16 @@ public abstract class Issue {
      * 태그 삭제
      */
     public void removeTag(IssueTag issueTag) {
-        this.tags.remove(issueTag);
+        this.issueTags.remove(issueTag);
         issueTag.getIssues().remove(this);
+    }
+
+    /**
+     * 태그 모두 삭제
+     */
+    public void removeTagAll() {
+        this.issueTags.forEach(issueTag -> { issueTag.getIssues().remove(this); });
+        this.issueTags.clear();
     }
 
 }

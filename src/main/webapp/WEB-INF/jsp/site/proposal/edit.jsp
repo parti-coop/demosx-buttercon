@@ -25,17 +25,34 @@
               <a href="<c:url value="/copyright.do"/>">[저작권 및 컨텐츠 관련안내 바로가기]</a>
             </p>
           </div>
-          <input type="hidden" name="id" value="${updateDto.id}">
+          <input type="hidden" name="id" value="${editDto.id}">
           <div class="form-group form-group--demo">
             <label class="demo-form-label" for="inputTitle">제목</label>
             <input type="text" class="form-control demo-input" id="inputTitle" placeholder="제목"
                    name="title" data-parsley-required="true" data-parsley-maxlength="100"
-                   value="${updateDto.title}">
+                   value="${editDto.title}">
+          </div>
+          <div class="form-group form-group--demo">
+            <label class="demo-form-label" for="category">분류<span> *</span></label>
+            <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true" >
+                <c:forEach var="category" items="${categories}">
+                  <option value="${category.name}" <c:if
+                          test="${proposal.category.name eq category.name}">selected</c:if>>${category.name}</option>
+                </c:forEach>
+              </select>
           </div>
           <div class="form-group form-group--demo">
             <label class="demo-form-label" for="inputContent">내용</label>
             <textarea class="form-control" name="content" id="inputContent" rows="10"
-                      data-parsley-required="true">${updateDto.content}</textarea>
+                      data-parsley-required="true">${editDto.content}</textarea>
+          </div>
+          <div class="form-group form-group--demo">
+            <label class="demo-form-label" for="issueTagNames[]">태그</label>
+            <select class="form-control js-tagging" name="issueTagNames[]" multiple="multiple">
+              <c:forEach var="issueTag" items="${editDto.issueTags}">
+                <option value="${issueTag.name}" selected>${issueTag.name}</option>
+              </c:forEach>
+            </select>
           </div>
         </div>
         <div class="form-action text-right">
@@ -62,14 +79,14 @@
       var data = $formEditProposal.serializeObject();
       $.ajax({
         headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-        url: '/ajax/mypage/proposals/${updateDto.id}',
+        url: '/ajax/mypage/proposals/${editDto.id}',
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(data),
         success: function (data) {
           alert(data.msg);
-          window.location.href = '/proposal.do?id=' + ${updateDto.id};
+          window.location.href = '/proposal.do?id=' + ${editDto.id};
         },
         error: function (error) {
           if (error.status === 400) {

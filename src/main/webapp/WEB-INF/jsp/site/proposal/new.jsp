@@ -33,7 +33,7 @@
 
           <div class="form-group form-group--demo">
             <label class="demo-form-label" for="category">분류<span> *</span></label>
-            <select class="form-control demo-input" name="category" title="분류">
+            <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true" >
                 <option value="">선택...</option>
                 <c:forEach var="item" items="${categories}">
                   <option value="${item.name}">${item.name}</option>
@@ -46,6 +46,12 @@
             <textarea class="form-control" name="content" id="inputContent" rows="10"
                       data-parsley-required="true"></textarea>
           </div>
+
+          <div class="form-group form-group--demo">
+            <label class="demo-form-label" for="issueTagNames[]">태그</label>
+            <select class="form-control js-tagging" name="issueTagNames[]" multiple="multiple"></select>
+          </div>
+
         </div>
         <div class="form-action text-right">
           <div class="inline-block">

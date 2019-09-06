@@ -71,19 +71,19 @@ public class ProposalRepositoryImpl extends QueryDslRepositorySupport implements
     }
 
     @Override
-    public ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection, boolean withTags) {
+    public ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection, boolean withIssueTags) {
         ProposalDto proposalDto = getQuery(projection)
                                     .where(predicate)
                                     .uniqueResult(projection);
         if (proposalDto == null) return null;
 
-        if (withTags) {
-            List<IssueTagDto> tags = from(proposal)
-                                .innerJoin(proposal.tags, issueTag)
+        if (withIssueTags) {
+            List<IssueTagDto> issueTags = from(proposal)
+                                .innerJoin(proposal.issueTags, issueTag)
                                 .where(predicate)
                                 .orderBy(issueTag.name.asc())
                                 .list(IssueTagDto.projection);
-            proposalDto.setTags(tags);
+            proposalDto.setIssueTags(issueTags);
         }
 
         return proposalDto;

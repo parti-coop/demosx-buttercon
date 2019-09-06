@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
@@ -14,6 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalDto;
 import seoul.democracy.proposal.dto.ProposalManagerCommentEditDto;
@@ -52,10 +56,13 @@ public class S_7_03_담당자는_담당자_의견을_등록할_수_있다 {
 
     private final Long assignedProposalId = 41L;
     private final Long completedProposalId = 51L;
+    private final static String ip = "127.0.0.1";
 
     @Before
     public void setUp() throws Exception {
-
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setRemoteAddr(ip);
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
     }
 
     /**

@@ -13,6 +13,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
 <link href="<c:url value="/css/main.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/application.css"/>" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -22,3 +23,10 @@
 <!-- form validation -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
 <script type="text/javascript" src="<c:url value="/js/parsley-ko.js"/>"></script>
+
+<!-- select2 -->
+<script type="text/javascript" src="<c:url value="/js/select2.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/select2-ko.js"/>"></script>
+
+<!-- application -->
+<script type="text/javascript" src="<c:url value="/js/application.js"/>"></script>
