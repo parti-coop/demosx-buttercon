@@ -51,7 +51,7 @@ public class ProposalController {
                                Model model) {
 
         Pageable pageable = new PageRequest(page - 1, 10, sort.getSort());
-        Page<ProposalDto> proposals = proposalService.getProposals(predicateForSiteList(search, category), pageable, projectionForSiteList);
+        Page<ProposalDto> proposals = proposalService.getProposalsWithIssueTags(predicateForSiteList(search, category), pageable, projectionForSiteList);
         model.addAttribute("page", proposals);
 
         List<CategoryDto> categories = categoryService.getCategories(enabled(), projectionForFilter);
@@ -67,7 +67,7 @@ public class ProposalController {
     @RequestMapping(value = "/proposal.do", method = RequestMethod.GET)
     public String proposal(@RequestParam("id") Long id,
                            Model model) {
-        ProposalDto proposalDto = proposalService.getProposalDetail(equalIdAndStatus(id, OPEN), projectionForSiteDetail);
+        ProposalDto proposalDto = proposalService.getProposalSiteDetail(equalIdAndStatus(id, OPEN), projectionForSiteDetail);
         if (proposalDto == null) throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
         model.addAttribute("proposal", proposalDto);

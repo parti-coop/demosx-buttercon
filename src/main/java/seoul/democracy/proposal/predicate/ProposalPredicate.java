@@ -80,8 +80,7 @@ public class ProposalPredicate {
                                 .list(issueTag)
                         ));
                 } else {
-                    predicate = ExpressionUtils.and(predicate, proposal.title.contains(search));
-                    predicate = ExpressionUtils.and(predicate, proposal.content.contains(search));
+                    predicate = ExpressionUtils.and(predicate, ExpressionUtils.anyOf(proposal.title.contains(search), proposal.content.contains(search)));
                 }
             }
 

@@ -38,15 +38,15 @@ public class SiteController {
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String index(Model model) {
 
-        Page<ProposalDto> best = proposalService.getProposals(equalStatusAndProcess(Issue.Status.OPEN, Proposal.Process.COMPLETE), pageableByLimit2, projectionForSiteList);
+        Page<ProposalDto> best = proposalService.getProposalsWithIssueTags(equalStatusAndProcess(Issue.Status.OPEN, Proposal.Process.COMPLETE), pageableByLimit2, projectionForSiteList);
         model.addAttribute("best", best);
 
         // 인기글 - 최대 4개 - 공감 5개 이상의 시간 최신 순
-        Page<ProposalDto> favorite = proposalService.getProposals(equalStatusAndLikeCountOver(Issue.Status.OPEN, 5), pageableByLimit4, projectionForSiteList);
+        Page<ProposalDto> favorite = proposalService.getProposalsWithIssueTags(equalStatusAndLikeCountOver(Issue.Status.OPEN, 5), pageableByLimit4, projectionForSiteList);
         model.addAttribute("favorite", favorite);
 
         // 최신글 - 최대 4개 - 제안으로 분류된 것 중 최
-        Page<ProposalDto> latest = proposalService.getProposals(equalStatusAndProposalType(Issue.Status.OPEN, ProposalType.PROPOSAL), pageableByLimit4, projectionForSiteList);
+        Page<ProposalDto> latest = proposalService.getProposalsWithIssueTags(equalStatusAndProposalType(Issue.Status.OPEN, ProposalType.PROPOSAL), pageableByLimit4, projectionForSiteList);
         model.addAttribute("latest", latest);
 
         return "/site/index";

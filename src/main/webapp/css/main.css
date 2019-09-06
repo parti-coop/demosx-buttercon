@@ -2855,7 +2855,7 @@ a:hover {
 }
 
 .demo-card__contents {
-    height: 130px;
+    min-height: 200px;
 }
 
 .demo-card__title {

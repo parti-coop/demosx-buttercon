@@ -34,11 +34,11 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static seoul.democracy.proposal.dto.ProposalDto.projection;
 import static seoul.democracy.proposal.predicate.ProposalPredicate.equalId;
 import static seoul.democracy.issue.predicate.IssueTagPredicate.containsName;
 import static seoul.democracy.proposal.predicate.ProposalPredicate.predicateForSiteList;
 import static seoul.democracy.proposal.dto.ProposalDto.projectionForSiteList;
+import static seoul.democracy.proposal.dto.ProposalDto.projectionForSiteDetail;
 
 /**
  * epic : 6. 제안
@@ -85,7 +85,7 @@ public class S_6_10_제안한_사용자는_제안에_태그할_수_있다 {
         assertThat(proposal.getId(), is(notNullValue()));
         assertThat(proposal.getCreatedBy().getEmail(), is("user1@googl.co.kr"));
 
-        ProposalDto proposalDto1 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projection);
+        ProposalDto proposalDto1 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projectionForSiteDetail);
         assertThat(proposalDto1.getCreatedBy().getEmail(), is("user1@googl.co.kr"));
         String[] resultTagNames1 = proposalDto1.getIssueTags().stream()
                                     .map(issueTagDto -> issueTagDto.getName())
@@ -108,7 +108,7 @@ public class S_6_10_제안한_사용자는_제안에_태그할_수_있다 {
         ProposalUpdateDto updateDto = ProposalUpdateDto.of(proposal.getId(), "제안 수정합니다.", "제안 수정내용입니다.", tagNames2);
         proposalService.update(updateDto);
 
-        ProposalDto proposalDto2 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projection);
+        ProposalDto proposalDto2 = proposalService.getProposalWithIssueTags(equalId(proposal.getId()), projectionForSiteDetail);
         String[] resultTagNames2 = proposalDto2.getIssueTags()
                                 .stream()
                                 .map(issueTagDto -> issueTagDto.getName())
@@ -130,7 +130,10 @@ public class S_6_10_제안한_사용자는_제안에_태그할_수_있다 {
 
         // 태그 검색
         Pageable pageable = new PageRequest(0, 10);
-        Page<ProposalDto> proposals = proposalService.getProposals(predicateForSiteList("#FE", "환경"), pageable, projectionForSiteList);
-        assertThat(proposals.getNumberOfElements(), is(2));
+        Page<ProposalDto> searchedProposals = proposalService.getProposalsWithIssueTags(predicateForSiteList("#FE", "환경"), pageable, projectionForSiteList);
+        assertThat(searchedProposals.getNumberOfElements(), is(2));
+        searchedProposals.forEach(searchedProposal -> assertThat(searchedProposal.getIssueTags().stream()
+                                                                                                .map(issueTagDto -> issueTagDto.getName())
+                                                                                                .collect(Collectors.toList()), hasItems("FE")));
     }
 }

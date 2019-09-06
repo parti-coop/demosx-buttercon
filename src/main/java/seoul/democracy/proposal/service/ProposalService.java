@@ -59,13 +59,9 @@ public class ProposalService {
         this.eventPublisher = eventPublisher;
     }
 
-    public ProposalDto getProposal(Predicate predicate, Expression<ProposalDto> projection) {
-        return proposalRepository.findOne(predicate, projection);
-    }
-
-    public ProposalDto getProposalDetail(Predicate predicate, Expression<ProposalDto> projection) {
-        boolean withIssueTag = true;
-        ProposalDto proposal = proposalRepository.findOne(predicate, projection, withIssueTag);
+    public ProposalDto getProposalSiteDetail(Predicate predicate, Expression<ProposalDto> projection) {
+        boolean withIssueTags = true;
+        ProposalDto proposal = proposalRepository.findOne(predicate, projection, withIssueTags);
 
         if (proposal == null)
             return null;
@@ -79,13 +75,24 @@ public class ProposalService {
         return proposal;
     }
 
+    public ProposalDto getProposal(Predicate predicate, Expression<ProposalDto> projection) {
+        boolean withIssueTags = false;
+        return proposalRepository.findOne(predicate, projection, withIssueTags);
+    }
+
     public ProposalDto getProposalWithIssueTags(Predicate predicate, Expression<ProposalDto> projection) {
-        boolean withIssueTag = true;
-        return proposalRepository.findOne(predicate, projection, withIssueTag);
+        boolean withIssueTags = true;
+        return proposalRepository.findOne(predicate, projection, withIssueTags);
     }
 
     public Page<ProposalDto> getProposals(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection) {
-        return proposalRepository.findAll(predicate, pageable, projection);
+        boolean withIssueTags = false;
+        return proposalRepository.findAll(predicate, pageable, projection, withIssueTags);
+    }
+
+    public Page<ProposalDto> getProposalsWithIssueTags(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection) {
+        boolean withIssueTags = true;
+        return proposalRepository.findAll(predicate, pageable, projection, withIssueTags);
     }
 
     private Proposal getProposal(Long proposalId) {

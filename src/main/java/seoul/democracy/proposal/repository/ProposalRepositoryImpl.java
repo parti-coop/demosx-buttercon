@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.dto.ProposalDto;
+import seoul.democracy.issue.predicate.IssueTagPredicate;
 
 import static seoul.democracy.issue.domain.QCategory.category;
 import static seoul.democracy.issue.domain.QIssueStats.issueStats;
@@ -55,19 +56,25 @@ public class ProposalRepositoryImpl extends QueryDslRepositorySupport implements
     }
 
     @Override
-    public Page<ProposalDto> findAll(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection) {
+    public Page<ProposalDto> findAll(Predicate predicate, Pageable pageable, Expression<ProposalDto> projection, boolean withIssueTags) {
         SearchResults<ProposalDto> results = getQuerydsl()
                                                  .applyPagination(
                                                      pageable,
                                                      getQuery(projection)
                                                          .where(predicate))
                                                  .listResults(projection);
-        return new PageImpl<>(results.getResults(), pageable, results.getTotal());
-    }
 
-    @Override
-    public ProposalDto findOne(Predicate predicate, Expression<ProposalDto> projection) {
-        return findOne(predicate, projection, false);
+        if (withIssueTags) {
+            for(ProposalDto result : results.getResults()) {
+                List<IssueTagDto> issueTags = from(issueTag)
+                                    .where(IssueTagPredicate.containsIssueId(result.getId()))
+                                    .orderBy(issueTag.name.asc())
+                                    .list(IssueTagDto.projection);
+                result.setIssueTags(issueTags);
+            }
+        }
+
+        return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }
 
     @Override

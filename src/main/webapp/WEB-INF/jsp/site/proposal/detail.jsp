@@ -68,8 +68,9 @@
         </c:if>
         <div class="contents-box__contents">${proposal.contentWithBr()}</div>
 
+        <hr/>
         <div>
-          <h3>태그</h3>
+          <strong>태그</strong>
           <c:forEach var="issueTag" items="${proposal.issueTags}">
             <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>">${issueTag.name}</a>
           </c:forEach>

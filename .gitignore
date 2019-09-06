@@ -7,6 +7,7 @@ target/
 .project
 .classpath
 .factorypath
+.sts4-cache/
 
 .vscode
 

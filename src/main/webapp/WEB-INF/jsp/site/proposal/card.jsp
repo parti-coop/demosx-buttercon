@@ -7,21 +7,34 @@
       <span>Best</span>
     </div>
   </c:if>
-  <a href="<c:url value="/proposal.do?id=${proposal.id}"/>" class="demo-card__link ">
-    <div class="clearfix">
-      <div class="demo-card__author pull-right">
-        <div class="profile-circle profile-circle--title"
-             style="background-image: url(${proposal.createdBy.viewPhoto()})">
-          <p class="alt-text">${proposal.createdBy.name}프로필</p>
+  <div class="demo-card__link ">
+    <a href="<c:url value="/proposal.do?id=${proposal.id}"/>">
+      <div class="clearfix">
+        <div class="demo-card__author pull-right">
+          <div class="profile-circle profile-circle--title"
+              style="background-image: url(${proposal.createdBy.viewPhoto()})">
+            <p class="alt-text">${proposal.createdBy.name}프로필</p>
+          </div>
+          <p class="title-author__name">${proposal.createdBy.name}</p>
+          <p class="title-author__date"><i class="xi-time"></i> ${proposal.createdDate.toLocalDate()}</p>
         </div>
-        <p class="title-author__name">${proposal.createdBy.name}</p>
-        <p class="title-author__date"><i class="xi-time"></i> ${proposal.createdDate.toLocalDate()}</p>
       </div>
+      <div class="demo-card__contents">
+        <h5 class="demo-card__title">${proposal.title}</h5>
+        <p class="demo-card__desc">${proposal.excerpt}</p>
+      </div>
+    </a>
+
+    <hr/>
+
+    <div>
+      <strong>태그</strong>
+      <c:forEach var="issueTag" items="${proposal.issueTags}">
+        <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>">${issueTag.name}</a>
+      </c:forEach>
     </div>
-    <div class="demo-card__contents">
-      <h5 class="demo-card__title">${proposal.title}</h5>
-      <p class="demo-card__desc">${proposal.excerpt}</p>
-    </div>
+
+    <hr/>
 
     <div class="demo-card__info">
       <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
@@ -45,5 +58,5 @@
         </div>
       </div>
     </div>
-  </a>
+  </div>
 </div>

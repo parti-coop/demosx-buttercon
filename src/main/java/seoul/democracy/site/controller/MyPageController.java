@@ -66,7 +66,7 @@ public class MyPageController {
     public String proposal(@RequestParam(value = "search", required = false) String search,
                            @PageableDefault(sort = "createdDate", direction = DESC) Pageable pageable,
                            Model model) {
-        Page<ProposalDto> proposals = proposalService.getProposals(predicateForMypageProposal(UserUtils.getUserId(), search), pageable, projectionForMypageProposal);
+        Page<ProposalDto> proposals = proposalService.getProposalsWithIssueTags(predicateForMypageProposal(UserUtils.getUserId(), search), pageable, projectionForMypageProposal);
         model.addAttribute("proposals", proposals);
 
         model.addAttribute("search", search);

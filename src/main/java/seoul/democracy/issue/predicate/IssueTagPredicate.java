@@ -23,4 +23,8 @@ public class IssueTagPredicate {
     public static Predicate containsName(String search) {
         return issueTag.name.contains(search);
     }
+
+    public static Predicate containsIssueId(Long issueId) {
+        return issueTag.issues.any().id.eq(issueId);
+    }
 }

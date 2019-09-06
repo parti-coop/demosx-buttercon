@@ -59,3 +59,5 @@ mvn package
 
 * hans@slowalk.co.kr 메일 주소변경
 * README 업데이트
+* "서울"이란 글자가 들어간 메일
+* 50/500
