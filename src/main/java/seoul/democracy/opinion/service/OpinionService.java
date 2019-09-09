@@ -18,6 +18,7 @@ import seoul.democracy.issue.repository.IssueStatsRepository;
 import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.opinion.domain.OpinionLike;
 import seoul.democracy.opinion.dto.OpinionCreateDto;
+import seoul.democracy.opinion.dto.ChildOpinionCreateDto;
 import seoul.democracy.opinion.dto.OpinionDto;
 import seoul.democracy.opinion.dto.OpinionUpdateDto;
 import seoul.democracy.opinion.repository.OpinionLikeRepository;
@@ -64,8 +65,8 @@ public class OpinionService {
         return opinionRepository.findAll(predicate, pageable, projection);
     }
 
-    public Page<OpinionDto> getOpinionsWithLiked(Predicate predicate, Pageable pageable, Expression<OpinionDto> projection) {
-        Page<OpinionDto> opinions = opinionRepository.findAll(predicate, pageable, projection);
+    public Page<OpinionDto> getParentOpinionsWithChildOpinionsAndLiked(Predicate predicate, Pageable pageable, Expression<OpinionDto> projection) {
+        Page<OpinionDto> opinions = opinionRepository.findAllParentOpinions(predicate, pageable, projection);
 
         Long userId = UserUtils.getUserId();
         if (userId == null) return opinions;
@@ -118,6 +119,20 @@ public class OpinionService {
         Issue issue = getIssue(createDto.getIssueId());
 
         Opinion opinion = issue.createOpinion(createDto);
+
+        increaseIssueStatsByOpinion(opinion, UserUtils.getUserId());
+
+        return opinionRepository.save(opinion);
+    }
+
+    /**
+     * 하위의견 등록
+     */
+    @Transactional
+    public Opinion createOpinion(ChildOpinionCreateDto childCreateDto) {
+        Opinion parentOpinion = getOpinion(childCreateDto.getParentOpinionId());
+
+        Opinion opinion = parentOpinion.createChildOpinion(childCreateDto.getContent());
 
         increaseIssueStatsByOpinion(opinion, UserUtils.getUserId());
 

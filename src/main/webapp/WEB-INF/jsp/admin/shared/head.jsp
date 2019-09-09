@@ -24,6 +24,9 @@
 <script type="text/javascript" src="<c:url value="/js/select2.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/select2-ko.js"/>"></script>
 
+<!-- handlebars -->
+<script type="text/javascript" src="<c:url value="/js/handlebars.min-v4.2.0.js"/>"></script>
+
 <script src="<c:url value="/js/adminlte.min.js"/>"></script>
 <script src="<c:url value="/js/admin.js"/>"></script>
 

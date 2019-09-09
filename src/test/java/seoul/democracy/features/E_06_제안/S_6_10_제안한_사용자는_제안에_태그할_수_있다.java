@@ -26,8 +26,6 @@ import seoul.democracy.proposal.dto.ProposalUpdateDto;
 import seoul.democracy.proposal.dto.ProposalDto;
 import seoul.democracy.proposal.service.ProposalService;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

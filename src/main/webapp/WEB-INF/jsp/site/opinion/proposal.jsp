@@ -75,6 +75,34 @@
   </div>
 </c:if>
 
+<c:if test="${not empty loginUser}">
+  <div class="modal fade" id="modalNewChildOpinion" tabindex="-1" role="dialog" aria-labelledby="의견 댓글달기">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form class="demo-form" id="form-new-child-opinion">
+            <input type="hidden" name="parentOpinionId" value="">
+            <div class="form-input-container form-input-container--history">
+              <div class="form-group form-group--demo">
+                <label class="demo-form-label" for="inputContent">의견 댓글달기</label>
+                <textarea class="form-control" name="content" id="inputContent" rows="8"
+                          data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
+              </div>
+            </div>
+            <div class="form-action text-right">
+              <div class="btn-group clearfix">
+                <button class="btn demo-submit-btn cancel-btn" data-dismiss="modal" aria-label="Close" role="button">취소
+                </button>
+                <button type="submit" class="demo-submit-btn demo-submit-btn--submit">저장하기</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</c:if>
+
 <div class="demo-comments-container">
   <div class="demo-comments-top">
     <div class="clearfix">
@@ -104,51 +132,109 @@
 <!-- jquery serialize object -->
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+
+<!-- template -->
+<script id="template-opinion" type="text/x-handlebars-template">
+  {{#*inline "partialCommentLine"}}
+    <li class="comment-li">
+      <div class="profile-circle profile-circle--comment" style="background-image: url({{ opinion.contextAssigns.photo }})">
+        <p class="alt-text">{{ opinion.createdBy.name }} 사진</p>
+      </div>
+      <div class="comment-content">
+        <div class="comment-info clearfix">
+          <div class="comment-date-wrapper">
+            <p class="comment-name">{{ opinion.createdBy.name }}</p>
+            <p class="comment-time"><i class="xi-time"></i> {{ opinion.contextAssigns.createdDateShort }}</p>
+          </div>
+          <div class="comment-likes-count">
+            <button class="opinion-thumbs-up-btn{{#if opinion.liked}}active{{/if}}" data-id="{{ opinion.id }}">
+              <i class="xi-thumbs-up"></i> 공감 <strong>{{ opinion.likeCount }}</strong>개
+            </button>
+          </div>
+        </div>
+        <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">{{ opinion.contextAssigns.contentBr }}</p>
+        {{#if @root.isSignedIn}}
+          <div class="clearfix">
+            <div class="pull-right">
+              {{#if opinion.contextAssigns.canHaveChildOpinions}}
+              <button type="button"
+                class="btn btn-default btn-sm js-new-child-opinion-btn"
+                data-id="{{ opinion.id }}">댓글달기</button>
+              {{/if}}
+              {{#if opinion.contextAssigns.isOwner}}
+              <button type="button"
+                class="btn btn-default btn-sm js-edit-opinion-btn js-edit-opinion-btn-{{ opinion.id }}"
+                data-id="{{ opinion.id }}" data-content="{{ opinion.content }}">수정하기</button>
+              <%--'            <button type="button" class="btn btn-default btn-sm delete-opinion-btn" data-id="' + opinion.id + '">삭제하기</button>' + --%>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    {{/inline}}
+
+    <!-- 부모 댓글 --->
+    {{> partialCommentLine }}
+
+    {{#if opinion.contextAssigns.canHaveChildOpinions}}
+      <!-- 자식 댓글 --->
+      <ul class='js-child-opinions-list-{{ opinion.id }} {{#unless opinion.contextAssigns.hasChildOpinions}}display_none{{/unless}}'>
+        {{#each opinion.childOpinions}}
+          {{> partialCommentLine opinion=this }}
+        {{/each}}
+      </ul>
+    {{/if}}
+  </li>
+</script>
+
 <script>
+$(function () {
   <c:if test="${not empty loginUser}">
-  $(function () {
     // 의견 등록
-    var $opinionLength = $('#opinion-length');
-    $('textarea[name=content]').keyup(function () {
-      $opinionLength.text($(this).val().length);
-    });
-
-    var $formOpinion = $('#form-opinion');
-    $formOpinion.parsley(parsleyConfig);
-    $formOpinion.on('submit', function (event) {
-      event.preventDefault();
-
-      var data = $formOpinion.serializeObject();
-      $.ajax({
-        headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-        url: '/ajax/mypage/opinions',
-        type: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(data),
-        success: function (data) {
-          alert(data.msg);
-          $('#latest-sort-btn').trigger('click');
-          $formOpinion[0].reset();
-          $formOpinion.parsley().reset();
-        },
-        error: function (error) {
-          if (error.status === 400) {
-            if (error.responseJSON.fieldErrors) {
-              var msg = error.responseJSON.fieldErrors.map(function (item) {
-                return item.fieldError;
-              }).join('/n');
-              alert(msg);
-            } else alert(error.responseJSON.msg);
-          } else if (error.status === 403 || error.status === 401) {
-            alert('로그인이 필요합니다.');
-            window.location.href = '/login.do';
-          }
-        }
+    (function() {
+      var $opinionLength = $('#opinion-length');
+      $('textarea[name=content]').keyup(function () {
+        $opinionLength.text($(this).val().length);
       });
-    });
+    })();
 
-    <%--// 의견 삭제
+    (function() {
+      var $formOpinion = $('#form-opinion');
+      $formOpinion.parsley(parsleyConfig);
+      $formOpinion.on('submit', function (event) {
+        event.preventDefault();
+
+        var data = $formOpinion.serializeObject();
+        $.ajax({
+          headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+          url: '/ajax/mypage/opinions',
+          type: 'POST',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify(data),
+          success: function (data) {
+            alert(data.msg);
+            $('#latest-sort-btn').trigger('click');
+            $formOpinion[0].reset();
+            $formOpinion.parsley().reset();
+          },
+          error: function (error) {
+            if (error.status === 400) {
+              if (error.responseJSON.fieldErrors) {
+                var msg = error.responseJSON.fieldErrors.map(function (item) {
+                  return item.fieldError;
+                }).join('/n');
+                alert(msg);
+              } else alert(error.responseJSON.msg);
+            } else if (error.status === 403 || error.status === 401) {
+              alert('로그인이 필요합니다.');
+              window.location.href = '/login.do';
+            }
+          }
+        });
+      });
+    })();
+
     $(document).on('click', '.delete-opinion-btn', function () {
       if (!window.confirm('삭제할까요?')) return;
 
@@ -181,51 +267,113 @@
           }
         }
       });
-    });--%>
+    });
 
     // 의견 수정
-    var $opinionContent = null;
-    var $modalEditOpinion = $('#modalEditOpinion');
-    $(document).on('click', '.edit-opinion-btn', function() {
-      $formOpinion[0].reset();
-      $formOpinion.parsley().reset();
-      $opinionContent = $(this).parents('.comment-li');
-      $('input[name=opinionId]', $modalEditOpinion).val($(this).data('id'));
-      $('textarea[name=content]', $modalEditOpinion).val($(this).data('content'));
-      $modalEditOpinion.modal('show');
-    });
-    var $formEditOpinion = $('#form-edit-opinion');
-    $formEditOpinion.parsley(parsleyConfig);
-    $formEditOpinion.on('submit', function (event) {
-      event.preventDefault();
-      var data = $formEditOpinion.serializeObject();
-      $.ajax({
-        headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-        url: '/ajax/mypage/opinions/' + data.opinionId,
-        type: 'PUT',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(data),
-        success: function (result) {
-          alert(result.msg);
-          $('.comment-content-text', $opinionContent).html(data.content.replace(/\r\n|\r|\n|\n\r/g, '<br>'));
-          $modalEditOpinion.modal('hide');
-        },
-        error: function (error) {
-          if (error.status === 400) {
-            if (error.responseJSON.fieldErrors) {
-              var msg = error.responseJSON.fieldErrors.map(function (item) {
-                return item.fieldError;
-              }).join('/n');
-              alert(msg);
-            } else alert(error.responseJSON.msg);
-          } else if (error.status === 403 || error.status === 401) {
-            alert('로그인이 필요합니다.');
-            window.location.href = '/login.do';
-          }
-        }
+    (function() {
+      var $formOpinion = $('#form-opinion');
+      var $opinionContent = null;
+      var $modalEditOpinion = $('#modalEditOpinion');
+      $(document).on('click', '.js-edit-opinion-btn', function() {
+        $formOpinion[0].reset();
+        $formOpinion.parsley().reset();
+        $opinionContent = $(this).parents('.comment-li');
+        $('input[name=opinionId]', $modalEditOpinion).val($(this).data('id'));
+        $('textarea[name=content]', $modalEditOpinion).val($(this).data('content'));
+        $modalEditOpinion.modal('show');
       });
-    });
+      var $formEditOpinion = $('#form-edit-opinion');
+      $formEditOpinion.parsley(parsleyConfig);
+      $formEditOpinion.on('submit', function (event) {
+        event.preventDefault();
+        var data = $formEditOpinion.serializeObject();
+        $.ajax({
+          headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+          url: '/ajax/mypage/opinions/' + data.opinionId,
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify(data),
+          success: function (result) {
+            alert(result.msg);
+            if(result.contents && result.contents.opinion) {
+              var opinion = result.contents.opinion;
+              $('.js-comment-content-text-' + opinion.id, $opinionContent).html(opinion.content.replace(/\r\n|\r|\n|\n\r/g, '<br>'));
+              $('.js-edit-opinion-btn-' + opinion.id, $opinionContent).data('content', opinion.content);
+              $formEditOpinion[0].reset();
+              $formEditOpinion.parsley().reset();
+              $modalEditOpinion.modal('hide');
+            }
+          },
+          error: function (error) {
+            if (error.status === 400) {
+              if (error.responseJSON.fieldErrors) {
+                var msg = error.responseJSON.fieldErrors.map(function (item) {
+                  return item.fieldError;
+                }).join('/n');
+                alert(msg);
+              } else alert(error.responseJSON.msg);
+            } else if (error.status === 403 || error.status === 401) {
+              alert('로그인이 필요합니다.');
+              window.location.href = '/login.do';
+            }
+          }
+        });
+      });
+    })();
+
+    // 의견 대댓글
+    (function() {
+      var $formOpinion = $('#form-opinion');
+      var $opinionContent = null;
+      var $modalNewChildOpinion = $('#modalNewChildOpinion');
+      $(document).on('click', '.js-new-child-opinion-btn', function() {
+        $formOpinion[0].reset();
+        $formOpinion.parsley().reset();
+        $opinionContent = $(this).parents('.comment-li');
+        $('input[name=parentOpinionId]', $modalNewChildOpinion).val($(this).data('id'));
+        $modalNewChildOpinion.modal('show');
+      });
+      var $formNewChildOpinion = $('#form-new-child-opinion');
+      $formNewChildOpinion.parsley(parsleyConfig);
+      $formNewChildOpinion.on('submit', function (event) {
+        event.preventDefault();
+        var data = $formNewChildOpinion.serializeObject();
+        $.ajax({
+          headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+          url: '/ajax/mypage/opinions/' + data.parentOpinionId + '/child-opinion',
+          type: 'POST',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify(data),
+          success: function (result) {
+            alert(result.msg);
+            if(result.contents && result.contents.opinion) {
+              var opinion = result.contents.opinion;
+              var content = $$makeOpinionString(opinion);
+              $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent).prepend(content);
+              $formNewChildOpinion[0].reset();
+              $formNewChildOpinion.parsley().reset();
+              $modalNewChildOpinion.modal('hide');
+            }
+          },
+          error: function (error) {
+            if (error.status === 400) {
+              if (error.responseJSON.fieldErrors) {
+                var msg = error.responseJSON.fieldErrors.map(function (item) {
+                  return item.fieldError;
+                }).join('/n');
+                alert(msg);
+              } else alert(error.responseJSON.msg);
+            } else if (error.status === 403 || error.status === 401) {
+              alert('로그인이 필요합니다.');
+              window.location.href = '/login.do';
+            }
+          }
+        });
+      });
+    })();
+
 
     // 의견 공감
     $(document).on('click', '.opinion-thumbs-up-btn', function () {
@@ -267,18 +415,15 @@
         }
       });
     });
-  });
   </c:if>
-  $(function () {
-      <c:if test="${not empty loginUser}">var userId = ${loginUser.id};
-    </c:if>
-      <c:if test="${empty loginUser}">var userId = null;
-    </c:if>
+
+  (function() {
     var page = 1;
     var sort = 'createdDate,desc';
     var $opinionList = $('#opinion-list');
     var $opinionMore = $('#opinion-more');
     var $opinionCount = $('#opinion-count');
+
     $('.opinion-sort').click(function (event) {
       event.preventDefault();
       var selectedSort = $(this).data('sort');
@@ -311,7 +456,7 @@
         success: function (data) {
           $opinionCount.text(data.totalElements);
           for (var i = 0; i < data.content.length; i++) {
-            var content = makeOpinionString(data.content[i]);
+            var content = $$makeOpinionString(data.content[i]);
             $opinionList.append(content);
           }
           $opinionList.css('height', 'auto');
@@ -323,41 +468,41 @@
         }
       });
     }
-
-    function makeOpinionString(opinion) {
-      var photo = opinion.createdBy.photo || '/images/noavatar.png';
-
-      var ownerMenu = '';
-      if(opinion.createdBy.id === userId) {
-        ownerMenu = '        <div class="clearfix">' +
-          '          <div class="pull-right">' +
-          '            <button type="button" class="btn btn-default btn-sm edit-opinion-btn" data-id="' + opinion.id + '" data-content="' + opinion.content + '">수정하기</button>' +
-          <%--'            <button type="button" class="btn btn-default btn-sm delete-opinion-btn" data-id="' + opinion.id + '">삭제하기</button>' + --%>
-          '          </div>' +
-          '        </div>';
-      }
-
-      return '<li class="comment-li">' +
-        '      <div class="profile-circle profile-circle--comment" style="background-image: url(' + photo + ')">' +
-        '        <p class="alt-text">' + opinion.createdBy.name + '사진</p>' +
-        '      </div>' +
-        '      <div class="comment-content">' +
-        '        <div class="comment-info clearfix">' +
-        '          <div class="comment-date-wrapper">' +
-        '            <p class="comment-name">' + opinion.createdBy.name + '</p>' +
-        '            <p class="comment-time"><i class="xi-time"></i> ' + opinion.createdDate.substring(0, opinion.createdDate.indexOf(' ')) + '</p>' +
-        '          </div>' +
-        '          <div class="comment-likes-count">' +
-        '            <button class="opinion-thumbs-up-btn' + (opinion.liked ? ' active' : '') + '" data-id="' + opinion.id + '">' +
-        '              <i class="xi-thumbs-up"></i> 공감 <strong>' + opinion.likeCount + '</strong>개' +
-        '            </button>' +
-        '          </div>' +
-        '        </div>' +
-        '        <p class="comment-content-text">' + opinion.content.replace(/\r\n|\r|\n|\n\r/g, '<br>') + '</p>' + ownerMenu +
-        '      </div>' +
-        '    </li>';
-    }
-
     getOpinion();
-  });
+  })();
+
+  <c:if test="${not empty loginUser}">
+    var $$userId = ${loginUser.id};
+  </c:if>
+  <c:if test="${empty loginUser}">
+    var $$userId = null;
+  </c:if>
+
+  var $$templateOpinion = Handlebars.compile($("#template-opinion").html());
+  function $$makeOpinionString(opinion) {
+    console.log(opinion);
+    var contextAssignedOpinion = $$contextAssignOpinion($.extend(true, {}, opinion), $$userId);
+    return $$templateOpinion({
+      isSignedIn: (!!$$userId),
+      opinion: contextAssignedOpinion,
+    });
+  }
+
+  function $$contextAssignOpinion(opinion) {
+    if(opinion.childOpinions) {
+      $.each(opinion.childOpinions, function(index, childOpinion) {
+        $$contextAssignOpinion(childOpinion);
+      });
+    }
+    opinion['contextAssigns'] = {
+      isOwner: (opinion.createdBy.id === $$userId),
+      photo: opinion.createdBy.photo || '/images/noavatar.png',
+      contentBr: opinion.content.replace(/\r\n|\r|\n|\n\r/g, '<br>'),
+      createdDateShort: opinion.createdDate.substring(0, opinion.createdDate.indexOf(' ')),
+      canHaveChildOpinions: (!opinion.parentOpinionId),
+      hasChildOpinions: (!opinion.parentOpinionId && opinion.childOpinions && opinion.childOpinions.length > 0),
+    }
+    return opinion;
+  }
+});
 </script>

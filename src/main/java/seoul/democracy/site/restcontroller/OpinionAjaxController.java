@@ -7,6 +7,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import seoul.democracy.common.dto.ResultInfo;
 import seoul.democracy.opinion.dto.OpinionCreateDto;
+import seoul.democracy.opinion.domain.Opinion;
+import seoul.democracy.opinion.dto.ChildOpinionCreateDto;
 import seoul.democracy.opinion.dto.OpinionDto;
 import seoul.democracy.opinion.dto.OpinionUpdateDto;
 import seoul.democracy.opinion.service.OpinionService;
@@ -19,6 +21,10 @@ import static seoul.democracy.opinion.dto.OpinionDto.projectionForIssueDetail;
 import static seoul.democracy.opinion.dto.OpinionDto.projectionForMyOpinion;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.equalIssueIdAndCreatedByIdAndStatus;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForOpinionList;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.equalId;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class OpinionAjaxController {
@@ -31,9 +37,9 @@ public class OpinionAjaxController {
     }
 
     @RequestMapping(value = "/ajax/opinions", method = RequestMethod.GET)
-    public Page<OpinionDto> getOpinions(@RequestParam("issueId") Long issueId,
-                                        @PageableDefault Pageable pageable) {
-        return opinionService.getOpinionsWithLiked(predicateForOpinionList(issueId), pageable, projectionForIssueDetail);
+    public Page<OpinionDto> getOpinions(@RequestParam("issueId") Long issueId, @PageableDefault Pageable pageable) {
+        return opinionService.getParentOpinionsWithChildOpinionsAndLiked(predicateForOpinionList(issueId), pageable,
+                projectionForIssueDetail);
     }
 
     @RequestMapping(value = "/ajax/mypage/opinions", method = RequestMethod.POST)
@@ -45,9 +51,11 @@ public class OpinionAjaxController {
 
     @RequestMapping(value = "/ajax/mypage/opinions/{id}", method = RequestMethod.PUT)
     public ResultInfo updateOpinion(@RequestBody @Valid OpinionUpdateDto updateDto) {
-        opinionService.updateOpinion(updateDto);
+        Opinion opinion = opinionService.updateOpinion(updateDto);
 
-        return ResultInfo.of("의견을 수정하였습니다.");
+        Map<String, Object> content = new HashMap<String, Object>();
+        content.put("opinion", opinionService.getOpinion(equalId(opinion.getId()), projectionForIssueDetail));
+        return ResultInfo.of("의견을 등록하였습니다.", content);
     }
 
     @RequestMapping(value = "/ajax/mypage/opinions/{id}", method = RequestMethod.DELETE)
@@ -55,6 +63,15 @@ public class OpinionAjaxController {
         opinionService.deleteOpinion(id);
 
         return ResultInfo.of("의견을 삭제하였습니다.");
+    }
+
+    @RequestMapping(value = "/ajax/mypage/opinions/{id}/child-opinion", method = RequestMethod.POST)
+    public ResultInfo createOpinion(@RequestBody @Valid ChildOpinionCreateDto childOpinionCreateDto) {
+        Opinion opinion = opinionService.createOpinion(childOpinionCreateDto);
+
+        Map<String, Object> content = new HashMap<String, Object>();
+        content.put("opinion", opinionService.getOpinion(equalId(opinion.getId()), projectionForIssueDetail));
+        return ResultInfo.of("의견을 등록하였습니다.", content);
     }
 
     @RequestMapping(value = "/ajax/mypage/opinions/{id}/selectLike", method = RequestMethod.PUT)

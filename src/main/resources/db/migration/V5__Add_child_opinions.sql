@@ -1,0 +1,5 @@
+-- 태그
+ALTER TABLE `TB_OPINION`
+	ADD (
+		`PARENT_OPINION_ID`         BIGINT(20) UNSIGNED NULL COMMENT '부모 의견ID' -- 부모 의견ID
+	);

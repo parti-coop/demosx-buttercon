@@ -10,6 +10,8 @@ import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.user.dto.UserDto;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static seoul.democracy.opinion.domain.QOpinion.opinion;
@@ -24,6 +26,7 @@ public class OpinionDto {
         UserDto.projectionForBasicByModifiedBy.as("modifiedBy"),
         opinion.createdIp, opinion.modifiedIp,
         IssueDto.projectionForOpinion.as("issue"),
+        opinion.parentOpinionId,
         opinion.likeCount, opinion.content, opinion.status, opinion.vote);
 
     /**
@@ -32,6 +35,7 @@ public class OpinionDto {
     public final static QBean<OpinionDto> projectionForIssueDetail = Projections.fields(OpinionDto.class,
         opinion.id, opinion.createdDate,
         UserDto.projectionForBasicByCreatedBy.as("createdBy"),
+        opinion.parentOpinionId,
         opinion.likeCount, opinion.content, opinion.vote);
 
     /**
@@ -40,6 +44,7 @@ public class OpinionDto {
     public final static QBean<OpinionDto> projectionForMypage = Projections.fields(OpinionDto.class,
         opinion.id, opinion.createdDate,
         IssueDto.projectionForOpinion.as("issue"),
+        opinion.parentOpinionId,
         opinion.likeCount, opinion.content, opinion.vote);
 
     /**
@@ -66,6 +71,9 @@ public class OpinionDto {
 
     // 제안에 대해 공감 표시 여부
     private Boolean liked;
+
+    protected Long parentOpinionId;
+    protected Set<OpinionDto> childOpinions = new HashSet<>();
 
     public String contentWithBr() {
         return content.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");

@@ -19,6 +19,8 @@ import seoul.democracy.user.domain.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * 의견
@@ -99,6 +101,21 @@ public abstract class Opinion {
     private Issue issue;
 
     /**
+     * 부모 의견
+     */
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PARENT_OPINION_ID", updatable = false, nullable = true)
+    protected Opinion parentOpinion;
+    @Column(name = "PARENT_OPINION_ID", insertable = false, updatable = false)
+    private Long parentOpinionId;
+
+    /**
+     * 자식 의견
+     */
+    @OneToMany(mappedBy = "parentOpinion", fetch = FetchType.LAZY)
+    protected Set<Opinion> childOpinions = new HashSet<Opinion>();
+
+    /**
      * 공감수
      */
     @Column(name = "LIKE_CNT", insertable = false, updatable = false)
@@ -130,6 +147,8 @@ public abstract class Opinion {
 
         this.status = Status.OPEN;
     }
+
+    public abstract Opinion createChildOpinion(String content);
 
     public Opinion update(OpinionUpdateDto updateDto) {
         if (!issue.isUpdatableOpinion())

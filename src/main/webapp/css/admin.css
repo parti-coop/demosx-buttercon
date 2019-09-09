@@ -18,6 +18,10 @@
     display: inline-block;
 }
 
+.display_none {
+    display: none;
+}
+
 .mr-10 {
     margin-right: 10px;
 }

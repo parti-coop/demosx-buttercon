@@ -24,4 +24,8 @@ public class DebateOpinion extends Opinion {
     public static DebateOpinion create(Issue issue, Vote vote, String content) {
         return new DebateOpinion(issue, vote, content);
     }
+
+    public DebateOpinion createChildOpinion(String content) {
+        throw new java.lang.UnsupportedOperationException();
+    }
 }

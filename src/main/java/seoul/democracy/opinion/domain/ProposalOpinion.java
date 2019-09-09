@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("P")
 public class ProposalOpinion extends Opinion {
-
-
     private ProposalOpinion(Issue issue, String content) {
         super(issue, content);
         this.vote = Vote.ETC;
@@ -24,5 +22,13 @@ public class ProposalOpinion extends Opinion {
 
     public static ProposalOpinion create(Issue issue, String content) {
         return new ProposalOpinion(issue, content);
+    }
+
+    public ProposalOpinion createChildOpinion(String content) {
+        Issue issue = this.getIssue();
+        ProposalOpinion childProposalOpinion = ProposalOpinion.create(issue, content);
+        childProposalOpinion.parentOpinion = this;
+
+        return childProposalOpinion;
     }
 }

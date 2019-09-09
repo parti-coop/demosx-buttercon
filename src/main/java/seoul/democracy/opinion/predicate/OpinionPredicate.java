@@ -11,6 +11,8 @@ import seoul.democracy.opinion.domain.Opinion;
 
 import static seoul.democracy.opinion.domain.QOpinion.opinion;
 
+import java.time.LocalDateTime;
+
 public class OpinionPredicate {
 
     public static Predicate equalId(Long id) {
@@ -67,7 +69,11 @@ public class OpinionPredicate {
         return ExpressionUtils.and(opinion.issue.type.eq(issueType), opinion.issue.group.eq(group));
     }
 
-    public static OrderSpecifier orderByIdDesc() {
+    public static OrderSpecifier<Long> orderByIdDesc() {
         return opinion.id.desc();
+    }
+
+    public static OrderSpecifier<LocalDateTime> orderByCreatedDateAsc() {
+        return opinion.createdDate.asc();
     }
 }

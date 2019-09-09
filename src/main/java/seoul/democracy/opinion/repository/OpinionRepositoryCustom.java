@@ -6,6 +6,8 @@ import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.opinion.dto.OpinionDto;
 
 import java.time.LocalDate;
@@ -15,10 +17,11 @@ public interface OpinionRepositoryCustom {
 
     Page<OpinionDto> findAll(Predicate predicate, Pageable pageable, Expression<OpinionDto> projection);
 
+    Page<OpinionDto> findAllParentOpinions(Predicate predicate, Pageable pageable, Expression<OpinionDto> projection);
+
     OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection);
 
-    OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection, OrderSpecifier order);
-
+    OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection, OrderSpecifier<Long> order);
 
     /**
      * 제안의견 공감

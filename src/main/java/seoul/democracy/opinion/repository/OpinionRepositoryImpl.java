@@ -7,6 +7,8 @@ import com.mysema.query.support.Expressions;
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -20,12 +22,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import static seoul.democracy.issue.domain.QIssue.issue;
 import static seoul.democracy.opinion.domain.QOpinion.opinion;
 import static seoul.democracy.user.domain.QUser.user;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.orderByCreatedDateAsc;
 
 public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements OpinionRepositoryCustom {
 
@@ -59,8 +66,39 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
                                                     getQuery(projection)
                                                         .where(predicate))
                                                 .listResults(projection);
+
         return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }
+
+    @Override
+    public Page<OpinionDto> findAllParentOpinions(Predicate predicate, Pageable pageable, Expression<OpinionDto> projection) {
+        SearchResults<OpinionDto> results = getQuerydsl()
+                                                .applyPagination(
+                                                    pageable,
+                                                    getQuery(projection)
+                                                        .where(predicate)
+                                                        .where(opinion.parentOpinionId.isNull()))
+                                                .listResults(projection);
+
+        List<Long> parentOpinionIds = results.getResults().stream().map(opinionDto -> {
+            return opinionDto.getId();
+        }).collect(Collectors.toList());
+
+        BooleanExpression childOpinionPredicate = opinion.parentOpinionId.in(parentOpinionIds);
+        List<OpinionDto> childOpinionDtos =  getQuery(projection).where(childOpinionPredicate).orderBy(orderByCreatedDateAsc()).list(projection);
+
+        Map<Long, Set<OpinionDto>> groupingChildOpinionDtos = childOpinionDtos.stream().collect(Collectors.groupingBy(childOpinionDto -> {
+            return childOpinionDto.getParentOpinionId();
+        },  Collectors.toCollection(HashSet::new)));
+
+        results.getResults().forEach(parentOpinion -> {
+            Set<OpinionDto> childOpinions = groupingChildOpinionDtos.get(parentOpinion.getId());
+            parentOpinion.setChildOpinions(childOpinions);
+        });
+
+        return new PageImpl<>(results.getResults(), pageable, results.getTotal());
+    }
+
 
     @Override
     public OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection) {
@@ -70,7 +108,7 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
     }
 
     @Override
-    public OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection, OrderSpecifier orderBy) {
+    public OpinionDto findOne(Predicate predicate, Expression<OpinionDto> projection, OrderSpecifier<Long> orderBy) {
         return getQuery(projection)
                    .where(predicate)
                    .orderBy(orderBy)
