@@ -338,13 +338,13 @@
                 <artifactId>sass-maven-plugin</artifactId>
                 <version>3.7.2</version>
                 <executions>
-                    <execution>
+                    <!-- <execution>
                         <id>lint</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>scss-lint</goal>
                         </goals>
-                    </execution>
+                    </execution> -->
                     <execution>
                         <id>build</id>
                         <phase>generate-resources</phase>

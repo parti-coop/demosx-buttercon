@@ -7,16 +7,16 @@
     <ul class="nav-login-ul list-inline text-right">
       <c:if test="${empty loginUser}">
         <li class="nav-login-li"><a href="<c:url value="/login.do"/>" class="nav-login-li__link show-login-modal">로그인</a></li>
-        <li class="nav-login-li"><span class="li-middle-line">|</span></li>
+        <li class="nav-login-li"><span class="li-middle-line">&nbsp;</span></li>
         <li class="nav-login-li"><a href="<c:url value="/join.do"/>" class="nav-login-li__link">회원가입</a></li>
       </c:if>
       <c:if test="${not empty loginUser}">
         <c:if test="${loginUser.isAdmin() or loginUser.isManager()}">
           <li class="nav-login-li"><a href="<c:url value="/admin/index.do"/>" class="nav-login-li__link">관리자페이지</a></li>
-          <li class="nav-login-li"><span class="li-middle-line">|</span></li>
+          <li class="nav-login-li"><span class="li-middle-line">&nbsp;</span></li>
         </c:if>
         <li class="nav-login-li"><a href="<c:url value="/mypage/info.do"/>" class="nav-login-li__link">마이페이지</a></li>
-        <li class="nav-login-li"><span class="li-middle-line">|</span></li>
+        <li class="nav-login-li"><span class="li-middle-line">&nbsp;</span></li>
         <li class="nav-login-li"><a href="#" class="nav-login-li__link logout-link">로그아웃</a></li>
         <form:form action="/logout.do" method="post" class="hidden" id="form-logout">
         </form:form>
@@ -41,27 +41,20 @@
         <i class="xi-bars xi-2x demo-toggle demo-toggle--open"></i>
         <i class="xi-close xi-2x demo-toggle demo-toggle--close"></i>
       </button>
-      <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">청년 참여 플랫폼</a>
+      <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">버터나이프크루</a>
     </div>
 
     <div class="demo-collapse collapse navbar-collapse" id="demo-navbar-collapse">
-      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">청년 참여 플랫</a>
+      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">버터나이프크루</a>
       <ul class="nav navbar-nav navbar-right demo-nav">
-        <li class="demo-nav-li"><a href="<c:url value="/intro.do"/>">청년 참여 플랫폼이란?
+        <li class="demo-nav-li"><a href="<c:url value="/intro.do"/>">버터나이프크루
           <div class="nav-li-active-bar"></div>
         </a></li>
-        <li class="li-middle"><span class="li-middle-line">|</span></li>
+        <li class="li-middle"><span class="li-middle-line">&nbsp;</span></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true"
-             aria-expanded="false">아이디어
-            <div class="nav-li-active-bar"></div>
+          <a href="<c:url value="/proposal-list.do"/>">
+            아이디어
           </a>
-          <a href="#" class="dropdown-toggle visible-xs">아이디어<div class="nav-li-active-bar"></div></a>
-          <ul class="dropdown-menu">
-            <li><a href="<c:url value="/proposal-list.do"/>"><i class="xi-angle-right-min"></i> 아이디어</a></li>
-            <li><a href="<c:url value="/debate-list.do"/>"><i class="xi-angle-right-min"></i> 토론</a></li>
-            <li><a href="<c:url value="/action-list.do"/>"><i class="xi-angle-right-min"></i> 실행</a></li>
-          </ul>
         </li>
         <%-- <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>버터콘 - 청년 참여 플랫폼</title>
+  <title>버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css"/>
@@ -12,87 +12,53 @@
 <body class="home header-no-margin">
 <%@ include file="./shared/header.jsp" %>
 
-<div class="container">
-
-  <div class="main-slide-wrapper">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="/images/main-slider1.jpg" class="hidden-xs" alt="메인 슬라이더1">
-          <img src="/images/mobile-slider1.jpg" class="visible-xs" alt="메인 슬라이더1">
-          <div class="slide-text-wrapper">
-            <p>버터콘은<br>청년이 주도하는<br class="visible-xs"> 의견을 나누고<br class="hidden-xs">함께 실행하는<br
-                class="visible-xs">청년 참여 플랫폼입니다.</p>
-            <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary">자세히보기</a>
+<section class="section-main-key-visual">
+  <div class="container">
+    <div class="key-title">
+      나의 삶은 달라지고 있고,
+      <br>
+      우리가 변화의 흐름을 만든다
+    </div>
+    <div class="key-subtitle">
+      버터나이프크루는
+      <br>
+      우리의 달라진 삶에 필요한 정책을 제안하고 (정책살롱)
+      <br>
+      우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을 진행하는 청년참여플랫폼입니다.
+    </div>
+    <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary key-btn">자세히보기</a>
+  </div>
+</section>
+<section class="section-banner">
+  <div class="container">
+    <div class="key-banner">
+      <span class="key-banner-text">
+        예정된 정책 살롱 일정을 확인하고 오프라인 모임에 참여해보세요!
+      </span>
+      <a href="#" class="key-banner-btn btn demo-btn demo-btn--primary">정책 살롱 참여하기</a>
+  </div>
+</section>
+<section class="section-proposals">
+  <div class="container">
+    <div class="main-card-wrapper">
+      <div class="main-card-wrapper-title">최근 아이디어</div>
+      <div class="main-card-wrapper-subtitle">변화의 흐름을 만든다</div>
+      <div class="row">
+        <c:forEach var="item" items="${latest.content}">
+          <c:set var="proposal" value="${item}" scope="request"/>
+          <div class="col-sm-6 demo-card-wrapper">
+            <jsp:include page="./proposal/card.jsp"/>
           </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/images/main-slider2.jpg" class="hidden-xs" alt="메인 슬라이더2">
-          <img src="/images/mobile-slider2.jpg" class="visible-xs" alt="메인 슬라이더2">
-          <div class="slide2-text-wrapper">
-            <p>민주주의 ㅇㅇ은<br>시민과 기관이 함께 정책에 대해<br class="visible-xs"> 의견을 나누고<br class="hidden-xs">함께 실행하는<br
-                class="visible-xs"> 시민참여 플랫폼입니다.</p>
-            <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary">자세히보기</a>
-          </div>
-        </div>
+        </c:forEach>
       </div>
+    </div>
 
-      <div class="swiper-pagination">
-        <div class="swiper-pagination-wrapper"></div>
-      </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+    <div class="show-more-container text-center">
+      <a class="btn white-default-btn" href="<c:url value="/proposal-list.do"/>">더보기<i
+          class="xi-angle-down-min"></i></a>
     </div>
   </div>
-
-  <div class="top-search clearfix">
-    <div class="top-search__left">
-      <form action="<c:url value="/proposal-list.do"/>">
-        <div class="search-form-group search-form-group--lg">
-          <label class="demo-form-label sr-only" for="inputSearch">이름</label>
-          <input type="text" class="form-control demo-input" name="search" id="inputSearch" autocomplete="off"
-                 placeholder="어떤 생각이나 주제에 관심이 있으시나요?">
-          <button type="submit" class="search-submit-btn">
-            <i class="xi-search"><p class="sr-only">돋보기</p></i>
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="top-search__right">
-      <a href="<c:url value="/new-proposal.do"/>" class="btn demo-btn demo-btn--primary d-btn-lg btn-block">아이디어 제안<i
-          class="xi-angle-right"></i></a>
-    </div>
-  </div>
-  <div class="main-card-wrapper">
-    <div class="row">
-      <c:forEach var="item" items="${best.content}">
-        <c:set var="proposal" value="${item}" scope="request"/>
-        <div class="col-sm-6 demo-card-wrapper">
-          <jsp:include page="./proposal/card.jsp">
-            <jsp:param name="best" value="true"/>
-          </jsp:include>
-        </div>
-      </c:forEach>
-      <c:forEach var="item" items="${favorite.content}">
-        <c:set var="proposal" value="${item}" scope="request"/>
-        <div class="col-sm-6 demo-card-wrapper">
-          <jsp:include page="./proposal/card.jsp"/>
-        </div>
-      </c:forEach>
-      <c:forEach var="item" items="${latest.content}">
-        <c:set var="proposal" value="${item}" scope="request"/>
-        <div class="col-sm-6 demo-card-wrapper">
-          <jsp:include page="./proposal/card.jsp"/>
-        </div>
-      </c:forEach>
-    </div>
-  </div>
-
-  <div class="show-more-container text-center">
-    <a class="white-btn d-btn btn-more" href="<c:url value="/proposal-list.do"/>">더보기<i
-        class="xi-angle-down-min"></i></a>
-  </div>
-</div>
+</section>
 
 <script>
   $(function () {

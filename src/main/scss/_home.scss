@@ -1,0 +1,63 @@
+body.home {
+  .section-main-key-visual {
+    margin-top: -40px;
+    background-color: $brand-background;
+    .key-title {
+      font-size: 48px;
+      color: white;
+      margin-top: 150px;
+      margin-bottom: 27px;
+    }
+    .key-subtitle {
+      font-size: 18px;
+      color: $gray-lighter;
+      margin-bottom: 40px;
+    }
+    .key-btn {
+      font-size: 18px;
+      padding: 18px 60px;
+      font-weight: 600;
+      margin-bottom: 150px;
+    }
+  }
+  .section-banner {
+    box-shadow: 0 1px 5px 0 #0000002e, 0 3px 4px 0 #0000001e, 0 2px 4px 0 #00000023;
+    .key-banner {
+      text-align: center;
+      font-size: 24px;
+      color: $text-color;
+      margin: 56px 0;
+      .key-banner-btn {
+        font-size: 16px;
+        font-weight: normal;
+        margin-left: 20px;
+        background-color: transparent;
+        border: 1px solid $brand-primary-dark;
+        color: $text-color-yellow;
+        &:hover, &:focus {
+          border: 1px solid $brand-primary-darker;
+          color: $text-color-yellow-dark;
+        }
+      }
+    }
+  }
+  .section-proposals {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 4px;
+    margin-bottom: -80px;
+    background-color: $gray-background;
+    .main-card-wrapper-title {
+      font-size: 34px;
+      font-weight: 600;
+      color: $text-color-darker;
+      margin-bottom: 12px;
+    }
+    .main-card-wrapper-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-color-light;
+      margin-bottom: 40px;
+    }
+  }
+}
