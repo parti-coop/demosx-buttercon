@@ -11,7 +11,7 @@
     <a href="<c:url value="/proposal.do?id=${proposal.id}"/>">
       <div class="clearfix">
         <div class="demo-card__author pull-left">
-          <div class="profile-circle profile-circle--title"
+          <div class="profile-circle profile-circle--title profile-circle--title-responsive"
               style="background-image: url(${proposal.createdBy.viewPhoto()})">
             <p class="alt-text">${proposal.createdBy.name}프로필</p>
           </div>
@@ -26,7 +26,7 @@
         <h5 class="demo-card__title">${proposal.title}</h5>
         <p class="demo-card__desc">${proposal.excerpt}</p>
       </div>
-      <div class="demo-card__tags">
+      <div class="demo-card__tags <c:if test="${proposal.issueTags.size() eq 0}">demo-card__tags-empty</c:if>">
         <div>
           <c:forEach var="issueTag" items="${proposal.issueTags}">
             <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>">#${issueTag.name}</a>

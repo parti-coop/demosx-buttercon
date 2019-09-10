@@ -27,10 +27,17 @@
     .demo-card__author {
       position: relative;
       padding-left: 50px;
+      @media(max-width: $screen-xs-max) {
+        padding-left: 37px;
+      }
       .title-author__name {
         margin-top: 0;
         line-height: 42px;
         color: $gray-light;
+        @media(max-width: $screen-xs-max) {
+          font-size: 12px;
+          line-height: 32px;
+        }
       }
     }
 
@@ -38,11 +45,18 @@
       .title-author__date {
         line-height: 42px;
         color: $gray-light;
+        @media(max-width: $screen-xs-max) {
+          font-size: 12px;
+          line-height: 32px;
+        }
       }
     }
 
     .demo-card__contents {
       min-height: 194px;
+      @media(max-width: $screen-xs-max) {
+        min-height: auto;
+      }
     }
 
     .demo-card__category {
@@ -57,6 +71,11 @@
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       margin-top: 20px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 16px;
+        font-weight: normal;
+        margin-top: 16px;
+      }
     }
 
     .demo-card__title {
@@ -64,13 +83,18 @@
       color: $text-color;
       font-weight: 600;
       line-height: 1.5em;
-      max-height: 3em;
+      max-height: 4.5em;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       margin-top: 12px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 16px;
+        font-weight: normal;
+        margin-top: 8px;
+      }
     }
 
     .demo-card__desc {
@@ -85,6 +109,11 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       margin-top: 12px;
+      margin-bottom: 0;
+      @media(max-width: $screen-xs-max) {
+        font-size: 12px;
+        margin-top: 8px;
+      }
     }
 
     .demo-card__tags {
@@ -105,11 +134,23 @@
         color: $text-color-lighter;
         white-space: nowrap;
       }
+      @media(max-width: $screen-xs-max) {
+        font-size: 12px;
+        margin-top: 16px;
+        height: auto;
+        max-height: 3em;
+        &.demo-card__tags-empty {
+          display: none;
+        }
+      }
     }
 
     .demo-card__hr {
       margin: 20px 0;
       border-top: 1px solid $gray-lighter;
+      @media(max-width: $screen-xs-max) {
+        margin: 16px 0;
+      }
     }
 
     .demo-card__info {

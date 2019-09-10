@@ -1,0 +1,102 @@
+/* side START */
+.side-box {
+  border: 1px solid #b6c1cc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .side-box {
+      padding: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .side-box {
+      padding: 12px;
+  }
+}
+
+.profile-circle {
+  margin: 40px auto 10px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 108px;
+  height: 108px;
+
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-img {
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.profile-circle--title {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  margin: 0;
+}
+
+@media(max-width: $screen-xs-max) {
+  .profile-circle--title.profile-circle--title-responsive {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.profile-circle--admin-feedback {
+  height: 27px;
+  width: 27px;
+  margin: 0;
+  float: left;
+  display: inline-block;
+}
+
+.profile-circle--comment-form {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  left: 0;
+  margin-top: 0;
+}
+
+.profile-circle--comment {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 0;
+  margin: 0;
+}
+
+.profile-circle--mypage {
+  width: 144px;
+  height: 144px;
+}
+
+.profile-name {
+  color: #191919;
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+.side-help-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #43484c;
+}
+
+/* side END */

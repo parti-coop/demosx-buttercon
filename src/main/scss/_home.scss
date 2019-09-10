@@ -7,17 +7,28 @@ body.home {
       color: white;
       margin-top: 150px;
       margin-bottom: 27px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 24px;
+      }
     }
     .key-subtitle {
       font-size: 18px;
       color: $gray-lighter;
       margin-bottom: 40px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 12px;
+      }
     }
     .key-btn {
       font-size: 18px;
       padding: 18px 60px;
       font-weight: 600;
       margin-bottom: 150px;
+      @media(max-width: $screen-xs-max) {
+        display: block;
+        font-size: 14px;
+        padding: 14px 0;
+      }
     }
   }
   .section-banner {
@@ -27,6 +38,8 @@ body.home {
       font-size: 24px;
       color: $text-color;
       margin: 56px 0;
+      display: flex;
+      align-items: center;
       .key-banner-btn {
         font-size: 16px;
         font-weight: normal;
@@ -40,6 +53,19 @@ body.home {
         }
       }
     }
+    @media(max-width: $screen-xs-max) {
+      .key-banner {
+        justify-content: space-between;
+        margin: 16px 0;
+        .key-banner-text {
+          font-size: 14px;
+          text-align: left;
+        }
+        .key-banner-btn {
+          font-size: 12px;
+        }
+      }
+    }
   }
   .section-proposals {
     padding-top: 100px;
@@ -47,17 +73,30 @@ body.home {
     margin-top: 4px;
     margin-bottom: -80px;
     background-color: $gray-background;
+    @media(max-width: $screen-xs-max) {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      margin-bottom: -30px;
+    }
     .main-card-wrapper-title {
       font-size: 34px;
       font-weight: 600;
       color: $text-color-darker;
       margin-bottom: 12px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 18px;
+      }
     }
     .main-card-wrapper-subtitle {
       font-size: 18px;
       font-weight: 600;
       color: $text-color-light;
       margin-bottom: 40px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 12px;
+        font-weight: normal;
+        margin-bottom: 30px;
+      }
     }
   }
 }

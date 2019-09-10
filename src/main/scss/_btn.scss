@@ -203,12 +203,15 @@
 }
 
 .white-default-btn {
-  height: 51px;
   color: $text-color-light;
   font-size: 16px;
-  padding: 14px;
+  padding: 11px 20px;
   background-color: #ffffff;
   border: 1px solid $gray-lightest;
+  @media(max-width: $screen-xs-max) {
+    font-size: 12px;
+    padding: 7px 16px;
+  }
 }
 
 .white-default-btn:hover, .white-default-btn:focus {

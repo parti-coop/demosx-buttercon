@@ -24,7 +24,9 @@
       <br>
       우리의 달라진 삶에 필요한 정책을 제안하고 (정책살롱)
       <br>
-      우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을 진행하는 청년참여플랫폼입니다.
+      우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을
+      <br class="visible-xs"/>
+      진행하는 청년참여플랫폼입니다.
     </div>
     <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary key-btn">자세히보기</a>
   </div>
@@ -32,10 +34,20 @@
 <section class="section-banner">
   <div class="container">
     <div class="key-banner">
-      <span class="key-banner-text">
-        예정된 정책 살롱 일정을 확인하고 오프라인 모임에 참여해보세요!
-      </span>
-      <a href="#" class="key-banner-btn btn demo-btn demo-btn--primary">정책 살롱 참여하기</a>
+      <div class="key-banner-text">
+        <span class="text-nowrap">
+          예정된 정책 살롱 일정을 확인하고
+        </span>
+        <br class="visible-xs"/>
+        <span class="text-nowrap">
+          오프라인 모임에 참여해보세요!
+        </span>
+      </div>
+      <div class="key-banner-btn-container">
+        <a href="#" class="key-banner-btn btn demo-btn demo-btn--primary">
+          <span class="hidden-xs">정책 살롱</span> 참여하기
+        </a>
+      </div>
   </div>
 </section>
 <section class="section-proposals">
