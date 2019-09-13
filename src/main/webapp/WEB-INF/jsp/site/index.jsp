@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css"/>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 </head>
-<body class="home header-no-margin">
+<body class="home header-no-margin body-home">
 <%@ include file="./shared/header.jsp" %>
 
 <section class="section-main-key-visual">

@@ -5,12 +5,12 @@
   <title>${proposal.title} - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
-<body>
+<body class="body-proposal">
 
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="demo-detail-title">제안보기</h3>
+  <h3 class="demo-detail-title">아이디어 보기</h3>
   <div class="clearfix">
     <div class="demo-content">
       <div class="title-box">
@@ -178,7 +178,7 @@
   <script>
     $(function () {
       $('#delete-proposal-btn').click(function () {
-        if (!window.confirm('제안을 삭제하시겠습니까?')) return;
+        if (!window.confirm('아이디어를 삭제하시겠습니까?')) return;
 
         $.ajax({
           headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },

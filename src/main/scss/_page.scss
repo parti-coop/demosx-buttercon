@@ -1,0 +1,101 @@
+/* pagination START */
+nav.nav--pagination--demo {
+  text-align: center;
+}
+
+.pagination--demo {
+  margin: 0 auto;
+  > li,
+  > li:first-child,
+  > li:last-child {
+    display: inline-block;
+    > a,
+    > span {
+      background-color: transparent;
+      border: none;
+      color: $text-color-less-light;
+      font-size: 14px;
+      font-weight: 700;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      line-height: 20px;
+      vertical-align: middle;
+      @media (max-width: 767px) {
+        margin: 0 3px;
+      }
+    }
+  }
+  & > li + li {
+    margin-left: 16px;
+  }
+  > li.active {
+    > a,
+    > span,
+    > a:hover,
+    > a:focus,
+    > span:hover,
+    > span:focus {
+      background-color: transparent;
+      color: $text-color-dark;
+    }
+  }
+  > li > a:hover,
+  > li > a:focus {
+    color: $brand-primary-darker;
+  }
+
+  li.page-arrow {
+    a,
+    > span {
+      color: $text-color-less-light;
+      i {
+        font-weight: 800;
+      }
+    }
+    > a:hover,
+    > a:focus,
+    > span:hover,
+    > span:focus {
+      color: $brand-primary-darker;
+    }
+    &.disabled {
+      a,
+      > span {
+        color: $gray-lighter-e0;
+      }
+      > a:hover,
+      > a:focus,
+      > span:hover,
+      > span:focus {
+        color: $gray-lighter-e0;
+      }
+    }
+  }
+  .page-arrow--pre {
+    a,
+    > span {
+      margin-right: 15px;
+      @media (max-width: 767px) {
+        margin-right: 10px;
+      }
+    }
+  }
+  .page-arrow--next {
+    a,
+    > span {
+      margin-left: 15px;
+      @media (max-width: 767px) {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+  background: transparent;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+  background: transparent;
+}

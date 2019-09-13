@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 public class Proposal extends Issue {
 
     /**
-     * 제안타입
+     * 아이디어타입
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "ISSUE_TYPE")
@@ -99,7 +99,7 @@ public class Proposal extends Issue {
     }
 
     public Proposal update(ProposalUpdateDto updateDto) {
-        if (!status.isOpen()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (!status.isOpen()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.title = updateDto.getTitle();
         this.content = updateDto.getContent();
@@ -109,21 +109,21 @@ public class Proposal extends Issue {
     }
 
     public Proposal delete() {
-        if (!status.isOpen()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (!status.isOpen()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.status = Status.DELETE;
         return this;
     }
 
     public Proposal block() {
-        if (!status.isOpen()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (!status.isOpen()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.status = Status.CLOSED;
         return this;
     }
 
     public Proposal open() {
-        if (status.isDelete()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (status.isDelete()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.status = Status.OPEN;
         return this;
@@ -140,7 +140,7 @@ public class Proposal extends Issue {
     }
 
     public Proposal editAdminComment(String comment) {
-        if (!status.isOpen()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (!status.isOpen()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.adminComment = comment;
         this.adminCommentDate = LocalDateTime.now();
@@ -149,10 +149,10 @@ public class Proposal extends Issue {
 
     public Proposal assignManager(User manager) {
         if (!status.isOpen())
-            throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+            throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         if (process.isInit())
-            throw new BadRequestException("likeCount", "error.likeCount", "공감수 50이상 제안만 담당자 지정이 가능합니다.");
+            throw new BadRequestException("likeCount", "error.likeCount", "공감수 50이상 아이디어만 담당자 지정이 가능합니다.");
 
         if (process.isComplete())
             throw new BadRequestException("process", "error.process", "담당자 답변이 완료된 경우 담당자를 변경할 수 없습니다.");
@@ -183,7 +183,7 @@ public class Proposal extends Issue {
     }
 
     public IssueLike createLike(User user) {
-        if (!status.isOpen()) throw new NotFoundException("해당 제안을 찾을 수 없습니다.");
+        if (!status.isOpen()) throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         if (process.isInit() && stats.getLikeCount() >= 50)
             process = Process.NEED_ASSIGN;

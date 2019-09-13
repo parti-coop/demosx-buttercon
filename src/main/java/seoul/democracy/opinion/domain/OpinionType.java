@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum OpinionType {
-    PROPOSAL("제안의견"),   // 제안의견
+    PROPOSAL("아이디어의견"),   // 제안의견
     DEBATE("투표의견");      // 토론의견
 
     private final String msg;

@@ -11,11 +11,11 @@
   <c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}?${queries}"/>
   <c:set var="minPage" value="${param.current - (param.current - 1) % 5}"/>
   <c:set var="maxPage" value="${param.current - (param.current - 1) % 5 + 4}"/>
-  <nav class="demo-pagination" aria-label="page navigation">
+  <nav class="nav--pagination--demo" aria-label="page navigation">
     <ul class="pagination pagination--demo">
       <c:choose>
         <c:when test="${minPage eq 1}">
-          <li class="page-arrow page-arrow--pre"><span><i class="xi-angle-left"></i></span></li>
+          <li class="page-arrow page-arrow--pre disabled"><span><i class="xi-angle-left"></i></span></li>
         </c:when>
         <c:otherwise>
           <c:url value="${url}" var="link">
@@ -55,7 +55,7 @@
           </li>
         </c:when>
         <c:otherwise>
-          <li class="page-arrow page-arrow--next"><span><i class="xi-angle-right"></i></span></li>
+          <li class="page-arrow page-arrow--next disabled"><span><i class="xi-angle-right"></i></span></li>
         </c:otherwise>
       </c:choose>
     </ul>

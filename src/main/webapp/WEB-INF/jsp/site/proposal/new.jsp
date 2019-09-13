@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>제안하기 - 버터나이프크루</title>
+  <title>아이디어 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 
   <!-- jquery serialize object -->
   <script type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
-<body>
+<body class="body-proposal">
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="demo-detail-title">제안하기</h3>
+  <h3 class="demo-detail-title">아이디어</h3>
 
   <div class="demo-row clearfix">
     <div class="demo-content">
@@ -55,8 +55,8 @@
         </div>
         <div class="form-action text-right">
           <div class="inline-block">
-            <a class="btn demo-submit-btn cancel-btn" href="<c:url value="/mypage/proposal.do"/>" role="button">나의 제안 목록</a>
-            <button type="submit" class="demo-submit-btn demo-submit-btn--submit">제안하기</button>
+            <a class="btn demo-submit-btn cancel-btn" href="<c:url value="/mypage/proposal.do"/>" role="button">나의 아이디어 목록</a>
+            <button type="submit" class="demo-submit-btn demo-submit-btn--submit">아이디어 제안</button>
           </div>
         </div>
       </form>

@@ -889,93 +889,6 @@ a:hover {
 
 /* table END */
 
-/* pagination START */
-.demo-pagination {
-    text-align: center;
-}
-
-.pagination--demo {
-    margin: 0 auto;
-}
-
-.pagination--demo > li > a, .pagination--demo > li > span {
-    background-color: transparent;
-    border: none;
-    color: #727a7f;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 3px 2px 0;
-    margin: 0 5px;
-}
-
-@media (max-width: 767px) {
-    .pagination--demo > li > a, .pagination--demo > li > span {
-        margin: 0 3px;
-    }
-}
-
-.pagination--demo > li.active > a, .pagination--demo > li.active > span,
-.pagination--demo > li.active > a:hover, .pagination--demo > li.active > a:focus,
-.pagination--demo > li.active > span:hover, .pagination--demo > li.active > span:focus {
-    background-color: transparent;
-    color: #0ccbd2;
-    border-bottom: 1px solid #0ccbd2;
-}
-
-.pagination--demo > li > a:hover, .pagination--demo > li > a:focus {
-    color: #0ccbd2;
-    background-color: transparent;
-}
-
-.pagination--demo .page-arrow a, .pagination--demo .page-arrow > span {
-    border: 1px solid #b6c1cc;
-    color: #727a7f;
-    font-weight: 700;
-    padding: 3px 12px;
-
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    height: 36px;
-}
-
-@media (max-width: 767px) {
-    .pagination--demo .page-arrow a, .pagination--demo .page-arrow span {
-        padding: 3px 6px;
-    }
-}
-
-.pagination--demo .page-arrow > span:hover, .pagination--demo .page-arrow > span:focus {
-    border: 1px solid #b6c1cc;
-    color: #727a7f;
-    background-color: white;
-}
-
-.pagination--demo .page-arrow a:hover, .pagination--demo .page-arrow a:focus {
-    color: #0ccbd2;
-    background-color: #eaf8ff;
-}
-
-.pagination--demo .page-arrow--pre a, .pagination--demo .page-arrow--pre > span {
-    margin-right: 15px;
-}
-
-.pagination--demo .page-arrow--next a, .pagination--demo .page-arrow--next > span {
-    margin-left: 15px;
-}
-
-@media (max-width: 767px) {
-    .pagination--demo .page-arrow--pre a, .pagination--demo .page-arrow--pre > span {
-        margin-right: 10px;
-    }
-
-    .pagination--demo .page-arrow--next a, .pagination--demo .page-arrow--next > span {
-        margin-left: 10px;
-    }
-}
-
-/* pagination END */
-
 /* 제안쓰기 START */
 .demo-detail-title {
     color: #191919;
@@ -2194,12 +2107,6 @@ a:hover {
         padding-left: 0;
         width: 100%;
     }
-}
-
-.card-wrapper {
-    margin-bottom: 40px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #b6c1cc;
 }
 
 /* main END */

@@ -36,7 +36,7 @@ public class ProposalAjaxController {
     public ResultRedirectInfo newProposal(@RequestBody @Valid ProposalCreateDto createDto) throws Exception {
         Proposal proposal = proposalService.create(createDto);
 
-        return ResultRedirectInfo.of("제안을 등록하였습니다.", "/proposal.do?id=" + proposal.getId());
+        return ResultRedirectInfo.of("아이디어를 등록하였습니다.", "/proposal.do?id=" + proposal.getId());
     }
 
     @RequestMapping(value = "/proposals/{id}", method = RequestMethod.PUT)
@@ -44,14 +44,14 @@ public class ProposalAjaxController {
                                    @RequestBody @Valid ProposalUpdateDto updateDto) {
         proposalService.update(updateDto);
 
-        return ResultInfo.of("제안을 수정하였습니다.");
+        return ResultInfo.of("아이디어를 수정하였습니다.");
     }
 
     @RequestMapping(value = "/proposals/{id}", method = RequestMethod.DELETE)
     public ResultInfo deleteProposal(@PathVariable("id") Long id) {
         proposalService.delete(id);
 
-        return ResultInfo.of("제안을 삭제하였습니다.");
+        return ResultInfo.of("아이디어를 삭제하였습니다.");
     }
 
     @RequestMapping(value = "/proposals/{id}/selectLike", method = RequestMethod.PUT)

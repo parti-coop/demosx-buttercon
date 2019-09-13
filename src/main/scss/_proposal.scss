@@ -1,0 +1,106 @@
+body.body-proposal {
+  background-color: $gray-background;
+  .top-row {
+    margin-top: 70px;
+    @media(max-width: $screen-sm-max) {
+      margin-top: -8px;
+    }
+    .top-row__title {
+      font-size: 32px;
+      @media(max-width: $screen-sm-max) {
+        font-size: 14px;
+        line-height: 30px;
+      }
+    }
+    @media(max-width: $screen-sm-max) {
+      .top-left {
+        width: auto;
+        float: left;
+        margin: 0;
+      }
+      .top-right {
+        width: auto;
+        float: right;
+      }
+    }
+    .demo-btn-proposal {
+      font-size: 18px;
+      padding: 12px;
+      margin-top: 14px;
+
+      @media(max-width: $screen-sm-max) {
+        font-size: 12px;
+        background-color: white;
+        border: 1px solid $brand-primary-darker;
+        border-radius: 18px;
+        color: $brand-primary-darker;
+        padding: 4px 16px;
+        margin: 0;
+        line-height: 20px;
+        vertical-align: middle
+      }
+    }
+  }
+
+  .sorting-tab {
+    border-top: 1px solid $text-color-darker;
+    border-bottom: none;
+    padding-top: 40px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    @media(max-width: $screen-sm-max) {
+      margin-bottom: 28px;
+      margin-top: 6px;
+      border-color: #e0e0e0;
+      padding: 8px 0 0 0;
+    }
+    .sorting-tab-select-row {
+      .sorting-tab__select {
+        &.sorting-tab__select-category {
+          width: 330px;
+          margin-right: 20px;
+        }
+        &.sorting-tab__select-sort {
+          width: 200px;
+        }
+        select {
+          width: 100%;
+          @media(max-width: $screen-sm-max) {
+            border-radius: 0;
+            font-size: 14px;
+            height: 42px;
+          }
+        }
+      }
+      @media(max-width: $screen-sm-max) {
+        display: flex;
+        margin-left: 0;
+        margin-right: 0;
+        .sorting-tab__select {
+          &.sorting-tab__select-category {
+            width: auto;
+            flex: 1;
+            margin-right: 8px;
+          }
+          &.sorting-tab__select-sort {
+            width: 106px;
+            @media(max-width: $screen-sm-max) {
+              width: 36%;
+            }
+          }
+        }
+      }
+      .form-control {
+        border-radius: 0;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+      }
+    }
+    @media(max-width: $screen-sm-max) {
+      .sorting-right-form {
+        width: 100%;
+        padding-left: 0;
+      }
+    }
+  }
+}

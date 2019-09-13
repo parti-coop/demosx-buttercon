@@ -213,7 +213,7 @@ public abstract class Issue {
 
     public IssueHistory createHistory(String content) {
         if (this instanceof Proposal)
-            throw new BadRequestException("issueId", "error.issueId", "제안은 히스토리를 등록할 수 없습니다.");
+            throw new BadRequestException("issueId", "error.issueId", "아이디어는 히스토리를 등록할 수 없습니다.");
 
         return IssueHistory.create(this, content);
     }
