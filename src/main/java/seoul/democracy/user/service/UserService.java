@@ -68,6 +68,8 @@ public class UserService {
     public User create(UserCreateDto createDto) {
         if (existsEmail(createDto.getEmail())) throw new AlreadyExistsException("이미 사용중인 이메일입니다.");
 
+        String encodedPassword = passwordEncoder.encode(createDto.getPassword());
+        createDto.setPassword(encodedPassword);
         User user = User.create(createDto);
 
         return userRepository.save(user);
@@ -83,10 +85,6 @@ public class UserService {
     @Transactional
     public User update(UserUpdateDto updateDto) {
         User user = getMe();
-
-        if (!passwordEncoder.matches(updateDto.getPassword(), user.getPassword()))
-            throw new BadRequestException("password", "error.password", "패스워드가 일치하지 않습니다.");
-
         return user.update(updateDto);
     }
 

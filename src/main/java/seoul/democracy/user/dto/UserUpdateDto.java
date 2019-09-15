@@ -16,9 +16,5 @@ public class UserUpdateDto {
     @Size(max = 30)
     private String name;
 
-    @Size(max = 100)
     private String photo;
-
-    @NotBlank
-    private String password;
 }

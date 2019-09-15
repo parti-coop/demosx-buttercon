@@ -137,7 +137,9 @@ public class User implements Serializable {
 
     public User update(UserUpdateDto updateDto) {
         this.name = updateDto.getName();
-        this.photo = updateDto.getPhoto();
+        if(!StringUtils.isEmpty(updateDto.getPhoto())) {
+            this.photo = updateDto.getPhoto();
+        }
         return this;
     }
 

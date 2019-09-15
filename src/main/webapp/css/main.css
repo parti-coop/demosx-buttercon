@@ -436,6 +436,7 @@ a:hover {
     font-weight: 700;
     line-height: 1.2;
     padding-bottom: 36px;
+    text-align: center;
 }
 
 @media (max-width: 767px) {
@@ -1519,19 +1520,6 @@ a:hover {
     .sign-container {
         margin: 10px 0 30px;
         max-width: 100%;
-    }
-}
-
-.sing-action {
-    border-top: 2px solid #b6c1cc;
-    margin-top: 40px;
-    padding-top: 30px;
-}
-
-@media (max-width: 767px) {
-    .sing-action {
-        margin-top: 20px;
-        padding-top: 20px;
     }
 }
 

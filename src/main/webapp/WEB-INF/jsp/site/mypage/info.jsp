@@ -10,8 +10,8 @@
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="my-page-title">마이페이지</h3>
-  <div class="m-tabs-mobile">
+  <h3 class="my-page-title">${loginUser.name}</h3>
+  <%-- <div class="m-tabs-mobile">
     <form name="mypage_link-form">
       <div class="sorting-tab__select">
         <select class="form-control" name="mypage-link">
@@ -29,7 +29,7 @@
     </li>
     <li class="my-page-tab"><a href="<c:url value="/mypage/vote.do"/>" class="my-page-tab__link">나의 투표 활동</a></li>
     <li class="my-page-tab"><a href="<c:url value="/mypage/opinion.do"/>" class="my-page-tab__link">나의 의견 활동</a></li>
-  </ul>
+  </ul> --%>
 
   <div class="mypage-edit-container">
     <form name="mypage-info" id="form-mypage">
@@ -39,7 +39,7 @@
                style="background-image: url(${me.viewPhoto()})"></div>
           <span class="profile-edit-btn fileinput-button" style="position:absolute">
               <i class="xi-camera-o"></i>
-              <input id="thumbnail-upload-input" type="file" name="file">
+              <input id="thumbnail-upload-input" type="file" name="file" accept="image/*">
           </span>
           <img src="<c:url value="/images/loading.gif"/>" height="20" id="thumbnail-progress" class="hidden">
         </div>
@@ -54,21 +54,19 @@
                autocomplete="off" value="${me.name}" data-parsley-required="true">
       </div>
 
-      <div class="form-group form-group--demo" id="password-group">
-        <label class="demo-form-label" for="inputPassword">비밀번호</label>
-        <input type="password" class="form-control demo-input" name="password" id="inputPassword"
-               autocomplete="off" placeholder="현재 비밀번호를 입력해 주세요." data-parsley-required="true">
-        <p class="help-block help-block-error" id="password-error"></p>
-      </div>
-
-      <div class="panel-group panel-group--mypage">
-        <a class="blue-link" href="<c:url value="/mypage/change-password.do"/>">비밀번호 변경하기</a>
-      </div>
-
       <div class="sing-action">
         <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">저장하기</button>
       </div>
     </form>
+
+    <hr>
+
+    <c:if test="${me.getProvider() eq 'email'}">
+      <div class="panel-group panel-group--mypage">
+        <a class="blue-link" href="<c:url value="/mypage/change-password.do"/>">비밀번호 변경하기</a>
+      </div>
+    </c:if>
+
   </div>
 </div>
 <script>

@@ -10,8 +10,8 @@
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="my-page-title">마이페이지</h3>
-  <div class="m-tabs-mobile">
+  <h3 class="my-page-title">비밀번호 변경</h3>
+  <%-- <div class="m-tabs-mobile">
     <form name="mypage_link-form">
       <div class="sorting-tab__select">
         <select class="form-control" name="mypage-link">
@@ -29,7 +29,7 @@
     </li>
     <li class="my-page-tab"><a href="<c:url value="/mypage/vote.do"/>" class="my-page-tab__link">나의 투표 활동</a></li>
     <li class="my-page-tab"><a href="<c:url value="/mypage/opinion.do"/>" class="my-page-tab__link">나의 의견 활동</a></li>
-  </ul>
+  </ul> --%>
 
   <div class="mypage-edit-container">
     <form name="mypage-info" id="form-mypage">

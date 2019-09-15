@@ -51,7 +51,7 @@ public class MyPageController {
         UserDto userDto = userService.getUser(equalId(UserUtils.getUserId()), projectionForBasic);
         model.addAttribute("me", userDto);
 
-        return userDto.getProvider().equals("email") ? "/site/mypage/info" : "/site/mypage/info-social";
+        return "/site/mypage/info";
     }
 
     @RequestMapping(value = "/change-password.do", method = RequestMethod.GET)

@@ -57,17 +57,22 @@ mvn package
 
 ## 할일
 
-* hans@slowalk.co.kr 메일 주소변경
-* README 업데이트
-* "서울"이란 글자가 들어간 메일
-* 50/500
 * 네이버 등 각종 로그인 설정
+* 구글 로그인
 * 관리자 아이디어랑 아이디어 댓글 관리
 * GNB hover
-* https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css --> 로컬 bootstrap로 변경
-* tinymce 정리
+* 개안정보처리방침
+* 이용약관
+* 업로드 파일이 배포 후에도 잘 저장되는가?
+* ROBOT.txt
+
+* 이메일 연결
+* 도메인 설정
+
 * 주소복사
-* GNB 로그인
-* 내 정보 수정
-* 구글 로그인
 * 버터나이프크루
+
+* https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css --> 로컬 bootstrap로 변경
+* README 업데이트
+* 50/500
+* tinymce 정리
