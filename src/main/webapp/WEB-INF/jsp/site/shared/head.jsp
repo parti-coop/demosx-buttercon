@@ -43,6 +43,10 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
 
+<!-- tinymce editor -->
+<script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/tinymce/jquery.tinymce.min.js"/>"></script>
+
 <!-- application -->
 <script type="text/javascript" src="<c:url value="/js/application.js"/>"></script>
 

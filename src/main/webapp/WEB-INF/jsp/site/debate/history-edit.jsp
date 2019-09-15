@@ -27,8 +27,6 @@
 </div>
 
 <c:if test="${not empty loginUser and loginUser.isAdmin()}">
-  <!-- tinymce editor -->
-  <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
   <script>
     $(function () {
       var $content = $('.tinymce-editor');

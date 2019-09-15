@@ -4,9 +4,6 @@
 <head>
   <title>아이디어 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
-  <!-- tinymce editor -->
-  <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/tinymce/jquery.tinymce.min.js"/>"></script>
 </head>
 <body class="body-proposal body-proposal-form">
 <%@ include file="../shared/header.jsp" %>
@@ -45,8 +42,8 @@
           <div class="select-container">
             <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true"  data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}">
               <option value="">살롱 주제 선택...</option>
-              <c:forEach var="item" items="${categories}">
-                <option value="${item.name}">${item.name}</option>
+              <c:forEach var="category" items="${categories}">
+                <option value="${category.name}">${category.name}</option>
               </c:forEach>
             </select>
           </div>
