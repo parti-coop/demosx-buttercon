@@ -41,7 +41,7 @@
         </span>
       </div>
       <div class="key-banner-btn-container">
-        <a href="https://event-us.kr/butterknife/event/list" class="key-banner-btn btn demo-btn demo-btn--primary">
+        <a href="https://event-us.kr/butterknife/event/list" class="key-banner-btn btn demo-btn demo-btn--primary" target="_blank">
           <span class="hidden-xs">정책 살롱</span> 참여하기
         </a>
       </div>

@@ -4,18 +4,23 @@
 <footer class="demo-footer">
   <div class="container">
     <div class="row">
-      <div class="col-sm-3 col-sm-push-9">
-        <p class="term-link-p"><a class="term-link" href="<c:url value="/notice-list.do"/>"><i
-            class="xi-angle-right-min"></i> 공지사항</a></p>
-        <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>"><i
-            class="xi-angle-right-min"></i> 개인정보처리방침</a></p>
-        <p class="term-link-p"><a class="term-link" href="<c:url value="/terms.do"/>"><i class="xi-angle-right-min"></i>
-          이용약관</a></p>
+      <div class="col-sm-3 col-sm-push-9 term-links">
+        <%-- <p class="term-link-p"><a class="term-link" href="<c:url value="/notice-list.do"/>"><i
+            class="xi-angle-right-min"></i> 공지사항</a></p> --%>
+        <p class="term-link-p"><a class="term-link" href="https://event-us.kr/butterknife/event/list" target="_blank">살롱 일정</a></p>
+        <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>">개인정보처리방침</a></p>
+        <p class="term-link-p"><a class="term-link" href="<c:url value="/terms.do"/>">이용약관</a></p>
       </div>
-      <div class="col-sm-9 col-sm-pull-3">
-        <address class="demo-address">0XXX 주소주소</address>
-        <p class="footer-name">데모스X</p>
-        <p class="footer-copyright">© XXX all rights reserved.</p>
+      <div class="col-sm-9 col-sm-pull-3 term-link-logos">
+        <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/wf-logo.png"/>" alt="여성가족부" style="width:146px"></a>
+        <a href="http://gingertproject.co.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/ginger-logo.png"/>" alt="진저티프로젝트" style="width:71px"></a>
+        <a href="http://parti.coop/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/parti-logo.png"/>" alt="빠띠" style="width:57px"></a>
+        <a href="https://www.innogov.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/gv-logo.png"/>" alt="보다나은 정부" style="width:70px"></a>
+
+        <p class="footer-copyright" style="color: #212121;">
+          문의
+          <a href="mailto:help@butterknifecrew.kr" style="color: #212121;">help@butterknifecrew.kr</a>
+        </p>
       </div>
     </div>
   </div>
