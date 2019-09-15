@@ -31,7 +31,7 @@
       </div>
       <div class="form-group form-group--demo">
         <label class="demo-form-label" for="password">비밀번호</label>
-        <form:input path="password" type="password" class="form-control demo-input" placeholder="6자리 이상 비밀전호를 설정해 주세요."
+        <form:input path="password" type="password" class="form-control demo-input" placeholder="6자리 이상 비밀번호를 설정해 주세요."
                     data-parsley-required="true" data-parsley-minlength="6"/>
         <form:errors path="password" cssClass="demo-help-error"/>
         <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 비밀번호를 적어주세요.</p> -->

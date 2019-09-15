@@ -49,6 +49,11 @@
   position: absolute;
   left: 0;
   margin: 0;
+  &.profile-circle--title-side {
+    position: initial;
+    display: inline-block;
+    vertical-align: bottom;
+  }
 }
 
 @media(max-width: $screen-xs-max) {

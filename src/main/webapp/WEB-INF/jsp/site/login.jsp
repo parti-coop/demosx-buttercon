@@ -21,7 +21,7 @@
     <div class="form-group form-group--demo">
       <label class="demo-form-label" for="inputPassword">비밀번호</label>
       <input type="password" class="form-control demo-input" name="pw" id="inputPassword"
-             placeholder="6자리 이상 비밀전호를 설정해 주세요."
+             placeholder="6자리 이상 비밀번호를 설정해 주세요."
              data-parsley-required="true">
     </div>
     <c:if test="${not empty loginError}">

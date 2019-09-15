@@ -43,13 +43,13 @@
       <div class="form-group form-group--demo">
         <label class="demo-form-label" for="newPassword">새 비밀번호</label>
         <input type="password" class="form-control demo-input" name="changePassword" id="newPassword" autocomplete="off"
-               placeholder="6자리 이상 비밀전호를 입력해 주세요." data-parsley-required="true" data-parsley-minlength="6">
+               placeholder="6자리 이상 비밀번호를 입력해 주세요." data-parsley-required="true" data-parsley-minlength="6">
       </div>
 
       <div class="form-group form-group--demo">
         <label class="demo-form-label" for="newConfirmPassword">새 비밀번호 확인</label>
         <input type="password" class="form-control demo-input" id="newConfirmPassword" autocomplete="off"
-               placeholder="새 비밀전호를 확인해 주세요." data-parsley-required="true" data-parsley-equalto="#newPassword">
+               placeholder="새 비밀번호를 확인해 주세요." data-parsley-required="true" data-parsley-equalto="#newPassword">
       </div>
 
       <div class="sing-action">

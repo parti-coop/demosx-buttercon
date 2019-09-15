@@ -1,6 +1,7 @@
 body.body-proposal {
   background-color: $gray-background;
-  &.body-proposal-form {
+  &.body-proposal-form,
+  &.body-proposal-detail {
     background-color: white;
   }
 
@@ -146,5 +147,146 @@ body.body-proposal {
       border-color: #e0e0e0;
       padding: 8px 0 0 0;
     }
+  }
+
+  .demo-content .author-box {
+    display: none;
+    @media(max-width: $screen-xs-max) {
+      display: block;
+      margin-top: 26px;
+    }
+
+    @media(max-width: $screen-xs-max) {
+      .proposal-title-author {
+        position: relative;
+        margin-bottom: 16px;
+        .title-author__name {
+          margin-left: 41px;
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-right: 0;
+          line-height: 32px;
+          margin-left: 40px;
+          display: inline-block;
+        }
+        .title-author__date {
+          line-height: 32px;
+        }
+      }
+    }
+  }
+
+  .discussion-comment-form {
+    padding-left: 0;
+    border-width: 0;
+    padding: 0;
+    .demo-comment-form {
+      padding: 0;
+    }
+    .demo-comment-textarea {
+      border-radius: 0;
+    }
+    .comment-count-text {
+      text-align: initial;
+    }
+    .profile-circle.profile-circle--comment-form {
+      display: none;
+    }
+    .demo-submit-btn--submit {
+      @extend .btn-default;
+    }
+  }
+
+  // detail
+
+  .detail-category-container {
+    display: inline-block;
+    .detail-category {
+      color: $text-color-yellow;
+      font-size: 24px;
+      font-weight: 500;
+      display: inline-block;
+      margin: 0;
+      @media(max-width: $screen-xs-max) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .detail-copy-url {
+    float: right;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    color: $text-color-lighter;
+    display: none;
+    @media(max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .detail-title-container {
+    width: 100%;
+    float: initial;
+    .detail-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      line-height: 34px;
+    }
+  }
+
+  .title-box {
+    padding-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .contents-box {
+    padding: 35px 0;
+    @media(max-width: $screen-xs-max) {
+      padding: 16px 0;
+    }
+    .contents-box-controls {
+      margin-bottom: 35px;
+    }
+    .contents-box-tags {
+      margin-top: 80px;
+      margin-bottom: 20px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid $gray-lighter-e0;
+      @media(max-width: $screen-xs-max) {
+        margin-top: 32px;
+        font-size: 12px;
+        padding-bottom: 16px;
+      }
+      .contents-box-tags-lead {
+        color: $text-color-dark;
+        i {
+          color: $text-color-light;
+        }
+      }
+      .contents-box-tags-link {
+        color: $text-color-dark;
+        margin-left: 8px;
+      }
+    }
+  }
+  button#proposal-like-btn {
+    box-shadow: none;
+  }
+}
+
+.proposal-title-author {
+  .title-author__name {
+    font-size: 14px;
+    color: $gray-light;
+    margin: 0;
+  }
+
+  .title-author__date {
+    font-size: 14px;
+    color: $gray-light;
+    margin: 0;
   }
 }

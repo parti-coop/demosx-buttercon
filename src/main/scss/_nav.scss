@@ -31,6 +31,9 @@
   text-align: center;
   line-height: 26px;
 }
+.navbar-default ul.demo-nav > li:last-child > a {
+  padding-right: 5px;
+}
 
 .navbar-default .demo-nav .dropdown.open .dropdown-toggle {
   color: $brand-primary-darker;
@@ -115,13 +118,12 @@
 
 .nav-login-li__link:hover,
 .nav-login-li__link:focus {
-  color: #2968b5;
+  color: $brand-primary;
   text-decoration: none;
 }
 
 .navbar-brand.navbar-brand--demo {
   padding: 27px 15px 24px;
-  margin-left: 0 !important;
   height: auto;
   @media (max-width: $screen-sm-max) {
     padding: 24px 15px 16px;

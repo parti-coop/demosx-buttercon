@@ -16,7 +16,7 @@
         <div class="comment-action-group row">
           <div class="comment-count col-xs-6"><p class="comment-count-text">0/1000자</p></div>
           <div class="comment-submit text-right col-xs-6">
-            <button type="button" class="demo-submit-btn demo-submit-btn--submit pull-right show-login-modal">댓글달기
+            <button type="button" class="btn btn-default btn-responsive-sm-md-md pull-right show-login-modal">댓글달기
             </button>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <div class="comment-count col-xs-6"><p class="comment-count-text"><span id="opinion-length">0</span>/1000자</p>
           </div>
           <div class="comment-submit text-right col-xs-6">
-            <button type="submit" class="demo-submit-btn demo-submit-btn--submit pull-right">댓글달기
+            <button type="submit" class="btn btn-default btn-responsive-sm-md-md pull-right">댓글달기
             </button>
           </div>
         </div>
@@ -62,11 +62,9 @@
               </div>
             </div>
             <div class="form-action text-right">
-              <div class="btn-group clearfix">
-                <button class="btn demo-submit-btn cancel-btn" data-dismiss="modal" aria-label="Close" role="button">취소
-                </button>
-                <button type="submit" class="demo-submit-btn demo-submit-btn--submit">저장하기</button>
-              </div>
+              <button class="btn cancel-btn btn-lg" data-dismiss="modal" aria-label="Close" role="button">취소
+              </button>
+              <button type="submit" class="btn btn-primary btn-lg">저장하기</button>
             </div>
           </form>
         </div>
@@ -90,11 +88,9 @@
               </div>
             </div>
             <div class="form-action text-right">
-              <div class="btn-group clearfix">
-                <button class="btn demo-submit-btn cancel-btn" data-dismiss="modal" aria-label="Close" role="button">취소
-                </button>
-                <button type="submit" class="demo-submit-btn demo-submit-btn--submit">저장하기</button>
-              </div>
+              <button class="btn cancel-btn btn-lg" data-dismiss="modal" aria-label="Close" role="button">취소
+              </button>
+              <button type="submit" class="btn btn-primary btn-lg">저장하기</button>
             </div>
           </form>
         </div>
@@ -103,28 +99,28 @@
   </div>
 </c:if>
 
-<div class="demo-comments-container">
+<div class="demo-comments-container js-demo-comments-container collapse">
   <div class="demo-comments-top">
-    <div class="clearfix">
-      <div class="demo-comments-top__tabs demo-comments-top__tabs--discuss">
-        <ul class="comment-sorting-ul clearfix">
-          <li class="comment-sorting-li active">
-            <a class="sorting-link opinion-sort" id="latest-sort-btn" data-sort="createdDate,desc" href="#">최신순</a>
-          </li>
-          <li class="comment-sorting-li">
-            <a class="sorting-link opinion-sort" data-sort="createdDate,asc" href="#">과거순</a>
-          </li>
-          <li class="comment-sorting-li">
-            <a class="sorting-link opinion-sort" data-sort="likeCount,desc" href="#">공감순</a>
-          </li>
-        </ul>
+    <div class="demo-comments-top__tabs demo-comments-top__tabs--discuss clearfix">
+      <div class="demo-comments-lead pull-left">
+        댓글
       </div>
+      <ul class="comment-sorting-ul clearfix">
+        <li class="comment-sorting-li active">
+          <a class="sorting-link opinion-sort" id="latest-sort-btn" data-sort="createdDate,desc" href="#">최신순</a>
+        </li>
+        <li class="comment-sorting-li">
+          <a class="sorting-link opinion-sort" data-sort="createdDate,asc" href="#">과거순</a>
+        </li>
+        <li class="comment-sorting-li">
+          <a class="sorting-link opinion-sort" data-sort="likeCount,desc" href="#">공감순</a>
+        </li>
+      </ul>
     </div>
   </div>
   <ul class="demo-comments" id="opinion-list"></ul>
-  <div class="comment-end-line"></div>
   <div class="show-more-container text-center">
-    <button class="white-btn d-btn btn-more" type="button" id="opinion-more">더보기<i class="xi-angle-down-min"></i>
+    <button class="btn btn-default btn-outline btn-responsive-sm-md-md" type="button" id="opinion-more">더 보기<i class="xi-angle-down-min"></i>
     </button>
   </div>
 </div>
@@ -133,37 +129,34 @@
 <script id="template-opinion" type="text/x-handlebars-template">
   {{#*inline "partialCommentLine"}}
     <li class="comment-li">
-      <div class="profile-circle profile-circle--comment" style="background-image: url({{ opinion.contextAssigns.photo }})">
-        <p class="alt-text">{{ opinion.createdBy.name }} 사진</p>
-      </div>
       <div class="comment-content">
         <div class="comment-info clearfix">
           <div class="comment-date-wrapper">
             <p class="comment-name">{{ opinion.createdBy.name }}</p>
-            <p class="comment-time"><i class="xi-time"></i> {{ opinion.contextAssigns.createdDateShort }}</p>
-          </div>
-          <div class="comment-likes-count">
-            <button class="opinion-thumbs-up-btn{{#if opinion.liked}}active{{/if}}" data-id="{{ opinion.id }}">
-              <i class="xi-thumbs-up"></i> 공감 <strong>{{ opinion.likeCount }}</strong>개
-            </button>
+            <p class="comment-time">{{ opinion.contextAssigns.createdDateShort }}</p>
           </div>
         </div>
         <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">{{ opinion.contextAssigns.contentBr }}</p>
         {{#if @root.isSignedIn}}
           <div class="clearfix">
-            <div class="pull-right">
-              {{#if opinion.contextAssigns.canHaveChildOpinions}}
-              <button type="button"
-                class="btn btn-default btn-sm js-new-child-opinion-btn"
-                data-id="{{ opinion.id }}">댓글달기</button>
-              {{/if}}
-              {{#if opinion.contextAssigns.isOwner}}
-              <button type="button"
-                class="btn btn-default btn-sm js-edit-opinion-btn js-edit-opinion-btn-{{ opinion.id }}"
-                data-id="{{ opinion.id }}" data-content="{{ opinion.content }}">수정하기</button>
-              <%--'            <button type="button" class="btn btn-default btn-sm delete-opinion-btn" data-id="' + opinion.id + '">삭제하기</button>' + --%>
-              {{/if}}
+            {{#if opinion.contextAssigns.canHaveChildOpinions}}
+            <button type="button"
+              class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-new-child-opinion-btn"
+              data-id="{{ opinion.id }}">댓글달기</button>
+            {{/if}}
+            <div class="comment-likes-count">
+              <button class="btn btn-responsive-xs-sm-sm js-opinion-thumbs-up-btn {{#if opinion.liked}}active btn-primary btn-outline{{else}}btn-no-border btn-default{{/if}}" data-id="{{ opinion.id }}">
+                <i class="xi-thumbs-up"></i> 공감 <strong>{{ opinion.likeCount }}</strong>개
+              </button>
             </div>
+            {{#if opinion.contextAssigns.isOwner}}
+            <button type="button"
+              class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-edit-opinion-btn js-edit-opinion-btn-{{ opinion.id }}"
+              data-id="{{ opinion.id }}" data-content="{{ opinion.content }}">수정하기</button>
+            <button type="button"
+              class="btn btn-default btn-responsive-xs-sm-sm btn-no-border delete-opinion-btn"
+              data-id="{{ opinion.id }}">삭제하기</button>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -174,7 +167,7 @@
 
     {{#if opinion.contextAssigns.canHaveChildOpinions}}
       <!-- 자식 댓글 --->
-      <ul class='js-child-opinions-list-{{ opinion.id }} {{#unless opinion.contextAssigns.hasChildOpinions}}display_none{{/unless}}'>
+      <ul class='demo-child-comments js-child-opinions-list-{{ opinion.id }} {{#unless opinion.contextAssigns.hasChildOpinions}}collapse{{/unless}}'>
         {{#each opinion.childOpinions}}
           {{> partialCommentLine opinion=this }}
         {{/each}}
@@ -372,7 +365,7 @@ $(function () {
 
 
     // 의견 공감
-    $(document).on('click', '.opinion-thumbs-up-btn', function () {
+    $(document).on('click', '.js-opinion-thumbs-up-btn', function () {
       var hasLike = $(this).hasClass('active');
       var id = $(this).data('id');
       var that = $(this);
@@ -387,10 +380,18 @@ $(function () {
           var count = +$('strong', that).text();
           if (hasLike) {
             that.removeClass('active');
+            that.removeClass('btn-primary');
+            that.removeClass('btn-outline');
+            that.addClass('btn-default');
+            that.addClass('btn-no-border ');
             if (count !== 0) $('strong', that).text(count - 1);
           }
           else {
             that.addClass('active');
+            that.addClass('btn-primary');
+            that.addClass('btn-outline');
+            that.removeClass('btn-default');
+            that.removeClass('btn-no-border ');
             $('strong', that).text(count + 1);
           }
         },
@@ -455,6 +456,7 @@ $(function () {
             var content = $$makeOpinionString(data.content[i]);
             $opinionList.append(content);
           }
+          if(data.content.length > 0) $('.js-demo-comments-container').show();
           $opinionList.css('height', 'auto');
           if (data.last) $opinionMore.addClass('hidden');
           else $opinionMore.removeClass('hidden');
@@ -476,7 +478,6 @@ $(function () {
 
   var $$templateOpinion = Handlebars.compile($("#template-opinion").html());
   function $$makeOpinionString(opinion) {
-    console.log(opinion);
     var contextAssignedOpinion = $$contextAssignOpinion($.extend(true, {}, opinion), $$userId);
     return $$templateOpinion({
       isSignedIn: (!!$$userId),

@@ -21,7 +21,7 @@
     <div class="form-group form-group--demo">
       <label class="demo-form-label" for="inputPassword">새 비밀번호</label>
       <input type="password" class="form-control demo-input" name="password" id="inputPassword"
-             placeholder="6자리 이상 새 비밀전호를 설정해 주세요."
+             placeholder="6자리 이상 새 비밀번호를 설정해 주세요."
              data-parsley-required="true" data-parsley-minlength="6">
     </div>
     <div class="form-group form-group--demo">

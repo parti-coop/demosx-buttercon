@@ -61,7 +61,7 @@ public class EmailService {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        helper.setFrom("버터나이프크루<hans@slowalk.co.kr>");
+        helper.setFrom("버터나이프크루<help@butterknifecrew.kr>");
         helper.setTo(email);
         helper.setSubject(title);
 
@@ -84,7 +84,7 @@ public class EmailService {
      */
     public void registerProposal(String email, String name) throws MessagingException {
         String content = String.format(registerProposalEmailContent, name, host);
-        sendEmail(email, "[서울특별시 응답소]민원 등록 알림", content);
+        // sendEmail(email, "[서울특별시 응답소]민원 등록 알림", content);
     }
 
     /**
@@ -92,7 +92,7 @@ public class EmailService {
      */
     public void assignedProposal(String email, String name) throws MessagingException {
         String content = String.format(assignProposalEmailContent, name, host);
-        sendEmail(email, "[서울특별시 응답소]민원 처리완료 알림", content);
+        // sendEmail(email, "[서울특별시 응답소]민원 처리완료 알림", content);
     }
 
     /**
@@ -100,7 +100,7 @@ public class EmailService {
      */
     public void completedProposal(String email, String name) throws MessagingException {
         String content = String.format(passProposalEmailContent, name, host);
-        sendEmail(email, "[서울특별시 응답소] 제안 투표 통과 알림", content);
+        // sendEmail(email, "[서울특별시 응답소] 제안 투표 통과 알림", content);
     }
 
     /**
@@ -109,7 +109,7 @@ public class EmailService {
      */
     public void dropProposal(String email, String name) throws MessagingException {
         String content = String.format(dropProposalEmailContent, name, host);
-        sendEmail(email, "[서울특별시 버터나이프크루]제안 투표 탈락 알림", content);
+        // sendEmail(email, "[서울특별시 버터나이프크루]제안 투표 탈락 알림", content);
     }
 
     /**

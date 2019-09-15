@@ -5,161 +5,86 @@
   <title>${proposal.title} - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
-<body class="body-proposal">
-
+<body class="body-proposal body-proposal-detail">
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="demo-detail-title">아이디어 보기</h3>
-  <div class="clearfix">
-    <div class="demo-content">
+  <div class="top-row clearfix">
+    <div class="top-left">
+      <h3 class="top-row__title">아이디어</h3>
+    </div>
+  </div>
+
+  <div class="content-container clearfix">
+    <div class="demo-side">
+      <div class="profile-circle profile-circle--title profile-circle--title-side"
+        style="background-image: url(${proposal.createdBy.viewPhoto()})">
+        <p class="alt-text">${proposal.createdBy.name} 사진</p>
+      </div>
+      <div class="proposal-title-author d-inline-block">
+        <p class="title-author__name">${proposal.createdBy.name}</p>
+        <p class="title-author__date">${proposal.createdDate.toLocalDate()}</p>
+      </div>
+    </div>
+    <div class="demo-content demo-content-right">
+      <div class="author-box">
+        <div class="proposal-title-author clearfix">
+          <div class="demo-card__author pull-left">
+            <div class="profile-circle profile-circle--title profile-circle--title-responsive"
+                style="background-image: url(${proposal.createdBy.viewPhoto()})">
+              <p class="alt-text">${proposal.createdBy.name}프로필</p>
+            </div>
+            <p class="title-author__name">${proposal.createdBy.name}</p>
+          </div>
+          <div class="demo-card__date pull-right">
+            <p class="title-author__date">${proposal.createdDate.toLocalDate()}</p>
+          </div>
+        </div>
+      </div>
+      <div class="category-box">
+        <div class="category-row clearfix">
+          <div class="detail-category-container">
+            <h3 class="detail-category">${proposal.category.name}</h2>
+          </div>
+          <div class="detail-copy-url">
+            주소복사
+            <i class="xi-share-alt"></i>
+          </div>
+        </div>
+      </div>
       <div class="title-box">
         <div class="title-row clearfix">
           <div class="detail-title-container">
             <h2 class="detail-title">${proposal.title}</h2>
           </div>
-          <div class="thumbs-ups">
-            <div class="thumbs-up-btn ${proposal.process.isInit() ? '' : 'active'}">공감<i class="xi-thumbs-up"></i></div>
-            <div class="answer-status ${proposal.process.isComplete() ? 'active' : ''}">부서답변</div>
-          </div>
-        </div>
-
-        <div class="title-info clearfix">
-          <div class="title-author">
-            <div class="profile-circle profile-circle--title"
-                 style="background-image: url(${proposal.createdBy.viewPhoto()})">
-              <p class="alt-text">${proposal.createdBy.name}사진</p>
-            </div>
-            <p class="title-author__name">${proposal.createdBy.name}</p>
-            <p class="title-author__date"><i class="xi-time"></i> ${proposal.createdDate.toLocalDate()}</p>
-          </div>
-          <div class="sns-group">
-            <button class="sns-btn sns-btn--trigger collapsed" type="button" data-toggle="collapse"
-                    data-target="#sns-collapse" aria-expanded="false" aria-controls="sns-collapse"><i
-                class="xi-share-alt">
-              <p class="alt-text">share-open</p>
-            </i></button>
-            <div class="collapse collapse-sns" id="sns-collapse">
-              <button href="" class="sns-btn" type="button"><i class="xi-facebook">
-                <p class="alt-text">facebook</p>
-              </i></button>
-              <button href="" class="sns-btn" type="button"><i class="xi-kakaotalk">
-                <p class="alt-text">kakaotalk</p>
-              </i></button>
-              <button href="" class="sns-btn" type="button"><i class="xi-twitter">
-                <p class="alt-text">twitter</p>
-              </i></button>
-              <button href="" class="sns-btn" type="button"><i class="xi-blogger">
-                <p class="alt-text">blogger</p>
-              </i></button>
-            </div>
-          </div>
         </div>
       </div>
 
       <div class="contents-box">
-        <c:if test="${proposal.createdBy.id eq loginUser.id}">
-          <div class="clearfix">
-            <div class="pull-right">
-              <a href="<c:url value="/edit-proposal.do?id=${proposal.id}"/>" class="btn btn-default btn-sm">수정하기</a>
-              <button type="button" class="btn btn-default btn-sm" id="delete-proposal-btn">삭제하기</button>
-            </div>
-          </div>
-        </c:if>
         <div class="contents-box__contents">${proposal.contentWithBr()}</div>
 
-        <hr/>
-        <div>
-          <strong>태그</strong>
-          <c:forEach var="issueTag" items="${proposal.issueTags}">
-            <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>">${issueTag.name}</a>
-          </c:forEach>
+        <div class="contents-box-tags">
+          <span class="contents-box-tags-lead">
+            <i class="xi-tags"></i>
+            태그
+          </span>
+          <span class="contents-box-tags-list">
+            <c:forEach var="issueTag" items="${proposal.issueTags}">
+              <a href="<c:url value="/proposal-list.do?search=%23${issueTag.name}"/>" class="contents-box-tags-link">#${issueTag.name}</a>
+            </c:forEach>
+          </span>
         </div>
 
-        <hr/>
-
-        <button
-            class="content-thumbs-up-btn${proposal.liked eq true ? ' active' : ''}${empty loginUser ? ' show-login-modal' : ''}"
-            id="proposal-like-btn">
-          <i class="xi-thumbs-up"></i> 공감 <strong>${proposal.stats.likeCount}</strong>개
-        </button>
-
-
-        <div class="demo-progress">
-          <div class="progress-container">
-            <div class="progress-thumb-wrapper" style="margin-left: ${proposal.stats.likePercentBy500()}%;">
-              <img class="progress-thumb-img" src="<c:url value="/images/progress-thumb.png"/>">
-            </div>
-            <div class="progress-bg">
-              <div class="progress-fill-bar" style="width: ${proposal.stats.likePercentBy500()}%;"></div>
-              <div class="progress-step-1" style="left: 10%">
-                <div class="progress-step-1-text">50명</div>
-              </div>
-              <div class="progress-step-1-line" style="left: 10%;"></div>
-              <p class="progress-step-2">500명</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="admin-feedbacks">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-          <c:if test="${not empty proposal.adminComment}">
-            <div class="panel panel-default panel-demo">
-              <div class="panel-heading panel-heading--demo" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                  <a class="demo-collapse-btn" role="button" data-toggle="collapse" data-parent="#accordion"
-                     href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <div class="feedback-title-wrapper clearfix">
-                      <p class="feedback-name">관리자 답변</p>
-                      <p class="feedback-date"><i class="xi-time"></i> ${proposal.adminCommentDate.toLocalDate()}</p>
-                    </div>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse collapse-demo" role="tabpanel"
-                   aria-labelledby="headingOne">
-                <div class="panel-body">${proposal.adminComment}</div>
-              </div>
-              <div class="feedback-arrow-group">
-                <i class="xi-angle-down">
-                  <p class="sr-only">아래 화살표</p>
-                </i>
-                <i class="xi-angle-up">
-                  <p class="sr-only">아래 화살표</p>
-                </i>
-              </div>
-            </div>
-          </c:if>
-          <c:if test="${proposal.process.isComplete()}">
-            <div class="panel panel-default panel-demo">
-              <div class="panel-heading panel-heading--demo" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                  <a class="demo-collapse-btn" role="button" data-toggle="collapse" data-parent="#accordion"
-                     href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <div class="feedback-title-wrapper clearfix">
-                      <div class="profile-circle profile-circle--admin-feedback"
-                           style="background-image: url(${proposal.manager.viewPhoto()})">
-                        <p class="alt-text">${proposal.manager.name}사진</p>
-                      </div>
-                      <p class="feedback-name">${proposal.manager.name}</p>
-                      <p class="feedback-date"><i class="xi-time"></i> ${proposal.managerCommentDate.toLocalDate()}</p>
-                    </div>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse collapse-demo" role="tabpanel"
-                   aria-labelledby="headingTwo">
-                <div class="panel-body">${proposal.managerComment}</div>
-              </div>
-              <div class="feedback-arrow-group">
-                <i class="xi-angle-down">
-                  <p class="sr-only">아래 화살표</p>
-                </i>
-                <i class="xi-angle-up">
-                  <p class="sr-only">아래 화살표</p>
-                </i>
-              </div>
+        <div class="contents-box-controls clearfix">
+          <button
+              class="btn btn-responsive-sm-md-md ${proposal.liked eq true ? ' btn-primary btn-outline active' : 'btn-default'}${empty loginUser ? ' show-login-modal' : ''}"
+              id="proposal-like-btn">
+            <i class="xi-thumbs-up"></i> 공감 <strong>${proposal.stats.likeCount}</strong>개
+          </button>
+          <c:if test="${proposal.createdBy.id eq loginUser.id}">
+            <div class="pull-right">
+              <a href="<c:url value="/edit-proposal.do?id=${proposal.id}"/>" class="btn btn-default btn-responsive-sm-md-md">수정하기</a>
+              <button type="button" class="btn btn-default btn-responsive-sm-md-md" id="delete-proposal-btn">삭제하기</button>
             </div>
           </c:if>
         </div>
@@ -169,8 +94,6 @@
         <jsp:param name="id" value="${proposal.id}"/>
       </jsp:include>
     </div>
-
-    <%@include file="../shared/side.jsp" %>
   </div><!-- demo-row end  -->
 </div>
 
@@ -225,10 +148,16 @@
             var count = +$('strong', that).text();
             if (hasLike) {
               that.removeClass('active');
+              that.removeClass('btn-primary');
+              that.removeClass('btn-outline');
+              that.addClass('btn-default');
               if (count !== 0) $('strong', that).text(count - 1);
             }
             else {
               that.addClass('active');
+              that.addClass('btn-primary');
+              that.addClass('btn-outline');
+              that.removeClass('btn-default');
               $('strong', that).text(count + 1);
             }
           },

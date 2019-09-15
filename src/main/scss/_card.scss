@@ -31,9 +31,7 @@
         padding-left: 37px;
       }
       .title-author__name {
-        margin-top: 0;
         line-height: 42px;
-        color: $gray-light;
         @media(max-width: $screen-xs-max) {
           font-size: 12px;
           line-height: 32px;
@@ -44,7 +42,6 @@
     .demo-card__date {
       .title-author__date {
         line-height: 42px;
-        color: $gray-light;
         @media(max-width: $screen-xs-max) {
           font-size: 12px;
           line-height: 32px;

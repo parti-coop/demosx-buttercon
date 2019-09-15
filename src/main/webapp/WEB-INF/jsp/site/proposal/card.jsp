@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="demo-card position-relative">
+<div class="demo-card demo-card-proposal position-relative">
   <c:if test="${param.best}">
     <div class="card-best-tag">
       <img src="<c:url value="/images/best-tag.png"/>" alt="best">
       <span>Best</span>
     </div>
   </c:if>
-  <div class="demo-card__link">
+  <div class="demo-card__link ">
     <a href="<c:url value="/proposal.do?id=${proposal.id}"/>">
-      <div class="clearfix">
+      <div class="proposal-title-author clearfix">
         <div class="demo-card__author pull-left">
           <div class="profile-circle profile-circle--title profile-circle--title-responsive"
               style="background-image: url(${proposal.createdBy.viewPhoto()})">

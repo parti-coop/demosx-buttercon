@@ -36,7 +36,7 @@
             <div class="form-group form-group--demo">
               <label class="demo-form-label" for="modalInputPassword">비밀번호</label>
               <input type="password" class="form-control demo-input" id="modalInputPassword" name="pw"
-                     placeholder="6자리 이상 비밀전호를 설정해 주세요."
+                     placeholder="6자리 이상 비밀번호를 설정해 주세요."
                      data-parsley-required="true">
             </div>
             <div class="has-error">

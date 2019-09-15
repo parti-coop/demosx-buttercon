@@ -62,8 +62,12 @@ mvn package
 * "서울"이란 글자가 들어간 메일
 * 50/500
 * 네이버 등 각종 로그인 설정
-* 내가 공감한 댓글에 공감 댓글 백그라운드 컬러
 * 관리자 아이디어랑 아이디어 댓글 관리
 * GNB hover
 * https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css --> 로컬 bootstrap로 변경
 * tinymce 정리
+* 주소복사
+* GNB 로그인
+* 내 정보 수정
+* 구글 로그인
+* 버터나이프크루

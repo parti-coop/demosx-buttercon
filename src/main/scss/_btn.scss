@@ -68,9 +68,7 @@
 
 .cancel-btn {
   background-color: $gray-background-light;
-  @extend .btn;
   @extend .btn-default;
-  @extend .btn-lg;
   line-height: 24px;
   margin-right: 10px;
 }
@@ -91,9 +89,11 @@
 
 .demo-submit-btn--submit {
   background-color: $brand-primary;
-  @extend .btn;
-  @extend .btn-lg;
-  @extend .btn-primary;
+}
+
+.demo-submit-btn--submit:hover,
+.demo-submit-btn--submit:focus {
+  background-color: $brand-primary-dark;
 }
 
 .demo-btn {
@@ -258,27 +258,8 @@
 }
 
 .opinion-thumbs-up-btn {
-  color: #727a7f;
-  font-size: 14px;
   display: inline-block;
-  padding: 3px 9px 4px;
-  margin-bottom: 7px;
-  background-color: white;
-
-  border: 1px solid #b6c1cc;
-
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-
-  -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
-  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
-}
-
-.opinion-thumbs-up-btn.active {
-  background-color: #ff5600;
-  color: white;
+  @extend .btn-default;
 }
 
 @media (max-width: 767px) {
@@ -376,10 +357,19 @@
 .btn.btn-outline {
   background-color: transparent;
   color: inherit;
+  &.btn-primary {
+    color: $brand-primary-dark;
+  }
   transition: all .25s;
+  box-shadow: none;
 }
+
 .btn-default.btn-outline {
   color: $text-color-light;
+}
+
+.btn.btn-outline:focus {
+  background-color: transparent;
 }
 
 .btn-primary.btn-outline:hover,
@@ -389,6 +379,7 @@
 .btn-danger.btn-outline:hover {
   color: #fff;
 }
+
 
 // bootstrap
 .btn.btn-primary,
@@ -403,6 +394,28 @@
 
 .btn {
   box-shadow: none;
+}
+
+.btn-no-border {
+  border-color: transparent;
+}
+
+// @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+// @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+// @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+
+.btn-responsive-xs-sm-sm {
+  @media (max-width: $screen-sm-max) {
+    @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+  }
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+}
+
+.btn-responsive-sm-md-md {
+  @media (max-width: $screen-sm-max) {
+    @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+  }
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $btn-border-radius-base);
 }
 
 /* button END */

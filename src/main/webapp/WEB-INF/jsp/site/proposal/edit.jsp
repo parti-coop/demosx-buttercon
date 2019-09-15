@@ -5,7 +5,7 @@
   <title>아이디어 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
-<body class="body-proposal">
+<body class="body-proposal body-proposal-form ">
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
@@ -76,8 +76,8 @@
 
         <div class="form-action form-gruop-proposal text-right">
           <div class="inline-block">
-            <a class="btn demo-submit-btn cancel-btn" href="<c:url value="/proposal-list.do"/>" role="button">취소</a>
-            <button type="submit" class="demo-submit-btn demo-submit-btn--submit">아이디어 수정</button>
+            <a class="btn btn-default btn-lg" href="<c:url value="/proposal-list.do"/>" role="button">취소</a>
+            <button type="submit" class="btn btn-primary btn-lg">아이디어 수정</button>
           </div>
         </div>
       </form>
