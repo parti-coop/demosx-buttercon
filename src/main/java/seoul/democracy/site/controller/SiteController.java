@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.domain.ProposalType;
@@ -100,5 +102,12 @@ public class SiteController {
     @RequestMapping(value = "/500.do", method = RequestMethod.GET)
     public String error() {
         return "/site/static/500";
+    }
+
+    @RequestMapping(value={"/robots.txt", "/robot.txt"})
+    @ResponseBody
+    public String getRobotsTxt() {
+        return "User-agent: *\n" +
+               "Disallow: /\n";
     }
 }
