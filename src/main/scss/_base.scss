@@ -1,3 +1,31 @@
 .text-nowrap {
   white-space: nowrap;
 }
+
+// demo-content & demo-side
+
+.demo-content {
+  float: left;
+  width: 75%;
+  min-height: 400px;
+  @media (max-width: 767px) {
+    float: inherit;
+    width: 100%;
+  }
+}
+
+.demo-side {
+  float: left;
+  width: 25%;
+  padding-left: 32px;
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  .demo-side-title {
+    color: $text-color-yellow;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0;
+  }
+}

@@ -5,32 +5,6 @@
 <head>
   <title>실행 관리 - 수정 - Democracy</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- form validation -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
-  <script type="text/javascript" src="<c:url value="/js/parsley-ko.js"/>"></script>
-
-  <!-- date picker -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/ko.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
-
-  <!-- 파일 업로드 -->
-  <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/css/jquery.fileupload.min.css"/>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/vendor/jquery.ui.widget.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.iframe-transport.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
-
-  <!-- select2 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
-
   <style>
     #thumbnail-remove {
       position: absolute;
@@ -65,10 +39,10 @@
         body_class: 'container',
         setup: function (editor) {
           $editor = editor;
-          editor.addButton('custom_image', {
+          editor.ui.registry.addButton('custom_image', {
             title: '이미지삽입',
             icon: 'image',
-            onclick: function() {
+            onAction: function() {
               $('#tinymce-file-upload').click();
             }
           });

@@ -1,3 +1,6 @@
+@import 'vendors/select2';
+@import 'vendors/bootstrap3/bootstrap';
+
 .skin-black-light .wrapper > .main-header {
     border-top: 6px solid #3c8dbc;
 }
@@ -8,10 +11,6 @@
 
 .cursor-pointer {
     cursor: pointer;
-}
-
-#tinymce {
-    padding-top: 20px;
 }
 
 .display_inline-block {

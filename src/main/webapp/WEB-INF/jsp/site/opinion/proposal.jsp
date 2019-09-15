@@ -129,10 +129,6 @@
   </div>
 </div>
 
-<!-- jquery serialize object -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-
 <!-- template -->
 <script id="template-opinion" type="text/x-handlebars-template">
   {{#*inline "partialCommentLine"}}

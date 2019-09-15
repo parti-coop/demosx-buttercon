@@ -5,19 +5,6 @@
 <head>
   <title>카테고리 관리 - Democracy</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- datatables -->
-  <link rel="stylesheet" type="text/css" href="<c:url value="/css/dataTables.bootstrap.min.css"/>"/>
-  <script type="text/javascript" src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/js/dataTables.bootstrap.min.js"/>"></script>
-
-  <!-- form validation -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
-  <script type="text/javascript" src="<c:url value="/js/parsley-ko.js"/>"></script>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
 

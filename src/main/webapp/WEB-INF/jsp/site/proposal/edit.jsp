@@ -4,10 +4,6 @@
 <head>
   <title>아이디어 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
 <body class="body-proposal">
 <%@ include file="../shared/header.jsp" %>

@@ -5,9 +5,6 @@
 <head>
   <title>회원 관리 - Democracy</title>
   <%@ include file="../shared/head.jsp" %>
-  <link rel="stylesheet" type="text/css" href="<c:url value="/css/dataTables.bootstrap.min.css"/>"/>
-  <script type="text/javascript" src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/js/dataTables.bootstrap.min.js"/>"></script>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
 

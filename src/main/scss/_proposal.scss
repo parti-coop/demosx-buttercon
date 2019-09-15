@@ -1,18 +1,22 @@
 body.body-proposal {
   background-color: $gray-background;
+  &.body-proposal-form {
+    background-color: white;
+  }
+
   .top-row {
     margin-top: 70px;
-    @media(max-width: $screen-sm-max) {
+    @media(max-width: $screen-xs-max) {
       margin-top: -8px;
     }
     .top-row__title {
       font-size: 32px;
-      @media(max-width: $screen-sm-max) {
+      @media(max-width: $screen-xs-max) {
         font-size: 14px;
         line-height: 30px;
       }
     }
-    @media(max-width: $screen-sm-max) {
+    @media(max-width: $screen-xs-max) {
       .top-left {
         width: auto;
         float: left;
@@ -43,17 +47,6 @@ body.body-proposal {
   }
 
   .sorting-tab {
-    border-top: 1px solid $text-color-darker;
-    border-bottom: none;
-    padding-top: 40px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    @media(max-width: $screen-sm-max) {
-      margin-bottom: 28px;
-      margin-top: 6px;
-      border-color: #e0e0e0;
-      padding: 8px 0 0 0;
-    }
     .sorting-tab-select-row {
       .sorting-tab__select {
         &.sorting-tab__select-category {
@@ -101,6 +94,57 @@ body.body-proposal {
         width: 100%;
         padding-left: 0;
       }
+    }
+  }
+
+  // form
+
+  .form-warning-text {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    @media(max-width: $screen-xs-max) {
+      margin-bottom: 15px;
+      padding-bottom: 0;
+    }
+    border-bottom: 2px solid $gray-lighter-e0;
+    color: $text-color-dark;
+    .lead {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      @media(max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+    ul {
+      li {
+        position: relative;
+        padding-left: 12px;
+        &:before {
+          content: '.';
+          position: absolute;
+          top: -4px;
+          left: 2px;
+        }
+      }
+    }
+  }
+
+  .demo-submit-btn--submit {
+    width: 200px;
+  }
+
+  .content-container {
+    border-top: 2px solid $text-color-darker;
+    border-bottom: none;
+    padding-top: 40px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    @media(max-width: $screen-xs-max) {
+      margin-bottom: 28px;
+      margin-top: 6px;
+      border-color: #e0e0e0;
+      padding: 8px 0 0 0;
     }
   }
 }

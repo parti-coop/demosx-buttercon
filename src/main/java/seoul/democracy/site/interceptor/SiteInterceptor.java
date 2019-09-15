@@ -1,5 +1,6 @@
 package seoul.democracy.site.interceptor;
 
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import seoul.democracy.user.utils.UserUtils;
@@ -21,5 +22,19 @@ public class SiteInterceptor extends HandlerInterceptorAdapter {
         if (modelAndView == null || modelAndView.getViewName().startsWith("redirect:")) return;
 
         modelAndView.addObject("loginUser", UserUtils.getLoginUser());
+
+        String controllerName = "";
+        String actionName = "";
+
+        if( handler instanceof HandlerMethod ) {
+			// there are cases where this handler isn't an instance of HandlerMethod, so the cast fails.
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			//controllerName = handlerMethod.getBean().getClass().getSimpleName().replace("Controller", "");
+			controllerName  = handlerMethod.getBeanType().getSimpleName().replace("Controller", "");
+			actionName = handlerMethod.getMethod().getName();
+		}
+
+		modelAndView.addObject("controllerName", controllerName );
+		modelAndView.addObject("actionName", actionName );
     }
 }

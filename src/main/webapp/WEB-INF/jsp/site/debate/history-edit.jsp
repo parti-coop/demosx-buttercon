@@ -27,22 +27,8 @@
 </div>
 
 <c:if test="${not empty loginUser and loginUser.isAdmin()}">
-  <!-- 파일 업로드 -->
-  <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/css/jquery.fileupload.min.css"/>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/vendor/jquery.ui.widget.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.iframe-transport.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
-
   <!-- tinymce editor -->
   <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
   <script>
     $(function () {
       var $content = $('.tinymce-editor');
@@ -62,10 +48,10 @@
         body_class: 'container',
         setup: function (editor) {
           $editor = editor;
-          editor.addButton('custom_image', {
+          editor.ui.registry.addButton('custom_image', {
             title: '이미지삽입',
             icon: 'image',
-            onclick: function() {
+            onAction: function() {
               $('#tinymce-file-upload').click();
             }
           });

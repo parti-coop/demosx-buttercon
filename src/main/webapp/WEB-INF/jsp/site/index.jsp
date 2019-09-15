@@ -5,9 +5,6 @@
 <head>
   <title>버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
-
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css"/>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 </head>
 <body class="home header-no-margin body-home">
 <%@ include file="./shared/header.jsp" %>
@@ -44,7 +41,7 @@
         </span>
       </div>
       <div class="key-banner-btn-container">
-        <a href="#" class="key-banner-btn btn demo-btn demo-btn--primary">
+        <a href="https://event-us.kr/butterknife/event/list" class="key-banner-btn btn demo-btn demo-btn--primary">
           <span class="hidden-xs">정책 살롱</span> 참여하기
         </a>
       </div>

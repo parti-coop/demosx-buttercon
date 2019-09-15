@@ -5,16 +5,6 @@
 <head>
   <title>제안 관리 상세 - Democracy</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- datatables -->
-  <link rel="stylesheet" type="text/css" href="<c:url value="/css/dataTables.bootstrap.min.css"/>"/>
-  <script type="text/javascript" src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/js/dataTables.bootstrap.min.js"/>"></script>
-
-  <!-- select2 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
 

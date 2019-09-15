@@ -4,66 +4,80 @@
 <head>
   <title>아이디어 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+  <!-- tinymce editor -->
+  <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/tinymce/jquery.tinymce.min.js"/>"></script>
 </head>
-<body class="body-proposal">
+<body class="body-proposal body-proposal-form">
 <%@ include file="../shared/header.jsp" %>
 
 <div class="container">
-  <h3 class="demo-detail-title">아이디어</h3>
+  <div class="top-row clearfix">
+    <div class="top-left">
+      <h3 class="top-row__title">아이디어</h3>
+    </div>
+  </div>
 
-  <div class="demo-row clearfix">
-    <div class="demo-content">
+  <div class="content-container clearfix">
+    <div class="demo-side">
+      <h4 class="demo-side-title">아이디어 작성</h4>
+    </div>
+    <div class="demo-content demo-content-right">
       <form class="demo-form" id="form-new-proposal">
-        <div class="form-input-container">
-          <div class="form-warning-text">
-            <p>・ 제안 게시기준에 맞지 않는 부적절한 게시물은 이동 또는 삭제 조치됩니다.
-              <a href="<c:url value="/copyright.do"/>">[저작권 및 컨텐츠 관련안내 바로가기]</a>
-            </p>
-          </div>
-
-          <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="inputTitle">제목<span> *</span></label>
-            <input type="text" class="form-control demo-input" id="inputTitle" placeholder="제목" autocomplete="off"
-                   name="title" data-parsley-required="true" data-parsley-maxlength="100">
-          </div>
-
-          <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="category">분류<span> *</span></label>
-            <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true" >
-                <option value="">선택...</option>
-                <c:forEach var="item" items="${categories}">
-                  <option value="${item.name}">${item.name}</option>
-                </c:forEach>
-              </select>
-          </div>
-
-          <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="inputContent">내용<span> *</span></label>
-            <textarea class="form-control" name="content" id="inputContent" rows="10"
-                      data-parsley-required="true"></textarea>
-          </div>
-
-          <div class="form-group form-group--demo">
-            <label class="demo-form-label" for="issueTagNames[]">태그</label>
-            <select class="form-control js-tagging" name="issueTagNames[]" multiple="multiple"></select>
-          </div>
-
+        <div class="form-warning-text">
+          <p class="lead">작성 가이드</p>
+          <ul class="list-unstyled">
+            <li>다른 크루를 위해 본문 제일 처음에는 아이디어 내용을 요약하여 작성해주세요.</li>
+            <li>아이디어의 핵심 키워드를 태그로 입력할 수 있습니다. (최대 5개까지 입력 가능)</li>
+            <li><span class="text-danger">*</span> 은 필수 입력 항목입니다.</li>
+          </ul>
         </div>
-        <div class="form-action text-right">
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="inputTitle">제목<span class="required"> *</span></label>
+          <input type="text" class="form-control demo-input" id="inputTitle" placeholder="" autocomplete="off"
+                  name="title" data-parsley-required="true" data-parsley-maxlength="100">
+        </div>
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="category">분류<span class="required"> *</span></label>
+          <c:set var="proposalCategoryParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
+          <div class="select-container">
+            <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true"  data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}">
+              <option value="">살롱 주제 선택...</option>
+              <c:forEach var="item" items="${categories}">
+                <option value="${item.name}">${item.name}</option>
+              </c:forEach>
+            </select>
+          </div>
+          <div id="${proposalCategoryParsleyErrorsContainerId}" class="help-block-error-container"></div>
+        </div>
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="inputContent">내용<span class="required"> *</span></label>
+          <c:set var="proposalContentParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
+          <div class="textarea-tinymce-container">
+            <textarea class="form-control js-tinymce-editor" name="content" id="inputContent" data-parsley-required="true" data-tinymce-content-css="<c:url value="/css/tinymce-content.css"/>" data-tinymce-upload-url="/ajax/mypage/files" data-parsley-errors-container="#${proposalContentParsleyErrorsContainerId}">
+            </textarea>
+          </div>
+          <div id="${proposalContentParsleyErrorsContainerId}" class="help-block-error-container"></div>
+        </div>
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="issueTagNames[]">태그</label>
+          <div class="select-container">
+            <select class="form-control js-tagging" name="issueTagNames[]" multiple="multiple" data-width="100%"></select>
+          </div>
+        </div>
+
+        <div class="form-action form-gruop-proposal text-right ">
           <div class="inline-block">
-            <a class="btn demo-submit-btn cancel-btn" href="<c:url value="/mypage/proposal.do"/>" role="button">나의 아이디어 목록</a>
+            <a class="btn demo-submit-btn cancel-btn" href="<c:url value="/proposal-list.do"/>" role="button">취소</a>
             <button type="submit" class="demo-submit-btn demo-submit-btn--submit">아이디어 제안</button>
           </div>
         </div>
       </form>
     </div>
-
-
-    <%@include file="../shared/side.jsp" %>
   </div>
 </div>
 <script>

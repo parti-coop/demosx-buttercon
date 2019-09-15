@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="sorting-tab sorting-tab--suggest clearfix">
+  <div class="sorting-tab sorting-tab--suggest content-container clearfix">
     <form name="search">
       <div class="sorting-tab-select-row">
         <div class="sorting-tab__select sorting-tab__select-category">

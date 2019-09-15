@@ -5,20 +5,6 @@
 <head>
   <title>내 정보 수정 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
-
-  <!-- 파일 업로드 -->
-  <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/css/jquery.fileupload.min.css"/>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/vendor/jquery.ui.widget.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.iframe-transport.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
 <body class="home">
 <%@ include file="../shared/header.jsp" %>

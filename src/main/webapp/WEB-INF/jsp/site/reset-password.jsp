@@ -4,10 +4,6 @@
 <head>
   <title>비밀번호 재설정 - Democracy</title>
   <%@ include file="./shared/head.jsp" %>
-
-  <!-- jquery serialize object -->
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
 <body>
 <%@ include file="./shared/header.jsp" %>
