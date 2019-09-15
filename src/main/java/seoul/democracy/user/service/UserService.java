@@ -165,6 +165,6 @@ public class UserService {
             return userRepository.save(user);
         }
 
-        return user.update(UserUpdateDto.of(name, photo, null));
+        return user.update(UserUpdateDto.of(name, photo));
     }
 }

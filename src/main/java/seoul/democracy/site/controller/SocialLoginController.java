@@ -43,6 +43,8 @@ public class SocialLoginController {
             return "redirect:" + socialService.twitterAuthorizationUrl(session);
         } else if ("facebook".equals(provider)) {
             return "redirect:" + socialService.facebookAuthorizationUrl(session);
+        } else if ("google".equals(provider)) {
+            return "redirect:" + socialService.googleAuthorizationUrl(session);
         }
 
         return "redirect:/login.do";

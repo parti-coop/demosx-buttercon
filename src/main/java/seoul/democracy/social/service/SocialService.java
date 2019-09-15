@@ -1,6 +1,7 @@
 package seoul.democracy.social.service;
 
 import com.github.scribejava.apis.FacebookApi;
+import com.github.scribejava.apis.GoogleApi20;
 import com.github.scribejava.apis.NaverApi;
 import com.github.scribejava.apis.TwitterApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
@@ -36,6 +37,10 @@ public class SocialService {
     private final String facebookClientSecret;
     private final String facebookRedirectUrl;
 
+    private final String googleClientId;
+    private final String googleClientSecret;
+    private final String googleRedirectUrl;
+
     @Autowired
     public SocialService(EgovPropertyService propertyService) {
         String host = propertyService.getString("host");
@@ -54,6 +59,10 @@ public class SocialService {
         this.facebookClientId = propertyService.getString("facebookClientId");
         this.facebookClientSecret = propertyService.getString("facebookClientSecret");
         this.facebookRedirectUrl = host + "/auth/facebook";
+
+        this.googleClientId = propertyService.getString("googleClientId");
+        this.googleClientSecret = propertyService.getString("googleClientSecret");
+        this.googleRedirectUrl = host + "/auth/google";
     }
 
     /* 세션 유효성 검증을 위한 난수 생성기 */
@@ -143,6 +152,26 @@ public class SocialService {
                    .apiSecret(facebookClientSecret)
                    .callback(facebookRedirectUrl)
                    .build(FacebookApi.instance());
+    }
+
+    public String googleAuthorizationUrl(HttpSession session) {
+        String state = generateRandomString();
+        setSession(session, state);
+
+        return new ServiceBuilder(googleClientId)
+                   .apiSecret(googleClientSecret)
+                   .scope("email profile")
+                   .callback(googleRedirectUrl)
+                   .state(state) // callback에서 이 값을 비교하여 유효한 결과인지 확인
+                   .build(GoogleApi20.instance())
+                   .getAuthorizationUrl();
+    }
+
+    public OAuth20Service google() {
+        return new ServiceBuilder(googleClientId)
+                   .apiSecret(googleClientSecret)
+                   .callback(googleRedirectUrl)
+                   .build(GoogleApi20.instance());
     }
 
 }

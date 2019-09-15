@@ -78,6 +78,15 @@ public class SocialAuthenticationFilter extends AbstractAuthenticationProcessing
 
                     return this.getAuthenticationManager().authenticate(authRequest);
                 }
+                case "google": {
+                    String code = getCode(request);
+
+                    OAuth20Service service = socialService.google();
+                    OAuth2AccessToken accessToken = service.getAccessToken(code);
+                    SocialAuthenticationToken authRequest = new SocialAuthenticationToken(provider, accessToken);
+
+                    return this.getAuthenticationManager().authenticate(authRequest);
+                }
                 default: {
                     return null;
                 }

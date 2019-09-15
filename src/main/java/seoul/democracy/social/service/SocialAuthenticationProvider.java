@@ -87,6 +87,19 @@ public class SocialAuthenticationProvider implements AuthenticationProvider {
             } catch (InterruptedException | ExecutionException | IOException e) {
                 throw new UsernameNotFoundException("Unknown connectd account id");
             }
+        }  else if (authToken.getProvider().equals("google")) {
+            OAuth20Service service = socialService.google();
+            final OAuthRequest req = new OAuthRequest(Verb.GET, "https://www.googleapis.com/oauth2/v3/userinfo");
+            service.signRequest((OAuth2AccessToken) authToken.getToken(), req);
+            try {
+                final Response res = service.execute(req);
+                Map<String, Object> map = JsonUtils.asStringToMap(res.getBody());
+                id = map.get("sub").toString();
+                name = map.get("name").toString();
+                photo = map.get("picture").toString();
+            } catch (InterruptedException | ExecutionException | IOException e) {
+                throw new UsernameNotFoundException("Unknown connectd account id");
+            }
         }
 
         if (id == null || name == null) throw new UsernameNotFoundException("Unknown connectd account id");

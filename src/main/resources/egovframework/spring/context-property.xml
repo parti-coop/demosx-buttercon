@@ -16,6 +16,8 @@
                 <entry key="twitterClientSecret" value="${Globals.twitterClientSecret}"/>
                 <entry key="facebookClientId" value="${Globals.facebookClientId}"/>
                 <entry key="facebookClientSecret" value="${Globals.facebookClientSecret}"/>
+                <entry key="googleClientId" value="${Globals.googleClientId}"/>
+                <entry key="googleClientSecret" value="${Globals.googleClientSecret}"/>
             </map>
         </property>
     </bean>

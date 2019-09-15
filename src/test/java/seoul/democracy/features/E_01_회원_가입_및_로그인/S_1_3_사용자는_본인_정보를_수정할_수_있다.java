@@ -54,7 +54,7 @@ public class S_1_3_사용자는_본인_정보를_수정할_수_있다 {
     @Test
     @WithUserDetails("user1@googl.co.kr")
     public void T_1_이름_프로필_사진을_수정할_수_있다() {
-        UserUpdateDto updateDto = UserUpdateDto.of("유저999", "photo999.jpg", "12345");
+        UserUpdateDto updateDto = UserUpdateDto.of("유저999", "photo999.jpg");
         User user = userService.update(updateDto);
         assertThat(user.getId(), is(21L));
 
@@ -63,14 +63,14 @@ public class S_1_3_사용자는_본인_정보를_수정할_수_있다 {
         assertThat(userDto.getPhoto(), is(updateDto.getPhoto()));
     }
 
-    /**
-     * 2. 비밀번호 다를 경우 수정할 수 없다.
-     */
-    @Test(expected = BadRequestException.class)
-    @WithUserDetails("user1@googl.co.kr")
-    public void T_2_비밀번호_다를_경우_수정할_수_없다() {
-        UserUpdateDto updateDto = UserUpdateDto.of("유저999", "photo999.jpg", "wrongpassword");
-        userService.update(updateDto);
-    }
+    // /**
+    //  * 2. 비밀번호 다를 경우 수정할 수 없다.
+    //  */
+    // @Test(expected = BadRequestException.class)
+    // @WithUserDetails("user1@googl.co.kr")
+    // public void T_2_비밀번호_다를_경우_수정할_수_없다() {
+    //     UserUpdateDto updateDto = UserUpdateDto.of("유저999", "photo999.jpg");
+    //     userService.update(updateDto);
+    // }
 
 }
