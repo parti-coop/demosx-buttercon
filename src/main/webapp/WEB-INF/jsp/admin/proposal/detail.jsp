@@ -42,7 +42,7 @@
                     </c:if>
                   </div>
                 </div>
-                <div class="form-group">
+                <%-- <div class="form-group">
                   <label class="col-sm-2 control-label">타입</label>
                   <div class="col-sm-2">
                     <c:if test="${loginUser.isManager()}">
@@ -60,7 +60,7 @@
                       </select>
                     </c:if>
                   </div>
-                </div>
+                </div> --%>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">제목</label>
                   <div class="col-sm-10"><p class="form-control-static">${proposal.title}</p></div>
@@ -91,7 +91,7 @@
                   <label class="col-sm-2 control-label">진행사항</label>
                   <div class="col-sm-10"><p class="form-control-static">${proposal.process.msg}</p></div>
                 </div>
-                <div class="form-group">
+                <%-- <div class="form-group">
                   <label class="col-sm-2 control-label">공개여부</label>
                   <div class="col-sm-2">
                     <c:if test="${loginUser.isManager() or proposal.status.isDelete()}">
@@ -104,12 +104,12 @@
                       </select>
                     </c:if>
                   </div>
-                </div>
+                </div> --%>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">내용</label>
                   <div class="col-sm-10"><p class="form-control-static">${proposal.contentWithBr()}</p></div>
                 </div>
-                <div class="form-group">
+                <%-- <div class="form-group">
                   <label class="col-sm-2 control-label">관리자 댓글</label>
                   <div class="col-sm-10">
                     <c:if test="${loginUser.isAdmin() and proposal.status.isOpen()}">
@@ -158,7 +158,7 @@
                       </button>
                     </c:if>
                   </div>
-                </div>
+                </div> --%>
               </div>
             </form>
           </div>

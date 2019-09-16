@@ -57,7 +57,7 @@
             <span>제안 관리</span>
           </a>
         </li>
-        <li>
+        <%-- <li>
           <a href="<c:url value="/admin/issue/debate.do"/>">
             <i class="fa fa-comments-o" aria-hidden="true"></i>
             <span>토론 관리</span>
@@ -76,7 +76,7 @@
             <i class="fa fa-comments-o" aria-hidden="true"></i>
             <span>기관제안 관리</span>
           </a>
-        </li>
+        </li> --%>
 
         <li class="header">회원</li>
         <li>
@@ -85,20 +85,20 @@
             <span>회원 관리</span>
           </a>
         </li>
-        <li>
+        <%-- <li>
           <a href="<c:url value="/admin/users/manager.do"/>">
             <i class="fa fa-id-card" aria-hidden="true"></i>
             <span>담당자 관리</span>
           </a>
-        </li>
+        </li> --%>
 
-        <li class="header">게시판</li>
+        <%-- <li class="header">게시판</li>
         <li>
           <a href="<c:url value="/admin/post/notice.do"/>">
             <i class="fa fa-list" aria-hidden="true"></i>
             <span>공지사항 관리</span>
           </a>
-        </li>
+        </li> --%>
 
         <li class="header">카테고리</li>
         <li>
@@ -108,7 +108,7 @@
           </a>
         </li>
 
-        <li class="header">통계</li>
+        <%-- <li class="header">통계</li>
         <li>
           <a href="<c:url value="/admin/stats/issue.do"/>">
             <i class="fa fa-bar-chart"></i>
@@ -120,7 +120,7 @@
             <i class="fa fa-bar-chart"></i>
             <span>댓글 통계</span>
           </a>
-        </li>
+        </li> --%>
       </ul>
     </section>
   </aside>

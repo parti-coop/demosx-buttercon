@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="main-footer">
   <div class="pull-right hidden-xs">
-    <b>Version</b> 2.4.0
+    <b>진저티버터나이프크루</b>
   </div>
-  <strong>Copyright &copy; 2018-2019 <a href="https://slowalk.co.kr" target="_blank">Slowalk Team-D</a>.</strong> All rights reserved.
+  <strong>.</strong>
 </footer>

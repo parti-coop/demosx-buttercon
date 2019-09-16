@@ -8,7 +8,6 @@
     <th>투표</th>
     <th>의견</th>
     <th>작성자</th>
-    <th>관리</th>
   </tr>
   </thead>
 </table>
@@ -83,24 +82,7 @@
             }, orderable: false
           },
           { data: 'content', orderable: false },
-          { data: 'createdBy.name', orderable: false },
-          {
-            data: function (item) {
-              <c:if test="${loginUser.isManager()}">
-              if (item.status === 'DELETE') return '삭제';
-              if (item.status === 'BLOCK') return '비공개';
-              return '공개';
-              </c:if>
-              <c:if test="${loginUser.isAdmin()}">
-              if (item.status === 'DELETE') return '삭제';
-
-              return '<select class="form-control input-sm opinion-status-select" data-status="' + item.status + '" data-id="' + item.id + '">' +
-                '<option value="OPEN"' + (item.status === 'OPEN' ? ' selected' : '') + '>공개</option>' +
-                '<option value="BLOCK"' + (item.status === 'BLOCK' ? ' selected' : '') + '>비공개</option>' +
-                '</select>';
-              </c:if>
-            }, orderable: false
-          }
+          { data: 'createdBy.name', orderable: false }
         ]
       });
 
