@@ -84,7 +84,7 @@
           </c:if>
           <c:if test="${not empty loginUser}">
             <li class="nav-login-m-li">
-              <a href="<c:url value="/mypage/info.do"/>" class="nav-login-m-li__link">마이페이지</a>
+              <a href="<c:url value="/mypage/info.do"/>" class="nav-login-m-li__link">${loginUser.name}</a>
             </li>
             <li class="nav-login-m-li">
               <a href="#" class="nav-login-m-li__link nav-login-m-li__link--last logout-link">로그아웃</a>

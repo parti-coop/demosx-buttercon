@@ -183,8 +183,8 @@
     left: 0;
     right: 0;
 
-    width: 100%;
-    width: 100vw;
+    max-width: 100%;
+    max-width: 100vw;
     height: 100%;
     height: 100vh;
 
@@ -197,6 +197,9 @@
     ul.demo-nav {
       margin-top: 56px;
       margin-bottom: 0;
+      padding: 0;
+      margin-right: -15px;
+      margin-left: -15px;
       > li > a {
         font-weight: 700;
         padding: 26px 30px 26px;
@@ -207,6 +210,8 @@
         text-align: center;
         line-height: 26px;
         line-height: 22px;
+        padding-left: 0;
+        padding-right: 0;
       }
       > li:last-child > a {
         border-bottom: 1px solid $gray-lighter-e0;
@@ -260,7 +265,7 @@
   }
 
   .navbar-default .navbar-nav > li {
-    padding: 0 15px;
+    padding: 0;
     text-align: left;
   }
 

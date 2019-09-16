@@ -29,11 +29,12 @@
       <input type="password" class="form-control demo-input" id="inputPasswordConfirm" placeholder="비밀번호를 확인해 주세요."
              data-parsley-required="true" data-parsley-minlength="6" data-parsley-equalto="#inputPassword">
     </div>
-    <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">비밀번호 재설정</button>
     <div class="sing-action">
-      <a href="<c:url value="/login.do"/>" class="btn demo-btn demo-btn--primary btn-sign">로그인</a>
-      <a href="<c:url value="/join.do"/>" class="btn d-btn white-btn btn-sign next-btn">회원가입</a>
+      <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">비밀번호 재설정</button>
     </div>
+    <p class="form-help-text form-help-text--blue" style="margin-top: 22px;>
+      <a class="blue-link" href="<c:url value="/login.do"/>">비밀번호가 기억나셨나요? <span style="text-decoration: underline">로그인</span></a>
+    </p>
   </form>
 </div>
 

@@ -29,13 +29,16 @@
         <p class="help-block help-block-error">아이디 및 비밀번호를 확인해 주세요.</p>
       </div>
     </c:if>
-    <p class="form-help-text form-help-text--blue">
-      <a class="blue-link" href="<c:url value="/find-password.do"/>">비밀번호를 잊어버리셨나요?</a>
-    </p>
     <div class="sing-action">
       <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">로그인</button>
-      <a href="<c:url value="/join.do"/>" class="btn d-btn white-btn btn-sign next-btn">회원가입</a>
     </div>
+    <p class="form-help-text form-help-text--blue" style="margin-top: 22px;">
+      <a class="blue-link" href="<c:url value="/join.do"/>">아직 회원이 아니신가요? <span style="text-decoration: underline">회원가입</span></a>
+    </p>
+    <p class="form-help-text form-help-text--blue">
+      <a class="blue-link" href="<c:url value="/find-password.do"/>">비밀번호를 잊어버리셨나요? <span style="text-decoration: underline">비밀번호 찾기</span></a>
+    </p>
+
   </form>
   <div class="social-login-wrapper">
     <p>*소셜아이디로 로그인</p>

@@ -44,11 +44,9 @@
         <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 비밀번호를 적어주세요.</p> -->
       </div>
       <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">가입하기</button>
-      <hr>
       <div class="sing-action">
-        <p class="form-help-text">
-          이미 가입하셨나요?
-          <a href="<c:url value="/login.do"/>" class="blue-link">로그인하기</a>
+        <p class="form-help-text form-help-text--blue" style="margin-top: 22px;">
+          <a href="<c:url value="/login.do"/>" class="blue-link">이미 가입하셨나요? <span style="text-decoration: underline">로그인하기</span></a>
         </p>
       </div>
     </form:form>
