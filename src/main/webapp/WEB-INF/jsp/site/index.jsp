@@ -69,27 +69,6 @@
   </div>
 </section>
 
-<script>
-  $(function () {
-    new Swiper('.swiper-container', {
-      // Optional parameters
-      //direction: 'vertical',
-      loop: true,
-      autoplay: {
-        delay: 4000
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      }
-    });
-  });
-</script>
-
 <%@ include file="./shared/footer.jsp" %>
 </body>
 </html>

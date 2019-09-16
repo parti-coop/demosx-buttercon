@@ -11,6 +11,7 @@ services:
       JAVA_OPTS: "-Djava.security.egd=file:/dev/./urandom -Xmx1g -Xms1g"
       TZ: Asia/Seoul
     volumes:
+      - ./letsencrypt:/etc/letsencrypt
       - ./static:/var/www
       - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml:ro
       - ./tomcat/ROOT.xml:/usr/local/tomcat/conf/Catalina/localhost/ROOT.xml:ro
