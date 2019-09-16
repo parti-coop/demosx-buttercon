@@ -9,8 +9,11 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.ResourceUrlProvider;
+
 import seoul.democracy.common.config.ApiPathRequestMatcher;
 import seoul.democracy.common.dto.ErrorInfo;
 
@@ -23,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalControllerExceptionHandler {
 
     final private ApiPathRequestMatcher apiPathRequestMatcher;
+    @Autowired
+    private ResourceUrlProvider resourceUrlProvider;
 
     @Autowired
     public GlobalControllerExceptionHandler(ApiPathRequestMatcher apiPathRequestMatcher) {
@@ -54,5 +59,10 @@ public class GlobalControllerExceptionHandler {
 
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON_UTF8)
                    .body((new ErrorInfo(req.getRequestURL().toString(), ex)));
+    }
+
+    @ModelAttribute("urlHelper")
+    public ResourceUrlProvider urls() {
+        return this.resourceUrlProvider;
     }
 }

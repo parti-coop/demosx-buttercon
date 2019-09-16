@@ -11,8 +11,8 @@
 <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
-<link href="<c:url value="/css/main.css"/>" rel="stylesheet">
-<link href="<c:url value="/css/application.css"/>" rel="stylesheet">
+<link href="<c:url value="${urlHelper.getForLookupPath('/css/main.css')}"/>" rel="stylesheet">
+<link href="<c:url value="${urlHelper.getForLookupPath('/css/application.css')}"/>" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -21,14 +21,14 @@
 
 <!-- form validation -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
-<script type="text/javascript" src="<c:url value="/js/parsley-ko.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/js/parsley-ko.js')}"/>"></script>
 
 <!-- select2 -->
-<script type="text/javascript" src="<c:url value="/js/select2.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/select2-ko.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/js/select2.js')}"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/js/select2-ko.js')}"/>"></script>
 
 <!-- handlebars -->
-<script type="text/javascript" src="<c:url value="/js/handlebars.min-v4.2.0.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/js/handlebars.min-v4.2.0.js')}"/>"></script>
 
 <!-- jquery serialize object -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
@@ -44,9 +44,9 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
 
 <!-- tinymce editor -->
-<script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/tinymce/jquery.tinymce.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/tinymce/tinymce.min.js')}"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/tinymce/jquery.tinymce.min.js')}"/>"></script>
 
 <!-- application -->
-<script type="text/javascript" src="<c:url value="/js/application.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${urlHelper.getForLookupPath('/js/application.js')}"/>"></script>
 
