@@ -23,20 +23,24 @@
     <form name="search">
       <div class="sorting-tab-select-row">
         <div class="sorting-tab__select sorting-tab__select-category">
-          <select class="form-control" name="category">
-            <option value="" disabled>분류 선택</option>
-            <option value="">모든 주제</option>
-            <c:forEach var="item" items="${categories}">
-              <option value="${item.name}" <c:if test="${category eq item.name}">selected</c:if>>${item.name}</option>
-            </c:forEach>
-          </select>
+          <div class="select-container">
+            <select class="form-control" name="category">
+              <option value="" disabled>살롱 주제 선택</option>
+              <option value="">모든 살롱 주제</option>
+              <c:forEach var="item" items="${categories}">
+                <option value="${item.name}" <c:if test="${category eq item.name}">selected</c:if>>${item.name}</option>
+              </c:forEach>
+            </select>
+          </div>
         </div>
         <div class="sorting-tab__select sorting-tab__select-sort">
-          <select class="form-control" name="sort">
-            <option value="latest" <c:if test="${sort eq 'latest'}">selected</c:if>>최신순</option>
-            <option value="like" <c:if test="${sort eq 'like'}">selected</c:if>>공감순</option>
-            <option value="opinion" <c:if test="${sort eq 'opinion'}">selected</c:if>>의견 많은 순</option>
-          </select>
+          <div class="select-container">
+            <select class="form-control" name="sort">
+              <option value="latest" <c:if test="${sort eq 'latest'}">selected</c:if>>최신순</option>
+              <option value="like" <c:if test="${sort eq 'like'}">selected</c:if>>공감순</option>
+              <option value="opinion" <c:if test="${sort eq 'opinion'}">selected</c:if>>의견 많은 순</option>
+            </select>
+          </div>
         </div>
       </div>
 

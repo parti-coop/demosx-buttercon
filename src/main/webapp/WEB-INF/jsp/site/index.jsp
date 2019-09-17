@@ -50,7 +50,7 @@
 <section class="section-proposals">
   <div class="container">
     <div class="main-card-wrapper">
-      <div class="main-card-wrapper-title">최근 아이디어</div>
+      <div class="main-card-wrapper-title">아이디어</div>
       <div class="main-card-wrapper-subtitle">변화의 흐름을 만든다</div>
       <div class="row">
         <c:forEach var="item" items="${latest.content}">

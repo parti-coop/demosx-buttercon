@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group form-group--demo form-gruop-proposal">
-          <label class="demo-form-label" for="category">분류<span class="required"> *</span></label>
+          <label class="demo-form-label" for="category">살롱 주제<span class="required"> *</span></label>
           <c:set var="proposalCategoryParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
           <div class="select-container">
             <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true"  data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}">

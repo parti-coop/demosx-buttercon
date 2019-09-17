@@ -83,8 +83,8 @@
           </button>
           <c:if test="${proposal.createdBy.id eq loginUser.id}">
             <div class="pull-right">
-              <a href="<c:url value="/edit-proposal.do?id=${proposal.id}"/>" class="btn btn-default btn-responsive-sm-md-md">수정하기</a>
-              <button type="button" class="btn btn-default btn-responsive-sm-md-md" id="delete-proposal-btn">삭제하기</button>
+              <a href="<c:url value="/edit-proposal.do?id=${proposal.id}"/>" class="btn btn-default btn-responsive-sm-md-md">수정</a>
+              <button type="button" class="btn btn-default btn-responsive-sm-md-md" id="delete-proposal-btn">삭제</button>
             </div>
           </c:if>
         </div>
@@ -111,7 +111,7 @@
           dataType: 'json',
           success: function (data) {
             alert(data.msg);
-            window.location.href = '/mypage/proposal.do';
+            window.location.href = '/proposal-list.do';
           },
           error: function (error) {
             if (error.status === 400) {

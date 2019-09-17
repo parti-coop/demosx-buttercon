@@ -8,8 +8,8 @@
         <%-- <p class="term-link-p"><a class="term-link" href="<c:url value="/notice-list.do"/>"><i
             class="xi-angle-right-min"></i> 공지사항</a></p> --%>
         <p class="term-link-p"><a class="term-link" href="https://event-us.kr/butterknife/event/list" target="_blank">살롱 일정</a></p>
-        <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>">개인정보처리방침</a></p>
         <p class="term-link-p"><a class="term-link" href="<c:url value="/terms.do"/>">이용약관</a></p>
+        <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>">개인정보처리방침</a></p>
       </div>
       <div class="col-sm-9 col-sm-pull-3 term-link-logos">
         <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/wf-logo.png"/>" alt="여성가족부" style="width:146px"></a>
@@ -72,7 +72,7 @@
   <script>
     $(function () {
       var $modalLogin = $('#modal-login');
-      $('.show-login-modal').click(function (event) {
+      $(document).on('click', '.show-login-modal', function (event) {
         event.preventDefault();
         $modalLogin.modal('show');
       });

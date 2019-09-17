@@ -3,6 +3,12 @@
   background-color: $brand-background;
 }
 
+.beta {
+  position: absolute;
+  bottom: 1em;
+  right: -26px;
+}
+
 @media (max-width: 767px) {
   .nav-login-bar {
     display: none;
@@ -125,6 +131,7 @@
 .navbar-brand.navbar-brand--demo {
   padding: 27px 15px 24px;
   height: auto;
+  position: relative;
   @media (max-width: $screen-sm-max) {
     padding: 24px 15px 16px;
   }

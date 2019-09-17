@@ -16,7 +16,7 @@
         <div class="comment-action-group row">
           <div class="comment-count col-xs-6"><p class="comment-count-text">0/1000자</p></div>
           <div class="comment-submit text-right col-xs-6">
-            <button type="button" class="btn btn-default btn-responsive-sm-md-md pull-right show-login-modal">댓글달기
+            <button type="button" class="btn btn-default btn-responsive-sm-md-md pull-right show-login-modal">등록
             </button>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <div class="comment-count col-xs-6"><p class="comment-count-text"><span id="opinion-length">0</span>/1000자</p>
           </div>
           <div class="comment-submit text-right col-xs-6">
-            <button type="submit" class="btn btn-default btn-responsive-sm-md-md pull-right">댓글달기
+            <button type="submit" class="btn btn-default btn-responsive-sm-md-md pull-right">등록
             </button>
           </div>
         </div>
@@ -56,7 +56,7 @@
             <input type="hidden" name="opinionId" value="">
             <div class="form-input-container form-input-container--history">
               <div class="form-group form-group--demo">
-                <label class="demo-form-label" for="inputContent">의견 수정하기</label>
+                <label class="demo-form-label" for="inputContent">수정</label>
                 <textarea class="form-control" name="content" id="inputContent" rows="8"
                           data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
               </div>
@@ -64,7 +64,7 @@
             <div class="form-action text-right">
               <button class="btn cancel-btn btn-lg" data-dismiss="modal" aria-label="Close" role="button">취소
               </button>
-              <button type="submit" class="btn btn-primary btn-lg">저장하기</button>
+              <button type="submit" class="btn btn-primary btn-lg">등록</button>
             </div>
           </form>
         </div>
@@ -74,7 +74,7 @@
 </c:if>
 
 <c:if test="${not empty loginUser}">
-  <div class="modal fade" id="modalNewChildOpinion" tabindex="-1" role="dialog" aria-labelledby="의견 댓글달기">
+  <div class="modal fade" id="modalNewChildOpinion" tabindex="-1" role="dialog" aria-labelledby="의견 등록">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
@@ -82,7 +82,7 @@
             <input type="hidden" name="parentOpinionId" value="">
             <div class="form-input-container form-input-container--history">
               <div class="form-group form-group--demo">
-                <label class="demo-form-label" for="inputContent">의견 댓글달기</label>
+                <label class="demo-form-label" for="inputContent">의견 등록</label>
                 <textarea class="form-control" name="content" id="inputContent" rows="8"
                           data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
               </div>
@@ -90,7 +90,7 @@
             <div class="form-action text-right">
               <button class="btn cancel-btn btn-lg" data-dismiss="modal" aria-label="Close" role="button">취소
               </button>
-              <button type="submit" class="btn btn-primary btn-lg">저장하기</button>
+              <button type="submit" class="btn btn-primary btn-lg">등록</button>
             </div>
           </form>
         </div>
@@ -136,13 +136,13 @@
             <p class="comment-time">{{ opinion.contextAssigns.createdDateShort }}</p>
           </div>
         </div>
-        <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">{{ opinion.contextAssigns.contentBr }}</p>
+        <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">{{{ opinion.contextAssigns.contentBr }}}</p>
         {{#if @root.isSignedIn}}
           <div class="clearfix">
             {{#if opinion.contextAssigns.canHaveChildOpinions}}
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-new-child-opinion-btn"
-              data-id="{{ opinion.id }}">댓글달기</button>
+              data-id="{{ opinion.id }}">댓글</button>
             {{/if}}
             <div class="comment-likes-count">
               <button class="btn btn-responsive-xs-sm-sm js-opinion-thumbs-up-btn {{#if opinion.liked}}active btn-primary btn-outline{{else}}btn-no-border btn-default{{/if}}" data-id="{{ opinion.id }}">
@@ -152,11 +152,24 @@
             {{#if opinion.contextAssigns.isOwner}}
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-edit-opinion-btn js-edit-opinion-btn-{{ opinion.id }}"
-              data-id="{{ opinion.id }}" data-content="{{ opinion.content }}">수정하기</button>
+              data-id="{{ opinion.id }}" data-content="{{ opinion.content }}">수정</button>
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border delete-opinion-btn"
-              data-id="{{ opinion.id }}">삭제하기</button>
+              data-id="{{ opinion.id }}">삭제</button>
             {{/if}}
+          </div>
+        {{else}}
+          <div class="clearfix">
+            {{#if opinion.contextAssigns.canHaveChildOpinions}}
+            <button type="button"
+              class="btn btn-default btn-responsive-xs-sm-sm btn-no-border show-login-modal"
+              data-id="{{ opinion.id }}">댓글</button>
+            {{/if}}
+            <div class="comment-likes-count">
+              <button class="btn btn-responsive-xs-sm-sm show-login-modal btn-no-border btn-default">
+                <i class="xi-thumbs-up"></i> 공감 <strong>{{ opinion.likeCount }}</strong>개
+              </button>
+            </div>
           </div>
         {{/if}}
       </div>

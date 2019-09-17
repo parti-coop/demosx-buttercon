@@ -48,6 +48,7 @@
       </button>
       <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">
         <img src="<c:url value="/images/butttercon-kr-logo.png"/>">
+        <span class="beta">beta</span>
       </a>
     </div>
 

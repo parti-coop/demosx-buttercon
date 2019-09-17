@@ -12,6 +12,7 @@ import seoul.democracy.opinion.domain.Opinion;
 import static seoul.democracy.opinion.domain.QOpinion.opinion;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OpinionPredicate {
 
@@ -34,6 +35,12 @@ public class OpinionPredicate {
         return ExpressionUtils.allOf(
             opinion.issue.id.eq(issueId),
             opinion.issue.status.eq(Issue.Status.OPEN),
+            opinion.status.eq(Opinion.Status.OPEN));
+    }
+
+    public static Predicate predicateForChildOpinionList(List<Long> parentOpinionIds) {
+        return ExpressionUtils.allOf(
+            opinion.parentOpinionId.in(parentOpinionIds),
             opinion.status.eq(Opinion.Status.OPEN));
     }
 

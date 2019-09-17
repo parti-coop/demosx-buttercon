@@ -33,6 +33,7 @@ import static seoul.democracy.user.domain.QUser.user;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.orderByCreatedDateAsc;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForChildOpinionList;
 
 public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements OpinionRepositoryCustom {
 
@@ -84,7 +85,7 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
             return opinionDto.getId();
         }).collect(Collectors.toList());
 
-        BooleanExpression childOpinionPredicate = opinion.parentOpinionId.in(parentOpinionIds);
+        Predicate childOpinionPredicate = predicateForChildOpinionList(parentOpinionIds);
         List<OpinionDto> childOpinionDtos =  getQuery(projection).where(childOpinionPredicate).orderBy(orderByCreatedDateAsc()).list(projection);
 
         Map<Long, Set<OpinionDto>> groupingChildOpinionDtos = childOpinionDtos.stream().collect(Collectors.groupingBy(childOpinionDto -> {
