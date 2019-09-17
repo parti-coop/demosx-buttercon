@@ -142,7 +142,7 @@
             {{#if opinion.contextAssigns.canHaveChildOpinions}}
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-new-child-opinion-btn"
-              data-id="{{ opinion.id }}">댓글</button>
+              data-id="{{ opinion.id }}">댓글 달기</button>
             {{/if}}
             <div class="comment-likes-count">
               <button class="btn btn-responsive-xs-sm-sm js-opinion-thumbs-up-btn {{#if opinion.liked}}active btn-primary btn-outline{{else}}btn-no-border btn-default{{/if}}" data-id="{{ opinion.id }}">
@@ -163,7 +163,7 @@
             {{#if opinion.contextAssigns.canHaveChildOpinions}}
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border show-login-modal"
-              data-id="{{ opinion.id }}">댓글</button>
+              data-id="{{ opinion.id }}">댓글 달기</button>
             {{/if}}
             <div class="comment-likes-count">
               <button class="btn btn-responsive-xs-sm-sm show-login-modal btn-no-border btn-default">
@@ -354,6 +354,7 @@ $(function () {
               var opinion = result.contents.opinion;
               var content = $$makeOpinionString(opinion);
               $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent).prepend(content);
+              $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent).show();
               $formNewChildOpinion[0].reset();
               $formNewChildOpinion.parsley().reset();
               $modalNewChildOpinion.modal('hide');
