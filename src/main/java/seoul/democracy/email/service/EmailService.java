@@ -8,6 +8,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import egovframework.rte.fdl.property.EgovPropertyService;
 import seoul.democracy.opinion.repository.OpinionRepository;
 import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.predicate.ProposalPredicate;
@@ -22,7 +24,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class EmailService {
 
-    private final String host = "http://localhost:8091";
+    private final String host;
     private final JavaMailSender mailSender;
 
     private final String resetPasswordEmailContent;
@@ -44,7 +46,9 @@ public class EmailService {
                         String opinionProposalEmailContent,
                         String passProposalEmailContent,
                         ProposalRepository proposalRepository,
-                        OpinionRepository opinionRepository) {
+                        OpinionRepository opinionRepository,
+                        EgovPropertyService propertyService) {
+        this.host = propertyService.getString("host");
 
         this.mailSender = mailSender;
         this.resetPasswordEmailContent = resetPasswordEmailContent;
@@ -68,7 +72,7 @@ public class EmailService {
         helper.setText(content, true);
 
         log.info("{} : {}", email, title);
-        //mailSender.send(message);
+        mailSender.send(message);
     }
 
     /**

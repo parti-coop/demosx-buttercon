@@ -4,13 +4,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-        <property name="username" value="help@butterknifecrew.kr" />
-        <property name="password" value="${Globals.MailPassword}" />
+        <property name="host" value="email-smtp.us-west-2.amazonaws.com" />
+        <property name="port" value="465" />
+        <property name="protocol" value="smtps" />
+        <property name="username" value="${Globals.SmtpUser}" />
+        <property name="password" value="${Globals.SmtpPassword}" />
         <property name="javaMailProperties">
             <props>
-                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtps.auth">true</prop>
+                <prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.transport.protocol">smtps</prop>
             </props>
         </property>
     </bean>
