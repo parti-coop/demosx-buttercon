@@ -4,6 +4,9 @@
 # 필요치 않은 파일 삭제
 sudo rm -rf /home/ubuntu/docker/static/.bash_history
 
+# 권한 설정
+sudo chmod -R 755 /home/ubuntu/docker/static
+
 # WAR 준비
 echo ' '
 echo '-----------'
