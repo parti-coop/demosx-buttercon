@@ -94,7 +94,11 @@ public class LoginController {
         if (UserUtils.isLogin()) return "redirect:/index.do";
 
         User user = userService.initPassword(email);
-        if (user == null) return "/site/find-password";
+        if (user == null) {
+            model.addAttribute("not_found", true);
+            model.addAttribute("email", email);
+            return "/site/find-password";
+        }
 
         emailService.resetPassword(user.getEmail(), user.getToken());
         model.addAttribute("reset", true);
