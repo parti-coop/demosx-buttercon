@@ -12,10 +12,10 @@
         <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>">개인정보처리방침</a></p>
       </div>
       <div class="col-sm-9 col-sm-pull-3 term-link-logos">
-        <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/wf-logo.png"/>" alt="여성가족부" style="width:146px"></a>
-        <a href="http://gingertproject.co.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/ginger-logo.png"/>" alt="진저티프로젝트" style="width:71px"></a>
-        <a href="http://parti.coop/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/parti-logo.png"/>" alt="빠띠" style="width:57px"></a>
-        <a href="https://www.innogov.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/gv-logo.png"/>" alt="보다나은 정부" style="width:70px"></a>
+        <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/wf-logo.png" alt="여성가족부" style="width:146px"></a>
+        <a href="http://gingertproject.co.kr/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/ginger-logo.png" alt="진저티프로젝트" style="width:71px"></a>
+        <a href="http://parti.coop/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/parti-logo.png" alt="빠띠" style="width:57px"></a>
+        <a href="https://www.innogov.go.kr/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/gv-logo.png" alt="보다나은 정부" style="width:70px"></a>
 
         <p class="footer-copyright" style="color: #212121;">
           문의
@@ -60,10 +60,10 @@
           </form>
           <div class="social-login-wrapper">
             <p>*소셜아이디로 로그인</p>
-            <a href="<c:url value="/social-login.do?provider=facebook"/>"><img src="<c:url value="/images/login-facebook.png"/>" alt="페이스북으로 로그인"></a>
-            <%-- <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="<c:url value="/images/login-naver.png"/>" alt="네이버로 로그인"></a> --%>
-            <a href="<c:url value="/social-login.do?provider=google"/>"><img src="<c:url value="/images/login-google.png"/>" alt="구글로 로그인"></a>
-            <a href="<c:url value="/social-login.do?provider=kakao"/>"><img src="<c:url value="/images/login-kakao.png"/>" alt="카카오톡으로 로그인"></a>
+            <a href="<c:url value="/social-login.do?provider=facebook"/>"><img src="${pageContext.request.contextPath}/images/login-facebook.png" alt="페이스북으로 로그인"></a>
+            <%-- <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="${pageContext.request.contextPath}/images/login-naver.png" alt="네이버로 로그인"></a> --%>
+            <a href="<c:url value="/social-login.do?provider=google"/>"><img src="${pageContext.request.contextPath}/images/login-google.png" alt="구글로 로그인"></a>
+            <a href="<c:url value="/social-login.do?provider=kakao"/>"><img src="${pageContext.request.contextPath}/images/login-kakao.png" alt="카카오톡으로 로그인"></a>
           </div>
         </div><!-- constainer end  -->
       </div>

@@ -24,12 +24,12 @@
         </li>
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="<c:url value="/images/noavatar.png"/>" class="user-image" alt="User Image">
+            <img src="${pageContext.request.contextPath}/images/noavatar.png" class="user-image" alt="User Image">
             <span class="hidden-xs">${loginUser.email}</span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <img src="<c:url value="/images/noavatar.png"/>" class="img-circle" alt="User Image">
+              <img src="${pageContext.request.contextPath}/images/noavatar.png" class="img-circle" alt="User Image">
               <p>${loginUser.email}</p>
             </li>
             <li class="user-footer">

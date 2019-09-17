@@ -42,7 +42,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static seoul.democracy.opinion.dto.OpinionDto.projection;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.equalId;
-import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForOpinionList;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForParentOpinionList;
 import static seoul.democracy.opinion.dto.OpinionDto.projectionForIssueDetail;
 
 /**
@@ -90,8 +90,8 @@ public class S_6_7_1_사용자는_제안의견에_의견을_등록할_수_있다
         OpinionDto parentOpinionDto = opinionService.getOpinion(equalId(parentOpinionId), projection);
 
         Pageable pageable = new PageRequest(0, 10);
-        Predicate predicateForOpinionList = predicateForOpinionList(parentOpinionDto.getIssue().getId());
-        Page<OpinionDto> issueParentOpinionDtos = opinionService.getParentOpinionsWithChildOpinionsAndLiked(predicateForOpinionList, pageable, projectionForIssueDetail);
+        Predicate predicateForParentOpinionList = predicateForParentOpinionList(parentOpinionDto.getIssue().getId());
+        Page<OpinionDto> issueParentOpinionDtos = opinionService.getParentOpinionsWithChildOpinionsAndLiked(predicateForParentOpinionList, pageable, projectionForIssueDetail);
 
         issueParentOpinionDtos.forEach(issueParentOpinionDto -> {
             if(parentOpinionDto.getId().equals(issueParentOpinionDto.getId())) {

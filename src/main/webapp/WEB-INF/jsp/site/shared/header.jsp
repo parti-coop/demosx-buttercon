@@ -47,7 +47,7 @@
         <i class="xi-close xi-2x demo-toggle demo-toggle--close"></i>
       </button>
       <a class="navbar-brand navbar-brand--demo" href="<c:url value="/index.do"/>">
-        <img src="<c:url value="/images/butttercon-kr-logo.png"/>">
+        <img src="${pageContext.request.contextPath}/images/butttercon-kr-logo.png">
         <span class="beta">beta</span>
       </a>
     </div>
@@ -55,7 +55,7 @@
     <!-- 모바일 펼쳐진 메뉴 -->
     <div class="demo-collapse collapse navbar-collapse" id="demo-navbar-collapse">
       <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">
-        <img src="<c:url value="/images/butttercon-kr-logo.png"/>">
+        <img src="${pageContext.request.contextPath}/images/butttercon-kr-logo.png">
       </a>
       <ul class="nav navbar-nav navbar-right demo-nav">
         <li class="demo-nav-li">

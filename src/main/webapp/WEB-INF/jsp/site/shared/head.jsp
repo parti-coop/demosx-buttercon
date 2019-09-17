@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,8 @@
 <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
-<link href="<c:url value="/css/main.css?v=1"/>" rel="stylesheet">
-<link href="<c:url value="/css/application.css?v=1"/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/main.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/application.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -22,14 +23,14 @@
 
 <!-- form validation -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
-<script type="text/javascript" src="<c:url value="/js/parsley-ko.js?v=1"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/parsley-ko.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
 <!-- select2 -->
-<script type="text/javascript" src="<c:url value="/js/select2.js?v=1"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/select2-ko.js?v=1"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2-ko.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
 <!-- handlebars -->
-<script type="text/javascript" src="<c:url value="/js/handlebars.min-v4.2.0.js?v=1"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/handlebars.min-v4.2.0.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
 <!-- jquery serialize object -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
@@ -45,9 +46,12 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.22.1/js/jquery.fileupload.min.js"></script>
 
 <!-- tinymce editor -->
-<script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js?v=1"/>"></script>
-<script type="text/javascript" src="<c:url value="/tinymce/jquery.tinymce.min.js?v=1"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/tinymce/tinymce.min.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/tinymce/jquery.tinymce.min.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+
+<!-- scroll-into -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/smooth-scroll-into-view-if-needed.min.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
 <!-- application -->
-<script type="text/javascript" src="<c:url value="/js/application.js?v=1"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/application.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 

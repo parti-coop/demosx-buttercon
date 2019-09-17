@@ -22,6 +22,8 @@
         <spring.security.maven.artifact.version>4.0.3.RELEASE</spring.security.maven.artifact.version>
         <egovframework.rte.version>3.7.0</egovframework.rte.version>
         <querydsl.version>3.7.4</querydsl.version>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
     </properties>
 
     <repositories>
@@ -305,6 +307,15 @@
 
     <build>
         <finalName>ROOT</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>*.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

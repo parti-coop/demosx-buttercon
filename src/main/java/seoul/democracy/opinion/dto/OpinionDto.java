@@ -10,8 +10,8 @@ import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.user.dto.UserDto;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static seoul.democracy.opinion.domain.QOpinion.opinion;
@@ -36,7 +36,7 @@ public class OpinionDto {
         opinion.id, opinion.createdDate,
         UserDto.projectionForBasicByCreatedBy.as("createdBy"),
         opinion.parentOpinionId,
-        opinion.likeCount, opinion.content, opinion.vote);
+        opinion.likeCount, opinion.content, opinion.vote, opinion.status);
 
     /**
      * 사이트 내 의견 활동
@@ -73,7 +73,7 @@ public class OpinionDto {
     private Boolean liked;
 
     protected Long parentOpinionId;
-    protected Set<OpinionDto> childOpinions = new HashSet<>();
+    protected List<OpinionDto> childOpinions = new ArrayList<>();
 
     public String contentWithBr() {
         return content.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");

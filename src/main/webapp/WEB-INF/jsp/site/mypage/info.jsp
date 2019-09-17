@@ -41,7 +41,7 @@
               <i class="xi-camera-o"></i>
               <input id="thumbnail-upload-input" type="file" name="file" accept="image/*">
           </span>
-          <img src="<c:url value="/images/loading.gif"/>" height="20" id="thumbnail-progress" class="hidden">
+          <img src="${pageContext.request.contextPath}/images/loading.gif" height="20" id="thumbnail-progress" class="hidden">
         </div>
         <p class="mypage-profile-helper-text">※ 파일 용량 1MB제한 (이미지크기 144X144)</p>
         <p class="mypage-profile-helper-text">※ 업로드 하신 프로필 사진이 음란/불법/폭력 및 기타 사유로 문제가 되는 경우, 삭제 될 수 있습니다.</p>

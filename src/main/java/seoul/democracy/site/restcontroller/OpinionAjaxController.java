@@ -20,7 +20,7 @@ import static seoul.democracy.opinion.domain.Opinion.Status.OPEN;
 import static seoul.democracy.opinion.dto.OpinionDto.projectionForIssueDetail;
 import static seoul.democracy.opinion.dto.OpinionDto.projectionForMyOpinion;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.equalIssueIdAndCreatedByIdAndStatus;
-import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForOpinionList;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForParentOpinionList;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.equalId;
 
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class OpinionAjaxController {
 
     @RequestMapping(value = "/ajax/opinions", method = RequestMethod.GET)
     public Page<OpinionDto> getOpinions(@RequestParam("issueId") Long issueId, @PageableDefault Pageable pageable) {
-        return opinionService.getParentOpinionsWithChildOpinionsAndLiked(predicateForOpinionList(issueId), pageable,
+        return opinionService.getParentOpinionsWithChildOpinionsAndLiked(predicateForParentOpinionList(issueId), pageable,
                 projectionForIssueDetail);
     }
 

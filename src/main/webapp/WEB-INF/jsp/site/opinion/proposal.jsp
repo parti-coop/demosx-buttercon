@@ -82,7 +82,7 @@
             <input type="hidden" name="parentOpinionId" value="">
             <div class="form-input-container form-input-container--history">
               <div class="form-group form-group--demo">
-                <label class="demo-form-label" for="inputContent">의견 등록</label>
+                <label class="demo-form-label" for="inputContent">댓글 등록</label>
                 <textarea class="form-control" name="content" id="inputContent" rows="8"
                           data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
               </div>
@@ -126,17 +126,34 @@
 </div>
 
 <!-- template -->
+<script id="template-comment-line-deleted" type="text/x-handlebars-template">
+  <div class="comment-content">
+    <div class="comment-info clearfix">
+      <div class="comment-date-wrapper">
+        <p class="comment-name">***</p>
+        <p class="comment-time">{{ createdDateShort }}</p>
+      </div>
+    </div>
+    <p class="comment-content-text text-muted">
+      삭제된 댓글입니다.
+    </p>
+  </div>
+</script>
 <script id="template-opinion" type="text/x-handlebars-template">
   {{#*inline "partialCommentLine"}}
-    <li class="comment-li">
-      <div class="comment-content">
+    {{#if opinion.contextAssigns.isDeleted}}
+      {{> commentLineDeleted createdDateShort=opinion.contextAssigns.createdDateShort }}
+    {{else}}
+      <div class="comment-content js-comment-content-{{ opinion.id }}">
         <div class="comment-info clearfix">
           <div class="comment-date-wrapper">
             <p class="comment-name">{{ opinion.createdBy.name }}</p>
-            <p class="comment-time">{{ opinion.contextAssigns.createdDateShort }}</p>
+            <p class="comment-time js-comment-time">{{ opinion.contextAssigns.createdDateShort }}</p>
           </div>
         </div>
-        <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">{{{ opinion.contextAssigns.contentBr }}}</p>
+        <p class="comment-content-text js-comment-content-text-{{ opinion.id }}">
+          {{{ opinion.contextAssigns.contentBr }}}
+        </p>
         {{#if @root.isSignedIn}}
           <div class="clearfix">
             {{#if opinion.contextAssigns.canHaveChildOpinions}}
@@ -173,8 +190,10 @@
           </div>
         {{/if}}
       </div>
-    {{/inline}}
+    {{/if}}
+  {{/inline}}
 
+  <li class="comment-li comment-li-{{ opinion.id }}">
     <!-- 부모 댓글 --->
     {{> partialCommentLine }}
 
@@ -182,7 +201,9 @@
       <!-- 자식 댓글 --->
       <ul class='demo-child-comments js-child-opinions-list-{{ opinion.id }} {{#unless opinion.contextAssigns.hasChildOpinions}}collapse{{/unless}}'>
         {{#each opinion.childOpinions}}
-          {{> partialCommentLine opinion=this }}
+          <li class="comment-li comment-li-{{ this.id }}">
+            {{> partialCommentLine opinion=this }}
+          </li>
         {{/each}}
       </ul>
     {{/if}}
@@ -251,7 +272,32 @@ $(function () {
         dataType: 'json',
         success: function (data) {
           alert(data.msg);
-          $(that).parents('.comment-li').remove();
+          var $comment = $(that).parents('.comment-li-' + id);
+          var $childOpinionsList = $('.js-child-opinions-list-' + id, $comment);
+
+          // 하위 댓글이 있는 경우
+          if($childOpinionsList.length > 0) {
+            var childOpinionsCount = $childOpinionsList.find('> li.comment-li').length;
+            // 하위 댓글이 남아 있으면 없애지 않고 숨김 처리
+            if(childOpinionsCount > 0) {
+              var createdDateShort = $comment.find('.js-comment-time').first().text();
+              var deletedCommentLineString = $$makeDeletedCommentLineString(createdDateShort);
+              $comment.find('.js-comment-content-' + id).replaceWith(deletedCommentLineString);
+            // 하위 댓글이 없으면 삭제
+            } else {
+              $comment.remove();
+            }
+          // 하위 댓글이 없는 경우
+          } else {
+            // 형제 댓글이 없으면 부모 댓글의 스타일을 정리
+            var $siblingGroup = $comment.closest('.demo-child-comments');
+            $comment.remove();
+            var siblingCount = $siblingGroup.find('> li.comment-li').length;
+            if(siblingCount <= 0) {
+              $siblingGroup.hide();
+            }
+
+          }
         },
         error: function (error) {
           if (error.status === 400) {
@@ -353,8 +399,12 @@ $(function () {
             if(result.contents && result.contents.opinion) {
               var opinion = result.contents.opinion;
               var content = $$makeOpinionString(opinion);
-              $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent).prepend(content);
-              $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent).show();
+              var $childOptionList = $('.js-child-opinions-list-' + opinion.parentOpinionId, $opinionContent);
+              $childOptionList.show();
+              $childOptionList.append(content);
+              scrollIntoView(
+                $childOptionList.children().last()[0],
+                { behavior: 'smooth', scrollMode: 'if-needed' });
               $formNewChildOpinion[0].reset();
               $formNewChildOpinion.parsley().reset();
               $modalNewChildOpinion.modal('hide');
@@ -491,12 +541,20 @@ $(function () {
   </c:if>
 
   var $$templateOpinion = Handlebars.compile($("#template-opinion").html());
+  Handlebars.registerPartial('commentLineDeleted', Handlebars.compile($("#template-comment-line-deleted").html()));
+
   function $$makeOpinionString(opinion) {
     var contextAssignedOpinion = $$contextAssignOpinion($.extend(true, {}, opinion), $$userId);
     return $$templateOpinion({
       isSignedIn: (!!$$userId),
       opinion: contextAssignedOpinion,
     });
+  }
+
+  function $$makeDeletedCommentLineString(createdDateShort) {
+    return Handlebars.partials['commentLineDeleted']({
+      createdDateShort: createdDateShort
+    })
   }
 
   function $$contextAssignOpinion(opinion) {
@@ -512,6 +570,7 @@ $(function () {
       createdDateShort: opinion.createdDate.substring(0, opinion.createdDate.indexOf(' ')),
       canHaveChildOpinions: (!opinion.parentOpinionId),
       hasChildOpinions: (!opinion.parentOpinionId && opinion.childOpinions && opinion.childOpinions.length > 0),
+      isDeleted: (opinion.status === 'DELETE'),
     }
     return opinion;
   }

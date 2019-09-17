@@ -7,7 +7,6 @@ import com.mysema.query.support.Expressions;
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
-import com.mysema.query.types.expr.BooleanExpression;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,8 +22,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import static seoul.democracy.issue.domain.QIssue.issue;
@@ -32,7 +29,7 @@ import static seoul.democracy.opinion.domain.QOpinion.opinion;
 import static seoul.democracy.user.domain.QUser.user;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
-import static seoul.democracy.opinion.predicate.OpinionPredicate.orderByCreatedDateAsc;
+import static seoul.democracy.opinion.predicate.OpinionPredicate.orderByIdAsc;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForChildOpinionList;
 
 public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements OpinionRepositoryCustom {
@@ -77,8 +74,7 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
                                                 .applyPagination(
                                                     pageable,
                                                     getQuery(projection)
-                                                        .where(predicate)
-                                                        .where(opinion.parentOpinionId.isNull()))
+                                                        .where(predicate))
                                                 .listResults(projection);
 
         List<Long> parentOpinionIds = results.getResults().stream().map(opinionDto -> {
@@ -86,14 +82,14 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
         }).collect(Collectors.toList());
 
         Predicate childOpinionPredicate = predicateForChildOpinionList(parentOpinionIds);
-        List<OpinionDto> childOpinionDtos =  getQuery(projection).where(childOpinionPredicate).orderBy(orderByCreatedDateAsc()).list(projection);
+        List<OpinionDto> childOpinionDtos =  getQuery(projection).where(childOpinionPredicate).orderBy(orderByIdAsc()).list(projection);
 
-        Map<Long, Set<OpinionDto>> groupingChildOpinionDtos = childOpinionDtos.stream().collect(Collectors.groupingBy(childOpinionDto -> {
+        Map<Long, List<OpinionDto>> groupingChildOpinionDtos = childOpinionDtos.stream().collect(Collectors.groupingBy(childOpinionDto -> {
             return childOpinionDto.getParentOpinionId();
-        },  Collectors.toCollection(HashSet::new)));
+        },  Collectors.toList()));
 
         results.getResults().forEach(parentOpinion -> {
-            Set<OpinionDto> childOpinions = groupingChildOpinionDtos.get(parentOpinion.getId());
+            List<OpinionDto> childOpinions = groupingChildOpinionDtos.get(parentOpinion.getId());
             parentOpinion.setChildOpinions(childOpinions);
         });
 
@@ -160,5 +156,16 @@ public class OpinionRepositoryImpl extends QueryDslRepositorySupport implements 
                    .groupBy(opinion.issue.id)
                    .list(opinion.issue.id, opinion.issue.createdBy.email, opinion.issue.createdBy.name);
 
+    }
+
+    @Override
+    public void syncChildOpinionsCount(Long opinionId) {
+        if(opinionId == null) return;
+
+        long childOpinionsCount = from(opinion).where(predicateForChildOpinionList(opinionId)).count();
+        update(opinion)
+            .where(opinion.id.eq(opinionId))
+            .set(opinion.childOpinionsCount, childOpinionsCount)
+            .execute();
     }
 }

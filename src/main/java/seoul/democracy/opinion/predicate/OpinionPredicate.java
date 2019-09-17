@@ -31,16 +31,29 @@ public class OpinionPredicate {
             opinion.status.eq(status));
     }
 
-    public static Predicate predicateForOpinionList(Long issueId) {
+    public static Predicate predicateForParentOpinionList(Long issueId) {
         return ExpressionUtils.allOf(
             opinion.issue.id.eq(issueId),
             opinion.issue.status.eq(Issue.Status.OPEN),
-            opinion.status.eq(Opinion.Status.OPEN));
+            opinion.parentOpinionId.isNull(),
+            ExpressionUtils.anyOf(
+                ExpressionUtils.allOf(
+                    opinion.status.eq(Opinion.Status.DELETE),
+                    opinion.childOpinionsCount.gt(0)
+                ),
+                opinion.status.eq(Opinion.Status.OPEN)
+            ));
     }
 
     public static Predicate predicateForChildOpinionList(List<Long> parentOpinionIds) {
         return ExpressionUtils.allOf(
             opinion.parentOpinionId.in(parentOpinionIds),
+            opinion.status.eq(Opinion.Status.OPEN));
+    }
+
+    public static Predicate predicateForChildOpinionList(Long parentOpinionId) {
+        return ExpressionUtils.allOf(
+            opinion.parentOpinionId.eq(parentOpinionId),
             opinion.status.eq(Opinion.Status.OPEN));
     }
 
@@ -78,6 +91,10 @@ public class OpinionPredicate {
 
     public static OrderSpecifier<Long> orderByIdDesc() {
         return opinion.id.desc();
+    }
+
+    public static OrderSpecifier<Long> orderByIdAsc() {
+        return opinion.id.asc();
     }
 
     public static OrderSpecifier<LocalDateTime> orderByCreatedDateAsc() {

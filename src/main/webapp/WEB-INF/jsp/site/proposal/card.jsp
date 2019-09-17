@@ -3,7 +3,7 @@
 <div class="demo-card demo-card-proposal position-relative">
   <c:if test="${param.best}">
     <div class="card-best-tag">
-      <img src="<c:url value="/images/best-tag.png"/>" alt="best">
+      <img src="${pageContext.request.contextPath}/images/best-tag.png" alt="best">
       <span>Best</span>
     </div>
   </c:if>

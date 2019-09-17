@@ -6,7 +6,6 @@
   <title>실행 관리 - 생성 - Democracy</title>
   <%@ include file="../shared/head.jsp" %>
   <!-- tinymce editor -->
-  <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
   <script>
     $(function () {
       var $editor = null;

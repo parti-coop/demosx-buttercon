@@ -41,4 +41,9 @@ public interface OpinionRepositoryCustom {
      * 새 의견이 있는 제안들
      */
     List<Tuple> getNewOpinionProposal();
+
+    /**
+     * 하위 댓글 숫자 업데이트
+     */
+    void syncChildOpinionsCount(Long opinionId);
 }

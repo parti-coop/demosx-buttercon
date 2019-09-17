@@ -133,10 +133,11 @@ public class OpinionService {
         Opinion parentOpinion = getOpinion(childCreateDto.getParentOpinionId());
 
         Opinion opinion = parentOpinion.createChildOpinion(childCreateDto.getContent());
-
+        opinionRepository.save(opinion);
+        opinionRepository.syncChildOpinionsCount(parentOpinion.getId());
         increaseIssueStatsByOpinion(opinion, UserUtils.getUserId());
 
-        return opinionRepository.save(opinion);
+        return opinion;
     }
 
     /**
@@ -155,9 +156,10 @@ public class OpinionService {
     @PostAuthorize("returnObject.createdById == authentication.principal.user.id and returnObject.issue.type.name() == 'P'")
     public Opinion deleteOpinion(Long opinionId) {
         Opinion opinion = getOpinion(opinionId);
+
         opinion.delete();
         opinionRepository.save(opinion);
-
+        opinionRepository.syncChildOpinionsCount(opinion.getParentOpinionId());
         decreaseIssueStatsByOpinion(opinion);
 
         return opinion;

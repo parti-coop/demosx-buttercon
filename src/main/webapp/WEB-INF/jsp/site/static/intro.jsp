@@ -67,13 +67,13 @@
         </p>
       </div>
       <div class="helpers">
-        <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/wf-logo.png"/>" alt="여성가족부" style="width:146px"></a>
-        <a href="http://gingertproject.co.kr/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/ginger-logo.png"/>" alt="진저티프로젝트" style="width:71px"></a>
-        <a href="http://parti.coop/" target="_blank" class="term-link-logo"><img src="<c:url value="/images/parti-logo.png"/>" alt="빠띠" style="width:57px"></a>
+        <a href="http://www.mogef.go.kr/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/wf-logo.png" alt="여성가족부" style="width:146px"></a>
+        <a href="http://gingertproject.co.kr/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/ginger-logo.png" alt="진저티프로젝트" style="width:71px"></a>
+        <a href="http://parti.coop/" target="_blank" class="term-link-logo"><img src="${pageContext.request.contextPath}/images/parti-logo.png" alt="빠띠" style="width:57px"></a>
       </div>
 
       <h4 class="demo-detail-title demo-detail-title-border-top">버터나이프크루</h4>
-      <img src="<c:url value="/images/butter.png"/>" class="box-butter">
+      <img src="${pageContext.request.contextPath}/images/butter.png" class="box-butter">
       <div class="terms-wrapper">
         <p class="lead">버터는 일상의 기쁨이자 사회적 리소스를 상징합니다</p>
         <p class="blockquote">
@@ -101,7 +101,7 @@
               <div class="name">${interview["name"]}</div>
               <div class="org">${interview["org"]}</div>
               <p class="body">${interview["body"]}</p>
-              <img src="<c:url value="/images/butter.png"/>" class="butter">
+              <img src="${pageContext.request.contextPath}/images/butter.png" class="butter">
             </div>
           </div>
         </c:forEach>

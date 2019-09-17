@@ -18,9 +18,6 @@
       margin-right: 30px;
     }
   </style>
-
-  <!-- tinymce editor -->
-  <script type="text/javascript" src="<c:url value="/tinymce/tinymce.min.js"/>"></script>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
 
@@ -50,7 +47,7 @@
                           <span>이미지 선택</span>
                           <input id="thumbnail-upload-input" type="file" name="file">
                       </span>
-                      <img src="<c:url value="/images/loading.gif"/>" height="20" id="thumbnail-progress"
+                      <img src="${pageContext.request.contextPath}/images/loading.gif" height="20" id="thumbnail-progress"
                            class="hidden">
                       <span>사이즈 : 700px X 960px</span>
                     </div>
@@ -99,7 +96,7 @@
                           <span>파일 선택</span>
                           <input id="file-upload-input" type="file" name="file">
                       </span>
-                      <img src="<c:url value="/images/loading.gif"/>" height="20" id="file-progress" class="hidden">
+                      <img src="${pageContext.request.contextPath}/images/loading.gif" height="20" id="file-progress" class="hidden">
                     </div>
                     <div id="file-uploaded">
                       <c:forEach var="file" items="${createDto.files}" varStatus="status">

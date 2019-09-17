@@ -19,8 +19,8 @@ import seoul.democracy.user.domain.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 의견
@@ -113,7 +113,13 @@ public abstract class Opinion {
      * 자식 의견
      */
     @OneToMany(mappedBy = "parentOpinion", fetch = FetchType.LAZY)
-    protected Set<Opinion> childOpinions = new HashSet<Opinion>();
+    protected List<Opinion> childOpinions = new ArrayList<Opinion>();
+
+    /**
+     * 자식 의견 수
+     */
+    @Column(name = "CHILD_OPINIONS_CNT", insertable = false, updatable = false)
+    private Long childOpinionsCount;
 
     /**
      * 공감수
