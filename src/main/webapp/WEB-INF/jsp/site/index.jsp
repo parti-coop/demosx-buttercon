@@ -49,9 +49,18 @@
 </section>
 <section class="section-proposals">
   <div class="container">
-    <div class="main-card-wrapper">
-      <div class="main-card-wrapper-title">아이디어</div>
-      <div class="main-card-wrapper-subtitle">변화의 흐름을 만든다</div>
+    <div class="main-card-list">
+      <div class="main-card-list-lead">
+        <div class="main-card-list-lead-title-container">
+          <div class="main-card-list-lead-title">아이디어</div>
+          <div class="main-card-list-lead-subtitle">변화의 흐름을 만든다</div>
+        </div>
+        <div class="main-card-list-lead-button">
+          <a href="<c:url value="/new-proposal.do"/>" class="btn btn-primary .btn-responsive-sm-md-md">
+            아이디어 제안
+          </a>
+        </div>
+      </div>
       <div class="row">
         <c:forEach var="item" items="${latest.content}">
           <c:set var="proposal" value="${item}" scope="request"/>

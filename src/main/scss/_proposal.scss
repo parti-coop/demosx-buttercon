@@ -205,12 +205,12 @@ body.body-proposal {
     display: inline-block;
     .detail-category {
       color: $text-color-yellow;
-      font-size: 24px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 400;
       display: inline-block;
       margin: 0;
       @media(max-width: $screen-xs-max) {
-        font-size: 16px;
+        font-size: 14px;
       }
     }
   }
