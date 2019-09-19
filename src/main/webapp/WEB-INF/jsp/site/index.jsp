@@ -25,6 +25,9 @@
       <br class="visible-xs"/>
       진행하는 청년참여플랫폼입니다.
     </div>
+    <div class="key-visual">
+      <img src="${pageContext.request.contextPath}/images/key-visual-butter.png">
+    </div>
     <a href="<c:url value="/intro.do"/>" class="btn demo-btn demo-btn--primary key-btn">자세히보기</a>
   </div>
 </section>

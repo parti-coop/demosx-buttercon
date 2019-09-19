@@ -2,6 +2,13 @@ body.body-home {
   .section-main-key-visual {
     margin-top: -40px;
     background-color: $brand-background;
+    @media(min-width: $screen-sm-min) {
+      background-image: url(/images/key-visual-butter.png);
+      background-size: 30%;
+      background-repeat: no-repeat;
+      background-position-y: 55%;
+      background-position-x: 90%;
+    }
     .key-title {
       font-size: 48px;
       color: white;
@@ -9,6 +16,7 @@ body.body-home {
       margin-bottom: 27px;
       @media(max-width: $screen-xs-max) {
         font-size: 24px;
+        margin-top: 100px;
       }
     }
     .key-subtitle {
@@ -17,6 +25,7 @@ body.body-home {
       margin-bottom: 40px;
       @media(max-width: $screen-xs-max) {
         font-size: 12px;
+        margin-bottom: 12px;
       }
     }
     .key-btn {
@@ -28,6 +37,16 @@ body.body-home {
         display: block;
         font-size: 14px;
         padding: 14px 0;
+        margin-bottom: 35px;
+      }
+    }
+    .key-visual {
+      margin-bottom: 16px;
+      margin-left: 60px;
+      margin-right: 60px;
+
+      @media(min-width: $screen-sm-min) {
+        display: none;
       }
     }
   }
