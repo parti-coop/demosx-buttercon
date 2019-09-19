@@ -164,7 +164,6 @@ public class UserService {
             user = User.create(UserSocialCreateDto.of(id, provider, name, photo));
             return userRepository.save(user);
         }
-
-        return user.update(UserUpdateDto.of(name, photo));
+        return user;
     }
 }
