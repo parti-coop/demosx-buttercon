@@ -9,6 +9,12 @@
 <body class="body-intro">
 <%@ include file="../shared/header.jsp" %>
 
+<section>
+  <img src="${pageContext.request.contextPath}/images/intro-key-visual.png" style="width: 100%; margin-top: -20px;">
+  <div class="container">
+  </div>
+</section>
+
 <div class="container">
   <div class="top-row clearfix">
     <div class="top-left">
