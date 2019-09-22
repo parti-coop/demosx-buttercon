@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>담당자 관리 - Democracy</title>
+  <title>담당자 관리 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
   <style>
     .input-group>.select2-container--bootstrap {

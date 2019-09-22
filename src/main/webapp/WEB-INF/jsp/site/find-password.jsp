@@ -2,18 +2,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>비밀번호찾기 - Democracy</title>
+  <title>비밀번호찾기 - 버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
 </head>
 <body>
 <%@ include file="./shared/header.jsp" %>
 
 <div class="sign-container">
-  <h3 class="demo-detail-title">비밀번호찾기</h3>
-  <form action="<c:url value="/find-password.do"/>" method="post" id="je-find-password">
+  <h3 class="demo-detail-title demo-detail-title-sm demo-detail-title-noborder">비밀번호 찾기</h3>
+  <div class="terms-wrapper text-center">
+    <p class="muted">
+      비밀번호를 잊어버리셨나요?
+    </p>
+  </div>
+  <form action="<c:url value="/find-password.do"/>" method="post" id="je-find-password" class="form-login">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <div class="form-group form-group--demo">
-      <label class="demo-form-label" for="inputEmail">이메일로 비밀번호 재설정 링크 전달</label>
+      <label class="demo-form-label" for="inputEmail">가입한 이메일 주소</label>
       <input type="email" class="form-control demo-input" name="email" value="${email}" id="inputEmail" placeholder="이메일을 입력해 주세요."
              data-parsley-required="true" data-parsley-type="email"
              data-parsley-error-message="이메일을 적어주세요.">
@@ -30,13 +35,22 @@
       </c:if>
     </div>
     <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">비밀번호 재설정</button>
-    <p class="form-help-text form-help-text--blue" style="margin-top: 22px;">
-      <a class="blue-link" href="<c:url value="/join.do"/>">아직 회원이 아니신가요? <span style="text-decoration: underline">회원가입</span></a>
-    </p>
-    <p class="form-help-text form-help-text--blue">
-      <a class="blue-link" href="<c:url value="/login.do"/>">비밀번호가 기억나셨나요? <span style="text-decoration: underline">로그인</span></a>
-    </p>
   </form>
+  <div class="login-wrapper">
+    <div class="terms-wrapper text-center">
+      <p class="muted">
+        <a href="<c:url value="/login.do"/>">
+          비밀번호가 기억나셨나요?
+          <span class="text-underline">로그인</span>
+        </a>
+        <br>
+        <a href="<c:url value="/join.do"/>">
+          처음 오셨나요?
+          <span class="text-underline">회원가입</span>
+        </a>
+      </p>
+    </div>
+  </div>
 </div>
 
 <%@ include file="./shared/footer.jsp" %>

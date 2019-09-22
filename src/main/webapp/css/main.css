@@ -1445,42 +1445,6 @@ a:hover {
 
 /* progress bar END */
 
-/* sign up, in START */
-.sign-container {
-    padding-left: 15px;
-    padding-right: 15px;
-    max-width: 399px;
-    width: 100%;
-    margin: 140px auto;
-
-}
-
-.sign-container--modal {
-    margin: 40px auto;
-
-}
-
-@media (max-width: 767px) {
-    .sign-container {
-        margin: 10px 0 30px;
-        max-width: 100%;
-    }
-}
-
-.modal-dialog--demo {
-    max-width: 460px;
-    width: 100%;
-
-}
-
-@media (max-width: 767px) {
-    .modal-dialog--demo {
-        width: auto;
-    }
-}
-
-/* sign up, in END */
-
 /* my page START */
 .mypage-edit-container {
     max-width: 369px;
@@ -1965,81 +1929,6 @@ a:hover {
 
 /* img CARD END */
 
-/* terms START */
-.section-title {
-    padding-bottom: 34px;
-    font-size: 26px;
-    margin-top: 60px;
-    color: #191919;
-    font-weight: 700;
-    border-bottom: 1px solid #727a7f;
-}
-
-.section-title--first {
-    margin-top: 30px;
-}
-
-.section-title__small {
-    color: #727a7f;
-    font-size: 16px;
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
-
-.term-small-title {
-    font-size: 20px;
-    color: #191919;
-    font-weight: 700;
-    margin-left: 20px;
-    margin-top: 35px;
-    margin-bottom: 14px;
-}
-
-@media (max-width: 767px) {
-    .term-small-title {
-        margin-left: 10px;
-    }
-}
-
-.terms-wrapper .normal {
-    color: #43484c;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-top: 16px;
-
-}
-
-@media (max-width: 767px) {
-    .terms-wrapper .normal {
-        margin-left: 10px;
-    }
-}
-
-@media (max-width: 767px) {
-    .circle-ul {
-        padding-left: 30px;
-    }
-}
-
-.circle-ul li {
-    font-weight: 700;
-}
-
-.number-ul {
-    list-style: none;
-    margin-top: 10px;
-    padding-left: 0;
-}
-
-.number-ul li {
-    color: #727a7f;
-    line-height: 1.8;
-    font-weight: 400;
-}
-
-/* terms END */
-
 i.mce-ico {
     font-family: 'tinymce', Arial, serif !important;
 }
@@ -2078,19 +1967,3 @@ i.mce-ico {
     }
 }
 
-.social-login-wrapper {
-    border-top: 2px solid #b6c1cc;
-    margin-top: 40px;
-    padding-top: 30px;
-}
-
-.social-login-wrapper p {
-    color: #727a7f;
-    font-size: 16px;
-    margin-bottom: 30px;
-}
-
-.social-login-wrapper img {
-    width: 100%;
-    margin-bottom: 14px;
-}

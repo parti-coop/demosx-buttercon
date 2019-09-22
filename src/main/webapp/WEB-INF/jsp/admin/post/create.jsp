@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>실행 관리 - 생성 - Democracy</title>
+  <title>실행 관리 - 생성 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
   <!-- tinymce editor -->
   <script>

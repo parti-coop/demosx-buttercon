@@ -55,11 +55,40 @@ public class LoginController {
     }
 
     /**
+     * 이메일 로그인 화면
+     */
+    @RequestMapping(value = "/email-login.do", method = RequestMethod.GET)
+    public String loginEmail(@RequestParam(value = "login_error", required = false) Long loginError,
+                        HttpServletRequest request,
+                        HttpSession session,
+                        Model model) {
+
+        model.addAttribute("loginError", loginError);
+
+        if (loginError == null) {
+            String target = request.getHeader("Referer");
+            if (StringUtils.hasText(target)) {
+                session.setAttribute("SITE_LOGIN_REDIRECT_URL", target);
+            }
+        }
+
+        return UserUtils.isLogin() ? "redirect:/index.do" : "/site/email-login";
+    }
+
+    /**
      * 회원가입 화면
      */
     @RequestMapping(value = "/join.do", method = RequestMethod.GET)
     public String join(@ModelAttribute("createDto") UserCreateDto createDto) {
         return UserUtils.isLogin() ? "redirect:/index.do" : "/site/join";
+    }
+
+    /**
+     * 이메일 회원가입 화면
+     */
+    @RequestMapping(value = "/email-join.do", method = RequestMethod.GET)
+    public String joinEmail(@ModelAttribute("createDto") UserCreateDto createDto) {
+        return UserUtils.isLogin() ? "redirect:/index.do" : "/site/email-join";
     }
 
     @RequestMapping(value = "/join.do", method = RequestMethod.POST)

@@ -2,50 +2,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>로그인 - Democracy</title>
+  <title>로그인 - 버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
 </head>
 <body>
 <%@ include file="./shared/header.jsp" %>
 
 <div class="sign-container">
-  <h3 class="demo-detail-title">로그인</h3>
-  <form method="post" action="<c:url value="/loginProcess.do"/>" id="form-login">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div class="form-group form-group--demo">
-      <label class="demo-form-label" for="inputEmail">아이디</label>
-      <input type="email" class="form-control demo-input" name="id" id="inputEmail" placeholder="이메일"
-             data-parsley-required="true" data-parsley-whitespace="trim">
-    </div>
-
-    <div class="form-group form-group--demo">
-      <label class="demo-form-label" for="inputPassword">비밀번호</label>
-      <input type="password" class="form-control demo-input" name="pw" id="inputPassword"
-             placeholder="6자리 이상 비밀번호를 설정해 주세요."
-             data-parsley-required="true">
-    </div>
-    <c:if test="${not empty loginError}">
-      <div class="has-error">
-        <p class="help-block help-block-error">아이디 및 비밀번호를 확인해 주세요.</p>
-      </div>
-    </c:if>
-    <div class="sing-action">
-      <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">로그인</button>
-    </div>
-    <p class="form-help-text form-help-text--blue" style="margin-top: 22px;">
-      <a class="blue-link" href="<c:url value="/join.do"/>">아직 회원이 아니신가요? <span style="text-decoration: underline">회원가입</span></a>
+  <h3 class="demo-detail-title demo-detail-title-sm demo-detail-title-noborder">로그인</h3>
+  <div class="terms-wrapper text-center">
+    <p class="muted">
+      어서 오세요. 로그인 방법을 선택하세요.
     </p>
-    <p class="form-help-text form-help-text--blue">
-      <a class="blue-link" href="<c:url value="/find-password.do"/>">비밀번호를 잊어버리셨나요? <span style="text-decoration: underline">비밀번호 찾기</span></a>
+  </div>
+  <div class="login-wrapper">
+    <a href="<c:url value="/email-login.do"/>" class="login login-email"><img src="${pageContext.request.contextPath}/images/sign-email.png" alt="이메일로 로그인"> 이메일로 로그인</a>
+    <a href="<c:url value="/social-login.do?provider=facebook"/>" class="login login-facebook"><img src="${pageContext.request.contextPath}/images/sign-facebook.png" alt="페이스북으로 로그인"> 페이스북으로 로그인</a>
+    <%-- <a href="<c:url value="/social-login.do?provider=naver"/>" class="login-email"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 로그인"> 네이버로 로그인</a> --%>
+    <a href="#" onClick="alert('준비 중입니다.')" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 로그인"> 네이버로 로그인</a>
+    <a href="<c:url value="/social-login.do?provider=google"/>" class="login login-google"><img src="${pageContext.request.contextPath}/images/sign-google.png" alt="구글로 로그인"> 구글로 로그인</a>
+    <a href="<c:url value="/social-login.do?provider=kakao"/>" class="login login-kakao"><img src="${pageContext.request.contextPath}/images/sign-kakao.png" alt="카카오톡으로 로그인"> 카카오톡으로 로그인</a>
+  </div>
+  <div class="terms-wrapper">
+    <p class="help">
+      로그인하기 버튼을 클릭하면 버터나이프크루의
+      <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">이용약관</a>과
+      <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">개인정보처리방침</a>에 동의하게 됩니다.
     </p>
 
-  </form>
-  <div class="social-login-wrapper">
-    <p>*소셜아이디로 로그인</p>
-    <a href="<c:url value="/social-login.do?provider=facebook"/>"><img src="${pageContext.request.contextPath}/images/login-facebook.png" alt="페이스북으로 로그인"></a>
-    <%-- <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="${pageContext.request.contextPath}/images/login-naver.png" alt="네이버로 로그인"></a> --%>
-    <a href="<c:url value="/social-login.do?provider=google"/>"><img src="${pageContext.request.contextPath}/images/login-google.png" alt="구글로 로그인"></a>
-    <a href="<c:url value="/social-login.do?provider=kakao"/>"><img src="${pageContext.request.contextPath}/images/login-kakao.png" alt="카카오톡으로 로그인"></a>
+    <p class="help">
+      2019 청년참여플랫폼 사업의 참여자만 로그인이 가능합니다.
+    </p>
+  </div>
+  <hr>
+  <div class="terms-wrapper text-center">
+    <p class="muted">
+      <a href="<c:url value="/join.do"/>">
+        아직 가입하지 않으셨나요?
+        <span class="text-underline">회원가입</span>
+      </a>
+    </p>
   </div>
 </div>
 

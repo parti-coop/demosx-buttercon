@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>비밀번호 재설정 - Democracy</title>
+  <title>비밀번호 재설정 - 버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
 </head>
 <body>

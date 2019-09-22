@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${groupText} 관리 - 생성 - Democracy</title>
+  <title>${groupText} 관리 - 생성 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
   <style>
     #thumbnail-remove {

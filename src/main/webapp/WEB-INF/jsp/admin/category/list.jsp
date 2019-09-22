@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>카테고리 관리 - Democracy</title>
+  <title>카테고리 관리 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">

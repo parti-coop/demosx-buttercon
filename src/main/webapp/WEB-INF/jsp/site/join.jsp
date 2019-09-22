@@ -3,59 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원가입 - Democracy</title>
+  <title>회원가입 - 버터나이프크루</title>
   <%@ include file="./shared/head.jsp" %>
 </head>
 <body>
 <%@ include file="./shared/header.jsp" %>
 
 <div class="sign-container">
-  <h3 class="demo-detail-title">회원가입</h3>
   <c:if test="${not joinSuccess}">
-    <form:form commandName="createDto">
-      <spring:bind path="email">
-        <div class="form-group form-group--demo${status.error ? ' has-error' : ''}">
-          <label class="demo-form-label" for="email">이메일 (로그인 아이디)</label>
-          <form:input path="email" type="email" class="form-control demo-input" placeholder="이메일"
-                      data-parsley-required="true" data-parsley-type="email" data-parsley-maxlength="100"/>
-          <form:errors path="email" cssClass="demo-help-error"/>
-          <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 이메일을 적어주세요.</p> -->
-        </div>
-      </spring:bind>
-      <div class="form-group form-group--demo">
-        <label class="demo-form-label" for="name">이름</label>
-        <form:input path="name" type="text" class="form-control demo-input" placeholder="이름"
-                    data-parsley-required="true" data-parsley-maxlength="30"/>
-        <form:errors path="name" cssClass="demo-help-error"/>
-        <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 이름을 적어주세요.</p> -->
-      </div>
-      <div class="form-group form-group--demo">
-        <label class="demo-form-label" for="password">비밀번호</label>
-        <form:input path="password" type="password" class="form-control demo-input" placeholder="6자리 이상 비밀번호를 설정해 주세요."
-                    data-parsley-required="true" data-parsley-minlength="6"/>
-        <form:errors path="password" cssClass="demo-help-error"/>
-        <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 비밀번호를 적어주세요.</p> -->
-      </div>
-      <div class="form-group form-group--demo">
-        <label class="demo-form-label" for="inputPasswordConfirm">비밀번호확인</label>
-        <input type="password" class="form-control demo-input" id="inputPasswordConfirm"
-               placeholder="비밀번호를 확인해 주세요."
-               data-parsley-required="true" data-parsley-minlength="6" data-parsley-equalto="#password">
-        <!-- <p class="demo-help-error"><i class="xi-error-o xi-x"></i> 비밀번호를 적어주세요.</p> -->
-      </div>
-      <button type="submit" class="btn demo-btn demo-btn--primary btn-sign">가입하기</button>
-      <div class="sing-action">
-        <p class="form-help-text form-help-text--blue" style="margin-top: 22px;">
-          <a href="<c:url value="/login.do"/>" class="blue-link">이미 가입하셨나요? <span style="text-decoration: underline">로그인하기</span></a>
-        </p>
-      </div>
-    </form:form>
-    <div class="social-login-wrapper">
-      <p>*소셜아이디로 가입</p>
-      <a href="<c:url value="/social-login.do?provider=facebook"/>"><img src="${pageContext.request.contextPath}/images/login-facebook.png" alt="페이스북으로 로그인"></a>
-      <%-- <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="${pageContext.request.contextPath}/images/login-naver.png" alt="네이버로 로그인"></a> --%>
-      <a href="<c:url value="/social-login.do?provider=google"/>"><img src="${pageContext.request.contextPath}/images/login-google.png" alt="구글로 로그인"></a>
-      <a href="<c:url value="/social-login.do?provider=kakao"/>"><img src="${pageContext.request.contextPath}/images/login-kakao.png" alt="카카오톡으로 로그인"></a>
+    <h3 class="demo-detail-title demo-detail-title-sm demo-detail-title-noborder">회원가입</h3>
+    <div class="terms-wrapper text-center">
+      <p class="muted">
+        어서 오세요. 회원가입 방법을 선택하세요.
+      </p>
+    </div>
+    <div class="login-wrapper">
+      <a href="<c:url value="/email-join.do"/>" class="login login-email"><img src="${pageContext.request.contextPath}/images/sign-email.png" alt="이메일로 가입"> 이메일로 가입</a>
+      <a href="<c:url value="/social-login.do?provider=facebook"/>" class="login login-facebook"><img src="${pageContext.request.contextPath}/images/sign-facebook.png" alt="페이스북으로 가입"> 페이스북으로 가입</a>
+      <%-- <a href="<c:url value="/social-login.do?provider=naver"/>" class="login-email"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a> --%>
+      <a href="#" onClick="alert('준비 중입니다.')" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a>
+      <a href="<c:url value="/social-login.do?provider=google"/>" class="login login-google"><img src="${pageContext.request.contextPath}/images/sign-google.png" alt="구글로 가입"> 구글로 가입</a>
+      <a href="<c:url value="/social-login.do?provider=kakao"/>" class="login login-kakao"><img src="${pageContext.request.contextPath}/images/sign-kakao.png" alt="카카오톡으로 가입"> 카카오톡으로 가입</a>
+    </div>
+    <div class="terms-wrapper">
+      <p class="help">
+        가입하기 버튼을 클릭하면 버터나이프크루의
+        <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">이용약관</a>과
+        <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">개인정보처리방침</a>에 동의하게 됩니다.
+      </p>
+
+      <p class="help">
+        2019 청년참여플랫폼 사업의 참여자만 가입이 가능합니다.
+      </p>
+    </div>
+    <hr>
+    <div class="terms-wrapper text-center">
+      <p class="muted">
+        <a href="<c:url value="/login.do"/>">
+          이미 가입하셨나요?
+          <span class="text-underline">로그인하기</span>
+        </a>
+      </p>
     </div>
   </c:if>
   <c:if test="${joinSuccess}">

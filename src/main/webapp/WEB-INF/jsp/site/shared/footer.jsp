@@ -30,8 +30,29 @@
     <div class="modal-dialog modal-dialog--demo" role="document">
       <div class="modal-content">
         <div class="sign-container sign-container--modal">
-          <h3 class="demo-detail-title">로그인</h3>
-          <form id="form-login-modal">
+          <h3 class="demo-detail-title demo-detail-title-sm demo-detail-title-noborder">로그인</h3>
+          <div class="terms-wrapper text-center">
+            <p class="muted">
+              어서 오세요. 로그인 방법을 선택하세요.
+            </p>
+          </div>
+          <div class="login-wrapper">
+            <a href="<c:url value="/email-login.do"/>" class="login login-email"><img src="${pageContext.request.contextPath}/images/sign-email.png" alt="이메일로 로그인"> 이메일로 로그인</a>
+            <a href="<c:url value="/social-login.do?provider=facebook"/>" class="login login-facebook"><img src="${pageContext.request.contextPath}/images/sign-facebook.png" alt="페이스북으로 로그인"> 페이스북으로 로그인</a>
+            <%-- <a href="<c:url value="/social-login.do?provider=naver"/>" class="login-email"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 로그인"> 네이버로 로그인</a> --%>
+            <a href="#" onClick="alert('준비 중입니다.')" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 로그인"> 네이버로 로그인</a>
+            <a href="<c:url value="/social-login.do?provider=google"/>" class="login login-google"><img src="${pageContext.request.contextPath}/images/sign-google.png" alt="구글로 로그인"> 구글로 로그인</a>
+            <a href="<c:url value="/social-login.do?provider=kakao"/>" class="login login-kakao"><img src="${pageContext.request.contextPath}/images/sign-kakao.png" alt="카카오톡으로 로그인"> 카카오톡으로 로그인</a>
+          </div>
+          <div class="terms-wrapper text-center">
+            <p class="muted">
+              <a href="<c:url value="/join.do"/>">
+                아직 가입하지 않으셨나요?
+                <span class="text-underline">회원가입</span>
+              </a>
+            </p>
+          </div>
+          <%-- <form id="form-login-modal">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <div class="form-group form-group--demo">
               <label class="demo-form-label" for="modalInputEmail">아이디</label>
@@ -57,14 +78,14 @@
             <p class="form-help-text form-help-text--blue">
               <a class="blue-link" href="<c:url value="/find-password.do"/>">비밀번호를 잊어버리셨나요? <span style="text-decoration: underline">비밀번호 찾기</span></a>
             </p>
-          </form>
-          <div class="social-login-wrapper">
+          </form> --%>
+          <%-- <div class="login-wrapper">
             <p>*소셜아이디로 로그인</p>
             <a href="<c:url value="/social-login.do?provider=facebook"/>"><img src="${pageContext.request.contextPath}/images/login-facebook.png" alt="페이스북으로 로그인"></a>
-            <%-- <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="${pageContext.request.contextPath}/images/login-naver.png" alt="네이버로 로그인"></a> --%>
+            <a href="<c:url value="/social-login.do?provider=naver"/>"><img src="${pageContext.request.contextPath}/images/login-naver.png" alt="네이버로 로그인"></a>
             <a href="<c:url value="/social-login.do?provider=google"/>"><img src="${pageContext.request.contextPath}/images/login-google.png" alt="구글로 로그인"></a>
             <a href="<c:url value="/social-login.do?provider=kakao"/>"><img src="${pageContext.request.contextPath}/images/login-kakao.png" alt="카카오톡으로 로그인"></a>
-          </div>
+          </div> --%>
         </div><!-- constainer end  -->
       </div>
     </div>

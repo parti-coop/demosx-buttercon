@@ -25,7 +25,7 @@
         <intercept-url pattern="/ajax/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/new-proposal.do" access="hasRole('ROLE_USER')"/>
 
-        <form-login login-page="/login.do"
+        <form-login login-page="/email-login.do"
                     username-parameter="id"
                     password-parameter="pw"
                     login-processing-url="/loginProcess.do"
@@ -97,7 +97,7 @@
 
     <beans:bean id="authenticationFailureHandler"
             class="seoul.democracy.common.handler.SiteAuthenticationFailureHandler">
-        <beans:property name="defaultFailureUrl" value="/login.do?login_error=1"/>
+        <beans:property name="defaultFailureUrl" value="/email-login.do?login_error=1"/>
     </beans:bean>
     <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans:beans>

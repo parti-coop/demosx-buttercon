@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>제안 관리 상세 - Democracy</title>
+  <title>제안 관리 상세 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
