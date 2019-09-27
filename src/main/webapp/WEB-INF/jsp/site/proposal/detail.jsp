@@ -61,7 +61,7 @@
       </div>
 
       <div class="contents-box">
-        <div class="contents-box__contents">${proposal.contentWithBr()}</div>
+        <div class="contents-box__contents">${proposal.content}</div>
 
         <div class="contents-box-tags">
           <span class="contents-box-tags-lead">

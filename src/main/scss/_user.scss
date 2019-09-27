@@ -11,6 +11,9 @@
   a {
     &.login {
       width: 369px;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
       height: 56px;
       border-radius: 3px;
       display: flex;
