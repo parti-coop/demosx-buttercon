@@ -11,7 +11,6 @@ services:
       JAVA_OPTS: "-Djava.security.egd=file:/dev/./urandom -Xmx1g -Xms1g"
       TZ: Asia/Seoul
     volumes:
-      - ./letsencrypt:/etc/letsencrypt
       - ./static:/var/www
       - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml:ro
       - ./tomcat/ROOT.xml:/usr/local/tomcat/conf/Catalina/localhost/ROOT.xml:ro
@@ -19,8 +18,9 @@ services:
   democracy-nginx:
     image: nginx:1.15.7
     ports:
-      - 80:80
+      - 443:443
     volumes:
+      - ./letsencrypt:/etc/letsencrypt
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./static:/usr/share/nginx/html:ro
       - ./tomcat/webapps/ROOT:/usr/share/nginx/tomcat:ro

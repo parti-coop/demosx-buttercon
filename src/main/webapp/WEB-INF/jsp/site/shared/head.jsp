@@ -73,3 +73,16 @@
 <!-- application -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/application.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
+<c:if test="${environmentName eq 'production'}">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148869553-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148869553-1');
+  </script>
+
+</c:if>

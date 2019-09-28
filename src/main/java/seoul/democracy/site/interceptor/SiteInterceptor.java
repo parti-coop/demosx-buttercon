@@ -27,14 +27,15 @@ public class SiteInterceptor extends HandlerInterceptorAdapter {
         String actionName = "";
 
         if( handler instanceof HandlerMethod ) {
-			// there are cases where this handler isn't an instance of HandlerMethod, so the cast fails.
-			HandlerMethod handlerMethod = (HandlerMethod) handler;
-			//controllerName = handlerMethod.getBean().getClass().getSimpleName().replace("Controller", "");
-			controllerName  = handlerMethod.getBeanType().getSimpleName().replace("Controller", "");
-			actionName = handlerMethod.getMethod().getName();
-		}
+            // there are cases where this handler isn't an instance of HandlerMethod, so the cast fails.
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            //controllerName = handlerMethod.getBean().getClass().getSimpleName().replace("Controller", "");
+            controllerName  = handlerMethod.getBeanType().getSimpleName().replace("Controller", "");
+            actionName = handlerMethod.getMethod().getName();
+        }
 
-		modelAndView.addObject("controllerName", controllerName );
-		modelAndView.addObject("actionName", actionName );
+        modelAndView.addObject("controllerName", controllerName );
+        modelAndView.addObject("actionName", actionName );
+        modelAndView.addObject("environmentName", System.getProperty("spring.profiles.active", "default"));
     }
 }
