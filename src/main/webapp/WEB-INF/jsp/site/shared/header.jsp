@@ -70,6 +70,9 @@
         <%-- <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안
         </a></li> --%>
+        <!-- <li class="li-middle"><span class="li-middle-line">|</span></li> -->
+        <li class="demo-nav-li"><a href="<c:url value="/debate-list.do"/>">버터제안
+        </a></li>
       </ul>
 
       <div class="nav-login-m">

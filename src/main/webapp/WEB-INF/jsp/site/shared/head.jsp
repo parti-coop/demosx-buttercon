@@ -73,6 +73,10 @@
 <!-- application -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/application.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
+<!-- SimpleMDE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
 <c:if test="${environmentName eq 'production'}">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
