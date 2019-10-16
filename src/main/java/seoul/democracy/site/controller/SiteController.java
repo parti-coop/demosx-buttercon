@@ -70,17 +70,17 @@ public class SiteController {
         interviews.add(new HashMap<String, String>() {{
             put("name", "김지수");
             put("org", "빠띠 민주주의 활동가");
-            put("body", "나의 경험으로 시작해, 세대의 경험을 모아내는 것. 우리 삶의 원칙이나 규율을 우리가 만드는 것. 함께 목소리를 모으고 행동하는 값진 경험이우리 안에 남길 기대합니다.");
+            put("body", "나의 경험으로 시작해, 세대의 경험을 모아내는 것. 우리 삶의 원칙이나 규율을 우리가 만드는 것. 함께 목소리를 모으고 행동하는 값진 경험이 우리 안에 남길 기대합니다.");
         }});
         interviews.add(new HashMap<String, String>() {{
             put("name", "정보경");
             put("org", "리워크 대표 플레이어");
-            put("body", "\"청년 전쟁의 중심에서 영역파괴왕을 꿈꾼다.\"");
+            put("body", "청년 전쟁의 중심에서 영역파괴왕을 꿈꾼다.");
         }});
         interviews.add(new HashMap<String, String>() {{
             put("name", "허지용");
             put("org", "루트임팩트 디웰 커뮤니티 디벨로퍼");
-            put("body", "우리의 문제는 우리가 제일 잘 알고,그래서 우리가 가장 잘 해결할 수 있다고 믿습니다. 그리고 우리가 만드는 현재가 누군가에게 보다 나은 미래가 될 수 있기를 기대합니다.");
+            put("body", "우리의 문제는 우리가 제일 잘 알고, 그래서 우리가 가장 잘 해결할 수 있다고 믿습니다. 그리고 우리가 만드는 현재가 누군가에게 보다 나은 미래가 될 수 있기를 기대합니다.");
         }});
         interviews.add(new HashMap<String, String>() {{
             put("name", "윤이나");
@@ -100,7 +100,7 @@ public class SiteController {
         interviews.add(new HashMap<String, String>() {{
             put("name", "홍진아");
             put("org", "빌라선샤인 대표");
-            put("body", "이 시대를 살아가고 있는 우리의 경험이 정책을 만들고 미래를 만들어 가는데 필요한 최고의 전문성이라고 생각합니다.'우리-전문가'들이 만들어 갈 우리의 정책들을 기대합니다. ");
+            put("body", "이 시대를 살아가고 있는 우리의 경험이 정책을 만들고 미래를 만들어 가는데 필요한 최고의 전문성이라고 생각합니다. '우리-전문가'들이 만들어 갈 우리의 정책들을 기대합니다.");
         }});
         model.addAttribute("interviews", interviews);
         return "/site/static/intro";
