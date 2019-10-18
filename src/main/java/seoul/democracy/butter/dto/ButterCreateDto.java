@@ -29,5 +29,5 @@ public class ButterCreateDto {
     private List<IssueFileDto> files;
 
     private String[] issueTagNames;
-    private String[] makerIds;
+    private Long[] makerIds;
 }

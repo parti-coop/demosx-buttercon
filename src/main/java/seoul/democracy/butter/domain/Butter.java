@@ -1,17 +1,33 @@
 package seoul.democracy.butter.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
-import seoul.democracy.issue.domain.*;
+import seoul.democracy.issue.domain.Category;
+import seoul.democracy.issue.domain.Issue;
+import seoul.democracy.issue.domain.IssueFile;
+import seoul.democracy.issue.domain.IssueGroup;
+import seoul.democracy.issue.domain.IssueStats;
 import seoul.democracy.opinion.domain.Opinion;
 import seoul.democracy.opinion.domain.ProposalOpinion;
 import seoul.democracy.opinion.dto.OpinionCreateDto;
-
-import javax.persistence.*;
-import java.util.List;
+import seoul.democracy.user.domain.User;
 
 @Getter
 @NoArgsConstructor
@@ -21,13 +37,33 @@ public class Butter extends Issue {
     /**
      * 문서 메이커
      */
-    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    // @JoinTable(name = "TB_ISSUE_MAKER",
-    // joinColumns = @JoinColumn(name = "ISSUE_ID", referencedColumnName =
-    // "ISSUE_ID"),
-    // inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName =
-    // "TAG_ID"))
-    // private Set<User> issueMakers = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "TB_ISSUE_MAKER", joinColumns = @JoinColumn(name = "ISSUE_ID", referencedColumnName = "ISSUE_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"))
+    private Set<User> butterMakers = new HashSet<>();
+
+    /* 메이커 추가 */
+    public void addMaker(User user) {
+        this.butterMakers.add(user);
+    }
+
+    // @ElementCollection(fetch = FetchType.LAZY)
+    // @CollectionTable(name = "TB_ISSUE_MAKER", joinColumns = @JoinColumn(name =
+    // "ISSUE_ID", referencedColumnName = "ISSUE_ID"))
+    // protected List<ButterMaker> butterMakers;
+
+    // protected void createMakers(List<UserDto> makers) {
+    // if (CollectionUtils.isEmpty(this.butterMakers) &&
+    // CollectionUtils.isEmpty(makers))
+    // return;
+    // List<UserDto> butterMakers =
+    // this.butterMakers.stream().sorted(Comparator.comparing(UserDto::getSeq))
+    // .map(file -> IssueFileDto.of(file.getName(),
+    // file.getUrl())).collect(Collectors.toList());
+    // if (files.equals(updateFiles))
+    // return;
+
+    // this.files = IssueFile.create(updateFiles);
+    // }
 
     /**
      * 이슈 과정
@@ -65,9 +101,9 @@ public class Butter extends Issue {
         this.excerpt = excerpt;
         this.content = content;
         this.files = files;
-        this.processType =  ProcessType.PUBLISHED;
         // this.processType = ProcessType.valueOf(processType);
 
+        this.processType = ProcessType.PUBLISHED;
         this.status = Status.OPEN;
         this.stats = IssueStats.create();
     }

@@ -24,6 +24,8 @@ import seoul.democracy.user.utils.UserUtils;
 
 import static seoul.democracy.user.predicate.UserPredicate.equalEmail;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 public class UserService {
@@ -50,6 +52,9 @@ public class UserService {
 
     public Page<UserDto> getUsers(Predicate predicate, Pageable pageable, QBean<UserDto> projection) {
         return userRepository.findAll(predicate, pageable, projection);
+    }
+    public List<UserDto> getUsers(Predicate predicate, QBean<UserDto> projection) {
+        return userRepository.findAll(predicate, projection);
     }
 
     public User getUser(Long id) {

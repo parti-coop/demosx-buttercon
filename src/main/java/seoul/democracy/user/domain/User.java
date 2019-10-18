@@ -1,22 +1,40 @@
 package seoul.democracy.user.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.StringUtils;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.common.annotation.CreatedIp;
 import seoul.democracy.common.converter.LocalDateTimeAttributeConverter;
 import seoul.democracy.common.exception.AlreadyExistsException;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.common.listener.AuditingIpListener;
 import seoul.democracy.issue.domain.Category;
-import seoul.democracy.user.dto.*;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import seoul.democracy.user.dto.UserCreateDto;
+import seoul.democracy.user.dto.UserManagerCreateDto;
+import seoul.democracy.user.dto.UserManagerUpdateDto;
+import seoul.democracy.user.dto.UserSocialCreateDto;
+import seoul.democracy.user.dto.UserUpdateDto;
 
 /**
  * 회원
@@ -116,6 +134,9 @@ public class User implements Serializable {
      */
     @Embedded
     private UserDepartment department;
+
+    @ManyToMany(mappedBy = "butterMakers")
+    private Set<Butter> butters = new HashSet<>();
 
     private User(String email, String provider, String name, String password, String photo) {
         this.email = email;

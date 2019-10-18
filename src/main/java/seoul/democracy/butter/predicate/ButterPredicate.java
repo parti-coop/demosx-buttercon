@@ -1,14 +1,17 @@
 package seoul.democracy.butter.predicate;
 
-import com.mysema.query.types.ExpressionUtils;
-import com.mysema.query.types.Predicate;
-import org.springframework.util.StringUtils;
-import seoul.democracy.butter.domain.Butter;
-import seoul.democracy.issue.domain.Issue;
-import seoul.democracy.issue.domain.IssueGroup;
-
 import static seoul.democracy.butter.domain.QButter.butter;
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
+
+import com.mysema.query.types.ExpressionUtils;
+import com.mysema.query.types.Predicate;
+
+import org.springframework.util.StringUtils;
+
+import seoul.democracy.butter.domain.ProcessType;
+import seoul.democracy.issue.domain.Issue;
+import seoul.democracy.issue.domain.IssueGroup;
+import seoul.democracy.user.utils.UserUtils;
 
 public class ButterPredicate {
 
@@ -39,20 +42,45 @@ public class ButterPredicate {
     public static Predicate predicateForRelationSelect(String search) {
         Predicate predicate = ExpressionUtils.and(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN));
 
-        if (StringUtils.isEmpty(search)) return predicate;
+        if (StringUtils.isEmpty(search))
+            return predicate;
 
         return ExpressionUtils.and(predicate, butter.title.contains(search));
     }
 
-    public static Predicate predicateForSiteList(IssueGroup group, String category, String search) {
+    public static Predicate predicateForSiteList(IssueGroup group, ProcessType process, String category,
+            String search) {
         Predicate predicate = ExpressionUtils.and(butter.group.eq(group), butter.status.eq(OPEN));
 
         if (!StringUtils.isEmpty(category))
             predicate = ExpressionUtils.and(predicate, butter.category.name.eq(category));
 
-        if (StringUtils.isEmpty(search)) return predicate;
+        if (StringUtils.isEmpty(search))
+            return predicate;
 
         return ExpressionUtils.and(predicate, butter.title.contains(search));
+    }
+
+    public static Predicate predicateForSiteList(String search) {
+        Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
+                butter.processType.eq(ProcessType.PUBLISHED));
+
+        if (StringUtils.isEmpty(search))
+            return predicate;
+
+        return ExpressionUtils.and(predicate, butter.title.contains(search));
+    }
+
+    public static Predicate predicateForSiteList(boolean mine) {
+        Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
+                butter.processType.eq(ProcessType.PUBLISHED));
+        if (mine) {
+            predicate = ExpressionUtils.and(predicate, butter.createdBy.id.eq(UserUtils.getUserId()));
+        } else {
+            predicate = ExpressionUtils.and(predicate, butter.createdBy.id.ne(UserUtils.getUserId()));
+        }
+
+        return predicate;
     }
 
     public static Predicate equalGroup(IssueGroup group) {

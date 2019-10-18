@@ -1,21 +1,28 @@
 package seoul.democracy.butter.domain;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import seoul.democracy.common.annotation.CreatedIp;
 import seoul.democracy.common.converter.LocalDateTimeAttributeConverter;
-import seoul.democracy.common.listener.AuditingIpListener;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.UserIssueId;
 import seoul.democracy.user.domain.User;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
 @Getter
+@Embeddable
 @NoArgsConstructor
-@Entity(name = "TB_ISSUE_MAKER")
-@EntityListeners(AuditingIpListener.class)
 public class ButterMaker {
 
     @Id

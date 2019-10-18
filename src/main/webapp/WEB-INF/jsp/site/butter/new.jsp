@@ -16,7 +16,7 @@
   </div>
 
   <div class="content-container clearfix">
-    <div class="demo-content demo-content-right">
+    <div class="demo-content-right">
       <form class="demo-form" id="form-new-proposal">
         <!-- <input type="hidden" name="opinionType" value="DEBATE"/> -->
         <div class="form-group form-group--demo form-gruop-proposal">
@@ -35,13 +35,13 @@
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label">문서 메이커(5명)</label>
           <div class="select-container">
-            <select class="form-control js-tagging" name="makerNames[]" multiple="multiple" data-width="100%"></select>
+            <select class="form-control maker-tagging" name="makerIds[]" multiple="multiple" data-width="100%"></select>
           </div>
         </div>
         
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="simplemde">본문*</label>
-          <div class="select-container">
+          <div style="overflow: hidden; flex: 1;">
             <textarea id="simplemde"></textarea> 
           </div>
         </div>
@@ -59,30 +59,76 @@
   </div>
 </div>
 <style>
-.custom-side-by-side {
+.editor-toolbar .custom-side-by-side {
   float: right;
   width: 140px;
-  margin-right: 30px;
 }
 .custom-side-by-side::after {
   content: '전체화면에서 작성';
   margin-left: 10px;
 }
+.fullscreen .custom-side-by-side::after {
+  content: '돌아가기';
+}
+
+.demo-form .form-group .demo-form-label{
+  width: 200px;
+}
 </style>
 <script>
   $(function () {
+    function toggleFullscreen(simplemde){
+      console.log(arguments);
+      console.log(simplemde);
+      console.log(simplemde.isFullscreenActive());
+      if(simplemde.isFullscreenActive()){
+        simplemde.toggleFullScreen();
+      }else{
+        simplemde.toggleSideBySide();
+      }
+    }
+
+    // 편집기
     var simplemde = new SimpleMDE({ 
       element: document.getElementById("simplemde"), 
       toolbar: ["bold", "italic", "heading", "strikethrough", "|", 
-        "quote","unordered-list","ordered-list","link","image","|"
-        ,"preview","fullscreen","guide",{
+        "quote","unordered-list","ordered-list","link","image","|","preview",
+        "fullscreen","guide",
+      {
         name: "side-by-side",
-        action:SimpleMDE.toggleSideBySide,
-        className: "fa fa-columns no-disable no-mobile custom-side-by-side",
-        title: "전체화면에서 작성",
+        action: toggleFullscreen,
+        className: "no-disable no-mobile custom-side-by-side",
+        title: "클릭",
       }
     ] 
     });
+    window.simplemde = simplemde;
+
+    $('.maker-tagging').select2({
+      language: "ko",
+      tokenSeparators: [',', ' '],
+      multiple: true,
+      ajax: {
+        headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+        url: '/ajax/butter/maker',
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        processResults: function (data) {
+          if(!data) {
+            return;
+          }
+          var results = $.map(data, function(item, index) {
+            return {
+              'id': item.id,
+              'text': item.name,
+            };
+          });
+          return { results };
+        },
+      }
+    });
+
     var $formNewProposal = $('#form-new-proposal');
     $formNewProposal.parsley(parsleyConfig);
     $formNewProposal.on('submit', function (event) {

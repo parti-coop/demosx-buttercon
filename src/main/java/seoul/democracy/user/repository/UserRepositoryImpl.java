@@ -14,6 +14,8 @@ import seoul.democracy.user.dto.UserDto;
 import static seoul.democracy.issue.domain.QCategory.category;
 import static seoul.democracy.user.domain.QUser.user;
 
+import java.util.List;
+
 public class UserRepositoryImpl extends QueryDslRepositorySupport implements UserRepositoryCustom {
 
     public UserRepositoryImpl() {
@@ -30,19 +32,19 @@ public class UserRepositoryImpl extends QueryDslRepositorySupport implements Use
 
     @Override
     public Page<UserDto> findAll(Predicate predicate, Pageable pageable, Expression<UserDto> projection) {
-        SearchResults<UserDto> results = getQuerydsl()
-                                             .applyPagination(
-                                                 pageable,
-                                                 getQuery(projection)
-                                                     .where(predicate))
-                                             .listResults(projection);
+        SearchResults<UserDto> results = getQuerydsl().applyPagination(pageable, getQuery(projection).where(predicate))
+                .listResults(projection);
         return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }
 
     @Override
     public UserDto findOne(Predicate predicate, Expression<UserDto> projection) {
-        return getQuery(projection)
-                   .where(predicate)
-                   .uniqueResult(projection);
+        return getQuery(projection).where(predicate).uniqueResult(projection);
+    }
+
+    @Override
+    public List<UserDto> findAll(Predicate predicate, Expression<UserDto> projection) {
+        SearchResults<UserDto> results = getQuery(projection).where(predicate).listResults(projection);
+        return results.getResults();
     }
 }

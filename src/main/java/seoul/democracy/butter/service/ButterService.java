@@ -1,53 +1,59 @@
 package seoul.democracy.butter.service;
 
+import static seoul.democracy.butter.predicate.ButterPredicate.predicateForSiteList;
+
+import java.util.List;
+
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import seoul.democracy.common.exception.NotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
 import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.repository.ButterRepository;
+import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.issue.domain.IssueGroup;
 import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.issue.service.IssueTagService;
-
-import java.time.LocalDate;
+import seoul.democracy.user.domain.User;
+import seoul.democracy.user.repository.UserRepository;
+import seoul.democracy.user.utils.UserUtils;
 
 @Slf4j
 @Service
 @Transactional(readOnly = true)
 public class ButterService {
 
-    private final ButterRepository butterRepository;
-    private final CategoryService categoryService;
-    private final IssueService issueService;
-    private final IssueTagService issueTagService;
-
     @Autowired
-    public ButterService(ButterRepository butterRepository, CategoryService categoryService,
-            IssueService issueService, IssueTagService issueTagService) {
-        this.butterRepository = butterRepository;
-        this.categoryService = categoryService;
-        this.issueService = issueService;
-        this.issueTagService = issueTagService;
-    }
+    private ButterRepository butterRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private IssueService issueService;
+    @Autowired
+    private IssueTagService issueTagService;
 
     public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection, boolean withFiles,
             boolean withRelations) {
         return butterRepository.findOne(predicate, projection, withFiles, withRelations);
     }
 
-    public Page<ButterDto> getButters(Predicate predicate, Pageable pageable, Expression<ButterDto> projection) {
-        return butterRepository.findAll(predicate, pageable, projection);
+    public List<ButterDto> getButters(Predicate predicate, Expression<ButterDto> projection) {
+        return butterRepository.findAll(predicate, projection);
+    }
+
+    public List<ButterDto> getButters(Expression<ButterDto> projection, boolean mine) {
+        Predicate predicate = predicateForSiteList(mine);
+        return butterRepository.findAll(predicate, projection);
     }
 
     /**
@@ -56,11 +62,19 @@ public class ButterService {
     @Transactional
     public Butter create(IssueGroup group, ButterCreateDto createDto) {
         Butter butter = Butter.create(group, createDto);
+        Long[] makerIds = createDto.getMakerIds();
+        if (makerIds != null && makerIds.length > 0) {
+            for (Long id : makerIds) {
+                User user = userRepository.findOne(id);
+                butter.addMaker(user);
+            }
+        }
+        /** 아무도 없으면 문서를 만든 사람을 넣는다 */
+        else {
+            butter.addMaker(UserUtils.getLoginUser());
+        }
         butter = butterRepository.save(butter);
-        issueTagService.changeIssueTags(butter.getId(), createDto.getIssueTagNames()); // 태그저장
-        // 메이커 저장
-        // ButterMaker makers = butter.createMakers(createDto.getMakerIds());
-        // butterMakerRepository.save(makers);
+        issueTagService.changeIssueTags(butter.getId(), createDto.getIssueTagNames());
         return butter;
     }
 
