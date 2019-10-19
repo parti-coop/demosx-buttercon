@@ -17,7 +17,7 @@
 
   <div class="content-container clearfix">
     <div class="demo-side">
-      <c:forEach var="maker" items="${item.butterMakers}">
+      <c:forEach var="maker" items="${butter.butterMakers}">
       <div>
         <div class="profile-circle profile-circle--title profile-circle--title-side"
           style="background-image: url(${maker.viewPhoto()})">
@@ -29,24 +29,26 @@
       </div>
       </c:forEach>
     </div>
-    <div class="">
-      <div class="author-box">
-        <c:forEach var="maker" items="${item.butterMakers}">
-        <div class="proposal-title-author clearfix">
-          <div class="demo-card__author pull-left">
-            <div class="profile-circle profile-circle--title profile-circle--title-responsive"
-                style="background-image: url(${maker.viewPhoto()})">
-              <p class="alt-text">${maker.name}프로필</p>
+    <div class="demo-content demo-content-right">
+      <div>
+        <c:forEach var="maker" items="${butter.butterMakers}">
+        <div class="author-box">
+          <div class="proposal-title-author clearfix">
+            <div class="demo-card__author pull-left">
+              <div class="profile-circle profile-circle--title profile-circle--title-responsive"
+                  style="background-image: url(${maker.viewPhoto()})">
+                <p class="alt-text">${maker.name}프로필</p>
+              </div>
+              <p class="title-author__name">${maker.name}</p>
             </div>
-            <p class="title-author__name">${maker.name}</p>
           </div>
         </div>
         </c:forEach>
-      </div>
+      <div>
       <div class="pull-right">
-        <c:if test="${butter.isMaker()}">
-            <a href="<c:url value="/butter-edit.do?id=${butter.id}"/>" class="btn btn-default btn-responsive-sm-md-md">내용 수정</a>
-        </c:if>
+        <%-- <c:if test="${butter.isMaker()}"> --%>
+          <a href="<c:url value="/butter-edit.do?id=${butter.id}"/>" class="btn btn-default btn-responsive-sm-md-md">내용 수정</a>
+        <%-- </c:if> --%>
       </div>
       <div class="contents-box-tags">
         <span class="contents-box-tags-list">
@@ -65,7 +67,7 @@
 
       <div class="contents-box">
         <div class="contents-box__contents">
-          <textarea id="simplemde"></textarea>
+          <textarea id="simplemde" name="content">${butter.content}</textarea>
         </div>
       </div>
       <div>
@@ -106,7 +108,6 @@
   var simplemde = new SimpleMDE({ element: document.getElementById("simplemde"), toolbar: false });
   window.simplemde = simplemde;
   $(function () {
-    simplemde.value(`${butter.content}`);
     simplemde.togglePreview();
   });
 </script>

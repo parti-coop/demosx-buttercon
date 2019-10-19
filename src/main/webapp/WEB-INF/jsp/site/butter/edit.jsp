@@ -17,60 +17,74 @@
 
   <div class="content-container clearfix">
     <div class="demo-side">
-      <h4 class="demo-side-title">아이디어 수정</h4>
+      <h4 class="demo-side-title">제안서 수정</h4>
     </div>
     <div class="demo-content demo-content-right">
       <form class="demo-form" id="form-edit-proposal">
-        <%@ include file="./guide.jsp" %>
-
-        <input type="hidden" name="id" value="${editDto.id}">
+        <input type="hidden" name="id" value="${butter.id}">
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="inputTitle">제목<span class="required"> *</span></label>
+          <c:if test="${butter.isMaker()}">
           <input type="text" class="form-control demo-input" id="inputTitle" placeholder="제목" autocomplete="off"
-                  name="title" data-parsley-required="true" data-parsley-maxlength="100"
-                  value="${editDto.title}">
-        </div>
-
-        <div class="form-group form-group--demo form-gruop-proposal">
-          <label class="demo-form-label" for="category">살롱 주제<span class="required"> *</span></label>
-          <c:set var="proposalCategoryParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
-          <div class="select-container">
-            <select class="form-control demo-input" name="category" title="분류" data-parsley-required="true"  data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}">
-                <c:forEach var="category" items="${categories}">
-                  <option value="${category.name}" <c:if
-                          test="${proposal.category.name eq category.name}">selected</c:if>>${category.name}</option>
-                </c:forEach>
-            </select>
-          </div>
-          <div id="${proposalCategoryParsleyErrorsContainerId}" class="help-block-error-container"></div>
-        </div>
-
-        <div class="form-group form-group--demo form-gruop-proposal">
-          <label class="demo-form-label" for="inputContent">내용<span class="required"> *</span></label>
-          <c:set var="proposalContentParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
-          <div class="textarea-tinymce-container">
-            <textarea class="form-control js-tinymce-editor" name="content" id="inputContent" data-parsley-required="true" data-tinymce-content-css="${pageContext.request.contextPath}/css/tinymce-content.css" data-tinymce-upload-url="/ajax/mypage/files" data-parsley-errors-container="#${proposalContentParsleyErrorsContainerId}">
-            ${editDto.content}
-            </textarea>
-          </div>
-          <div id="${proposalContentParsleyErrorsContainerId}" class="help-block-error-container"></div>
+              name="title" data-parsley-required="true" data-parsley-maxlength="100"
+              value="${butter.title}" />
+          </c:if>
+          <c:if test="${!butter.isMaker()}">
+          <h3>${butter.title}</h3>
+          </c:if>
         </div>
 
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="issueTagNames[]">태그</label>
+          <c:if test="${butter.isMaker()}">
           <div class="select-container">
             <select class="form-control js-tagging" name="issueTagNames[]" multiple="multiple" data-width="100%">
-              <c:forEach var="issueTag" items="${editDto.issueTags}">
+              <c:forEach var="issueTag" items="${butter.issueTags}">
                 <option value="${issueTag.name}" selected>${issueTag.name}</option>
               </c:forEach>
             </select>
+          </div>
+          </c:if>
+          <c:if test="${!butter.isMaker()}">
+          <div>
+            <c:forEach var="issueTag" items="${butter.issueTags}">
+              <h4>#${issueTag.name}</h4>
+            </c:forEach>
+          </div>
+          </c:if>
+        </div>
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label">문서 메이커(5명)</label>
+          <c:if test="${butter.isMaker()}">
+          <div class="select-container">
+            <select class="form-control maker-tagging" name="makerIds[]" multiple="multiple" data-width="100%">
+              <c:forEach var="maker" items="${butter.butterMakers}">
+              <option value="${maker.id}" selected>${maker.name}</option>
+              </c:forEach>
+            </select>
+          </div>
+          </c:if>
+          <c:if test="${!butter.isMaker()}">
+          <div>
+            <c:forEach var="maker" items="${butter.butterMakers}">
+              <h5>${maker.name}</h5>
+            </c:forEach>
+          </div>
+          </c:if>
+        </div>
+
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="simplemde">본문*</label>
+          <div style="overflow: hidden; flex: 1;">
+            <textarea id="simplemde" name="content">${butter.content}</textarea> 
           </div>
         </div>
 
         <div class="form-action form-gruop-proposal text-right">
           <div class="inline-block">
-            <a class="btn btn-default btn-lg" href="<c:url value="/proposal-list.do"/>" role="button">취소</a>
-            <button type="submit" class="btn btn-primary btn-lg">아이디어 수정</button>
+            <a class="btn btn-default btn-lg" href="<c:url value="/butter-list.do"/>" role="button">취소</a>
+            <button type="submit" class="btn btn-primary btn-lg">${butter.isMaker() ? '발행' : '기여'}</button>
           </div>
         </div>
       </form>
@@ -79,6 +93,58 @@
 </div>
 <script>
   $(function () {
+    function toggleFullscreen(simplemde){
+      console.log(arguments);
+      console.log(simplemde);
+      console.log(simplemde.isFullscreenActive());
+      if(simplemde.isFullscreenActive()){
+        simplemde.toggleFullScreen();
+      }else{
+        simplemde.toggleSideBySide();
+      }
+    }
+
+    // 편집기
+    var simplemde = new SimpleMDE({ 
+      element: document.getElementById("simplemde"), 
+      toolbar: ["bold", "italic", "heading", "strikethrough", "|", 
+        "quote","unordered-list","ordered-list","link","image","|","preview",
+        "fullscreen","guide",
+      {
+        name: "side-by-side",
+        action: toggleFullscreen,
+        className: "no-disable no-mobile custom-side-by-side",
+        title: "클릭",
+      }
+    ] 
+    });
+    window.simplemde = simplemde;
+
+    $('.maker-tagging').select2({
+      language: "ko",
+      tokenSeparators: [',', ' '],
+      multiple: true,
+      ajax: {
+        headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+        url: '/ajax/butter/maker',
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        processResults: function (data) {
+          if(!data) {
+            return;
+          }
+          var results = $.map(data, function(item, index) {
+            return {
+              'id': item.id,
+              'text': item.name,
+            };
+          });
+          return { results };
+        },
+      }
+    });
+
     var $formEditProposal = $('#form-edit-proposal');
     $formEditProposal.parsley(parsleyConfig);
     $formEditProposal.on('submit', function (event) {
@@ -87,14 +153,14 @@
       var data = $formEditProposal.serializeObject();
       $.ajax({
         headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-        url: '/ajax/mypage/proposals/${editDto.id}',
+        url: '/ajax/butter/${butter.id}',
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(data),
         success: function (data) {
           alert(data.msg);
-          window.location.href = '/proposal.do?id=' + ${editDto.id};
+          window.location.href = '/butter.do?id=' + ${butter.id};
         },
         error: function (error) {
           if (error.status === 400) {

@@ -21,7 +21,9 @@
     </div>
   </div>
 
+  <c:if test="${myButters != null && myButters.size() > 0 }">
   <div class="list-container">
+    <h2>내 버터문서</h2>
     <c:forEach var="item" items="${myButters}">
       <div class="list-each">
         <a href="<c:url value="/butter.do?id=${item.id}"/>" class="l-img-card__link">
@@ -51,23 +53,22 @@
           </div>
           <div class="demo-card__info">
             <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 조회수
-              <strong>${proposal.stats.viewCount}</strong>개</p>
-              <strong>${proposal.stats.viewViewCount()}</strong>개</p>
+              <strong>${item.stats.viewCount}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
-              <strong>${proposal.stats.likeCount}</strong>개</p>
-              <strong>${proposal.stats.viewLikeCount()}</strong>개</p>
+              <strong>${item.stats.likeCount}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-message"></i> 댓글
-              <strong>${proposal.stats.opinionCount}</strong>개</p>
-              <strong>${proposal.stats.viewOpinionCount()}</strong>개</p>
+              <strong>${item.stats.opinionCount}</strong>개</p>
           </div>
         </a>
       </div>
     </c:forEach>
   </div>
-
+  </c:if>
+  <c:if test="${otherButters != null && otherButters.size() > 0 }">
   <div class="list-container">
+    <h2>최신 업데이트된 버터문서</h2>
     <c:forEach var="item" items="${otherButters}">
-      <div class="list-each">
+       <div class="list-each">
         <a href="<c:url value="/butter.do?id=${item.id}"/>" class="l-img-card__link">
           <div class="l-img-card__img bg-img" style="background-image: url(${item.thumbnail})">
             <p class="sr-only">${item.title} 썸네일</p>
@@ -87,22 +88,25 @@
                   <strong>${maker.name}</strong>
                 </c:forEach>
               </p>
-              <p>${item.createdBy}</p>
-              <p>${item.createdDate}</p>
-              <p>${item.modifiedBy}</p>
-              <p>${item.modifiedDate}</p>
+              <p>${item.createdBy.name}</p>
+              <p>${item.createdDate.toLocalDate()}</p>
+              <p>${item.modifiedBy.name}</p>
+              <p>${item.modifiedDate.toLocalDate()}</p>
             </div>
           </div>
           <div class="demo-card__info">
+            <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 조회수
+              <strong>${item.stats.viewCount}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
-              <strong>${proposal.stats.likeCount}</strong>개</p>
+              <strong>${item.stats.likeCount}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-message"></i> 댓글
-              <strong>${proposal.stats.opinionCount}</strong>개</p>
+              <strong>${item.stats.opinionCount}</strong>개</p>
           </div>
         </a>
       </div>
     </c:forEach>
   </div>
+  </c:if>
 </div>
 
 <%@ include file="../shared/footer.jsp" %>

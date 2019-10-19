@@ -1,23 +1,29 @@
 package seoul.democracy.site.restcontroller;
 
+import static seoul.democracy.user.dto.UserDto.projectionForBasic;
+import static seoul.democracy.user.predicate.UserPredicate.containsNameOrEmail;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import seoul.democracy.common.dto.ResultInfo;
-import seoul.democracy.common.dto.ResultRedirectInfo;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.service.ButterService;
-import seoul.democracy.issue.domain.IssueGroup;
+import seoul.democracy.common.dto.ResultInfo;
+import seoul.democracy.common.dto.ResultRedirectInfo;
 import seoul.democracy.user.dto.UserDto;
 import seoul.democracy.user.service.UserService;
-
-import javax.validation.Valid;
-import java.util.List;
-
-import static seoul.democracy.user.dto.UserDto.*;
-import static seoul.democracy.user.predicate.UserPredicate.containsNameOrEmail;
 
 @RestController
 @RequestMapping("/ajax/butter")
@@ -33,8 +39,8 @@ public class ButterAjaxController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResultInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto updateDto) {
-        butterService.update(updateDto);
+    public ResultInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto dto) {
+        butterService.update(dto);
 
         return ResultInfo.of("아이디어를 수정하였습니다.");
     }

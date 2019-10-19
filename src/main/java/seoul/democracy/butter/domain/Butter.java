@@ -19,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
-import seoul.democracy.issue.domain.Category;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.domain.IssueGroup;
@@ -44,6 +43,19 @@ public class Butter extends Issue {
     /* 메이커 추가 */
     public void addMaker(User user) {
         this.butterMakers.add(user);
+    }
+
+    /* 메이커 제거 */
+    public void removeMaker(User user) {
+        this.butterMakers.remove(user);
+    }
+
+    /**
+     * 메이커 모두 삭제
+     */
+    public void removeAllMaker() {
+        // this.butterMakers.forEach(m -> { m.getButters().remove(this); });
+        this.butterMakers.clear();
     }
 
     // @ElementCollection(fetch = FetchType.LAZY)
@@ -72,11 +84,10 @@ public class Butter extends Issue {
     @Column(name = "ISSUE_PROCESS")
     private ProcessType processType;
 
-    public Butter update(ButterUpdateDto updateDto, Category category) {
-        this.status = updateDto.getStatus();
-        this.category = category;
-        this.title = updateDto.getTitle();
-        this.excerpt = updateDto.getExcerpt();
+    public Butter update(ButterUpdateDto updateDto, Boolean wasMaker) {
+        if (wasMaker) {
+            this.title = updateDto.getTitle();
+        }
         this.content = updateDto.getContent();
         return this;
     }
@@ -97,7 +108,7 @@ public class Butter extends Issue {
         this.content = content;
         this.files = files;
         // this.processType = ProcessType.valueOf(processType);
-        
+
         this.group = IssueGroup.USER;
         this.processType = ProcessType.PUBLISHED;
         this.status = Status.OPEN;

@@ -18,13 +18,13 @@
         <intercept-url pattern="/admin/issue/proposal-detail.do" access="hasRole('ROLE_MANAGER')"/>
 
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-
         <intercept-url pattern="/debate-history-edit.do" access="hasRole('ROLE_ADMIN')"/>
 
         <intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/ajax/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/new-proposal.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-new.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/butter-edit.do" access="hasRole('ROLE_USER')"/>
 
         <form-login login-page="/email-login.do"
                     username-parameter="id"

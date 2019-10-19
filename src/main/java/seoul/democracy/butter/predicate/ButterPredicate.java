@@ -2,6 +2,7 @@ package seoul.democracy.butter.predicate;
 
 import static seoul.democracy.butter.domain.QButter.butter;
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
+import static seoul.democracy.user.domain.QUser.user;
 
 import com.mysema.query.types.ExpressionUtils;
 import com.mysema.query.types.Predicate;
@@ -61,26 +62,28 @@ public class ButterPredicate {
         return ExpressionUtils.and(predicate, butter.title.contains(search));
     }
 
-    public static Predicate predicateForSiteList(String search) {
+    public static Predicate predicateForSiteList(Boolean mine) {
         Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
                 butter.processType.eq(ProcessType.PUBLISHED));
+        if (mine) {
+            predicate = ExpressionUtils.and(predicate, user.id.eq(UserUtils.getUserId()));
+        }
 
-        if (StringUtils.isEmpty(search))
-            return predicate;
-
-        return ExpressionUtils.and(predicate, butter.title.contains(search));
+        return predicate;
     }
 
-    public static Predicate predicateForSiteList(boolean mine) {
+    public static Predicate predicateForSiteList(/* boolean mine */) {
         Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
                 butter.processType.eq(ProcessType.PUBLISHED));
-        if (UserUtils.getLoginUser() != null) {
-            if (mine) {
-                predicate = ExpressionUtils.and(predicate, butter.createdBy.id.eq(UserUtils.getUserId()));
-            } else {
-                predicate = ExpressionUtils.and(predicate, butter.createdBy.id.ne(UserUtils.getUserId()));
-            }
-        }
+        // if (UserUtils.getLoginUser() != null) {
+        // if (mine) {
+        // predicate = ExpressionUtils.and(predicate,
+        // butter.createdBy.id.eq(UserUtils.getUserId()));
+        // } else {
+        // predicate = ExpressionUtils.and(predicate,
+        // butter.createdBy.id.ne(UserUtils.getUserId()));
+        // }
+        // }
 
         return predicate;
     }

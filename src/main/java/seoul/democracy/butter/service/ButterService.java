@@ -2,7 +2,9 @@ package seoul.democracy.butter.service;
 
 import static seoul.democracy.butter.predicate.ButterPredicate.predicateForSiteList;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
@@ -18,9 +20,6 @@ import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.repository.ButterRepository;
 import seoul.democracy.common.exception.NotFoundException;
-import seoul.democracy.issue.domain.IssueGroup;
-import seoul.democracy.issue.service.CategoryService;
-import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.issue.service.IssueTagService;
 import seoul.democracy.user.domain.User;
 import seoul.democracy.user.repository.UserRepository;
@@ -36,8 +35,6 @@ public class ButterService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private CategoryService categoryService;
-    @Autowired
     private IssueTagService issueTagService;
 
     public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection) {
@@ -50,6 +47,7 @@ public class ButterService {
 
     public List<ButterDto> getButters(Expression<ButterDto> projection, boolean mine) {
         Predicate predicate = predicateForSiteList(mine);
+
         return butterRepository.findAll(predicate, projection);
     }
 
@@ -79,12 +77,45 @@ public class ButterService {
      * 버터문서 수정
      */
     @Transactional
-    public Butter update(ButterUpdateDto updateDto) {
-        Butter butter = butterRepository.findOne(updateDto.getId());
+    public Butter update(ButterUpdateDto dto) {
+        Butter butter = butterRepository.findOne(dto.getId());
         if (butter == null)
             throw new NotFoundException("해당 토론을 찾을 수 없습니다.");
 
-        return butter.update(updateDto, categoryService.getCategory(updateDto.getCategory()));
+        Boolean wasMaker = false;
+        for (User maker : butter.getButterMakers()) {
+            if (maker.getId().equals(UserUtils.getUserId())) {
+                wasMaker = true;
+            }
+        }
+        if (wasMaker) {
+            issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
+            changeMakers(butter, dto.getMakerIds());
+        }
+        return butter.update(dto, wasMaker);
+    }
+
+    /**
+     * 메이커 업데이트
+     */
+    @Transactional
+    public void changeMakers(Butter butter, final Long[] ids) {
+        if (ids == null || ids.length == 0) {
+            butter.removeAllMaker();
+            butter.addMaker(UserUtils.getLoginUser());
+            return;
+        }
+        for (Long id : ids) {
+            User user = userRepository.findOne(id);
+            butter.addMaker(user);
+        }
+
+        List<User> removedMakers = butter.getButterMakers().stream()
+                .filter(m -> !Arrays.stream(ids).anyMatch(m.getId()::equals)).collect(Collectors.toList());
+        for (User removedMaker : removedMakers) {
+            butter.removeMaker(removedMaker);
+        }
+        butterRepository.save(butter);
     }
 
 }

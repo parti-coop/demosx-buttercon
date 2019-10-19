@@ -35,14 +35,16 @@
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label">문서 메이커(5명)</label>
           <div class="select-container">
-            <select class="form-control maker-tagging" name="makerIds[]" multiple="multiple" data-width="100%"></select>
+            <select class="form-control maker-tagging" name="makerIds[]" multiple="multiple" data-width="100%">
+              <option value="${myid}" selected>${myname}</option>
+            </select>
           </div>
         </div>
         
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="simplemde">본문*</label>
           <div style="overflow: hidden; flex: 1;">
-            <textarea id="simplemde"></textarea> 
+            <textarea id="simplemde" name="content"></textarea> 
           </div>
         </div>
         
@@ -135,6 +137,7 @@
       event.preventDefault();
 
       var data = $formNewProposal.serializeObject();
+      console.log(data.content);
       data.content = simplemde.value();
       $.ajax({
         headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
