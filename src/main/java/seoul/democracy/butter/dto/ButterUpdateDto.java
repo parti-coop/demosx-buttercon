@@ -58,20 +58,15 @@ public class ButterUpdateDto {
     @Valid
     private List<IssueFileDto> files;
 
-    private List<Long> relations;
-
-    private Map<Long, IssueDto> issueMap;
-
     public String period() {
-        if (startDate == null || endDate == null) return "";
+        if (startDate == null || endDate == null)
+            return "";
         return startDate.toString() + " - " + endDate.toString();
     }
 
-    public static ButterUpdateDto of(ButterDto debateDto) {
-        return of(debateDto.getId(), debateDto.getThumbnail(), debateDto.getCategory().getName(),
-            debateDto.getOpinionType(),
-            debateDto.getStartDate(), debateDto.getEndDate(),
-            debateDto.getTitle(), debateDto.getExcerpt(), debateDto.getContent(), debateDto.getStatus(),
-            debateDto.getFiles(), debateDto.getRelations(), debateDto.getIssueMap());
+    public static ButterUpdateDto of(ButterDto butterDto) {
+        return of(butterDto.getId(), butterDto.getThumbnail(), butterDto.getCategory().getName(),
+                butterDto.getOpinionType(), butterDto.getStartDate(), butterDto.getEndDate(), butterDto.getTitle(),
+                butterDto.getExcerpt(), butterDto.getContent(), butterDto.getStatus(), butterDto.getFiles());
     }
 }

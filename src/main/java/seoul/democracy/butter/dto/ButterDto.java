@@ -5,8 +5,6 @@ import static seoul.democracy.butter.domain.QButter.butter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mysema.query.types.Projections;
@@ -15,14 +13,13 @@ import com.mysema.query.types.QBean;
 import lombok.Data;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueGroup;
-import seoul.democracy.issue.domain.IssueType;
 import seoul.democracy.issue.dto.CategoryDto;
-import seoul.democracy.issue.dto.IssueDto;
 import seoul.democracy.issue.dto.IssueFileDto;
 import seoul.democracy.issue.dto.IssueStatsDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.opinion.domain.OpinionType;
 import seoul.democracy.user.dto.UserDto;
+import seoul.democracy.user.utils.UserUtils;
 
 @Data
 public class ButterDto {
@@ -34,42 +31,22 @@ public class ButterDto {
                         butter.group, butter.status, butter.title, butter.excerpt, butter.content);
 
         /**
-         * 관리자 토론 리스트에서 사용
-         */
-        public final static QBean<ButterDto> projectionForAdminList = Projections.fields(ButterDto.class, butter.id,
-                        butter.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.opinionType,
-                        CategoryDto.projection.as("category"), IssueStatsDto.projection.as("stats"), butter.status,
-                        butter.title);
-
-        /**
-         * 관리자 토론 상세에서 사용
-         */
-        public final static QBean<ButterDto> projectionForAdminDetail = Projections.fields(ButterDto.class, butter.id,
-                        butter.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.opinionType,
-                        CategoryDto.projection.as("category"), IssueStatsDto.projection.as("stats"), butter.group,
-                        butter.status, butter.title, butter.excerpt, butter.content);
-
-        /**
-         * 토론 선택용으로 사용
-         */
-        public final static QBean<ButterDto> projectionForAdminSelect = Projections.fields(ButterDto.class, butter.id,
-                        butter.title);
-
-        /**
          * 버터 리스트에서 사용
          */
         public final static QBean<ButterDto> projectionForSiteList = Projections.fields(ButterDto.class, butter.id,
                         butter.modifiedDate, UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), butter.createdIp,
-                        butter.modifiedIp, butter.createdDate, butter.excerpt,
+                        butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
                         UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.content,
                         IssueStatsDto.projection.as("stats"), butter.title);
 
         /**
-         * 토론 상세에서 사용
+         * 버터 상세에서 사용
          */
         public final static QBean<ButterDto> projectionForSiteDetail = Projections.fields(ButterDto.class, butter.id,
-                        butter.opinionType, CategoryDto.projection.as("category"), butter.statsId,
-                        IssueStatsDto.projection.as("stats"), butter.group, butter.title, butter.content);
+                        butter.modifiedDate, UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), butter.createdIp,
+                        butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
+                        UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.content,
+                        IssueStatsDto.projection.as("stats"), butter.title);
 
         private Long id;
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -101,26 +78,14 @@ public class ButterDto {
         private List<IssueTagDto> issueTags;
         private List<UserDto> butterMakers;
 
-        private List<Long> relations;
-        private Map<Long, IssueDto> issueMap;
-
-        public List<IssueDto> viewProposals() {
-                return relations.stream().map(relation -> issueMap.get(relation))
-                                .filter(relation -> relation.getType() == IssueType.P).collect(Collectors.toList());
+        public Boolean isMaker() {
+                Long id = UserUtils.getUserId();
+                for (UserDto maker : this.butterMakers) {
+                        if (maker.getId().equals(id)) {
+                                return true;
+                        }
+                }
+                return false;
         }
-
-        public List<IssueDto> viewDebates() {
-                return relations.stream().map(relation -> issueMap.get(relation))
-                                .filter(relation -> relation.getType() == IssueType.D).collect(Collectors.toList());
-        }
-
-        // private List<Long> makers;
-        // private Map<Long, IssueDto> makersMap;
-        // public List<IssueDto> viewMakers() {
-        // return makers.stream()
-        // .map(makers -> issueMap.get(makers))
-        // .filter(relation -> relation.getType() == IssueType.P)
-        // .collect(Collectors.toList());
-        // }
 
 }

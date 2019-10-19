@@ -74,10 +74,12 @@ public class ButterPredicate {
     public static Predicate predicateForSiteList(boolean mine) {
         Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
                 butter.processType.eq(ProcessType.PUBLISHED));
-        if (mine) {
-            predicate = ExpressionUtils.and(predicate, butter.createdBy.id.eq(UserUtils.getUserId()));
-        } else {
-            predicate = ExpressionUtils.and(predicate, butter.createdBy.id.ne(UserUtils.getUserId()));
+        if (UserUtils.getLoginUser() != null) {
+            if (mine) {
+                predicate = ExpressionUtils.and(predicate, butter.createdBy.id.eq(UserUtils.getUserId()));
+            } else {
+                predicate = ExpressionUtils.and(predicate, butter.createdBy.id.ne(UserUtils.getUserId()));
+            }
         }
 
         return predicate;

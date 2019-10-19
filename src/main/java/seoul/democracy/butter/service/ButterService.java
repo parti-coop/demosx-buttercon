@@ -38,13 +38,10 @@ public class ButterService {
     @Autowired
     private CategoryService categoryService;
     @Autowired
-    private IssueService issueService;
-    @Autowired
     private IssueTagService issueTagService;
 
-    public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection, boolean withFiles,
-            boolean withRelations) {
-        return butterRepository.findOne(predicate, projection, withFiles, withRelations);
+    public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection) {
+        return butterRepository.findOne(predicate, projection);
     }
 
     public List<ButterDto> getButters(Predicate predicate, Expression<ButterDto> projection) {
@@ -60,8 +57,8 @@ public class ButterService {
      * 버터문서 등록
      */
     @Transactional
-    public Butter create(IssueGroup group, ButterCreateDto createDto) {
-        Butter butter = Butter.create(group, createDto);
+    public Butter create(ButterCreateDto createDto) {
+        Butter butter = Butter.create(createDto);
         Long[] makerIds = createDto.getMakerIds();
         if (makerIds != null && makerIds.length > 0) {
             for (Long id : makerIds) {
@@ -83,8 +80,6 @@ public class ButterService {
      */
     @Transactional
     public Butter update(ButterUpdateDto updateDto) {
-        issueService.validateRelations(updateDto.getRelations());
-
         Butter butter = butterRepository.findOne(updateDto.getId());
         if (butter == null)
             throw new NotFoundException("해당 토론을 찾을 수 없습니다.");

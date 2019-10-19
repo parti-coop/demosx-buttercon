@@ -28,7 +28,7 @@ public class ButterAjaxController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResultRedirectInfo newButter(@RequestBody @Valid ButterCreateDto createDto) throws Exception {
-        Butter butter = butterService.create(IssueGroup.USER, createDto);
+        Butter butter = butterService.create(createDto);
         return ResultRedirectInfo.of("아이디어를 등록하였습니다.", "/butter.do?id=" + butter.getId());
     }
 

@@ -78,10 +78,6 @@ public class Butter extends Issue {
         this.title = updateDto.getTitle();
         this.excerpt = updateDto.getExcerpt();
         this.content = updateDto.getContent();
-
-        updateFiles(updateDto.getFiles());
-        updateRelations(updateDto.getRelations());
-
         return this;
     }
 
@@ -95,21 +91,21 @@ public class Butter extends Issue {
         return status.isOpen();
     }
 
-    private Butter(IssueGroup group, String title, String excerpt, String content, List<IssueFile> files) {
-        this.group = group;
+    private Butter(String title, String excerpt, String content, List<IssueFile> files) {
         this.title = title;
         this.excerpt = excerpt;
         this.content = content;
         this.files = files;
         // this.processType = ProcessType.valueOf(processType);
-
+        
+        this.group = IssueGroup.USER;
         this.processType = ProcessType.PUBLISHED;
         this.status = Status.OPEN;
         this.stats = IssueStats.create();
     }
 
-    public static Butter create(IssueGroup group, ButterCreateDto createDto) {
-        return new Butter(group, createDto.getTitle(), createDto.getExcerpt(), createDto.getContent(),
+    public static Butter create(ButterCreateDto createDto) {
+        return new Butter(createDto.getTitle(), createDto.getExcerpt(), createDto.getContent(),
                 IssueFile.create(createDto.getFiles()));
     }
 

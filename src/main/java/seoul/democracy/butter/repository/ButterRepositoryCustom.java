@@ -14,5 +14,5 @@ public interface ButterRepositoryCustom {
 
     List<ButterDto> findAll(Predicate predicate, Expression<ButterDto> projection);
 
-    ButterDto findOne(Predicate predicate, Expression<ButterDto> projection, boolean withFiles, boolean withRelations);
+    ButterDto findOne(Predicate predicate, Expression<ButterDto> projection);
 }

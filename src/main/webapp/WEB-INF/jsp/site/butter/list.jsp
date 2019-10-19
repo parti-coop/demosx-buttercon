@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${group eq 'USER' ? '토론' : '기관제안'} - 버터나이프크루</title>
+  <title>버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home">
@@ -20,7 +20,6 @@
         style="font-size: 18px;padding: 12px;margin-top: 14px;">+ 버터문서 작성</a>
     </div>
   </div>
-
 
   <div class="list-container">
     <c:forEach var="item" items="${myButters}">
@@ -44,22 +43,28 @@
                   <strong>${maker.name}</strong>
                 </c:forEach>
               </p>
-              <p>${item.createdBy}</p>
-              <p>${item.createdDate}</p>
-              <p>${item.modifiedBy}</p>
-              <p>${item.modifiedDate}</p>
+              <p>${item.createdBy.name}</p>
+              <p>${item.createdDate.toLocalDate()}</p>
+              <p>${item.modifiedBy.name}</p>
+              <p>${item.modifiedDate.toLocalDate()}</p>
             </div>
           </div>
           <div class="demo-card__info">
+            <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 조회수
+              <strong>${proposal.stats.viewCount}</strong>개</p>
+              <strong>${proposal.stats.viewViewCount()}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
               <strong>${proposal.stats.likeCount}</strong>개</p>
+              <strong>${proposal.stats.viewLikeCount()}</strong>개</p>
             <p class="demo-card__info__p"><i class="xi-message"></i> 댓글
               <strong>${proposal.stats.opinionCount}</strong>개</p>
+              <strong>${proposal.stats.viewOpinionCount()}</strong>개</p>
           </div>
         </a>
       </div>
     </c:forEach>
   </div>
+
   <div class="list-container">
     <c:forEach var="item" items="${otherButters}">
       <div class="list-each">
@@ -102,4 +107,12 @@
 
 <%@ include file="../shared/footer.jsp" %>
 </body>
+<style>
+.list-container{
+  padding: 10px;
+}
+.list-each{
+  padding: 10px;
+}
+</style>
 </html>

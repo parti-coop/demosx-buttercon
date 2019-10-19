@@ -22,6 +22,7 @@ import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.debate.dto.DebateCreateDto;
 import seoul.democracy.issue.domain.IssueGroup;
 import seoul.democracy.issue.service.IssueService;
+import seoul.democracy.user.utils.UserUtils;
 
 @Controller
 public class ButterController {
@@ -33,9 +34,11 @@ public class ButterController {
 
     @RequestMapping(value = "/butter-list.do", method = RequestMethod.GET)
     public String butterList(Model model) {
-        List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
+        if (UserUtils.getLoginUser() != null) {
+            List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
+            model.addAttribute("myButters", myButters);
+        }
         List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
-        model.addAttribute("myButters", myButters);
         model.addAttribute("otherButters", otherButters);
         return "/site/butter/list";
     }
@@ -44,11 +47,11 @@ public class ButterController {
     public String butter(@RequestParam("id") Long id, Model model) {
 
         Predicate predicate = equalIdAndStatus(id, OPEN);
-        ButterDto butterDto = butterService.getButter(predicate, projectionForSiteDetail, true, true);
+        ButterDto butterDto = butterService.getButter(predicate, projectionForSiteDetail);
         if (butterDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
-        model.addAttribute("debate", butterDto);
+        model.addAttribute("butter", butterDto);
         issueService.increaseViewCount(butterDto.getStatsId());
         return "/site/butter/detail";
     }

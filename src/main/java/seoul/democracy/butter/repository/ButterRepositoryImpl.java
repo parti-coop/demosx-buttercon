@@ -1,8 +1,6 @@
 package seoul.democracy.butter.repository;
 
 import static seoul.democracy.butter.domain.QButter.butter;
-import static seoul.democracy.issue.domain.QCategory.category;
-import static seoul.democracy.issue.domain.QIssueFile.issueFile;
 import static seoul.democracy.issue.domain.QIssueStats.issueStats;
 import static seoul.democracy.issue.domain.QIssueTag.issueTag;
 import static seoul.democracy.user.domain.QUser.user;
@@ -24,7 +22,6 @@ import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport
 import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.predicate.ButterPredicate;
-import seoul.democracy.issue.dto.IssueFileDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.issue.predicate.IssueTagPredicate;
 import seoul.democracy.user.dto.UserDto;
@@ -37,19 +34,9 @@ public class ButterRepositoryImpl extends QueryDslRepositorySupport implements B
 
     private JPQLQuery getQuery(Expression<ButterDto> projection) {
         JPQLQuery query = from(butter);
-        if (projection == ButterDto.projection) {
-            query.innerJoin(butter.createdBy, createdBy);
-            query.innerJoin(butter.modifiedBy, modifiedBy);
-            query.innerJoin(butter.category, category);
-            query.innerJoin(butter.stats, issueStats);
-        } else if (projection == ButterDto.projectionForAdminList || projection == ButterDto.projectionForAdminDetail) {
-            query.innerJoin(butter.createdBy, createdBy);
-            query.innerJoin(butter.category, category);
-            query.innerJoin(butter.stats, issueStats);
-        } else if (projection == ButterDto.projectionForSiteList || projection == ButterDto.projectionForSiteDetail) {
-            query.innerJoin(butter.category, category);
-            query.innerJoin(butter.stats, issueStats);
-        }
+        query.innerJoin(butter.createdBy, createdBy);
+        query.innerJoin(butter.modifiedBy, modifiedBy);
+        query.innerJoin(butter.stats, issueStats);
         return query;
     }
 
@@ -61,27 +48,23 @@ public class ButterRepositoryImpl extends QueryDslRepositorySupport implements B
     }
 
     @Override
-    public ButterDto findOne(Predicate predicate, Expression<ButterDto> projection, boolean withFiles,
-            boolean withRelations) {
+    public ButterDto findOne(Predicate predicate, Expression<ButterDto> projection) {
         ButterDto butterDto = getQuery(projection).where(predicate).uniqueResult(projection);
-
-        if (butterDto != null && withFiles) {
-            List<IssueFileDto> files = from(butter).innerJoin(butter.files, issueFile).where(predicate)
-                    .orderBy(issueFile.seq.asc()).list(IssueFileDto.projection);
-            butterDto.setFiles(files);
-        }
-
+        List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(butterDto.getId()))
+                .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
+        List<UserDto> butterMakers = from(butter).innerJoin(butter.butterMakers, user)
+                .where(ButterPredicate.equalId(butterDto.getId())).orderBy(user.name.asc())
+                .list(UserDto.projectionForBasic);
+        butterDto.setIssueTags(issueTags);
+        butterDto.setButterMakers(butterMakers);
         return butterDto;
     }
 
     @Override
     public List<ButterDto> findAll(Predicate predicate, Expression<ButterDto> projection) {
-        JPQLQuery query = from(butter);
-        query = query.innerJoin(butter.stats, issueStats);
-        query = query.innerJoin(butter.createdBy, createdBy);
-        query = query.innerJoin(butter.modifiedBy, modifiedBy);
-        SearchResults<ButterDto> butters = query.orderBy(butter.createdDate.desc(), butter.modifiedDate.desc())
-                .where(predicate).listResults(projection);
+        SearchResults<ButterDto> butters = getQuery(projection)
+                .orderBy(butter.createdDate.desc(), butter.modifiedDate.desc()).where(predicate)
+                .listResults(projection);
         for (ButterDto result : butters.getResults()) {
             List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
                     .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
