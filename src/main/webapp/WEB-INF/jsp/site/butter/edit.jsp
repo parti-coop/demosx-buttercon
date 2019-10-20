@@ -81,6 +81,15 @@
           </div>
         </div>
 
+        <div class="form-group form-group--demo form-gruop-proposal">
+          <label class="demo-form-label" for="simplemde"></label>
+          <div style="overflow: hidden; flex: 1;">
+            <input type="radio" id="minor" name="excerptChkbox" /><label for="minor">자잘한 수정입니다.</label>
+            <input type="radio" id="major" name="excerptChkbox" /><label for="major">큰 수정입니다.  (100자 이내 작성) </label>
+            <input type="text" name="excerpt" />
+          </div>
+        </div>
+
         <div class="form-action form-gruop-proposal text-right">
           <div class="inline-block">
             <a class="btn btn-default btn-lg" href="<c:url value="/butter-list.do"/>" role="button">취소</a>
@@ -93,6 +102,7 @@
 </div>
 <script>
   $(function () {
+    $("input[name='excerptChkbox']").change(e=>$("input[name='excerpt']").toggle());
     function toggleFullscreen(simplemde){
       console.log(arguments);
       console.log(simplemde);

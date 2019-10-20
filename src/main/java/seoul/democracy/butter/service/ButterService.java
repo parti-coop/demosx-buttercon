@@ -20,6 +20,8 @@ import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.repository.ButterRepository;
 import seoul.democracy.common.exception.NotFoundException;
+import seoul.democracy.history.repository.IssueHistoryRepository;
+import seoul.democracy.issue.repository.IssueStatsRepository;
 import seoul.democracy.issue.service.IssueTagService;
 import seoul.democracy.user.domain.User;
 import seoul.democracy.user.repository.UserRepository;
@@ -33,9 +35,13 @@ public class ButterService {
     @Autowired
     private ButterRepository butterRepository;
     @Autowired
+    private IssueHistoryRepository issueHistoryRepository;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private IssueTagService issueTagService;
+    @Autowired
+    private IssueStatsRepository statsRepository;
 
     public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection) {
         return butterRepository.findOne(predicate, projection);
@@ -69,6 +75,8 @@ public class ButterService {
             butter.addMaker(UserUtils.getLoginUser());
         }
         butter = butterRepository.save(butter);
+        issueHistoryRepository.save(butter.createHistory(butter.getContent(), "최초 작성"));
+        statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
         issueTagService.changeIssueTags(butter.getId(), createDto.getIssueTagNames());
         return butter;
     }
@@ -91,6 +99,10 @@ public class ButterService {
         if (wasMaker) {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
+        }
+        if (dto.getExcerpt() != null) {
+            issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
+            statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
         }
         return butter.update(dto, wasMaker);
     }

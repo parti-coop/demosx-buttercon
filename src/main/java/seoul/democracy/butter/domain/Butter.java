@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
+import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.domain.IssueGroup;
@@ -118,6 +119,10 @@ public class Butter extends Issue {
     public static Butter create(ButterCreateDto createDto) {
         return new Butter(createDto.getTitle(), createDto.getExcerpt(), createDto.getContent(),
                 IssueFile.create(createDto.getFiles()));
+    }
+
+    public IssueHistory createHistory(String content, String excerpt) {
+        return IssueHistory.create(this, content, excerpt);
     }
 
 }

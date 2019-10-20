@@ -1,12 +1,28 @@
 package seoul.democracy.history.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import seoul.democracy.common.annotation.CreatedIp;
 import seoul.democracy.common.annotation.ModifiedIp;
 import seoul.democracy.common.converter.LocalDateTimeAttributeConverter;
@@ -15,13 +31,10 @@ import seoul.democracy.common.listener.AuditingIpListener;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.user.domain.User;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 @Entity(name = "TB_ISSUE_HISTORY")
-@EntityListeners({AuditingEntityListener.class, AuditingIpListener.class})
+@EntityListeners({ AuditingEntityListener.class, AuditingIpListener.class })
 public class IssueHistory {
 
     @Id
@@ -89,6 +102,12 @@ public class IssueHistory {
     private Status status;
 
     /**
+     * 변경 요약
+     */
+    @Column(name = "EXCERPT")
+    private String excerpt;
+
+    /**
      * 히스토리 내용
      */
     @Lob
@@ -101,8 +120,19 @@ public class IssueHistory {
         this.content = content;
     }
 
+    private IssueHistory(Issue issue, String content, String excerpt) {
+        this.status = Status.OPEN;
+        this.issue = issue;
+        this.content = content;
+        this.excerpt = excerpt;
+    }
+
     public static IssueHistory create(Issue issue, String content) {
         return new IssueHistory(issue, content);
+    }
+
+    public static IssueHistory create(Issue issue, String content, String excerpt) {
+        return new IssueHistory(issue, content, excerpt);
     }
 
     public IssueHistory update(String content) {
@@ -122,8 +152,7 @@ public class IssueHistory {
     }
 
     public enum Status {
-        OPEN,
-        DELETE;
+        OPEN, DELETE;
 
         public boolean isDelete() {
             return this == DELETE;
