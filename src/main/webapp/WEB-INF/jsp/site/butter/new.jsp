@@ -50,6 +50,7 @@
         
 
         <div class="form-action form-gruop-proposal">
+          <input type="hidden" name="excerpt" placeholder="최초 작성" />
           <div class="inline-block">
             <a class="btn btn-default btn-lg" href="<c:url value="/proposal-list.do"/>" role="button"></a>
             <!-- <button type="submit" class="btn btn-primary btn-lg">저장하기</button> -->

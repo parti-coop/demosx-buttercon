@@ -61,9 +61,9 @@ public class ButterService {
      * 버터문서 등록
      */
     @Transactional
-    public Butter create(ButterCreateDto createDto) {
-        Butter butter = Butter.create(createDto);
-        Long[] makerIds = createDto.getMakerIds();
+    public Butter create(ButterCreateDto dto) {
+        Butter butter = Butter.create(dto);
+        Long[] makerIds = dto.getMakerIds();
         if (makerIds != null && makerIds.length > 0) {
             for (Long id : makerIds) {
                 User user = userRepository.findOne(id);
@@ -75,9 +75,9 @@ public class ButterService {
             butter.addMaker(UserUtils.getLoginUser());
         }
         butter = butterRepository.save(butter);
-        issueHistoryRepository.save(butter.createHistory(butter.getContent(), "최초 작성"));
+        issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
-        issueTagService.changeIssueTags(butter.getId(), createDto.getIssueTagNames());
+        issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
         return butter;
     }
 
