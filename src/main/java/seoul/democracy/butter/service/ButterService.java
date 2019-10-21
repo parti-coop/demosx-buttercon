@@ -90,20 +90,13 @@ public class ButterService {
         if (butter == null)
             throw new NotFoundException("해당 토론을 찾을 수 없습니다.");
 
-        Boolean wasMaker = false;
-        for (User maker : butter.getButterMakers()) {
-            if (maker.getId().equals(UserUtils.getUserId())) {
-                wasMaker = true;
-            }
-        }
+        Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
         if (wasMaker) {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
         }
-        if (dto.getExcerpt() != null && dto.getExcerpt().length() > 0) {
-            issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
-            statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
-        }
+        issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
+        statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
         return butter.update(dto, wasMaker);
     }
 
