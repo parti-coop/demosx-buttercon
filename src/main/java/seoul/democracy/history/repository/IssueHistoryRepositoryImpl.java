@@ -1,18 +1,20 @@
 package seoul.democracy.history.repository;
 
-import com.mysema.query.jpa.JPQLQuery;
-import com.mysema.query.types.Expression;
-import com.mysema.query.types.Predicate;
-import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
-import seoul.democracy.history.domain.IssueHistory;
-import seoul.democracy.history.dto.IssueHistoryDto;
-
-import java.util.List;
-
 import static seoul.democracy.history.domain.QIssueHistory.issueHistory;
 import static seoul.democracy.issue.domain.QIssue.issue;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
+
+import java.util.List;
+
+import com.mysema.query.jpa.JPQLQuery;
+import com.mysema.query.types.Expression;
+import com.mysema.query.types.Predicate;
+
+import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
+
+import seoul.democracy.history.domain.IssueHistory;
+import seoul.democracy.history.dto.IssueHistoryDto;
 
 public class IssueHistoryRepositoryImpl extends QueryDslRepositorySupport implements IssueHistoryRepositoryCustom {
 
@@ -44,6 +46,8 @@ public class IssueHistoryRepositoryImpl extends QueryDslRepositorySupport implem
     public IssueHistoryDto findOne(Predicate predicate, Expression<IssueHistoryDto> projection) {
         return getQuery(projection)
                    .where(predicate)
+                   .orderBy(issueHistory.id.desc())
+                   .limit(1)
                    .uniqueResult(projection);
     }
 }

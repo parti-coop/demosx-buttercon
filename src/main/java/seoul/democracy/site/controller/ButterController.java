@@ -62,12 +62,12 @@ public class ButterController {
 
         List<IssueHistoryDto> histories = issueHistoryService.getHistories(IssueHistoryPredicate.predicateForSite(id),
                 IssueHistoryDto.projectionForSite);
-        List<UserDto> contributors = histories.stream().map(IssueHistoryDto::getCreatedBy).distinct().collect(Collectors.toList());
+        List<UserDto> contributors = histories.stream().map(IssueHistoryDto::getCreatedBy).distinct()
+                .collect(Collectors.toList());
         issueService.increaseViewCount(butterDto.getStatsId());
         model.addAttribute("butter", butterDto);
         model.addAttribute("histories", histories);
         model.addAttribute("contributors", contributors);
-
 
         List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
         if (UserUtils.getLoginUser() != null) {
@@ -89,6 +89,18 @@ public class ButterController {
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
         model.addAttribute("butter", ButterDto);
         return "/site/butter/edit";
+    }
+
+    @RequestMapping(value = "/butter-history.do", method = RequestMethod.GET)
+    public String butterHistory(@RequestParam("id") Long id, Model model) {
+        IssueHistoryDto after = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(id),
+                IssueHistoryDto.projection);
+        Long issueId = after.getIssue().getId();
+        IssueHistoryDto before = issueHistoryService.getHistory(
+                IssueHistoryPredicate.justBefore(id, issueId), IssueHistoryDto.projectionForSite);
+        model.addAttribute("before", before);
+        model.addAttribute("after", after);
+        return "/site/butter/history";
     }
 
     @RequestMapping(value = "/butter-new.do", method = RequestMethod.GET)

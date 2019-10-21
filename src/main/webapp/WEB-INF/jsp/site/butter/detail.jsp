@@ -102,18 +102,19 @@
         <h2>발행이력 <strong>${String.valueOf(histories.size())}</strong></h2>
         <div>
           <c:forEach var="history" items="${histories}">
-            <div>
+            <a href="<c:url value="/butter-history.do?id=${history.id}"/>" class="l-img-card__link">
               <div class="profile-circle profile-circle--title profile-circle--title-side"
                 style="background-image: url(${history.createdBy.viewPhoto()})">
                 <p class="alt-text">${history.createdBy.name} 사진</p>
               </div>
               <div class="proposal-title-author d-inline-block">
                 <p class="title-author__name">${history.createdBy.name}</p>
+                <p class="title-author__name">${history.createdDate.toLocalDate()}</p>
               </div>
-            </div>
-            <div>
-              ${history.excerpt}
-            </div>
+              <div>
+                ${history.excerpt}
+              </div>
+            </a>
           </c:forEach>
         </div>
       </div>
