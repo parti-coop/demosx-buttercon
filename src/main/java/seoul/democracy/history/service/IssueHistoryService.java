@@ -45,6 +45,9 @@ public class IssueHistoryService {
     public List<IssueHistoryDto> getHistories(Predicate predicate, Expression<IssueHistoryDto> projection) {
         return historyRepository.findAll(predicate, projection);
     }
+    public List<IssueHistoryDto> getHistoriesGroupByUser(Predicate predicate, Expression<IssueHistoryDto> projection) {
+        return historyRepository.findAllByUser(predicate, projection);
+    }
 
     /**
      * 히스토리 등록

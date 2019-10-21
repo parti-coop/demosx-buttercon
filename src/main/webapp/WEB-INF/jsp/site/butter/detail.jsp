@@ -80,27 +80,135 @@
       </div>
 
       <div>
-        <div>
+        <h3>
           본 제안서에 기여해주신 분입니다.
-        </div>
+        </h3>
         <div>
-          <c:forEach var="maker" items="${item.butterMakers}">
+          <c:forEach var="contributor" items="${contributors}">
           <div>
             <div class="profile-circle profile-circle--title profile-circle--title-side"
-              style="background-image: url(${maker.viewPhoto()})">
-              <p class="alt-text">${maker.name} 사진</p>
+              style="background-image: url(${contributor.viewPhoto()})">
+              <p class="alt-text">${contributor.name} 사진</p>
             </div>
             <div class="proposal-title-author d-inline-block">
-              <p class="title-author__name">${maker.name}</p>
+              <p class="title-author__name">${contributor.name}</p>
             </div>
           </div>
           </c:forEach>
         </div>
       <div>
 
+      <div>
+        <h2>발행이력 <strong>${String.valueOf(histories.size())}</strong></h2>
+        <div>
+          <c:forEach var="history" items="${histories}">
+            <div>
+              <div class="profile-circle profile-circle--title profile-circle--title-side"
+                style="background-image: url(${history.createdBy.viewPhoto()})">
+                <p class="alt-text">${history.createdBy.name} 사진</p>
+              </div>
+              <div class="proposal-title-author d-inline-block">
+                <p class="title-author__name">${history.createdBy.name}</p>
+              </div>
+            </div>
+            <div>
+              ${history.excerpt}
+            </div>
+          </c:forEach>
+        </div>
+      </div>
+
       <jsp:include page="../opinion/butter.jsp">
         <jsp:param name="id" value="${butter.id}"/>
       </jsp:include>
+
+
+      <c:if test="${myButters != null && myButters.size() > 0 }">
+      <div class="list-container">
+        <h2>내 버터문서</h2>
+        <c:forEach var="item" items="${myButters}">
+          <div class="list-each">
+            <a href="<c:url value="/butter.do?id=${item.id}"/>" class="l-img-card__link">
+              <div class="l-img-card__img bg-img" style="background-image: url(${item.thumbnail})">
+                <p class="sr-only">${item.title} 썸네일</p>
+              </div>
+              <div>
+                <c:forEach var="tag" items="${item.issueTags}">
+                    <span>#${tag.name}</span>
+                </c:forEach>
+              </div>
+              <div class="l-img-card__contents">
+                <h5 class="demo-card__title">${item.title}</h5>
+                <p class="demo-card__desc">${item.excerpt}</p>
+                <div class="demo-card__info demo-card__info--discussion">
+                  <p class="demo-card__info__p">
+                    <i class="xi-user-plus"></i> 참여자 
+                    <c:forEach var="maker" items="${item.butterMakers}">
+                      <strong>${maker.name}</strong>
+                    </c:forEach>
+                  </p>
+                  <p>${item.createdBy.name}</p>
+                  <p>${item.createdDate.toLocalDate()}</p>
+                  <p>${item.modifiedBy.name}</p>
+                  <p>${item.modifiedDate.toLocalDate()}</p>
+                </div>
+              </div>
+              <div class="demo-card__info">
+                <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 조회수
+                  <strong>${item.stats.viewCount}</strong>개</p>
+                <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
+                  <strong>${item.stats.likeCount}</strong>개</p>
+                <p class="demo-card__info__p"><i class="xi-message"></i> 댓글
+                  <strong>${item.stats.opinionCount}</strong>개</p>
+              </div>
+            </a>
+          </div>
+        </c:forEach>
+      </div>
+      </c:if>
+      <c:if test="${otherButters != null && otherButters.size() > 0 }">
+      <div class="list-container">
+        <h2>최신 업데이트된 버터문서</h2>
+        <c:forEach var="item" items="${otherButters}">
+          <div class="list-each">
+            <a href="<c:url value="/butter.do?id=${item.id}"/>" class="l-img-card__link">
+              <div class="l-img-card__img bg-img" style="background-image: url(${item.thumbnail})">
+                <p class="sr-only">${item.title} 썸네일</p>
+              </div>
+              <div>
+                <c:forEach var="tag" items="${item.issueTags}">
+                    <span>#${tag.name}</span>
+                </c:forEach>
+              </div>
+              <div class="l-img-card__contents">
+                <h5 class="demo-card__title">${item.title}</h5>
+                <p class="demo-card__desc">${item.excerpt}</p>
+                <div class="demo-card__info demo-card__info--discussion">
+                  <p class="demo-card__info__p">
+                    <i class="xi-user-plus"></i> 참여자 
+                    <c:forEach var="maker" items="${item.butterMakers}">
+                      <strong>${maker.name}</strong>
+                    </c:forEach>
+                  </p>
+                  <p>${item.createdBy.name}</p>
+                  <p>${item.createdDate.toLocalDate()}</p>
+                  <p>${item.modifiedBy.name}</p>
+                  <p>${item.modifiedDate.toLocalDate()}</p>
+                </div>
+              </div>
+              <div class="demo-card__info">
+                <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 조회수
+                  <strong>${item.stats.viewCount}</strong>개</p>
+                <p class="demo-card__info__p"><i class="xi-thumbs-up"></i> 공감
+                  <strong>${item.stats.likeCount}</strong>개</p>
+                <p class="demo-card__info__p"><i class="xi-message"></i> 댓글
+                  <strong>${item.stats.opinionCount}</strong>개</p>
+              </div>
+            </a>
+          </div>
+        </c:forEach>
+      </div>
+      </c:if>
     </div>
   </div><!-- demo-row end  -->
 </div>

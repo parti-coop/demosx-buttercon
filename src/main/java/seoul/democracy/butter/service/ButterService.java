@@ -100,7 +100,7 @@ public class ButterService {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
         }
-        if (dto.getExcerpt() != null) {
+        if (dto.getExcerpt() != null && dto.getExcerpt().length() > 0) {
             issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
             statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
         }

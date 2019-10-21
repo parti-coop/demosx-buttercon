@@ -21,7 +21,11 @@ import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.service.ButterService;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.debate.dto.DebateCreateDto;
+import seoul.democracy.history.dto.IssueHistoryDto;
+import seoul.democracy.history.predicate.IssueHistoryPredicate;
+import seoul.democracy.history.service.IssueHistoryService;
 import seoul.democracy.issue.service.IssueService;
+import seoul.democracy.user.dto.UserDto;
 import seoul.democracy.user.utils.UserUtils;
 
 @Controller
@@ -31,13 +35,14 @@ public class ButterController {
     private ButterService butterService;
     @Autowired
     private IssueService issueService;
+    @Autowired
+    private IssueHistoryService issueHistoryService;
 
     @RequestMapping(value = "/butter-list.do", method = RequestMethod.GET)
     public String butterList(Model model) {
         List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
         if (UserUtils.getLoginUser() != null) {
             List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
-            // b.getButterMakers().stream().map(ButterMaker::getId).collect(Collector.toList()).contains()).collect(Collector.toList()
             List<Long> myButterIds = myButters.stream().map(ButterDto::getId).collect(Collectors.toList());
             otherButters = otherButters.stream().filter(b -> !myButterIds.contains(b.getId()))
                     .collect(Collectors.toList());
@@ -55,8 +60,24 @@ public class ButterController {
         if (butterDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
-        model.addAttribute("butter", butterDto);
+        List<IssueHistoryDto> histories = issueHistoryService.getHistories(IssueHistoryPredicate.predicateForSite(id),
+                IssueHistoryDto.projectionForSite);
+        List<UserDto> contributors = histories.stream().map(IssueHistoryDto::getCreatedBy).distinct().collect(Collectors.toList());
         issueService.increaseViewCount(butterDto.getStatsId());
+        model.addAttribute("butter", butterDto);
+        model.addAttribute("histories", histories);
+        model.addAttribute("contributors", contributors);
+
+
+        List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
+        if (UserUtils.getLoginUser() != null) {
+            List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
+            List<Long> myButterIds = myButters.stream().map(ButterDto::getId).collect(Collectors.toList());
+            otherButters = otherButters.stream().filter(b -> !myButterIds.contains(b.getId()))
+                    .collect(Collectors.toList());
+            model.addAttribute("myButters", myButters);
+        }
+        model.addAttribute("otherButters", otherButters);
         return "/site/butter/detail";
     }
 

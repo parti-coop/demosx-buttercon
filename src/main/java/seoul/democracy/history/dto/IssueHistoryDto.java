@@ -1,15 +1,16 @@
 package seoul.democracy.history.dto;
 
+import static seoul.democracy.history.domain.QIssueHistory.issueHistory;
+
+import java.time.LocalDateTime;
+
 import com.mysema.query.types.Projections;
 import com.mysema.query.types.QBean;
+
 import lombok.Data;
 import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.issue.dto.IssueDto;
 import seoul.democracy.user.dto.UserDto;
-
-import java.time.LocalDateTime;
-
-import static seoul.democracy.history.domain.QIssueHistory.issueHistory;
 
 @Data
 public class IssueHistoryDto {
@@ -20,7 +21,7 @@ public class IssueHistoryDto {
         UserDto.projectionForBasicByModifiedBy.as("modifiedBy"),
         issueHistory.createdIp, issueHistory.modifiedIp,
         IssueDto.projectionForRelation.as("issue"),
-        issueHistory.status, issueHistory.content);
+        issueHistory.status, issueHistory.content, issueHistory.excerpt);
 
     /**
      * 사이트에서
@@ -28,7 +29,7 @@ public class IssueHistoryDto {
     public final static QBean<IssueHistoryDto> projectionForSite = Projections.fields(IssueHistoryDto.class,
         issueHistory.id, issueHistory.createdDate,
         UserDto.projectionForBasicByCreatedBy.as("createdBy"),
-        issueHistory.status, issueHistory.content);
+        issueHistory.status, issueHistory.content, issueHistory.excerpt);
 
     private Long id;
     private LocalDateTime createdDate;
@@ -41,6 +42,7 @@ public class IssueHistoryDto {
     private IssueDto issue;
 
     private IssueHistory.Status status;
+    private String excerpt;
     private String content;
 
     public String contentWithBr() {

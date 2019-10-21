@@ -84,9 +84,9 @@
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="simplemde"></label>
           <div style="overflow: hidden; flex: 1;">
-            <input type="radio" id="minor" name="excerptChkbox" /><label for="minor">자잘한 수정입니다.</label>
-            <input type="radio" id="major" name="excerptChkbox" /><label for="major">큰 수정입니다.  (100자 이내 작성) </label>
-            <input type="text" name="excerpt" />
+            <input type="radio" id="minor" name="excerptChkbox"  /><label for="minor">자잘한 수정입니다.</label>
+            <input type="radio" id="major" name="excerptChkbox" checked /><label for="major">큰 수정입니다.  (100자 이내 작성) </label>
+            <input type="text" name="excerpt" placeholder="수정 요약 작성" />
           </div>
         </div>
 
@@ -102,7 +102,10 @@
 </div>
 <script>
   $(function () {
-    $("input[name='excerptChkbox']").change(e=>$("input[name='excerpt']").toggle());
+    $("input[name='excerptChkbox']").change(e=>{
+      $("input[name='excerpt']").toggle();
+      $("input[name='excerpt']").attr("disabled", "disabled"); 
+    });
     function toggleFullscreen(simplemde){
       console.log(arguments);
       console.log(simplemde);
