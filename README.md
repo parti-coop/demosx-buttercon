@@ -84,6 +84,11 @@ Globals.googleClientSecret=a
 * 스키마 변경은 flywaydb 라이브러리를 활용하여 관리. (추가설치 불필요)
     * /src/main/resources/db/migration 디렉토리에 V7__Add_issue_users.sql 다음으로 V8__${아무이름}을 넣으면, 실행 시 자동으로 sql코드를 읽어 디비에 반영.
 
+### 개발
+
+`mvn sass:watch`
+SASS 자동 컴파일
+
 ## 프로젝트 빌드
 
 자바 및 maven 환경이 설치되어 있어야 합니다.
