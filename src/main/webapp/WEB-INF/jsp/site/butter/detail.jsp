@@ -46,9 +46,9 @@
         </c:forEach>
       <div>
       <div class="pull-right">
-        <%-- <c:if test="${butter.isMaker()}"> --%>
+        <c:if test="${butter.isMaker()}">
           <a href="<c:url value="/butter-edit.do?id=${butter.id}"/>" class="btn btn-default btn-responsive-sm-md-md">내용 수정</a>
-        <%-- </c:if> --%>
+        </c:if>
       </div>
       <div class="contents-box-tags">
         <span class="contents-box-tags-list">

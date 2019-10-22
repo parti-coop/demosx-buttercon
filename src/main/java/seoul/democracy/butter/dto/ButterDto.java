@@ -78,6 +78,10 @@ public class ButterDto {
         private List<IssueTagDto> issueTags;
         private List<UserDto> butterMakers;
 
+        public Boolean isNew() {
+                return this.modifiedDate.isAfter(LocalDateTime.now().minusHours(24));
+        }
+
         public Boolean isMaker() {
                 Long id = UserUtils.getUserId();
                 for (UserDto maker : this.butterMakers) {

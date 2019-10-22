@@ -11,7 +11,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         class="butter-list-each"
       >
         <div class="butter-each-1">
-          <div class="butter-new">NEW</div>
+          <c:if test="${item.isNew()}">
+            <div class="butter-new">NEW</div>
+          </c:if>
           <div class="butter-slug">${item.id}</div>
         </div>
         <div class="butter-each-2">
