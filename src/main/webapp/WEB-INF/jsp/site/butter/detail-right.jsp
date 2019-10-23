@@ -49,7 +49,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         >버터 추가하기</a
       >
       <a href="#댓글작성" class="btn btn-default btn-responsive-sm-md-md"
-        >버터 없애기</a
+        >버터 댓글달기</a
       >
     </p>
   </div>
