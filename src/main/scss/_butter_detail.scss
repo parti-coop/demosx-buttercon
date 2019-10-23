@@ -165,6 +165,12 @@ body.body-butter-detail {
             border: solid 1px #d8d8d8;
             background-color: white;
             > div {
+              &:first-child {
+                flex: 7;
+              }
+              &:nth-child(2) {
+                flex: 1;
+              }
               display: flex;
               align-items: center;
               .butter-title {
@@ -173,15 +179,6 @@ body.body-butter-detail {
                 line-height: 1.38;
                 color: #292929;
               }
-              .butter-extra-maker {
-                text-align: right;
-              }
-            }
-            > div:first-child {
-              flex: 7;
-            }
-            > div:nth-child(2) {
-              flex: 1;
             }
           }
         }

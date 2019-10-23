@@ -1,0 +1,82 @@
+body.body-butter-new {
+  .demo-form {
+    span.required {
+      height: 36px;
+      font-size: 30px;
+      letter-spacing: -1.07px;
+      color: #e02020;
+      vertical-align: -webkit-baseline-middle;
+    }
+    .editor-toolbar .custom-side-by-side {
+      float: right;
+      width: 125px;
+      height: 29px;
+      border-radius: 2px;
+      background-color: #89919a;
+      line-height: 29px;
+      &::after {
+        content: "전체화면에서 작성";
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+      }
+    }
+    .fullscreen .custom-side-by-side::after {
+      content: "돌아가기";
+    }
+
+    .form-group-butter {
+      display: flex;
+      flex-wrap: wrap;
+      .demo-form-label {
+        width: 100px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 50px;
+        letter-spacing: -1px;
+        color: #595959;
+        span {
+          font-weight: normal;
+        }
+      }
+      > div {
+        flex: 1;
+        > span {
+          &:first-child {
+            color: #e02020;
+          }
+          font-size: 14px;
+          line-height: 1.86;
+          letter-spacing: -0.88px;
+          color: #595959;
+        }
+        .select-container {
+          min-height: 50px;
+          flex: 1;
+          ul.select2-selection__rendered {
+            line-height: 38px;
+          }
+        }
+      }
+    }
+    .butter-cancel {
+      width: 100px;
+      height: 56px;
+      border-radius: 3px;
+      background-color: #fafafa;
+      margin-left: 20px;
+      float: right;
+      &::after {
+        content: "취소";
+        vertical-align: sub;
+      }
+    }
+    .butter-publish {
+      width: 200px;
+      height: 56px;
+      border-radius: 3px;
+      background-color: #ffcf4d;
+      float: right;
+    }
+  }
+}
