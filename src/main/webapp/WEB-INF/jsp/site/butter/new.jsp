@@ -17,7 +17,7 @@
 
       <div class="content-container clearfix">
         <div class="demo-side">
-          <h4 class="demo-side-title">제안서 수정</h4>
+          <h4 class="demo-side-title">버터보드 수정</h4>
         </div>
         <div class="demo-content demo-content-right">
           <form class="demo-form" id="form-new-proposal">
@@ -91,7 +91,7 @@
             </div>
 
             <div class="form-action form-group-butter">
-              <input type="hidden" name="excerpt" placeholder="최초 작성" />
+              <input type="hidden" name="excerpt" placeholder="최초 버터" value="최초 버터" />
               <div class="inline-block">
                 <a
                   class="btn btn-default btn-lg butter-cancel"
@@ -102,7 +102,7 @@
                   type="submit"
                   class="btn btn-primary btn-lg butter-publish"
                 >
-                  발행하기
+                  저장하기
                 </button>
               </div>
             </div>

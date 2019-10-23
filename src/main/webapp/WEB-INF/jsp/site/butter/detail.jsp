@@ -12,7 +12,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
       <div class="top-row clearfix">
         <div class="top-left">
-          <h3 class="top-row__title">제안서</h3>
+          <h3 class="top-row__title">버터보드</h3>
         </div>
       </div>
       <div class="butter-container-detail">
@@ -23,7 +23,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script>
       var simplemde = new SimpleMDE({
         element: document.getElementById("simplemde"),
-        toolbar: false
+        toolbar: false,
+        spellChecker: false
       });
       window.simplemde = simplemde;
       $(function() {

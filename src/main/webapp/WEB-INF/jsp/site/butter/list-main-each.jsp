@@ -2,7 +2,7 @@
 <a href="<c:url value='/butter.do?id=${item.id}'/>" class="butter-list-each">
   <div class="butter-each-1">
     <c:if test="${item.isNew()}">
-      <div class="butter-new">NEW</div>
+      <div class="butter-new">NEW!</div>
     </c:if>
     <div class="butter-slug">${item.id}</div>
   </div>

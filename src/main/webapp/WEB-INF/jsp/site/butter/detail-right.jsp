@@ -39,24 +39,24 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   </div>
   <div class="butter-contribute">
     <p>
-      제안 내용에 추가하고 싶은 아이디어나 정정 내용, 오탈자가 있나요?<br />
-      직접 본문을 수정하거나 댓글로 기여 할 수 있습니다.
+      다양한 맛의 버터가 추가될 수록 풍성해지는 버터보드! <br />
+      지금 바로 버터를 추가해주세요.
     </p>
     <p class="butter-contri-buttons">
       <a
         href="<c:url value='/butter-edit.do?id=${butter.id}'/>"
         class="btn btn-default btn-responsive-sm-md-md"
-        >직접 수정으로 기여하기</a
+        >버터 추가하기</a
       >
       <a href="#댓글작성" class="btn btn-default btn-responsive-sm-md-md"
-        >댓글 작성으로 기여하기</a
+        >버터 없애기</a
       >
     </p>
   </div>
   <hr />
   <div class="butter-contributors">
     <div class="butter-contributor-label">
-      <h4>본 제안서에 기여해주신 분입니다.</h4>
+      <h4>버터를 추가한 크루입니다</h4>
     </div>
     <div class="butter-contributor-list">
       <c:forEach var="contributor" items="${contributors}">
@@ -76,7 +76,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <hr />
   <div class="butter-histories">
     <div class="butter-history-label">
-      <span>발행이력</span>
+      <span>버터보드 히스토리</span>
       <i class="circle"
         >${String.valueOf(histories != null ? histories.size() : 0)}</i
       >
@@ -115,7 +115,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <div class="butter-container">
     <c:if test="${myButters != null && myButters.size() > 0}">
       <div class="butter-list">
-        <h3>내 버터문서</h3>
+        <h3>내 버터보드</h3>
         <c:forEach var="item" items="${myButters}">
           <%@include file="list-detail-each.jsp"%>
         </c:forEach>
@@ -123,7 +123,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </c:if>
     <c:if test="${otherButters != null && otherButters.size() > 0}">
       <div class="butter-list">
-        <h3>다른 버터문서</h3>
+        <h3>다른 버터 보드</h3>
         <c:forEach var="item" items="${otherButters}">
           <%@include file="list-detail-each.jsp"%>
         </c:forEach>

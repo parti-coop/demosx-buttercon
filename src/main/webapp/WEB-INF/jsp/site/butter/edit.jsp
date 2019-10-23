@@ -17,7 +17,7 @@
 
   <div class="content-container clearfix">
     <div class="demo-side">
-      <h4 class="demo-side-title">제안서 수정</h4>
+      <h4 class="demo-side-title">버터보드 수정</h4>
     </div>
     <div class="demo-content demo-content-right">
       <form class="demo-form" id="form-edit-proposal">
@@ -84,16 +84,16 @@
         <div class="form-group form-group--demo form-gruop-proposal">
           <label class="demo-form-label" for="simplemde"></label>
           <div style="overflow: hidden; flex: 1;">
-            <input type="radio" id="minor" name="excerpt" value="자잘한 수정"  /><label for="minor">자잘한 수정입니다.</label>
-            <input type="radio" id="major" name="excerpt" checked /><label for="major">큰 수정입니다.  (100자 이내 작성) </label>
-            <input type="text" name="excerpt" placeholder="수정 요약 작성" />
+            <input type="radio" id="minor" name="excerpt" value="자잘한 수정"  /><label for="minor">작은 버터 추가입니다</label>
+            <input type="radio" id="major" name="excerpt" checked /><label for="major">큰 버터 추가입니다</label>
+            <input type="text" name="excerpt" placeholder="버터 맛보기 작성" />
           </div>
         </div>
 
         <div class="form-action form-gruop-proposal text-right">
           <div class="inline-block">
             <a class="btn btn-default btn-lg" href="<c:url value="/butter-list.do"/>" role="button">취소</a>
-            <button type="submit" class="btn btn-primary btn-lg">${butter.isMaker() ? '발행' : '기여'}</button>
+            <button type="submit" class="btn btn-primary btn-lg">${butter.isMaker() ? '발행' : '버터 추가'}</button>
           </div>
         </div>
       </form>
@@ -120,6 +120,7 @@
     // 편집기
     var simplemde = new SimpleMDE({ 
       element: document.getElementById("simplemde"), 
+      spellChecker: false,
       toolbar: ["bold", "italic", "heading", "strikethrough", "|", 
         "quote","unordered-list","ordered-list","link","image","|","preview",
         "fullscreen","guide",

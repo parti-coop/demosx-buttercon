@@ -19,14 +19,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             href="<c:url value='/butter-new.do'/>"
             class="btn butter-btn-edit"
           >
-            버터문서 작성
+            버터문서 만들기
           </a>
         </div>
       </div>
 
       <div class="butter-container">
         <div class="butter-label">
-          <span>내 버터문서</span
+          <span>내 버터보드</span
           ><i class="circle"
             >${String.valueOf(myButters != null ? myButters.size() : 0)}</i
           >
@@ -39,7 +39,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       </div>
       <div class="butter-container">
         <div class="butter-label">
-          <span>최신 업데이트된 버터문서</span
+          <span>방금 업데이트된 보드</span
           ><i class="circle"
             >${String.valueOf(otherButters != null ? otherButters.size() :
             0)}</i
