@@ -35,14 +35,14 @@ public class ButterAjaxController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResultRedirectInfo newButter(@RequestBody @Valid ButterCreateDto createDto) throws Exception {
         Butter butter = butterService.create(createDto);
-        return ResultRedirectInfo.of("아이디어를 등록하였습니다.", "/butter.do?id=" + butter.getId());
+        return ResultRedirectInfo.of("보드가 개설되었습니다.", "/butter.do?id=" + butter.getId());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResultInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto dto) {
         butterService.update(dto);
 
-        return ResultInfo.of("아이디어를 수정하였습니다.");
+        return ResultInfo.of("보드가 수정되었습니다.");
     }
 
     @RequestMapping(value = "/maker", method = RequestMethod.GET)

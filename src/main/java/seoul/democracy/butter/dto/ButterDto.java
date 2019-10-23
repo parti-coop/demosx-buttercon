@@ -40,6 +40,15 @@ public class ButterDto {
                         IssueStatsDto.projection.as("stats"), butter.title);
 
         /**
+         * 내 버터 리스트에서 사용
+         */
+        public final static QBean<ButterDto> projectionForSiteListMine = Projections.fields(ButterDto.class, butter.id,
+                        butter.modifiedDate, UserDto.projectionForBasic.as("modifiedBy"), butter.createdIp,
+                        butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
+                        UserDto.projectionForBasic.as("createdBy"), butter.content,
+                        IssueStatsDto.projection.as("stats"), butter.title);
+
+        /**
          * 버터 상세에서 사용
          */
         public final static QBean<ButterDto> projectionForSiteDetail = Projections.fields(ButterDto.class, butter.id,

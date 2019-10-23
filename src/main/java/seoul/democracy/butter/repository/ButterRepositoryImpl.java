@@ -34,7 +34,6 @@ public class ButterRepositoryImpl extends QueryDslRepositorySupport implements B
         query.innerJoin(butter.createdBy, createdBy);
         query.innerJoin(butter.modifiedBy, modifiedBy);
         query.innerJoin(butter.stats, issueStats);
-        query.innerJoin(butter.butterMakers, user);
         return query;
     }
 
@@ -55,7 +54,23 @@ public class ButterRepositoryImpl extends QueryDslRepositorySupport implements B
     public List<ButterDto> findAll(Predicate predicate, Expression<ButterDto> projection) {
         JPQLQuery query = getQuery();
         SearchResults<ButterDto> butters = query.orderBy(butter.modifiedDate.desc()).where(predicate).distinct()
-                // .groupBy(butter.id)
+                .listResults(projection);
+        for (ButterDto result : butters.getResults()) {
+            List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
+                    .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
+            List<UserDto> butterMakers = from(butter).innerJoin(butter.butterMakers, user)
+                    .where(ButterPredicate.equalId(result.getId())).orderBy(user.name.asc())
+                    .list(UserDto.projectionForBasic);
+            result.setIssueTags(issueTags);
+            result.setButterMakers(butterMakers);
+        }
+        return butters.getResults();
+    }
+
+    @Override
+    public List<ButterDto> findMine(Predicate predicate, Expression<ButterDto> projection) {
+        SearchResults<ButterDto> butters = from(user).innerJoin(user.butters, butter)
+                .innerJoin(butter.stats, issueStats).orderBy(butter.modifiedDate.desc()).where(predicate).distinct()
                 .listResults(projection);
         for (ButterDto result : butters.getResults()) {
             List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))

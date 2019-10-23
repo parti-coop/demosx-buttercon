@@ -1,7 +1,5 @@
 package seoul.democracy.butter.service;
 
-import static seoul.democracy.butter.predicate.ButterPredicate.predicateForSiteList;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +16,7 @@ import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
+import seoul.democracy.butter.predicate.ButterPredicate;
 import seoul.democracy.butter.repository.ButterRepository;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.history.repository.IssueHistoryRepository;
@@ -51,10 +50,14 @@ public class ButterService {
         return butterRepository.findAll(predicate, projection);
     }
 
-    public List<ButterDto> getButters(Expression<ButterDto> projection, boolean mine) {
-        Predicate predicate = predicateForSiteList(mine);
-
+    public List<ButterDto> getButters(Expression<ButterDto> projection) {
+        Predicate predicate = ButterPredicate.predicateForSiteList();
         return butterRepository.findAll(predicate, projection);
+    }
+
+    public List<ButterDto> getButtersMine(Expression<ButterDto> projection) {
+        Predicate predicate = ButterPredicate.predicateForSiteListMine();
+        return butterRepository.findMine(predicate, projection);
     }
 
     /**
@@ -76,7 +79,7 @@ public class ButterService {
         }
         butter = butterRepository.save(butter);
         issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
-        statsRepository.increaseYesOpinion(butter.getId()); // 기여횟수 증가
+        statsRepository.increaseYesOpinion(butter.getId()); // 버터 추가횟수 증가
         issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
         return butter;
     }

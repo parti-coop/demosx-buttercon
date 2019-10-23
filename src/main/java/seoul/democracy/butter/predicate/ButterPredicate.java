@@ -62,29 +62,16 @@ public class ButterPredicate {
         return ExpressionUtils.and(predicate, butter.title.contains(search));
     }
 
-    public static Predicate predicateForSiteList(Boolean mine) {
+    public static Predicate predicateForSiteListMine() {
         Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
                 butter.processType.eq(ProcessType.PUBLISHED));
-        if (mine) {
-            predicate = ExpressionUtils.and(predicate, user.id.eq(UserUtils.getUserId()));
-        }
-
+        predicate = ExpressionUtils.and(predicate, user.id.eq(UserUtils.getUserId()));
         return predicate;
     }
 
     public static Predicate predicateForSiteList(/* boolean mine */) {
         Predicate predicate = ExpressionUtils.allOf(butter.group.eq(IssueGroup.USER), butter.status.eq(OPEN),
                 butter.processType.eq(ProcessType.PUBLISHED));
-        // if (UserUtils.getLoginUser() != null) {
-        // if (mine) {
-        // predicate = ExpressionUtils.and(predicate,
-        // butter.createdBy.id.eq(UserUtils.getUserId()));
-        // } else {
-        // predicate = ExpressionUtils.and(predicate,
-        // butter.createdBy.id.ne(UserUtils.getUserId()));
-        // }
-        // }
-
         return predicate;
     }
 

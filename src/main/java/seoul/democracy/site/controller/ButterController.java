@@ -40,11 +40,12 @@ public class ButterController {
 
     @RequestMapping(value = "/butter-list.do", method = RequestMethod.GET)
     public String butterList(Model model) {
-        List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
+        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList);
+        List<ButterDto> otherButters = null;
         if (UserUtils.getLoginUser() != null) {
-            List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
+            List<ButterDto> myButters = butterService.getButtersMine(ButterDto.projectionForSiteListMine);
             List<Long> myButterIds = myButters.stream().map(ButterDto::getId).collect(Collectors.toList());
-            otherButters = otherButters.stream().filter(b -> !myButterIds.contains(b.getId()))
+            otherButters = allButters.stream().filter(b -> !myButterIds.contains(b.getId()))
                     .collect(Collectors.toList());
             model.addAttribute("myButters", myButters);
         }
@@ -69,11 +70,12 @@ public class ButterController {
         model.addAttribute("histories", histories);
         model.addAttribute("contributors", contributors);
 
-        List<ButterDto> otherButters = butterService.getButters(ButterDto.projectionForSiteList, false);
+        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList);
+        List<ButterDto> otherButters = null;
         if (UserUtils.getLoginUser() != null) {
-            List<ButterDto> myButters = butterService.getButters(ButterDto.projectionForSiteList, true);
+            List<ButterDto> myButters = butterService.getButtersMine(ButterDto.projectionForSiteListMine);
             List<Long> myButterIds = myButters.stream().map(ButterDto::getId).collect(Collectors.toList());
-            otherButters = otherButters.stream().filter(b -> !myButterIds.contains(b.getId()))
+            otherButters = allButters.stream().filter(b -> !myButterIds.contains(b.getId()))
                     .collect(Collectors.toList());
             model.addAttribute("myButters", myButters);
         }
@@ -96,8 +98,8 @@ public class ButterController {
         IssueHistoryDto after = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(id),
                 IssueHistoryDto.projection);
         Long issueId = after.getIssue().getId();
-        IssueHistoryDto before = issueHistoryService.getHistory(
-                IssueHistoryPredicate.justBefore(id, issueId), IssueHistoryDto.projectionForSite);
+        IssueHistoryDto before = issueHistoryService.getHistory(IssueHistoryPredicate.justBefore(id, issueId),
+                IssueHistoryDto.projectionForSite);
         model.addAttribute("before", before);
         model.addAttribute("after", after);
         return "/site/butter/history";
