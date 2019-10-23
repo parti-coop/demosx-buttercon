@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="discussion-comment-form" id="댓글작성">
-  <c:if test="${param.closed eq true}">
-    <h4><b>토론 기간동안 댓글 작성이 가능합니다.</b> (${debate.startDate} ~ ${debate.endDate})</h4>
-  </c:if>
+  <h4>댓글</h4>
   <c:if test="${param.closed ne true}">
   <div class="demo-comment-form clearfix">
     <c:if test="${empty loginUser}">
@@ -98,14 +96,10 @@
     </div>
   </div>
 </c:if>
-
 <div class="demo-comments-container js-demo-comments-container collapse">
   <div class="demo-comments-top">
     <div class="demo-comments-top__tabs demo-comments-top__tabs--discuss clearfix">
-      <div class="demo-comments-lead pull-left">
-        댓글
-      </div>
-      <ul class="comment-sorting-ul clearfix">
+      <ul class="comment-sorting-ul clearfix pull-left">
         <li class="comment-sorting-li active">
           <a class="sorting-link opinion-sort" id="latest-sort-btn" data-sort="createdDate,desc" href="#">최신순</a>
         </li>
@@ -147,7 +141,7 @@
       <div class="comment-content js-comment-content-{{ opinion.id }}">
         <div class="comment-info clearfix">
           <div class="comment-date-wrapper">
-            <p class="comment-name">{{ opinion.createdBy.name }}</p>
+            <p class="comment-name username">{{ opinion.createdBy.name }}</p>
             <p class="comment-time js-comment-time">{{ opinion.contextAssigns.createdDateShort }}</p>
           </div>
         </div>
@@ -159,11 +153,11 @@
             {{#if opinion.contextAssigns.canHaveChildOpinions}}
             <button type="button"
               class="btn btn-default btn-responsive-xs-sm-sm btn-no-border js-new-child-opinion-btn"
-              data-id="{{ opinion.id }}">댓글 달기</button>
+              data-id="{{ opinion.id }}">댓글 쓰기</button>
             {{/if}}
             <div class="comment-likes-count">
               <button class="btn btn-responsive-xs-sm-sm js-opinion-thumbs-up-btn {{#if opinion.liked}}active btn-primary btn-outline{{else}}btn-no-border btn-default{{/if}}" data-id="{{ opinion.id }}">
-                <i class="xi-thumbs-up"></i> 공감 <strong>{{ opinion.likeCount }}</strong>개
+                공감 <strong>{{ opinion.likeCount }}</strong>
               </button>
             </div>
             {{#if opinion.contextAssigns.isOwner}}

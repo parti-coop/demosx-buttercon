@@ -130,3 +130,4 @@ mvn package
 
 1. Butters 와 User 를 @ManyToMany로 엮음.
 2. JPA 코드의 projection, dto, domain의 차이를 3일만에 이해함, 아직 QBean은 잘 이해가지 않음.
+3. https://naver.com
