@@ -79,4 +79,17 @@ body.body-butter-new {
       float: right;
     }
   }
+  .mergely {
+    min-height: 300px;
+    .mergely-splash {
+      display: none;
+    }
+  }
+  .mergely-excerpt {
+    display: flex;
+    flex-direction: row;
+    input {
+      flex: 1;
+    }
+  }
 }

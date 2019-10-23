@@ -22,6 +22,7 @@ public class ButterUpdateDto {
     private String excerpt;
     private String[] issueTagNames;
     private Long[] makerIds;
+    private Long recentHistoryId;
 
     public Boolean isMaker() {
         Long id = UserUtils.getUserId();

@@ -20,8 +20,10 @@ import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.service.ButterService;
-import seoul.democracy.common.dto.ResultInfo;
 import seoul.democracy.common.dto.ResultRedirectInfo;
+import seoul.democracy.history.dto.IssueHistoryDto;
+import seoul.democracy.history.predicate.IssueHistoryPredicate;
+import seoul.democracy.history.service.IssueHistoryService;
 import seoul.democracy.user.dto.UserDto;
 import seoul.democracy.user.service.UserService;
 
@@ -29,8 +31,12 @@ import seoul.democracy.user.service.UserService;
 @RequestMapping("/ajax/butter")
 public class ButterAjaxController {
 
-    @Autowired private ButterService butterService;
-    @Autowired private UserService userService;
+    @Autowired
+    private ButterService butterService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private IssueHistoryService issueHistoryService;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResultRedirectInfo newButter(@RequestBody @Valid ButterCreateDto createDto) throws Exception {
@@ -39,10 +45,16 @@ public class ButterAjaxController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResultInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto dto) {
+    public ResultRedirectInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto dto) {
+        IssueHistoryDto recentHistory = issueHistoryService.getHistory(IssueHistoryPredicate.byIssueId(id),
+                IssueHistoryDto.projectionForSite);
+        if (!recentHistory.getId().equals(dto.getRecentHistoryId())) {
+            Long afterId = issueHistoryService.saveTempHistory(dto).getId();
+            return ResultRedirectInfo.of("버터보드 추가 중 다른 버터와 충돌이 났습니다.",
+                    "/butter-conflict.do?butterId=" + id + "&afterId=" + afterId + "&beforeId=" + recentHistory.getId());
+        }
         butterService.update(dto);
-
-        return ResultInfo.of("보드가 수정되었습니다.");
+        return ResultRedirectInfo.of("보드가 수정되었습니다.", "/butter.do?id=" + id);
     }
 
     @RequestMapping(value = "/maker", method = RequestMethod.GET)

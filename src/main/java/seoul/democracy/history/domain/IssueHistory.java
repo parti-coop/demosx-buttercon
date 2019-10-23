@@ -127,12 +127,23 @@ public class IssueHistory {
         this.excerpt = excerpt;
     }
 
+    private IssueHistory(Issue issue, String content, String excerpt, Status status) {
+        this.status = status;
+        this.issue = issue;
+        this.content = content;
+        this.excerpt = excerpt;
+    }
+
     public static IssueHistory create(Issue issue, String content) {
         return new IssueHistory(issue, content);
     }
 
     public static IssueHistory create(Issue issue, String content, String excerpt) {
         return new IssueHistory(issue, content, excerpt);
+    }
+
+    public static IssueHistory create(Issue issue, String content, String excerpt, Status status) {
+        return new IssueHistory(issue, content, excerpt, status);
     }
 
     public IssueHistory update(String content) {

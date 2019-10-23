@@ -87,9 +87,12 @@ public class ButterController {
     public String butterEdit(@RequestParam("id") Long id, Model model) {
         Predicate predicate = equalIdAndStatus(id, OPEN);
         ButterDto ButterDto = butterService.getButter(predicate, projectionForSiteDetail);
+        IssueHistoryDto recentHistory = issueHistoryService.getHistory(IssueHistoryPredicate.byIssueId(id),
+                IssueHistoryDto.projectionForSite);
         if (ButterDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
         model.addAttribute("butter", ButterDto);
+        model.addAttribute("recentHistory", recentHistory);
         return "/site/butter/edit";
     }
 
@@ -103,6 +106,19 @@ public class ButterController {
         model.addAttribute("before", before);
         model.addAttribute("after", after);
         return "/site/butter/history";
+    }
+
+    @RequestMapping(value = "/butter-conflict.do", method = RequestMethod.GET)
+    public String butterHistory(@RequestParam("beforeId") Long beforeId, @RequestParam("afterId") Long afterId,
+            @RequestParam("butterId") Long butterId, Model model) {
+        IssueHistoryDto before = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(beforeId),
+                IssueHistoryDto.projection);
+        IssueHistoryDto after = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(afterId),
+                IssueHistoryDto.projection);
+        model.addAttribute("before", before);
+        model.addAttribute("after", after);
+        model.addAttribute("butterId", butterId);
+        return "/site/butter/conflict";
     }
 
     @RequestMapping(value = "/butter-new.do", method = RequestMethod.GET)

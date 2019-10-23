@@ -16,6 +16,10 @@ public class IssueHistoryPredicate {
         return ExpressionUtils.and(issueHistory.issue.id.eq(issueId), issueHistory.status.eq(OPEN));
     }
 
+    public static Predicate byIssueId(Long issueId) {
+        return ExpressionUtils.and(issueHistory.issue.id.eq(issueId), issueHistory.status.eq(OPEN));
+    }
+
     public static Predicate justBefore(Long historyId, Long issueId) {
         Predicate exp = ExpressionUtils.and(issueHistory.issue.id.eq(issueId), issueHistory.status.eq(OPEN));
         return ExpressionUtils.and(issueHistory.id.lt(historyId), exp);

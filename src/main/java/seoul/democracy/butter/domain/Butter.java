@@ -125,4 +125,8 @@ public class Butter extends Issue {
         return IssueHistory.create(this, content, excerpt);
     }
 
+    public IssueHistory createHistory(String content, String excerpt, IssueHistory.Status status) {
+        return IssueHistory.create(this, content, excerpt, status);
+    }
+
 }

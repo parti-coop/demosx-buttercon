@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import com.mysema.query.types.Projections;
 import com.mysema.query.types.QBean;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import lombok.Data;
 import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.issue.dto.IssueDto;
@@ -15,21 +17,18 @@ import seoul.democracy.user.dto.UserDto;
 @Data
 public class IssueHistoryDto {
 
-    public final static QBean<IssueHistoryDto> projection = Projections.fields(IssueHistoryDto.class,
-        issueHistory.id, issueHistory.createdDate, issueHistory.modifiedDate,
-        UserDto.projectionForBasicByCreatedBy.as("createdBy"),
-        UserDto.projectionForBasicByModifiedBy.as("modifiedBy"),
-        issueHistory.createdIp, issueHistory.modifiedIp,
-        IssueDto.projectionForRelation.as("issue"),
-        issueHistory.status, issueHistory.content, issueHistory.excerpt);
+    public final static QBean<IssueHistoryDto> projection = Projections.fields(IssueHistoryDto.class, issueHistory.id,
+            issueHistory.createdDate, issueHistory.modifiedDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
+            UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), issueHistory.createdIp, issueHistory.modifiedIp,
+            IssueDto.projectionForRelation.as("issue"), issueHistory.status, issueHistory.content,
+            issueHistory.excerpt);
 
     /**
      * 사이트에서
      */
     public final static QBean<IssueHistoryDto> projectionForSite = Projections.fields(IssueHistoryDto.class,
-        issueHistory.id, issueHistory.createdDate,
-        UserDto.projectionForBasicByCreatedBy.as("createdBy"),
-        issueHistory.status, issueHistory.content, issueHistory.excerpt);
+            issueHistory.id, issueHistory.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
+            issueHistory.status, issueHistory.content, issueHistory.excerpt);
 
     private Long id;
     private LocalDateTime createdDate;
@@ -44,6 +43,10 @@ public class IssueHistoryDto {
     private IssueHistory.Status status;
     private String excerpt;
     private String content;
+
+    public String getContent() {
+        return StringEscapeUtils.escapeEcmaScript(content);
+    }
 
     public String contentWithBr() {
         return content.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
