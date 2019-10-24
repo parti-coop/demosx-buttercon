@@ -91,7 +91,7 @@ public class ButterService {
     public Butter update(ButterUpdateDto dto) {
         Butter butter = butterRepository.findOne(dto.getId());
         if (butter == null)
-            throw new NotFoundException("해당 토론을 찾을 수 없습니다.");
+            throw new NotFoundException("해당 버터를 찾을 수 없습니다.");
 
         Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
         if (wasMaker) {
@@ -101,6 +101,23 @@ public class ButterService {
         issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
         return butter.update(dto, wasMaker);
+    }
+
+    /**
+     * 버터문서 삭제
+     */
+    @Transactional
+    public void remove(Long id) {
+        Butter butter = butterRepository.findOne(id);
+        if (butter == null)
+            throw new NotFoundException("해당 버터를 찾을 수 없습니다.");
+
+        Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
+        if (wasMaker) {
+            butter.delete();
+        } else {
+            throw new NotFoundException("해당 버터의 메이커가 아닙니다.");
+        }
     }
 
     /**

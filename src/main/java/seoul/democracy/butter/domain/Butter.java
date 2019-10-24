@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import seoul.democracy.butter.dto.ButterCreateDto;
 import seoul.democracy.butter.dto.ButterUpdateDto;
+import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueFile;
@@ -55,28 +56,8 @@ public class Butter extends Issue {
      * 메이커 모두 삭제
      */
     public void removeAllMaker() {
-        // this.butterMakers.forEach(m -> { m.getButters().remove(this); });
         this.butterMakers.clear();
     }
-
-    // @ElementCollection(fetch = FetchType.LAZY)
-    // @CollectionTable(name = "TB_ISSUE_MAKER", joinColumns = @JoinColumn(name =
-    // "ISSUE_ID", referencedColumnName = "ISSUE_ID"))
-    // protected List<ButterMaker> butterMakers;
-
-    // protected void createMakers(List<UserDto> makers) {
-    // if (CollectionUtils.isEmpty(this.butterMakers) &&
-    // CollectionUtils.isEmpty(makers))
-    // return;
-    // List<UserDto> butterMakers =
-    // this.butterMakers.stream().sorted(Comparator.comparing(UserDto::getSeq))
-    // .map(file -> IssueFileDto.of(file.getName(),
-    // file.getUrl())).collect(Collectors.toList());
-    // if (files.equals(updateFiles))
-    // return;
-
-    // this.files = IssueFile.create(updateFiles);
-    // }
 
     /**
      * 이슈 과정
@@ -129,4 +110,11 @@ public class Butter extends Issue {
         return IssueHistory.create(this, content, excerpt, status);
     }
 
+    public Butter delete() {
+        if (this.status.isDelete())
+            throw new NotFoundException("해당 버터를 찾을 수 없습니다.");
+
+        this.status = Status.DELETE;
+        return this;
+    }
 }

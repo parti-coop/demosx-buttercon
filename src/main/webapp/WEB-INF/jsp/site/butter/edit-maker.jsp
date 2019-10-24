@@ -140,7 +140,8 @@ ${butter.content}
               <label class="demo-form-label"></label>
               <div class="inline-block">
                 <button
-                  type="submit"
+                  type="button"
+                  id="btn-butter-delete"
                   class="btn btn-lg butter-remove"
                 >
                   삭제

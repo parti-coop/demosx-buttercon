@@ -50,8 +50,8 @@ public class ButterAjaxController {
                 IssueHistoryDto.projectionForSite);
         if (!recentHistory.getId().equals(dto.getRecentHistoryId())) {
             Long afterId = issueHistoryService.saveTempHistory(dto).getId();
-            return ResultRedirectInfo.of("버터보드 추가 중 다른 버터와 충돌이 났습니다.",
-                    "/butter-conflict.do?butterId=" + id + "&afterId=" + afterId + "&beforeId=" + recentHistory.getId());
+            return ResultRedirectInfo.of("버터보드 추가 중 다른 버터와 충돌이 났습니다.", "/butter-conflict.do?butterId=" + id
+                    + "&afterId=" + afterId + "&beforeId=" + recentHistory.getId());
         }
         butterService.update(dto);
         return ResultRedirectInfo.of("보드가 수정되었습니다.", "/butter.do?id=" + id);
@@ -60,5 +60,11 @@ public class ButterAjaxController {
     @RequestMapping(value = "/maker", method = RequestMethod.GET)
     public List<UserDto> getUsers(@RequestParam(value = "q") String search, Model model) {
         return userService.getUsers(containsNameOrEmail(search), projectionForBasic);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResultRedirectInfo deleteButter(@PathVariable("id") Long id) {
+        butterService.remove(id);
+        return ResultRedirectInfo.of("버터를 삭제하였습니다.", "/butter-list.do");
     }
 }
