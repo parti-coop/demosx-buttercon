@@ -5,7 +5,7 @@
     <title>버터보드 - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
-  <body class="body-proposal body-proposal-form body-butter-new">
+  <body class="body-butter body-butter-edit body-butter-new">
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
@@ -20,8 +20,8 @@
           <h4 class="demo-side-title">버터보드 만들기</h4>
         </div>
         <div class="demo-content demo-content-right">
-          <form class="demo-form" id="form-new-proposal">
-            <!-- <input type="hidden" name="opinionType" value="DEBATE"/> -->
+          <form class="demo-form" id="form-edit-butter">
+            <input type="hidden" name="id" value="${butter.id}" />
             <div class="form-group form-group--demo form-group-butter">
               <label class="demo-form-label" for="inputTitle"
                 >제목<span class="required"> *</span></label
@@ -36,6 +36,7 @@
                   name="title"
                   data-parsley-required="true"
                   data-parsley-maxlength="100"
+                  value="${butter.title}"
                 />
                 <span>
                   필수 입력 항목입니다
@@ -52,7 +53,12 @@
                     name="issueTagNames[]"
                     multiple="multiple"
                     data-width="100%"
-                  ></select>
+                    ><c:forEach var="issueTag" items="${butter.issueTags}">
+                      <option value="${issueTag.name}" selected
+                        >${issueTag.name}</option
+                      >
+                    </c:forEach></select
+                  >
                 </div>
                 <span>
                   콤마 [ , ] 로 공백 없이 태그 입력
@@ -72,7 +78,11 @@
                     multiple="multiple"
                     data-width="100%"
                   >
-                    <option value="${myid}" selected>${myname}</option>
+                    <c:forEach var="maker" items="${butter.butterMakers}">
+                      <option value="${maker.id}" selected
+                        >${maker.name}</option
+                      >
+                    </c:forEach>
                   </select>
                 </div>
                 <span>
@@ -86,16 +96,51 @@
                 >본문<span class="required">*</span></label
               >
               <div>
-                <textarea id="simplemde" name="content"></textarea>
+                <textarea id="simplemde" name="content">
+${butter.content}
+                </textarea>
+              </div>
+            </div>
+
+            <div class="form-group form-group--demo form-group-butter">
+              <label class="demo-form-label"></label>
+              <div class="butter-excerpt">
+                <div>
+                  <div class="pretty p-default p-round">
+                    <input
+                      type="radio"
+                      id="minor"
+                      name="excerpt"
+                      value="작은 버터 추가"
+                    />
+                    <div class="state p-warning-o">
+                      <label for="minor">작은 버터 추가입니다</label>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="pretty p-default p-round">
+                    <input type="radio" id="major" name="excerpt" checked />
+                    <div class="state p-warning-o">
+                      <label for="major">큰 버터 추가입니다</label>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="excerpt"
+                    placeholder="큰 버터 추가"
+                  />
+                </div>
               </div>
             </div>
 
             <div class="form-action form-group-butter">
               <input
                 type="hidden"
-                name="excerpt"
-                placeholder="최초 버터"
-                value="최초 버터"
+                name="recentHistoryId"
+                value="${recentHistory.id}"
               />
               <div class="inline-block">
                 <a
@@ -115,7 +160,7 @@
         </div>
       </div>
     </div>
-    <%@ include file="new-script.jsp" %> <%@ include file="../shared/footer.jsp"
-    %>
+    <%@ include file="edit-script.jsp" %> <%@ include
+    file="../shared/footer.jsp" %>
   </body>
 </html>

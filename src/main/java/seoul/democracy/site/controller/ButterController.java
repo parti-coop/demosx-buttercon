@@ -93,7 +93,10 @@ public class ButterController {
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
         model.addAttribute("butter", ButterDto);
         model.addAttribute("recentHistory", recentHistory);
-        return "/site/butter/edit";
+        if(ButterDto.isMaker()){
+            return "/site/butter/edit-maker";
+        }
+        return "/site/butter/edit-user";
     }
 
     @RequestMapping(value = "/butter-history.do", method = RequestMethod.GET)

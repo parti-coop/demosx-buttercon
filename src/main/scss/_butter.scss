@@ -84,7 +84,6 @@ body.body-butter {
     word-break: keep-all;
     color: $text-color-darker;
     font-weight: 600;
-    min-height: 44px;
     font-size: 18px;
     line-height: 1.22;
   }
@@ -186,6 +185,7 @@ body.body-butter {
           flex: 167;
           display: flex;
           align-items: center;
+          padding-left: 20%;
         }
       }
     }
@@ -193,8 +193,9 @@ body.body-butter {
   .butter-maker-list {
     flex: 0 0 48px;
     height: 24px;
+    width: 48px;
     display: flex;
-    margin-left: 20%;
+    // margin-left: 20%;
     // margin-right: 20%;
     align-items: center;
     .butter-maker {
@@ -229,5 +230,22 @@ body.body-butter {
     letter-spacing: -0.5px;
     color: #cb9000;
     flex: 1;
+  }
+  .editor-toolbar .custom-side-by-side {
+    float: right;
+    width: 125px;
+    height: 29px;
+    border-radius: 2px;
+    background-color: #89919a;
+    line-height: 29px;
+    &::after {
+      content: "전체화면에서 작성";
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+  }
+  .fullscreen .custom-side-by-side::after {
+    content: "돌아가기";
   }
 }
