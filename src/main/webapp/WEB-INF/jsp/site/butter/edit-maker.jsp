@@ -137,15 +137,17 @@ ${butter.content}
             </div>
 
             <div class="form-action form-group-butter">
-              <input
-                type="hidden"
-                name="recentHistoryId"
-                value="${recentHistory.id}"
-              />
+              <label class="demo-form-label"></label>
               <div class="inline-block">
+                <button
+                  type="submit"
+                  class="btn btn-lg butter-remove"
+                >
+                  삭제
+                </button>
                 <a
                   class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/proposal-list.do'/>"
+                  href="<c:url value='/butter.do?id=${butter.id}'/>"
                   role="button"
                 ></a>
                 <button
@@ -154,6 +156,11 @@ ${butter.content}
                 >
                   저장하기
                 </button>
+                <input
+                  type="hidden"
+                  name="recentHistoryId"
+                  value="${recentHistory.id}"
+                />
               </div>
             </div>
           </form>

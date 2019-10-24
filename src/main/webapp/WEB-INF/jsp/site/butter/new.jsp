@@ -100,7 +100,7 @@
               <div class="inline-block">
                 <a
                   class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/proposal-list.do'/>"
+                  href="<c:url value='/butter-list.do'/>"
                   role="button"
                 ></a>
                 <button
