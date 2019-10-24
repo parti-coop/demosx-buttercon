@@ -40,14 +40,16 @@ public class ButterController {
 
     @RequestMapping(value = "/butter-list.do", method = RequestMethod.GET)
     public String butterList(Model model) {
-        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList);
         List<ButterDto> otherButters = null;
+        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList);
         if (UserUtils.getLoginUser() != null) {
             List<ButterDto> myButters = butterService.getButtersMine(ButterDto.projectionForSiteListMine);
             List<Long> myButterIds = myButters.stream().map(ButterDto::getId).collect(Collectors.toList());
             otherButters = allButters.stream().filter(b -> !myButterIds.contains(b.getId()))
                     .collect(Collectors.toList());
             model.addAttribute("myButters", myButters);
+        } else {
+            otherButters = allButters;
         }
         model.addAttribute("otherButters", otherButters);
         return "/site/butter/list";
@@ -93,7 +95,7 @@ public class ButterController {
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
         model.addAttribute("butter", ButterDto);
         model.addAttribute("recentHistory", recentHistory);
-        if(ButterDto.isMaker()){
+        if (ButterDto.isMaker()) {
             return "/site/butter/edit-maker";
         }
         return "/site/butter/edit-user";
