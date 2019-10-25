@@ -23,6 +23,8 @@ public class ButterUpdateDto {
     private String[] issueTagNames;
     private Long[] makerIds;
     private Long recentHistoryId;
+    private String slackUrl;
+    private String slackChannel;
 
     public Boolean isMaker() {
         Long id = UserUtils.getUserId();
@@ -32,10 +34,6 @@ public class ButterUpdateDto {
             }
         }
         return false;
-    }
-
-    public static ButterUpdateDto of(ButterDto butterDto) {
-        return of(butterDto.getId(), butterDto.getTitle(), butterDto.getContent(), butterDto.getExcerpt(), null, null);
     }
 
 }

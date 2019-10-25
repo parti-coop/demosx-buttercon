@@ -142,6 +142,16 @@ ${butter.content}
             <div class="form-action form-group-butter">
               <label class="demo-form-label"></label>
               <div class="inline-block">
+                <input
+                  type="hidden"
+                  name="slackChannel"
+                  value="${butter.slackChannel}"
+                />
+                <input
+                  type="hidden"
+                  name="slackUrl"
+                  value="${butter.slackUrl}"
+                />
                 <button
                   type="button"
                   id="btn-butter-delete"

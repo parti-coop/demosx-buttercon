@@ -8,6 +8,10 @@
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <script>
+  function setSlack(url, channel) {
+    $("input[name='slackUrl']").val(url);
+    $("input[name='slackChannel']").val(channel);
+  }
   $(function() {
     $("input[name='excerpt'][type='radio']").change(e => {
       $("input[name='excerpt'][type='text']").toggle();

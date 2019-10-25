@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
 import lombok.Getter;
@@ -70,9 +71,23 @@ public class Butter extends Issue {
         if (wasMaker) {
             this.title = updateDto.getTitle();
         }
+        this.slackChannel = updateDto.getSlackChannel();
+        this.slackUrl = updateDto.getSlackUrl();
         this.content = updateDto.getContent();
         return this;
     }
+
+    /**
+     * 슬랙 웹훅 url
+     */
+    @Column(name = "SLACK_URL")
+    private String slackUrl;
+
+    /**
+     * 슬랙 웹훅 channel
+     */
+    @Column(name = "SLACK_CHANNEL")
+    private String slackChannel;
 
     @Override
     public Opinion createOpinion(OpinionCreateDto createDto) {
@@ -84,12 +99,14 @@ public class Butter extends Issue {
         return status.isOpen();
     }
 
-    private Butter(String title, String excerpt, String content, List<IssueFile> files) {
+    private Butter(String title, String excerpt, String content, List<IssueFile> files, String slackUrl,
+            String slackChannel) {
         this.title = title;
         this.excerpt = excerpt;
         this.content = content;
         this.files = files;
-        // this.processType = ProcessType.valueOf(processType);
+        this.slackUrl = slackUrl;
+        this.slackChannel = slackChannel;
 
         this.group = IssueGroup.USER;
         this.processType = ProcessType.PUBLISHED;
@@ -99,7 +116,7 @@ public class Butter extends Issue {
 
     public static Butter create(ButterCreateDto createDto) {
         return new Butter(createDto.getTitle(), createDto.getExcerpt(), createDto.getContent(),
-                IssueFile.create(createDto.getFiles()));
+                IssueFile.create(createDto.getFiles()), createDto.getSlackUrl(), createDto.getSlackChannel());
     }
 
     public IssueHistory createHistory(String content, String excerpt) {

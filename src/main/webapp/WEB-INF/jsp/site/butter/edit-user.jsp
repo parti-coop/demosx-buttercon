@@ -113,6 +113,16 @@ ${butter.content}</textarea
                   name="recentHistoryId"
                   value="${recentHistory.id}"
                 />
+                <input
+                  type="hidden"
+                  name="slackChannel"
+                  value="${butter.slackChannel}"
+                />
+                <input
+                  type="hidden"
+                  name="slackUrl"
+                  value="${butter.slackUrl}"
+                />
                 <a
                   class="btn btn-default btn-lg butter-cancel"
                   href="<c:url value='/butter.do?id=${butter.id}'/>"

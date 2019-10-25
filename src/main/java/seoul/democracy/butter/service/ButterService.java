@@ -1,12 +1,22 @@
 package seoul.democracy.butter.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.mail.internet.ContentType;
+
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
 
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,7 +91,48 @@ public class ButterService {
         issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 버터 추가횟수 증가
         issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
+        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), dto.getExcerpt());
         return butter;
+    }
+
+    private void sendSlackWebHook(String url, String channel, String excerpt) {
+        try {
+            UrlValidator urlValidator = new UrlValidator();
+            Boolean isValidUrl = urlValidator.isValid(url);
+            if (isValidUrl == false) {
+                return;
+            }
+            URL object = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) object.openConnection();
+            con.setDoOutput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Accept", "application/json");
+            con.setRequestMethod("POST");
+
+            JsonObject body = Json.createObjectBuilder().add("text", excerpt).add("channel", channel).build();
+
+            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+            wr.write(body.toString());
+            wr.flush();
+
+            // display what returns the POST request
+
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = con.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+                System.out.println("" + sb.toString());
+            } else {
+                System.out.println(con.getResponseMessage());
+            }
+        } catch (Exception e) {
+            return;
+        }
     }
 
     /**
@@ -100,6 +151,7 @@ public class ButterService {
         }
         issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
+        sendSlackWebHook(dto.getSlackUrl(), dto.getSlackChannel(), dto.getExcerpt());
         return butter.update(dto, wasMaker);
     }
 
@@ -118,6 +170,7 @@ public class ButterService {
         } else {
             throw new NotFoundException("해당 버터의 메이커가 아닙니다.");
         }
+        sendSlackWebHook(butter.getAdminComment(), "삭제되었습니다.");
     }
 
     /**

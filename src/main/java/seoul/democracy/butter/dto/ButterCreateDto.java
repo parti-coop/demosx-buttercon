@@ -22,7 +22,7 @@ public class ButterCreateDto {
     private String excerpt;
 
     private String content;
-    
+
     private String processType;
 
     @Valid
@@ -30,4 +30,6 @@ public class ButterCreateDto {
 
     private String[] issueTagNames;
     private Long[] makerIds;
+    private String slackUrl;
+    private String slackChannel;
 }

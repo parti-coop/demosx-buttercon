@@ -97,6 +97,8 @@
                 placeholder="최초 버터"
                 value="최초 버터"
               />
+              <input type="hidden" name="slackChannel" />
+              <input type="hidden" name="slackUrl" />
               <div class="inline-block">
                 <a
                   class="btn btn-default btn-lg butter-cancel"

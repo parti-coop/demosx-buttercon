@@ -28,7 +28,8 @@ public class ButterDto {
                         butter.createdDate, butter.modifiedDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
                         UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), butter.createdIp, butter.modifiedIp,
                         butter.opinionType, CategoryDto.projection.as("category"), IssueStatsDto.projection.as("stats"),
-                        butter.group, butter.status, butter.title, butter.excerpt, butter.content);
+                        butter.group, butter.status, butter.title, butter.excerpt, butter.content, butter.slackUrl,
+                        butter.slackChannel);
 
         /**
          * 버터 리스트에서 사용
@@ -37,7 +38,7 @@ public class ButterDto {
                         butter.modifiedDate, UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), butter.createdIp,
                         butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
                         UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.content,
-                        IssueStatsDto.projection.as("stats"), butter.title);
+                        IssueStatsDto.projection.as("stats"), butter.title, butter.slackUrl, butter.slackChannel);
 
         /**
          * 내 버터 리스트에서 사용
@@ -46,7 +47,7 @@ public class ButterDto {
                         butter.modifiedDate, UserDto.projectionForBasic.as("modifiedBy"), butter.createdIp,
                         butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
                         UserDto.projectionForBasic.as("createdBy"), butter.content,
-                        IssueStatsDto.projection.as("stats"), butter.title);
+                        IssueStatsDto.projection.as("stats"), butter.title, butter.slackUrl, butter.slackChannel);
 
         /**
          * 버터 상세에서 사용
@@ -55,7 +56,7 @@ public class ButterDto {
                         butter.modifiedDate, UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), butter.createdIp,
                         butter.modifiedIp, butter.createdDate, butter.excerpt, butter.statsId,
                         UserDto.projectionForBasicByCreatedBy.as("createdBy"), butter.content,
-                        IssueStatsDto.projection.as("stats"), butter.title);
+                        IssueStatsDto.projection.as("stats"), butter.title, butter.slackUrl, butter.slackChannel);
 
         private Long id;
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -83,6 +84,9 @@ public class ButterDto {
 
         private LocalDate startDate;
         private LocalDate endDate;
+
+        private String slackUrl;
+        private String slackChannel;
 
         private List<IssueTagDto> issueTags;
         private List<UserDto> butterMakers;
