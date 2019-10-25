@@ -258,12 +258,14 @@ body.body-butter {
       font-weight: 800;
       line-height: 1.03;
       color: #000000;
+      margin-top: 40px;
     }
     h2 {
       font-size: 28px;
       font-weight: bold;
       line-height: 1.18;
       color: #000000;
+      margin-top: 40px;
     }
 
     h3 {
@@ -271,6 +273,7 @@ body.body-butter {
       font-weight: bold;
       line-height: 1.17;
       color: #000000;
+      margin-top: 40px;
     }
 
     h4 {
@@ -278,12 +281,14 @@ body.body-butter {
       font-weight: 800;
       line-height: 1.13;
       color: #000000;
+      margin-top: 40px;
     }
 
     p {
       font-size: 16px;
       line-height: 1.5;
       color: #000000;
+      margin-top: 20px;
     }
 
     strong {
@@ -296,6 +301,7 @@ body.body-butter {
     }
 
     blockquote {
+      margin-top: 18px;
       padding: 0 4px;
       margin: 0 0 10px;
       font-size: 20px;
@@ -303,9 +309,12 @@ body.body-butter {
       color: #595959;
       border-left: 2px rgba(0, 0, 0, 0.5) solid;
     }
-
+    ol {
+      padding-inline-start: 24px;
+    }
     ul {
       padding-inline-start: 17px;
+      margin-top: 20px;
       li {
         font-size: 16px;
         line-height: 1.5;

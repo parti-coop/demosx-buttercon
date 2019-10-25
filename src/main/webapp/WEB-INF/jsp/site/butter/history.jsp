@@ -1,40 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>버터나이프크루</title>
-  <%@ include file="../shared/head.jsp" %>
-</head>
-<body class="body-proposal body-proposal-detail">
-<%@ include file="../shared/header.jsp" %>
+  <head>
+    <title>버터나이프크루</title>
+    <%@ include file="../shared/head.jsp" %>
+  </head>
+  <body class="body-butter body-butter-new">
+    <%@ include file="../shared/header.jsp" %>
 
-<div class="container">
-  <div class="top-row clearfix">
-    <div class="top-left">
-      <h3 class="top-row__title">N개의 공론장 - 서울의 청년커뮤니티 작동에 관한 탐색적 연구</h3>
+    <div class="container">
+      <div class="butter-title">
+        ${after.issue.title}
+      </div>
+      <div class="butter-content">
+        발행 내용
+      </div>
+      <div class="mergely">
+        <div class="mergely-resizer">
+          <div id="mergely"></div>
+        </div>
+      </div>
+      <div class="butter-excerpt-label">
+        버터 요약
+      </div>
+      <div class="mergely-excerpt">
+        <input type="text" value="${before.excerpt}" disabled />
+        <input type="text" name="excerpt" value="${after.excerpt}" disabled />
+      </div>
     </div>
-  </div>
-  <div class="">
-    <div class="mergely-resizer">
-      <div id="mergely"></div>
-    </div>
-  </div>
-  <div>
-    ${after.excerpt}
-  </div>
-</div>
-<%@ include file="../shared/footer.jsp" %>
-<script>
-$(function () {
-  $('#mergely').mergely({
-        lhs: function(setValue) {
-            setValue(`${before.content}`);
-        },
-        rhs: function(setValue) {
-            setValue(`${after.content}`);
-        }
-    });
-});
-</script>
-</body>
+    <%@ include file="../shared/footer.jsp" %> <%@ include
+    file="history-script.jsp" %>
+  </body>
 </html>

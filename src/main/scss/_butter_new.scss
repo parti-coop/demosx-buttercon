@@ -69,8 +69,8 @@ body.body-butter-new {
     }
   }
   .mergely {
-    min-height: 300px;
-    .mergely-splash {
+    height: 400px;
+    #mergely-splash {
       display: none;
     }
   }
@@ -78,7 +78,37 @@ body.body-butter-new {
     display: flex;
     flex-direction: row;
     input {
+      margin: 0 38px;
       flex: 1;
+      height: 50px;
+      border: solid 1px #c2c2c2;
+      padding: 6px 12px;
+    }
+  }
+  .container {
+    .butter-title {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: #252525;
+      margin-top: 50px;
+      margin-bottom: 24px;
+    }
+    .butter-content {
+      font-size: 16px;
+      line-height: 1.38;
+      letter-spacing: -0.57px;
+      color: #111111;
+      margin-bottom: 4px;
+    }
+    .butter-excerpt-label {
+      font-size: 16px;
+      line-height: 1.38;
+      letter-spacing: -0.57px;
+      color: #111111;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
   }
 }

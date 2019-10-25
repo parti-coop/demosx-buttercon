@@ -101,6 +101,9 @@ ${butter.content}</textarea
                     placeholder="큰 버터 추가"
                   />
                 </div>
+                <p>
+                  <span class="butter-warning">수정 내용을 입력해주세요.</span>
+                </p>
               </div>
             </div>
             <div class="form-action form-group-butter text-right">
@@ -112,7 +115,7 @@ ${butter.content}</textarea
                 />
                 <a
                   class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter-list.do'/>"
+                  href="<c:url value='/butter.do?id=${butter.id}'/>"
                   role="button"
                 ></a>
                 <button

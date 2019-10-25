@@ -6,6 +6,16 @@ body.body-butter-edit {
     color: #cb9000;
     margin: 0;
   }
+  .butter-right {
+    .butter-header {
+      .butter-title {
+        margin-bottom: 8px;
+      }
+      .butter-maker-list {
+        margin-bottom: 20px;
+      }
+    }
+  }
 
   .butter-excerpt {
     display: flex;
@@ -27,5 +37,12 @@ body.body-butter-edit {
         padding: 6px 12px;
       }
     }
+  }
+
+  .butter-warning {
+    font-size: 14px;
+    line-height: 1.86;
+    letter-spacing: -0.88px;
+    color: #e82216;
   }
 }

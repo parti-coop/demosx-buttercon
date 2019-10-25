@@ -38,7 +38,7 @@
                   data-parsley-maxlength="100"
                   value="${butter.title}"
                 />
-                <span>
+                <span class="butter-warning">
                   필수 입력 항목입니다
                 </span>
               </div>
@@ -133,6 +133,9 @@ ${butter.content}
                     placeholder="큰 버터 추가"
                   />
                 </div>
+                <p>
+                  <span class="butter-warning">수정 내용을 입력해주세요.</span>
+                </p>
               </div>
             </div>
 

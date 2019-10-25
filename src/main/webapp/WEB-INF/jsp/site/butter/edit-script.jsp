@@ -1,4 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- SimpleMDE -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
 <script>
   $(function() {
     $("input[name='excerpt'][type='radio']").change(e => {
@@ -75,6 +83,11 @@
     $formEditButter.on("submit", function(event) {
       event.preventDefault();
       var data = $formEditButter.serializeObject();
+      if (data.excerpt == "") {
+        alert("수정내용을 입력해주세요");
+        $("input[type='text'][name='excerpt']").focus();
+        return;
+      }
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/butter/${butter.id}",

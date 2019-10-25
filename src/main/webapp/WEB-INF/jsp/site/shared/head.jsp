@@ -73,19 +73,8 @@
 <!-- application -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/application.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
-<!-- SimpleMDE -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
 <!-- radio checkbox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
-
-<!-- mergely -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
-<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/search/searchcursor.min.js"></script>
-<link href="${pageContext.request.contextPath}/css/mergely.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/mergely.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
 <c:if test="${environmentName eq 'production'}">
 

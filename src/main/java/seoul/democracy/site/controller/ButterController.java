@@ -115,15 +115,14 @@ public class ButterController {
 
     @RequestMapping(value = "/butter-conflict.do", method = RequestMethod.GET)
     public String butterHistory(@RequestParam("beforeId") Long beforeId, @RequestParam("afterId") Long afterId,
-            @RequestParam("butterId") Long butterId, Model model) {
-        IssueHistoryDto before = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(beforeId),
-                IssueHistoryDto.projection);
+            Model model) {
         IssueHistoryDto after = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(afterId),
                 IssueHistoryDto.projection);
+        IssueHistoryDto before = issueHistoryService.getHistory(IssueHistoryPredicate.equalId(beforeId),
+                IssueHistoryDto.projectionForSite);
         model.addAttribute("before", before);
         model.addAttribute("after", after);
-        model.addAttribute("butterId", butterId);
-        return "/site/butter/conflict";
+        return "/site/butter/history-conflict";
     }
 
     @RequestMapping(value = "/butter-new.do", method = RequestMethod.GET)

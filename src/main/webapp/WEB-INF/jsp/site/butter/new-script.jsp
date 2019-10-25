@@ -1,4 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- SimpleMDE -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
 <script>
   $(function() {
     function toggleFullscreen(simplemde) {
@@ -69,9 +77,12 @@
     $formNewProposal.parsley(parsleyConfig);
     $formNewProposal.on("submit", function(event) {
       event.preventDefault();
-
       var data = $formNewProposal.serializeObject();
-      console.log(data.content);
+      if (data.excerpt == "") {
+        alert("수정내용을 입력해주세요");
+        $("input[type='text'][name='excerpt']").focus();
+        return;
+      }
       data.content = simplemde.value();
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
