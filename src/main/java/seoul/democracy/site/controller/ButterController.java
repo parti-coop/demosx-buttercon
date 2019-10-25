@@ -80,6 +80,8 @@ public class ButterController {
             otherButters = allButters.stream().filter(b -> !myButterIds.contains(b.getId()))
                     .collect(Collectors.toList());
             model.addAttribute("myButters", myButters);
+        } else {
+            otherButters = allButters;
         }
         model.addAttribute("otherButters", otherButters);
         return "/site/butter/detail";
