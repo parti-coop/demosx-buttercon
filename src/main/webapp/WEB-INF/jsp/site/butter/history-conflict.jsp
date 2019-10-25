@@ -24,7 +24,7 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
       <div class="butter-excerpt-label">
         버터 요약
       </div>
-      <form class="demo-form" id="form-edit-butter">
+      <form class="demo-form js-form-dirrty" id="form-edit-butter">
         <div class="mergely-excerpt form-group--demo">
           <input type="text" value="${before.excerpt}" disabled />
           <input type="text" name="excerpt" value="${after.excerpt}" />
