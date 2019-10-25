@@ -62,6 +62,9 @@
 <!-- handlebars -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/handlebars.min-v4.2.0.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
+<!-- form dirty check -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.dirrty.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+
 <!-- date picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/ko.js"></script>
