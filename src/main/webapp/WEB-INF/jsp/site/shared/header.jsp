@@ -71,8 +71,8 @@
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안
         </a></li> --%>
         <!-- <li class="li-middle"><span class="li-middle-line">|</span></li> -->
-        <li class="demo-nav-li"><a href="#" onclick="alert('서비스를 시작하지 않았습니다')">버터제안
-        <!-- <li class="demo-nav-li"><a href="<c:url value="/butter-list.do"/>">버터제안 -->
+        <!-- <li class="demo-nav-li"><a href="#" onclick="alert('서비스를 시작하지 않았습니다')">버터제안 -->
+        <li class="demo-nav-li"><a href="<c:url value="/butter-list.do"/>">버터제안
         </a></li>
       </ul>
 

@@ -89,6 +89,30 @@
                 <textarea id="simplemde" name="content"></textarea>
               </div>
             </div>
+            <div id="slack" style="display: none;">
+              <div class="form-group form-group-butter">
+                <label class="demo-form-label">슬랙 url</label>
+                <div>
+                  <input
+                    type="text"
+                    name="slackUrl"
+                    class="form-control demo-input"
+                    value="${butter.slackUrl}"
+                  />
+                </div>
+              </div>
+              <div class="form-group form-group-butter">
+                <label class="demo-form-label">슬랙 channel</label>
+                <div>
+                  <input
+                    type="text"
+                    name="slackChannel"
+                    class="form-control demo-input"
+                    value="${butter.slackChannel}"
+                  />
+                </div>
+              </div>
+            </div>
 
             <div class="form-action form-group-butter">
               <input
@@ -97,8 +121,6 @@
                 placeholder="최초 버터"
                 value="최초 버터"
               />
-              <input type="hidden" name="slackChannel" />
-              <input type="hidden" name="slackUrl" />
               <div class="inline-block">
                 <a
                   class="btn btn-default btn-lg butter-cancel"
