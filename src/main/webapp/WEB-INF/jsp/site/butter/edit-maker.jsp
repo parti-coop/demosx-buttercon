@@ -111,7 +111,7 @@ ${butter.content}
                       type="radio"
                       id="minor"
                       name="excerpt"
-                      value="작은 버터 추가"
+                      value=""
                     />
                     <div class="state p-warning-o">
                       <label for="minor">작은 버터 추가입니다</label>

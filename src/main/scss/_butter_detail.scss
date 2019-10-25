@@ -122,6 +122,9 @@ body.body-butter-detail {
           font-weight: 600;
           line-height: 1.38;
           color: #252525;
+          .minor {
+            color: $gray-lightest;
+          }
         }
         .butter-maker-each {
           padding: 9px 2%;

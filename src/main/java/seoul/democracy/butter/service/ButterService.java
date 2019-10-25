@@ -20,6 +20,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import seoul.democracy.butter.domain.Butter;
@@ -149,7 +150,14 @@ public class ButterService {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
         }
-        issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
+        boolean changedContent = dto.getContent() != null && !dto.getContent().equals(butter.getContent());
+        boolean hasExcerpt = StringUtils.hasText(dto.getExcerpt());
+
+        log.info("dto.getExcerpt() : {}", dto.getExcerpt());
+        log.info("hasExcerpt : {}", hasExcerpt);
+        if(changedContent || hasExcerpt) {
+            issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
+        }
         statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
         sendSlackWebHook(dto.getSlackUrl(), dto.getSlackChannel(), dto.getExcerpt());
         return butter.update(dto, wasMaker);
