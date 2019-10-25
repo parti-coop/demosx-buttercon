@@ -134,6 +134,7 @@ body.body-butter {
         width: 100%;
       }
       span {
+        word-break: keep-all;
         line-height: 29px;
         font-size: 24px;
         font-weight: 500;

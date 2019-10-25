@@ -14,16 +14,17 @@
   type="text/javascript"
   src="${pageContext.request.contextPath}/js/mergely.js"
 ></script>
-
+<textarea id="beforeContent">${before.content}</textarea>
+<textarea id="afterContent">${after.content}</textarea>
 <script>
   $(function() {
     $("#mergely").mergely({
       // autoupdate: false,
       lhs: function(setValue) {
-        setValue(`${before.content}`);
+        setValue(document.getElementById("beforeContent").value);
       },
       rhs: function(setValue) {
-        setValue(`${after.content}`);
+        setValue(document.getElementById("afterContent").value);
       }
     });
     var $formEditButter = $("#form-edit-butter");

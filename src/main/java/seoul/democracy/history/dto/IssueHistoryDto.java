@@ -44,10 +44,6 @@ public class IssueHistoryDto {
     private String excerpt;
     private String content;
 
-    public String getContent() {
-        return StringEscapeUtils.escapeEcmaScript(content);
-    }
-
     public String contentWithBr() {
         return content.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
     }

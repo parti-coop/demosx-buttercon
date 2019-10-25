@@ -23,6 +23,7 @@
     // 편집기
     var simplemde = new SimpleMDE({
       element: document.getElementById("simplemde"),
+      spellChecker: false,
       toolbar: [
         "bold",
         "italic",
