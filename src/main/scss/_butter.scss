@@ -185,7 +185,11 @@ body.body-butter {
           flex: 167;
           display: flex;
           align-items: center;
-          padding-left: 20%;
+          > div {
+            padding-left: 20%;
+            display: flex;
+            align-items: center;
+          }
         }
       }
     }
@@ -247,5 +251,67 @@ body.body-butter {
   }
   .fullscreen .custom-side-by-side::after {
     content: "돌아가기";
+  }
+  .editor-preview {
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.03;
+      color: #000000;
+    }
+    h2 {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.18;
+      color: #000000;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.17;
+      color: #000000;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.13;
+      color: #000000;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    a {
+      color: #1578f2;
+      text-decoration: underline;
+    }
+
+    blockquote {
+      padding: 0 4px;
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.4;
+      color: #595959;
+      border-left: 2px rgba(0, 0, 0, 0.5) solid;
+    }
+
+    ul {
+      padding-inline-start: 17px;
+      li {
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: normal;
+        color: #000000;
+      }
+    }
   }
 }
