@@ -116,7 +116,9 @@ body.body-butter-detail {
         border: solid 1px #d8d8d8;
         background-color: #fafafa;
         padding: 2%;
-        display: block;
+        &:not(.collapse) {
+          display: block;
+        }
         .butter-history-excerpt {
           font-size: 16px;
           font-weight: 600;
@@ -142,7 +144,14 @@ body.body-butter-detail {
           }
         }
       }
-    }
+      .butter-history-more {
+        font-size: 14px;
+        line-height: 1.57;
+        letter-spacing: -0.5px;
+        color: $gray-75;
+        margin-bottom: 14px;
+      }
+  }
     .butter-container {
       padding: 0;
       .butter-list {

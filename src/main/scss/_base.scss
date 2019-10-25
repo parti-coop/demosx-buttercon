@@ -44,6 +44,11 @@ a:hover {
   display: inline-block;
 }
 
+.text-none-decoration,
+.text-none-decoration:hover,
+.text-none-decoration:focus {
+  text-decoration: none;
+}
 .text-underline {
   text-decoration: underline;
 }
