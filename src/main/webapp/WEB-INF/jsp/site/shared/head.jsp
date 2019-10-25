@@ -70,6 +70,9 @@
 <!-- scroll-into -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/smooth-scroll-into-view-if-needed.min.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
+<!-- form dirty check -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.dirrty.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+
 <!-- application -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/application.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 

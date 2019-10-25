@@ -20,7 +20,7 @@
           <h4 class="demo-side-title">버터보드 만들기</h4>
         </div>
         <div class="demo-content demo-content-right">
-          <form class="demo-form" id="form-edit-butter">
+          <form class="demo-form js-form-dirrty" id="form-edit-butter">
             <input type="hidden" name="id" value="${butter.id}" />
             <div class="form-group form-group--demo form-group-butter">
               <label class="demo-form-label" for="inputTitle"

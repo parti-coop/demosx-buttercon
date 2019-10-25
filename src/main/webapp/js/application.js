@@ -124,4 +124,6 @@ $(function() {
     });
 
   })();
+
+  $('.js-form-dirrty').dirrty();
 });
