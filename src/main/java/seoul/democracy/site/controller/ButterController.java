@@ -72,7 +72,11 @@ public class ButterController {
         model.addAttribute("histories", histories);
         model.addAttribute("contributors", contributors);
 
-        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList);
+        List<ButterDto> allButters = butterService.getButters(ButterDto.projectionForSiteList)
+                .stream()
+                .filter(b -> !b.getId().equals(butterDto.getId()))
+                .collect(Collectors.toList());
+
         List<ButterDto> otherButters = null;
         if (UserUtils.getLoginUser() != null) {
             List<ButterDto> myButters = butterService.getButtersMine(ButterDto.projectionForSiteListMine);
