@@ -170,7 +170,7 @@ public class ButterService {
         } else {
             throw new NotFoundException("해당 버터의 메이커가 아닙니다.");
         }
-        sendSlackWebHook(butter.getAdminComment(), "삭제되었습니다.");
+        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), "삭제되었습니다.");
     }
 
     /**
