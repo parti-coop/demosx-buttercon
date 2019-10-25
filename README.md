@@ -26,6 +26,13 @@ globals.properties 파일의 프로퍼티가 기본값이고, 프로파일 값(s
 
 ## 로컬 개발 및 테스트
 
+### 실서버 데이터베이스를 로컬로 다운로드
+
+mysql > drop database demosx_buttercon_development
+mysql > create database `demosx_buttercon_development` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+$ mysqldump -uadmin -p**** -h database-buttercon.clpurnr5lyok.ap-northeast-2.rds.amazonaws.com demosx_buttercon | mysql -h **** -uroot -p**** demosx_buttercon_development
+
 ### 패키징
 
 `maven clean package`
@@ -38,7 +45,7 @@ globals.properties 파일의 프로퍼티가 기본값이고, 프로파일 값(s
 
 * /src/main/resources/egovframework/egovProps/globals-override-test.properties
     * globals-override-main.properties 의 각 값을 테스트 환경에 맞춰 오버라이드 해야할 때 사용
-* `globals-override-test.properties` 파일의 `Globals.Url` 부분에 새로운 디비스키마를 만들어 주는 것이 좋다. 
+* `globals-override-test.properties` 파일의 `Globals.Url` 부분에 새로운 디비스키마를 만들어 주는 것이 좋다.
     * `globals-override-development.properties` 와 같은 디비 스키마를 바라볼 경우, 로컬에서 수동 테스트 데이타와 충돌하여, 자동 테스트 실패.
     * 로컬 디비에 테스트 스키마를 새로 만든다. `create schema buttercontest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
 
@@ -52,9 +59,9 @@ Globals.Url=jdbc:mysql://127.0.0.1:3306/buttercontest?useSSL=false
 ### 로컬실행 유의사항
 
 * `/src/main/resources/egovframework/egovProps/` 디렉토리 밑에 파일생성: `globals-override-development.properties`
-* 생성된 파일에 로컬 MYSQL의 `UserName,Password,Url` 항목을 넣는다. 
+* 생성된 파일에 로컬 MYSQL의 `UserName,Password,Url` 항목을 넣는다.
 
-`globals-override-development.properties` 예: 
+`globals-override-development.properties` 예:
 ```
 Globals.UserName=swain
 Globals.Password=swain
@@ -63,10 +70,10 @@ Globals.Url=jdbc:mysql://127.0.0.1:3306/buttercon?useSSL=false
 
 * 로컬 디비에 개발 스키마를 새로 만든다. `create schema buttercon DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
 * 톰켓 환경에 자바 변수를 넣어준다. `-Dspring.profiles.active=development`
-* `globals.properties`에 있는 변수 중 `ENC(...)`로 묶여있는 암호화 변수는 모두 `globals-override-development.properties`파일에서 다른 수로 덮어야 한다. 
+* `globals.properties`에 있는 변수 중 `ENC(...)`로 묶여있는 암호화 변수는 모두 `globals-override-development.properties`파일에서 다른 수로 덮어야 한다.
     * `Globals.kakaoClientId=a` 도커파일에 있는 암호 `-Dorg.demosx.master.password=needtochange` 가 아닌 다른 비밀번호로 암호화 되어 있기 때문에, 변경하지 않으면 구동이 되지 않는다.
 
-`globals-override-development.properties` 예: 
+`globals-override-development.properties` 예:
 ```
 Globals.SmtpUser=a
 Globals.SmtpPassword=a
@@ -117,7 +124,7 @@ mvn package
 1. 슬렉 이벤트 후크 넣기
 2. slack.com url 받아오기 https://hooks.slack.com/services/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
 3. 저장 성공
-3. 수정 시 
+3. 수정 시
 4. 댓글 시
 5. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
 
