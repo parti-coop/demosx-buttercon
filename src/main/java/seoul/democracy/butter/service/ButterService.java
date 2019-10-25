@@ -29,6 +29,7 @@ import seoul.democracy.butter.dto.ButterUpdateDto;
 import seoul.democracy.butter.predicate.ButterPredicate;
 import seoul.democracy.butter.repository.ButterRepository;
 import seoul.democracy.common.exception.NotFoundException;
+import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.history.repository.IssueHistoryRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
 import seoul.democracy.issue.service.IssueTagService;
@@ -91,11 +92,13 @@ public class ButterService {
         issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 버터 추가횟수 증가
         issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
-        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), dto.getExcerpt());
+        String msg = "버터 등록: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
+                + ">*";
+        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
         return butter;
     }
 
-    private void sendSlackWebHook(String url, String channel, String excerpt) {
+    private void sendSlackWebHook(String url, String channel, String text) {
         try {
             UrlValidator urlValidator = new UrlValidator();
             Boolean isValidUrl = urlValidator.isValid(url);
@@ -109,7 +112,7 @@ public class ButterService {
             con.setRequestProperty("Accept", "application/json");
             con.setRequestMethod("POST");
 
-            JsonObject body = Json.createObjectBuilder().add("text", excerpt).add("channel", channel).build();
+            JsonObject body = Json.createObjectBuilder().add("text", text).add("channel", channel).build();
 
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
             wr.write(body.toString());
@@ -128,7 +131,7 @@ public class ButterService {
                 br.close();
                 System.out.println("" + sb.toString());
             } else {
-                System.out.println(con.getResponseMessage());
+                System.out.println(HttpResult + ": " +con.getResponseMessage());
             }
         } catch (Exception e) {
             return;
@@ -149,10 +152,14 @@ public class ButterService {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
         }
-        issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
+        IssueHistory history = issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
-        sendSlackWebHook(dto.getSlackUrl(), dto.getSlackChannel(), dto.getExcerpt());
-        return butter.update(dto, wasMaker);
+        butter = butter.update(dto, wasMaker);
+        String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
+                + ">*\n> <https://butterknifecrew.kr/butter-history.do?id=" + history.getId() + "|"
+                + history.getExcerpt() + ">";
+        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
+        return butter;
     }
 
     /**
@@ -167,10 +174,11 @@ public class ButterService {
         Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
         if (wasMaker) {
             butter.delete();
+            String msg = "버터 삭제: *" + butter.getTitle() + "*";
+            sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
         } else {
             throw new NotFoundException("해당 버터의 메이커가 아닙니다.");
         }
-        sendSlackWebHook(butter.getAdminComment(), "삭제되었습니다.");
     }
 
     /**

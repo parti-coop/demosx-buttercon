@@ -8,9 +8,12 @@
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <script>
-  function setSlack(url, channel){
-   $("input[name='slackUrl']").val(url);
-   $("input[name='slackChannel']").val(channel);
+  function setSlack(url, channel) {
+    $("input[name='slackUrl']").val(url);
+    $("input[name='slackChannel']").val(channel);
+  }
+  function showSlack() {
+    $("#slack").show();
   }
   $(function() {
     function toggleFullscreen(simplemde) {

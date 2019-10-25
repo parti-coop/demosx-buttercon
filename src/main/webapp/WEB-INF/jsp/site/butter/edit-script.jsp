@@ -12,6 +12,9 @@
     $("input[name='slackUrl']").val(url);
     $("input[name='slackChannel']").val(channel);
   }
+  function showSlack() {
+    $("#slack").show();
+  }
   $(function() {
     $("input[name='excerpt'][type='radio']").change(e => {
       $("input[name='excerpt'][type='text']").toggle();

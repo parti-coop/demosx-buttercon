@@ -104,6 +104,20 @@ ${butter.content}</textarea
                 <p>
                   <span class="butter-warning">수정 내용을 입력해주세요.</span>
                 </p>
+                <div id="slack" style="display: none;">
+                  <label>슬랙 url</label>
+                  <input
+                    type="text"
+                    name="slackUrl"
+                    value="${butter.slackUrl}"
+                  />
+                  <label>슬랙 channel</label>
+                  <input
+                    type="text"
+                    name="slackChannel"
+                    value="${butter.slackChannel}"
+                  />
+                </div>
               </div>
             </div>
             <div class="form-action form-group-butter text-right">
@@ -112,16 +126,6 @@ ${butter.content}</textarea
                   type="hidden"
                   name="recentHistoryId"
                   value="${recentHistory.id}"
-                />
-                <input
-                  type="hidden"
-                  name="slackChannel"
-                  value="${butter.slackChannel}"
-                />
-                <input
-                  type="hidden"
-                  name="slackUrl"
-                  value="${butter.slackUrl}"
                 />
                 <a
                   class="btn btn-default btn-lg butter-cancel"

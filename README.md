@@ -86,8 +86,8 @@ Globals.googleClientSecret=a
 
 ### 개발
 
-`mvn sass:watch`
-SASS 자동 컴파일
+~~`mvn sass:watch` SASS 자동 컴파일~~
+크롬은 sass를 자동으로 src와 매칭시켜 줘서 위의 명령어를 킬 필요가 없다.
 
 ## 프로젝트 빌드
 
@@ -101,16 +101,34 @@ mvn package
 
 ## 서버 설치
 
-* 미리 설정된 관리자 아이디와 암호: contact@parti.xyz / needtochange
-* /deploy 폴더를 서버에 ~에 복사한다.
-* 서버 ~/docker/docker-compose.override.yml을 ~/docker/docker-compose.overried.yml로 복사하고 해당 파일 안의 org.demosx.master.password 값을 입력한다.
+1. ~~미리 설정된 관리자 아이디와 암호: contact@parti.xyz / needtochange~~
+1. connect to aws through **last pass** *contact@parti.xyz*
+1. pem key download
+1. ssh prep: `sudo nano cat ~/.ssh/config` 
+```
+Host parti-butter-prod
+ HostName ec2-15-164-213-61.ap-northeast-2.compute.amazonaws.com
+ User ubuntu
+ IdentityFile ~/.ssh/demosx.pem
+```
+5. /deploy 폴더를 서버에 ~에 복사한다.
+5. 서버 ~/docker/docker-compose.override.yml을 ~/docker/docker-compose.overried.yml로 복사하고 해당 파일 안의 org.demosx.master.password 값을 입력한다.
 
-## 배포 방법
+### 추가 dependency 목록
+1. docker
+1. docker-compose
+1. `apt install unzip`
+1. ssl https://certbot.eff.org/
+
+### 배포 방법
 
 1. 프로젝트 빌드를 한다.
 2. 서버 ~/current 에 war를 복사한다.
-    * 버전에 따라 도커 내에서 WAR 파일이 안풀리는 경우 발견. 톰켓 권한이 문제로 추정.
+    * `scp ./target/ROOT.war parti-butter-prod:~/current/`
 3. 서버 ~/docker/build.sh를 실행한다.
+    * ~~버전에 따라 도커 내에서 WAR 파일이 안풀리는 경우 발견. 톰켓 권한이 문제로 추정.~~
+    * `build.sh` 에서 WAR를 unzip한다.
+
 
 ## 할일
 
@@ -123,18 +141,11 @@ mvn package
 
 ### 아는 버그
 
-* 채널에 스페이스 바 들어가면 안된다.
+* ~~채널에 스페이스 바 들어가면 안된다.~~ 슬렉 @username 확인은 [Account Setting](https://parti-activists.slack.com/account/settings) 맨 아래 Username을 expand해야 나온다. Display Name과 다르니 주의! 채널이름은 애초에 띄워쓰기가 되지 않는다.
 
-### 2차로 미루어진 기능
+### 2차로 미루어진 기능? (검정필요)
 
-* 댓글 달기
-* 수정 요청하기
+* 발행이력에 댓글 달기
+* 비 메이커가 메이커에게 수정 요청하기
 * 메이커가 수정요청 반영하기/거절하기
-* 사소한 수정 이력은 건너뛰고 비교
-
-
-## 서원 낙서장
-
-1. Butters 와 User 를 @ManyToMany로 엮음.
-2. JPA 코드의 projection, dto, domain의 차이를 3일만에 이해함, 아직 QBean은 잘 이해가지 않음.
-3. https://naver.com
+* 사소한 수정 이력은 건너뛰고 비교?
