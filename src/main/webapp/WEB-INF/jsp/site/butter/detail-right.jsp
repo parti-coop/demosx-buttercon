@@ -81,9 +81,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         >${String.valueOf(histories != null ? histories.size() : 0)}</i
       >
     </div>
-    <c:forEach var="history" items="${histories}">
+    <c:forEach var="history" items="${histories}" varStatus="status">
       <a
-        class="butter-history-list"
+        class="butter-history-list ${status.index >= 3 ? 'collapse js-history-list-collapsable' : ''}"
         href="<c:url value='/butter-history.do?id=${history.id}'/>"
       >
         <div class="butter-maker-each">
@@ -106,6 +106,15 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </a>
     </c:forEach>
+
+    <c:if test="${histories.size() > 3}">
+      <div class="text-center">
+        <button class="butter-history-more btn btn-link text-none-decoration" data-toggle="collapse" data-target=".js-history-list-collapsable">
+          더 보기
+          <i class="xi-angle-down-thin"></i>
+        </button>
+      </div>
+    </c:if>
   </div>
   <hr />
 
