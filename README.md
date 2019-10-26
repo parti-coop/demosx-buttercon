@@ -140,11 +140,22 @@ Host parti-butter-prod
 ## 할일
 
 1. 슬렉 이벤트 후크 넣기
-2. slack.com url 받아오기 https://hooks.slack.com/services/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
-3. 저장 성공
-3. 수정 시
-4. 댓글 시
-5. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
+    1. slack.com url 받아오기 https://hooks.slack.com/services/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
+    1. 저장 성공
+    1. 수정 시
+    1. 댓글 시
+    1. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
+1. 레이블
+    1. 페이지 제목 : 버터제안 => 버터보드
+    1. 메이커가 수정시 : 버터보드만들기 => 버터보드 수정하기
+    1. 수정내용 ==> 변경 요약
+1. 기타
+    1. 수정내용을 입력해 주세요 사라지게
+    1. 한글 문제
+    1. 삭제 버튼 스타일
+    1. 충돌화면 다듬기
+    1. 충돌후 수정한 것 저장되는가?
+    1. 충돌한 후 요약을 다듬을 수 있게
 
 ### 아는 버그
 
@@ -156,3 +167,8 @@ Host parti-butter-prod
 * 비 메이커가 메이커에게 수정 요청하기
 * 메이커가 수정요청 반영하기/거절하기
 * 사소한 수정 이력은 건너뛰고 비교?
+
+### 낙서장
+
+1. conflict,history 양쪽다 수정되는 문제
+2. dirrty가 적용되는지?

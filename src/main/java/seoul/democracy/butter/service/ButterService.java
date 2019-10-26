@@ -20,6 +20,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import seoul.democracy.butter.domain.Butter;
@@ -131,7 +132,7 @@ public class ButterService {
                 br.close();
                 System.out.println("" + sb.toString());
             } else {
-                System.out.println(HttpResult + ": " +con.getResponseMessage());
+                System.out.println(HttpResult + ": " + con.getResponseMessage());
             }
         } catch (Exception e) {
             return;
@@ -152,13 +153,18 @@ public class ButterService {
             issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
             changeMakers(butter, dto.getMakerIds());
         }
-        IssueHistory history = issueHistoryRepository.save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
-        statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
-        butter = butter.update(dto, wasMaker);
-        String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
-                + ">*\n> <https://butterknifecrew.kr/butter-history.do?id=" + history.getId() + "|"
-                + history.getExcerpt() + ">";
-        sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
+        boolean changedContent = dto.getContent() != null && !dto.getContent().equals(butter.getContent());
+        boolean hasExcerpt = StringUtils.hasText(dto.getExcerpt());
+        if (changedContent || hasExcerpt) {
+            IssueHistory history = issueHistoryRepository
+                    .save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
+            butter = butter.update(dto, wasMaker);
+            String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
+                    + ">*\n> <https://butterknifecrew.kr/butter-history.do?id=" + history.getId() + "|"
+                    + history.getExcerpt() + ">";
+            sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
+            statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
+        }
         return butter;
     }
 

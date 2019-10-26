@@ -101,6 +101,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             >
           </div>
           <div class="butter-history-excerpt">
+            <c:if test="${empty history.excerpt}">
+              <span class='text-muted minor'>작은 버터 추가</span>
+            </c:if>
             ${history.excerpt}
           </div>
         </div>

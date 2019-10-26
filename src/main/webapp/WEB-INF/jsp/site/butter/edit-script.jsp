@@ -16,14 +16,11 @@
     $("#slack").show();
   }
   $(function() {
-    $("input[name='excerpt'][type='radio']").change(e => {
+    $("input[name='excerpt'][type='radio']").change(function(e) {
       $("input[name='excerpt'][type='text']").toggle();
-      $("input[name='excerpt'][type='text']").prop("disabled", (i, v) => !v);
+      $("input[name='excerpt'][type='text']").prop("disabled", function(i, v) { return !v; });
     });
     function toggleFullscreen(simplemde) {
-      console.log(arguments);
-      console.log(simplemde);
-      console.log(simplemde.isFullscreenActive());
       if (simplemde.isFullscreenActive()) {
         simplemde.toggleFullScreen();
       } else {
@@ -90,7 +87,7 @@
     $formEditButter.on("submit", function(event) {
       event.preventDefault();
       var data = $formEditButter.serializeObject();
-      if (data.excerpt == "") {
+      if (data.excerpt == "" && !$("input[type='text'][name='excerpt']").prop('disabled')) {
         alert("수정내용을 입력해주세요");
         $("input[type='text'][name='excerpt']").focus();
         return;
@@ -125,7 +122,7 @@
       });
     });
 
-    $("#btn-butter-delete").one("click", () => {
+    $("#btn-butter-delete").one("click", function(e) {
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/butter/${butter.id}",

@@ -86,11 +86,6 @@
     $formNewProposal.on("submit", function(event) {
       event.preventDefault();
       var data = $formNewProposal.serializeObject();
-      if (data.excerpt == "") {
-        alert("수정내용을 입력해주세요");
-        $("input[type='text'][name='excerpt']").focus();
-        return;
-      }
       data.content = simplemde.value();
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
