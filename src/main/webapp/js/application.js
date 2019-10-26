@@ -37,6 +37,15 @@ $(function() {
     }
   });
 
+  $('.js-focus').on('click', function(e) {
+    var $elm = $(e.currentTarget);
+    var $target = $($elm.data('focus'));
+    if($target.length > 0) {
+      $target.focus();
+    }
+    return false;
+  });
+
   (function() {
     $('.js-tinymce-editor').each(function(index, elm) {
       var protocol = location.protocol;
@@ -122,7 +131,6 @@ $(function() {
         }
       });
     });
-
   })();
 
   $('.js-form-dirrty').dirrty();

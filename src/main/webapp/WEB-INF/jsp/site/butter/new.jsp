@@ -86,7 +86,9 @@
                 >본문<span class="required">*</span></label
               >
               <div>
-                <textarea id="simplemde" name="content"></textarea>
+                <textarea id="simplemde" name="content">
+<%@ include file="default-content.jsp" %>
+                </textarea>
               </div>
             </div>
             <div id="slack" style="display: none;">
