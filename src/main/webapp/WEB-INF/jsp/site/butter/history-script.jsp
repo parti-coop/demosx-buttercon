@@ -19,7 +19,7 @@
 <script>
   $(function() {
     $("#mergely").mergely({
-      // autoupdate: false,
+      cmsettings: { readOnly: READONLY },
       lhs: function(setValue) {
         setValue(document.getElementById("beforeContent").value);
       },

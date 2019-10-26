@@ -3,6 +3,9 @@
 <html>
   <head>
     <title>버터나이프크루</title>
+    <script>
+      const READONLY = true;
+    </script>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-new">
@@ -33,7 +36,8 @@
             class="btn btn-default btn-lg butter-cancel"
             href="<c:url value='/butter.do?id=${after.issue.id}'/>"
             role="button"
-          >돌아가기</a>
+            >돌아가기</a
+          >
         </div>
       </div>
     </div>

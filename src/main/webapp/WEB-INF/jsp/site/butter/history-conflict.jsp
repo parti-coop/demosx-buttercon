@@ -4,17 +4,31 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
   <head>
     <title>버터나이프크루</title>
+    <script>
+      const READONLY = false;
+    </script>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-new">
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
+      <div class="butter-conflict">
+        <p>
+          버터보드 추가 중 이전 발행 내용과 충돌이 났습니다.
+        </p>
+        <p>
+          오류가 아닙니다. 안심하세요. :)
+        </p>
+      </div>
       <div class="butter-title">
         ${after.issue.title}
       </div>
       <div class="butter-content">
-        발행 내용
+        <div class="pull-left">이전 발행 내용입니다.</div>
+        <div class="pull-right">
+          방금 발행 내용입니다. 여기서 계속 수정하세요.
+        </div>
       </div>
       <div class="mergely">
         <div class="mergely-resizer">
