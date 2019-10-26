@@ -139,12 +139,6 @@ Host parti-butter-prod
 
 ## 할일
 
-1. 슬렉 이벤트 후크 넣기
-    1. slack.com url 받아오기 https://hooks.slack.com/services/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
-    1. 저장 성공
-    1. 수정 시
-    1. 댓글 시
-    1. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
 1. 레이블
     1. 페이지 제목 : 버터제안 => 버터보드
     1. 메이커가 수정시 : 버터보드만들기 => 버터보드 수정하기
@@ -172,3 +166,12 @@ Host parti-butter-prod
 
 1. conflict,history 양쪽다 수정되는 문제
 2. dirrty가 적용되는지?
+
+## 기능
+
+### 등록/수정 시 슬랙 메시지 받기
+
+1. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
+1. 예: 빠띠 워크스페이스 https://hooks.slack.com/services/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
+1. 버터 등록/수정 페이지, 브라우저 개발자 콘솔에서 `$("#slack").show();` 입력하면 숨겨진 필드 나온다.
+1. url과 채널명 등록하고 저장.

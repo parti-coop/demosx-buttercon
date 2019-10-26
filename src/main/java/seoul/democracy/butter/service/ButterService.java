@@ -155,14 +155,18 @@ public class ButterService {
         }
         boolean changedContent = dto.getContent() != null && !dto.getContent().equals(butter.getContent());
         boolean hasExcerpt = StringUtils.hasText(dto.getExcerpt());
+        /** 본문 수정이나 요약이 없으면 발행이력에 넣지 않고 슬랙도 쏘지 않는다. */
         if (changedContent || hasExcerpt) {
             IssueHistory history = issueHistoryRepository
                     .save(butter.createHistory(dto.getContent(), dto.getExcerpt()));
             butter = butter.update(dto, wasMaker);
-            String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
-                    + ">*\n> <https://butterknifecrew.kr/butter-history.do?id=" + history.getId() + "|"
-                    + history.getExcerpt() + ">";
-            sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
+            /** 요약이 없으면 발행이력에는 넣지만 슬랙은 쏘지 않는다. */
+            if (hasExcerpt) {
+                String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|"
+                        + butter.getTitle() + ">*\n> <https://butterknifecrew.kr/butter-history.do?id="
+                        + history.getId() + "|" + history.getExcerpt() + ">";
+                sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
+            }
             statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
         }
         return butter;
