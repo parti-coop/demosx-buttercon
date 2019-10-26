@@ -72,8 +72,24 @@
         </a></li> --%>
         <!-- <li class="li-middle"><span class="li-middle-line">|</span></li> -->
         <!-- <li class="demo-nav-li"><a href="#" onclick="alert('서비스를 시작하지 않았습니다')">버터보드 -->
-        <li class="demo-nav-li"><a href="<c:url value="/butter-list.do"/>">버터보드
-        </a></li>
+        <li class="demo-nav-li"><a href="<c:url value="/butter-list.do"/>">버터보드</a></li>
+        <li class="dropdown demo-nav-li">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            가이드
+            <i class="xi-angle-down-thin"></i>
+          </a>
+          <ul class="dropdown-menu dopdown-menu-auto">
+            <li class="dropdown-item">
+              <a href="<c:url value='/butter.do?id=141'/>" class="dropdown-link">버터보드 공동작업 가이드</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="<c:url value='/butter.do?id=146'/>" class="dropdown-link">정책 제안 점검 체크리스트</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="<c:url value='/butter.do?id=144'/>" class="dropdown-link">마크다운 문서 작성법</a>
+            </li>
+          </ul>
+        </li>
       </ul>
 
       <div class="nav-login-m">
