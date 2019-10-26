@@ -149,9 +149,11 @@ public class ButterService {
             throw new NotFoundException("해당 버터를 찾을 수 없습니다.");
 
         Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
-        if (wasMaker) {
-            issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
-            changeMakers(butter, dto.getMakerIds());
+        if (dto.getIsConflict() != true) {
+            if (wasMaker) {
+                issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
+                changeMakers(butter, dto.getMakerIds());
+            }
         }
         boolean changedContent = dto.getContent() != null && !dto.getContent().equals(butter.getContent());
         boolean hasExcerpt = StringUtils.hasText(dto.getExcerpt());

@@ -43,6 +43,7 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
           <input type="text" value="${before.excerpt}" disabled />
           <input type="text" name="excerpt" value="${after.excerpt}" />
           <input type="hidden" name="id" value="${after.issue.id}" />
+          <input type="hidden" name="isConflict" value="true" />
           <input type="hidden" name="recentHistoryId" value="${before.id}" />
         </div>
         <div class="form-action form-group-butter text-right">

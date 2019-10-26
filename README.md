@@ -172,6 +172,6 @@ Host parti-butter-prod
 ### 등록/수정 시 슬랙 메시지 받기
 
 1. 진저티 슬랙 워크스페이스의 웹훅 url 받아오기
-1. 예: 빠띠 워크스페이스 https://hooks.slack.com/services/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
+1. 예: 빠띠 워크스페이스 https://hooks.slack.com/services/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
 1. 버터 등록/수정 페이지, 브라우저 개발자 콘솔에서 `$("#slack").show();` 입력하면 숨겨진 필드 나온다.
 1. url과 채널명 등록하고 저장.

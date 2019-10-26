@@ -25,6 +25,7 @@ public class ButterUpdateDto {
     private Long recentHistoryId;
     private String slackUrl;
     private String slackChannel;
+    private Boolean isConflict = false;
 
     public Boolean isMaker() {
         Long id = UserUtils.getUserId();

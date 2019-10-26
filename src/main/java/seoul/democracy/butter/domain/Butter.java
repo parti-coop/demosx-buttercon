@@ -68,7 +68,7 @@ public class Butter extends Issue {
     private ProcessType processType;
 
     public Butter update(ButterUpdateDto updateDto, Boolean wasMaker) {
-        if (wasMaker) {
+        if (wasMaker && updateDto.getIsConflict() == false) {
             this.title = updateDto.getTitle();
         }
         this.slackChannel = updateDto.getSlackChannel();
