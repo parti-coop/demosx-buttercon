@@ -22,7 +22,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
     <script>
       var simplemde = new EasyMDE({
-        element: document.getElementById("simplemde"),
+        element: document.getElementById("simplemde-view"),
         toolbar: false,
         spellChecker: false
       });
