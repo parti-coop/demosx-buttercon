@@ -16,7 +16,7 @@
 
 .CodeMirror-gutters {
   border-right: 1px solid $color-border;
-  background-color: transparent;
+  background-color: $color-background;
   white-space: nowrap;
 }
 
@@ -91,6 +91,7 @@
     border: none;
     -ms-overflow-style: none;
     overflow: auto;
+    min-height: auto;
   }
   .CodeMirror-vscrollbar,
   .CodeMirror-hscrollbar,
@@ -98,7 +99,7 @@
   .CodeMirror-gutter-filler,
   .CodeMirror-scroll,
   .editor-statusbar {
-    display: none;
+    display: none !important;
   }
   .editor-preview {
     position: static;
@@ -106,4 +107,9 @@
     padding-right: 0;
     overflow: visible;
   }
+}
+
+.CodeMirror-merge-l-chunk .CodeMirror-line,
+.CodeMirror-merge-r-chunk .CodeMirror-line {
+  color: $color-text-preview;
 }

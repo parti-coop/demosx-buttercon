@@ -157,6 +157,9 @@ body.body-butter {
         height: 126px;
         border: solid 1px $gray-lighter;
         background-color: white;
+        & + .butter-list-each {
+          border-top: none;
+        }
         .butter-each-1 {
           flex: 123;
           .butter-new {

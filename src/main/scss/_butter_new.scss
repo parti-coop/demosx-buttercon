@@ -68,21 +68,24 @@ body.body-butter-new {
       float: right;
     }
   }
-  .mergely {
-    height: 400px;
-    #mergely-splash {
-      display: none;
-    }
-  }
-  .mergely-excerpt {
+  .butter-excerpt {
     display: flex;
     flex-direction: row;
     input {
-      margin: 0 38px;
+      margin: 0;
       flex: 1;
       height: 50px;
       border: solid 1px #c2c2c2;
       padding: 6px 12px;
+    }
+    input:first-child {
+      margin-left: 0;
+      margin-right: 34px;
+      background-color: #eee;
+    }
+    input:nth-child(2) {
+      margin-left: 34px;
+      margin-right: 0;
     }
   }
   .container {

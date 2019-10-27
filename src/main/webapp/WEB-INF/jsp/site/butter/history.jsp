@@ -18,15 +18,11 @@
       <div class="butter-content">
         발행 내용
       </div>
-      <div class="mergely">
-        <div class="mergely-resizer">
-          <div id="mergely"></div>
-        </div>
-      </div>
+      <div id="js-mergely" data-read-only="true"></div>
       <div class="butter-excerpt-label">
         버터 요약
       </div>
-      <div class="mergely-excerpt form-group--demo">
+      <div class="butter-excerpt form-group--demo">
         <input type="text" value="${before.excerpt}" disabled />
         <input type="text" name="excerpt" value="${after.excerpt}" disabled />
       </div>

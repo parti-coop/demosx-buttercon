@@ -87,6 +87,12 @@
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 
+<!-- Codemirror with merge -->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.48.4/lib/codemirror.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/diff_match_patch.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/codemirror/merge.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+
+
 <c:if test="${environmentName eq 'production'}">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
