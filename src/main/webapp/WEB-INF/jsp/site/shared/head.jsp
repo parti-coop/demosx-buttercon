@@ -28,9 +28,11 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+
 <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link href="${pageContext.request.contextPath}/css/main.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/application.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
 
@@ -78,6 +80,12 @@
 
 <!-- radio checkbox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
+
+<!-- EasyMDE -->
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendors/simplemde/simplemde-theme-dark.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
 
 <c:if test="${environmentName eq 'production'}">
 

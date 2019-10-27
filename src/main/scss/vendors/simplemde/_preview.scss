@@ -1,0 +1,36 @@
+.editor-preview {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 30px $width-gap $width-gap;
+  z-index: $smde-z-index-container + 1;
+}
+
+.editor-preview-side {
+  border: 0;
+  border-left: 1px solid $color-border;
+  border-top: 1px solid $color-border;
+  padding: 30px 30px 100px 20px;
+  bottom: 0;
+  position: fixed;
+  left: 50%;
+  top: $smde-height-toolbar-fullscreen;
+  width: 50%;
+  z-index: $smde-z-index-fullscreen;
+}
+
+.editor-preview,
+.editor-preview-side {
+  background-color: $smde-color-background-preview;
+  box-sizing: border-box;
+  display: none;
+  overflow: auto;
+  z-index: 4;
+}
+
+.editor-preview-active,
+.editor-preview-active-side {
+  display: block;
+}

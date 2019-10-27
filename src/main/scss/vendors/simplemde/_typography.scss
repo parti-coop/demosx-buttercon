@@ -1,0 +1,217 @@
+.editor-preview,
+.editor-preview-side {
+  line-height: 24px;
+  color: #111;
+  font-size: $font-size;
+
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  h1, h2 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+  h4 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  p,
+  blockquote,
+  table,
+  hr,
+  dl,
+  ul,
+  ol,
+  pre,
+  address,
+  figure {
+    margin: $margin-block;
+  }
+
+  a {
+    color: $color-text-link;
+    text-decoration: none;
+    // Remove gaps in links underline in iOS 8+ and Safari 8+.
+    -webkit-text-decoration-skip: objects;
+
+    &:active,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  b,
+  strong,
+  dt {
+    font-weight: $font-weight-bold;
+  }
+
+  code,
+  kbd,
+  samp {
+    background-color: $color-background-over;
+    font-family: $font-family-monospace;
+    font-size: $font-size-code;
+    padding: $padding-code;
+  }
+
+  pre {
+    background-color: $color-background-over;
+    font-family: $font-family-monospace;
+    font-size: $font-size-code;
+    line-height: $line-height-pre;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: $width-gap;
+
+    // Override the code styles
+    code {
+      background-color: transparent;
+      font-size: $font-size-code;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 0.25em solid #ddd;
+    padding: 0 1em;
+    color: #777;
+  }
+
+  ul,
+  ol {
+    padding-left: ($width-gap * 3);
+  }
+
+  dt,
+  dd,
+  ol ol,
+  ul ul,
+  ol ul,
+  ul ol {
+    margin: 0 !important;
+    margin: 0 !important;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid $color-border;
+  }
+
+  small {
+    font-size: $font-size-small;
+  }
+
+  // Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+  sub,
+  sup {
+    font-size: $font-size-small;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: $bottom-sub;
+  }
+
+  sup {
+    top: $top-sup;
+  }
+
+  address,
+  time {
+    color: $color-text-muted;
+    font-style: normal;
+  }
+
+  mark {
+    color: $color-text-preview;
+  }
+
+  abbr[title] {
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+  }
+
+
+  code,
+  tt {
+    color: $color-text-preview;
+    background-color: rgba(0, 0, 0, 0.04);
+    font-size: 85%;
+    &:before,
+    &:after {
+      letter-spacing: -0.2em;
+      content: "\00a0";
+    }
+  }
+
+
+  // p {
+  //   font-size: 16px;
+  //   line-height: 1.5;
+  //   color: #000000;
+  //   margin-top: 0;
+  //   margin-bottom: 10px;
+  // }
+
+  // strong {
+  //   font-weight: bold;
+  // }
+
+  // a {
+  //   color: #1578f2;
+  //   text-decoration: underline;
+  // }
+
+  // blockquote {
+  //   margin-top: 18px;
+  //   padding: 0 4px;
+  //   margin: 0 0 10px;
+  //   color: #595959;
+  //   border-left: 2px rgba(0, 0, 0, 0.5) solid;
+  // }
+  // ol {
+  //   padding-inline-start: 24px;
+  // }
+  // ul {
+  //   padding-inline-start: 17px;
+  //   margin-top: 0;
+  //   margin-bottom: 20px;
+  //   li {
+  //     font-size: 16px;
+  //     letter-spacing: normal;
+  //     color: #000000;
+  //   }
+  // }
+}
