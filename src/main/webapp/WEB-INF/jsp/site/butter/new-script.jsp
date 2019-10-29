@@ -5,12 +5,6 @@
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
     $("input[name='slackChannel']").val(channel);
-<<<<<<< HEAD
-  }
-  function showSlack() {
-    $("#slack").show();
-=======
->>>>>>> 에디터 스타일을 다듬습니다
   }
   $(function() {
     $(".maker-tagging").select2({
