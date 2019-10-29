@@ -157,6 +157,9 @@ body.body-butter {
         height: 126px;
         border: solid 1px $gray-lighter;
         background-color: white;
+        & + .butter-list-each {
+          border-top: none;
+        }
         .butter-each-1 {
           flex: 123;
           .butter-new {
@@ -256,76 +259,5 @@ body.body-butter-new {
   }
   .fullscreen .custom-side-by-side::after {
     content: "돌아가기";
-  }
-  .editor-preview {
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1.03;
-      color: #000000;
-      margin-top: 40px;
-    }
-    h2 {
-      font-size: 28px;
-      font-weight: bold;
-      line-height: 1.18;
-      color: #000000;
-      margin-top: 40px;
-    }
-
-    h3 {
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1.17;
-      color: #000000;
-      margin-top: 40px;
-    }
-
-    h4 {
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.13;
-      color: #000000;
-      margin-top: 40px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-      color: #000000;
-      margin-top: 20px;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    a {
-      color: #1578f2;
-      text-decoration: underline;
-    }
-
-    blockquote {
-      margin-top: 18px;
-      padding: 0 4px;
-      margin: 0 0 10px;
-      font-size: 20px;
-      line-height: 1.4;
-      color: #595959;
-      border-left: 2px rgba(0, 0, 0, 0.5) solid;
-    }
-    ol {
-      padding-inline-start: 24px;
-    }
-    ul {
-      padding-inline-start: 17px;
-      margin-top: 20px;
-      li {
-        font-size: 16px;
-        line-height: 1.5;
-        letter-spacing: normal;
-        color: #000000;
-      }
-    }
   }
 }

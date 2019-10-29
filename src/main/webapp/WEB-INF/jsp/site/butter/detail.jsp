@@ -5,12 +5,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <title>${butter.title} - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
-    <!-- SimpleMDE -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   </head>
   <body class="body-butter body-butter-detail">
     <%@ include file="../shared/header.jsp" %>
@@ -27,8 +21,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </div>
     <script>
-      var simplemde = new SimpleMDE({
-        element: document.getElementById("simplemde"),
+      var simplemde = new EasyMDE({
+        element: document.getElementById("simplemde-view"),
         toolbar: false,
         spellChecker: false
       });

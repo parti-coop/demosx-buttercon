@@ -53,11 +53,10 @@ body.body-butter-detail {
       p {
         flex: 6;
         &.butter-contri-buttons {
-          flex: 4;
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
-          justify-content: space-around;
+          justify-content: flex-end;
           a {
             font-size: 14px;
             font-weight: 500;
@@ -71,6 +70,7 @@ body.body-butter-detail {
             border-radius: 2px;
             background-color: #9e9e9e;
             flex: 0 1 161px;
+            margin-right: 10px;
           }
         }
       }

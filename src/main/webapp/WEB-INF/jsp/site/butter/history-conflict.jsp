@@ -30,16 +30,12 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
           방금 발행 내용입니다. 여기서 계속 수정하세요.
         </div>
       </div>
-      <div class="mergely">
-        <div class="mergely-resizer">
-          <div id="mergely"></div>
-        </div>
-      </div>
+      <div id="js-mergely" data-read-only="false"></div>
       <div class="butter-excerpt-label">
         버터 요약
       </div>
       <form class="demo-form js-form-dirrty" id="form-edit-butter">
-        <div class="mergely-excerpt form-group--demo">
+        <div class="butter-excerpt form-group--demo">
           <input type="text" value="${before.excerpt}" disabled />
           <input type="text" name="excerpt" value="${after.excerpt}" />
           <input type="hidden" name="id" value="${after.issue.id}" />

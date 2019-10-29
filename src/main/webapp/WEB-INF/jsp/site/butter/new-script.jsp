@@ -1,61 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- SimpleMDE -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
+<%@ include file="editor-script.jsp" %>
 <script>
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
     $("input[name='slackChannel']").val(channel);
+<<<<<<< HEAD
   }
   function showSlack() {
     $("#slack").show();
+=======
+>>>>>>> 에디터 스타일을 다듬습니다
   }
   $(function() {
-    function toggleFullscreen(simplemde) {
-      console.log(arguments);
-      console.log(simplemde);
-      console.log(simplemde.isFullscreenActive());
-      if (simplemde.isFullscreenActive()) {
-        simplemde.toggleFullScreen();
-      } else {
-        simplemde.toggleSideBySide();
-      }
-    }
-
-    // 편집기
-    var simplemde = new SimpleMDE({
-      element: document.getElementById("simplemde"),
-      spellChecker: false,
-      toolbar: [
-        "bold",
-        "italic",
-        "heading",
-        "strikethrough",
-        "|",
-        "quote",
-        "unordered-list",
-        "ordered-list",
-        "link",
-        "image",
-        "|",
-        "preview",
-        "fullscreen",
-        "guide",
-        {
-          name: "side-by-side",
-          action: toggleFullscreen,
-          className: "no-disable no-mobile custom-side-by-side",
-          title: "클릭"
-        }
-      ]
-    });
-    window.simplemde = simplemde;
-
     $(".maker-tagging").select2({
       language: "ko",
       tokenSeparators: [",", " "],

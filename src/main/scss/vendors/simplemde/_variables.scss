@@ -1,0 +1,218 @@
+//
+//
+// Please DONOT edit this file, edit _custom.scss instead
+//
+//
+
+
+//
+//
+// Basic variables
+//
+// Try to only change the basic variables for your theme
+//
+//
+
+
+//
+// Colors
+//
+
+// Background color
+$color-background: #fff !default;
+// For code, th
+$color-background-over: rgba(0, 0, 0, 0.05) !default;
+// For selected area
+$color-background-selected: rgba(0, 0, 0, 0.1) !default;
+
+// Border color
+$color-border: #ddd !default;
+
+// Text color
+$color-text: #333 !default;
+$color-text-muted: #777 !default;
+// The link color
+$color-text-link: hsl(210, 100%, 50%) !default;
+
+
+//
+// Typography
+//
+
+// Basic font-size
+$font-size-base: 10px !default;
+
+// line-height
+$line-height: 1.5 !default;
+$line-height-header: 2 !default;
+
+//
+// font-family
+// If your css framework already define a nice font-family,
+// you can set it to inherit
+//
+$font-family: inherit !default;
+// $font-family:
+//   // Safari for OS X and iOS (San Francisco)
+//   -apple-system,
+//   // Chrome for OS X (San Francisco)
+//   BlinkMacSystemFont,
+//   // Windows
+//   'Segoe UI',
+//   // Android
+//   'Roboto',
+//   // Linux
+//   'Oxygen', // KDE
+//   'Ubuntu',
+//   'Cantarell', // GNOME
+//   // Firefox OS [R.I.P.]
+//   'Fira Sans',
+//   // Older Android
+//   'Droid Sans',
+//   // Chinese font for OSX and iOS
+//   'Hiragino Sans GB',
+//   // Chinese font for Windows
+//   'Microsoft Yahei', '微软雅黑',
+//   // Basic web fallback
+//   Arial, Helvetica, STHeiti, sans-serif,
+//   // Emoji
+//   'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+
+// Monospace
+$font-family-monospace: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+
+
+//
+// Spacing
+//
+
+$width-gap: 14px !default;
+
+// The padding of code
+// Set it carefully because it's hard to fill the whole line
+$padding-code: ($font-size-base * 0.6) 0 ($font-size-base * 0.4) !default;
+
+// Border radius for textareas and buttons
+$border-radius: 3px !default;
+
+
+//
+// SimpleMDE specific variables, prefixed with smde-
+//
+
+// For preview section
+$smde-color-background-preview: #fff !default;
+// Image alt, HTML tag and attribute
+$smde-color-text-tag: hsl(120, 50%, 50%) !default;
+
+// Icon size
+$smde-width-toolbar-icon: 30px !default;
+
+
+
+//
+//
+// Additional variables
+//
+// In most cases, you will not need to change these variables
+//
+//
+
+
+//
+// Typography
+//
+
+// Main font-size
+$font-size: $font-size-base * 1.8 !default;
+// Headers
+$font-size-h1: $font-size-base * 3.2 !default;
+$font-size-h2: $font-size-base * 2.6 !default;
+$font-size-h3: $font-size-base * 2.4 !default;
+$font-size-h4: $font-size-base * 2.2 !default;
+$font-size-h5: $font-size-base * 2 !default;
+$font-size-h6: $font-size-base * 1.8 !default;
+// Codes
+$font-size-code: $font-size-base * 1.4 !default;
+// Small
+$font-size-small: 80% !default;
+
+// font-weight
+$font-weight-bold: 600 !default;
+
+// <pre><code> in preview is styled by codemirror.css, we need to reset it
+$line-height-pre: 1.2 !default;
+
+// <sub> relative bottom
+// Defines the <sub> position of H1, H2, H3 icon
+$bottom-sub: -0.25em !default;
+
+
+
+//
+//
+// Danger zone
+//
+// Considering never change them
+//
+//
+
+
+//
+// Calculated variables
+//
+
+$width-gap-half: $width-gap / 2 !default;
+
+// The height of toolbar in fullscreen mode
+$smde-height-toolbar-fullscreen: $smde-width-toolbar-icon + ($width-gap * 2) !default;
+
+
+//
+// Be careful
+//
+
+// A margin need to be set to hidden the right and bottom scrollbar of container
+// By default it's set in the codemirror project, default to 30px
+// For some reasons, if you resize the padding of the container,
+// you need to reset this margin size
+// Delete all the textarea content and hide the border of the container to test it
+// Be careful!
+$smde-margin-hidden-scrollbar: 32px !default;
+
+// This is hard coded in simplemde/src/js/simplemde.js
+// Be careful if you want to change it
+$smde-breakpoint-mobile: 700px !default;
+
+// z-index
+$smde-z-index-container: 1 !default;
+$smde-z-index-fullscreen: 9 !default;
+
+// The left and right padding for every line
+// This is not needed because SimpleMDE doesn't has line-number
+$smde-padding-line: 0 !default;
+
+// Height for container
+// This should be set by user, not theme
+$smde-height-container: auto !default;
+// Minimun height for container
+// This should be set by user, not theme
+$smde-min-height-container: 300px !default;
+
+
+
+//
+//
+// Typography specific variables
+//
+// This is for _typography.scss, if you doesn't need them, feel free to delete them
+//
+//
+
+// Margin for headers in preview
+$margin-header: ($width-gap * 2) 0 0 !default;
+// Margin for block elements in preview
+$margin-block: $width-gap 0 0 !default;
+
+// <sup> relative top
+$top-sup: -0.5em !default;

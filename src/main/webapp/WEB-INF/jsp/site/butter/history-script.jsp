@@ -1,38 +1,37 @@
-<!-- mergely -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
-<link
-  rel="stylesheet"
-  media="all"
-  href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/search/searchcursor.min.js"></script>
-<link
-  href="${pageContext.request.contextPath}/css/mergely.css?"
-  rel="stylesheet"
-/>
-<script
-  type="text/javascript"
-  src="${pageContext.request.contextPath}/js/mergely.js"
-></script>
 <textarea id="beforeContent">${before.content}</textarea>
 <textarea id="afterContent">${after.content}</textarea>
 <script>
   $(function() {
-    $("#mergely").mergely({
-      cmsettings: { readOnly: READONLY },
-      lhs: function(setValue) {
-        setValue(document.getElementById("beforeContent").value);
-      },
-      rhs: function(setValue) {
-        setValue(document.getElementById("afterContent").value);
-      }
-    });
+    var initEditor = function() {
+      var $target = $("#js-mergely");
+      var afterContent = document.getElementById("afterContent").value;
+      var beforeContent = document.getElementById("beforeContent").value;
+
+      var docMirror = CodeMirror.MergeView($target[0], {
+        value: afterContent,
+        origLeft: beforeContent,
+        lineNumbers: true,
+        mode: "text/html",
+        highlightDifferences: true,
+        connect: true,
+        collapseIdentical: true,
+        readOnly: $target.data('read-only')
+      });
+
+      var lineWidget = document.createElement("div");
+      $(lineWidget).css("width: 50px; margin: 7px; height: 14px");
+      docMirror.editor().addLineWidget(57, lineWidget);
+
+      return docMirror;
+    }
+    var docMirror = initEditor();
+
     var $formEditButter = $("#form-edit-butter");
     $formEditButter.parsley(parsleyConfig);
     $formEditButter.on("submit", function(event) {
       event.preventDefault();
       var data = $formEditButter.serializeObject();
-      data.content = $("#mergely").mergely("get", "rhs");
+      data.content = docMirror.editor().getValue();
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/butter/${after.issue.id}",
