@@ -3,7 +3,10 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>버터나이프크루</title>
+    <title>
+      <c:if test="${environmentName ne 'production'}">DEV -
+      </c:if>버터나이프크루
+    </title>
     <script>
       const READONLY = false;
     </script>

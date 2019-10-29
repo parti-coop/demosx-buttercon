@@ -3,7 +3,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>버터나이프크루</title>
+    <title>
+      <c:if test="${environmentName ne 'production'}">DEV -
+      </c:if>버터나이프크루
+    </title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter">
@@ -12,14 +15,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
       <div class="top-row clearfix">
         <div class="top-left">
-          <h3 class="top-row__title">버터문서</h3>
+          <h3 class="top-row__title">버터보드</h3>
         </div>
         <div class="top-right">
-          <a
-            href="<c:url value='/butter-new.do'/>"
-            class="btn butter-btn-edit"
-          >
-            버터문서 만들기
+          <a href="<c:url value='/butter-new.do'/>" class="btn butter-btn-edit">
+            버터보드 만들기
           </a>
         </div>
       </div>
