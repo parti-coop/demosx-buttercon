@@ -1,6 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ include file="editor-script.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ include
+file="editor-script.jsp" %>
 <script>
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
@@ -35,7 +34,11 @@
     var $formNewProposal = $("#form-new-proposal");
     $formNewProposal.parsley(parsleyConfig);
     $formNewProposal.on("submit", function(event) {
+      if ($formNewProposal.data("submitting") === true) {
+        return false;
+      }
       event.preventDefault();
+      $formNewProposal.data("submitting", true);
       var data = $formNewProposal.serializeObject();
       data.content = simplemde.value();
       $.ajax({
@@ -52,6 +55,7 @@
           window.location.href = data.url;
         },
         error: function(error) {
+          $formNewProposal.data("submitting", false);
           if (error.status === 400) {
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors

@@ -15,7 +15,7 @@
         highlightDifferences: true,
         connect: true,
         collapseIdentical: true,
-        readOnly: $target.data('read-only')
+        readOnly: $target.data("read-only")
       });
 
       var lineWidget = document.createElement("div");
@@ -23,13 +23,17 @@
       docMirror.editor().addLineWidget(57, lineWidget);
 
       return docMirror;
-    }
+    };
     var docMirror = initEditor();
 
     var $formEditButter = $("#form-edit-butter");
     $formEditButter.parsley(parsleyConfig);
     $formEditButter.on("submit", function(event) {
+      if ($formEditButter.data("submitting") === true) {
+        return false;
+      }
       event.preventDefault();
+      $formEditButter.data("submitting", true);
       var data = $formEditButter.serializeObject();
       data.content = docMirror.editor().getValue();
       $.ajax({
@@ -44,6 +48,7 @@
           window.location.href = data.url;
         },
         error: function(error) {
+          $formEditButter.data("submitting", false);
           if (error.status === 400) {
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors

@@ -1,6 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ include file="editor-script.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ include
+file="editor-script.jsp" %>
 <script>
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
@@ -12,7 +11,9 @@
   $(function() {
     $("input[name='excerpt'][type='radio']").change(function(e) {
       $("input[name='excerpt'][type='text']").toggle();
-      $("input[name='excerpt'][type='text']").prop("disabled", function(i, v) { return !v; });
+      $("input[name='excerpt'][type='text']").prop("disabled", function(i, v) {
+        return !v;
+      });
     });
     $(".maker-tagging").select2({
       language: "ko",
@@ -34,7 +35,7 @@
               text: item.name
             };
           });
-          return [ results ];
+          return [results];
         }
       }
     });
@@ -42,7 +43,11 @@
     var $formEditButter = $("#form-edit-butter");
     $formEditButter.parsley(parsleyConfig);
     $formEditButter.on("submit", function(event) {
+      if ($formEditButter.data("submitting") === true) {
+        return false;
+      }
       event.preventDefault();
+      $formEditButter.data("submitting", true);
       var data = $formEditButter.serializeObject();
       if (
         data.excerpt == "" &&
@@ -65,6 +70,7 @@
           window.location.href = data.url;
         },
         error: function(error) {
+          $formEditButter.data("submitting", false);
           if (error.status === 400) {
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors
