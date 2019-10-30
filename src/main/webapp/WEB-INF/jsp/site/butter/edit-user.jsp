@@ -2,10 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      <c:if test="${environmentName ne 'production'}">DEV - </c:if>버터보드 -
-      버터나이프크루
-    </title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body
@@ -103,7 +99,9 @@ ${butter.content}</textarea
                   />
                 </div>
                 <p>
-                  <span class="butter-warning">발행 히스토리를 입력해주세요.</span>
+                  <span class="butter-warning"
+                    >발행 히스토리를 입력해주세요.</span
+                  >
                 </p>
                 <div id="slack" style="display: none;">
                   <label>슬랙 url</label>

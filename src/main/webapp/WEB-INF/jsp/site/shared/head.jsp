@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<title>
+  <c:if test="${environmentName ne 'production'}">DEV - </c:if>
+  <c:if test="${not empty butter and butter.title ne ''}">${butter.title} - </c:if>
+  <c:if test="${empty butter}">버터보드 - </c:if>
+  버터나이프크루
+</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
