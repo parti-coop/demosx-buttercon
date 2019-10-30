@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import egovframework.rte.fdl.property.EgovPropertyService;
 import lombok.extern.slf4j.Slf4j;
 import seoul.democracy.butter.domain.Butter;
 import seoul.democracy.butter.dto.ButterCreateDto;
@@ -53,6 +54,12 @@ public class ButterService {
     private IssueTagService issueTagService;
     @Autowired
     private IssueStatsRepository statsRepository;
+    private final String host;
+
+    @Autowired
+    public ButterService(EgovPropertyService propertyService) {
+        this.host = propertyService.getString("host");
+    }
 
     public ButterDto getButter(Predicate predicate, Expression<ButterDto> projection) {
         return butterRepository.findOne(predicate, projection);
@@ -93,8 +100,7 @@ public class ButterService {
         issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 버터 추가횟수 증가
         issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
-        String msg = "버터 등록: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
-                + ">*";
+        String msg = "버터 등록: *<" + this.host + "/butter.do?id=" + butter.getId() + "|" + butter.getTitle() + ">*";
         sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
         return butter;
     }
@@ -164,9 +170,9 @@ public class ButterService {
             butter = butter.update(dto, wasMaker);
             /** 요약이 없으면 발행이력에는 넣지만 슬랙은 쏘지 않는다. */
             if (hasExcerpt) {
-                String msg = "버터 수정: *<https://butterknifecrew.kr/butter.do?id=" + butter.getId() + "|"
-                        + butter.getTitle() + ">*\n> <https://butterknifecrew.kr/butter-history.do?id="
-                        + history.getId() + "|" + history.getExcerpt() + ">";
+                String msg = "버터 수정: *<" + this.host + "/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
+                        + ">*\n> <" + this.host + "/butter-history.do?id=" + history.getId() + "|"
+                        + history.getExcerpt() + ">";
                 sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
             }
             statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
