@@ -81,6 +81,11 @@
               id="proposal-like-btn">
             <i class="xi-thumbs-up"></i> 공감 <strong>${proposal.stats.likeCount}</strong>개
           </button>
+          <button
+              class="btn btn-responsive-sm-md-md btn-default"
+              id="proposal-comment-btn">
+            <i class="xi-comment"></i> 댓글 <strong>${proposal.stats.etcCount}</strong>개
+          </button>
           <c:if test="${proposal.createdBy.id eq loginUser.id}">
             <div class="pull-right">
               <a href="<c:url value="/edit-proposal.do?id=${proposal.id}"/>" class="btn btn-default btn-responsive-sm-md-md">수정</a>
@@ -96,7 +101,15 @@
     </div>
   </div><!-- demo-row end  -->
 </div>
-
+<script>
+$(function(){
+  $(".discussion-comment-form").toggle();
+  $('#proposal-comment-btn').click(function () {
+    $(this).toggleClass("btn-default btn-primary btn-outline active");
+    $(".discussion-comment-form").toggle();
+  });
+});
+</script>
 <c:if test="${proposal.createdBy.id eq loginUser.id}">
   <script>
     $(function () {
