@@ -30,12 +30,14 @@ file="editor-script.jsp" %>
             return;
           }
           var results = $.map(data, function(item, index) {
+            console.log(item);
             return {
               id: item.id,
               text: item.name
             };
           });
-          return [results];
+          console.log(results);
+          return { results };
         }
       }
     });
