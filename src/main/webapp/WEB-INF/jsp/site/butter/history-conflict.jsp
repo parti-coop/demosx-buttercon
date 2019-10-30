@@ -3,13 +3,6 @@ prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      <c:if test="${environmentName ne 'production'}">DEV -
-      </c:if>버터나이프크루
-    </title>
-    <script>
-      const READONLY = false;
-    </script>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-new">

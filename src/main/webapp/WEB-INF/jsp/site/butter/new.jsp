@@ -2,10 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      <c:if test="${environmentName ne 'production'}">DEV - </c:if>버터보드 -
-      버터나이프크루
-    </title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-proposal body-proposal-form body-butter-new">
