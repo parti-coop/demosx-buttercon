@@ -43,20 +43,20 @@ file="editor-script.jsp" %>
     var $formEditButter = $("#form-edit-butter");
     $formEditButter.parsley(parsleyConfig);
     $formEditButter.on("submit", function(event) {
-      if ($formEditButter.data("submitting") === true) {
-        return false;
-      }
       event.preventDefault();
-      $formEditButter.data("submitting", true);
       var data = $formEditButter.serializeObject();
       if (
         data.excerpt == "" &&
         !$("input[type='text'][name='excerpt']").prop("disabled")
       ) {
-        alert("수정내용을 입력해주세요");
+        alert("발행 히스토리를 입력해주세요");
         $("input[type='text'][name='excerpt']").focus();
         return;
       }
+      if ($formEditButter.data("submitting") === true) {
+        return false;
+      }
+      $formEditButter.data("submitting", true);
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/butter/${butter.id}",
