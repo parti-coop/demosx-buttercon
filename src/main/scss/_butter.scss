@@ -5,6 +5,11 @@ body.body-butter {
     background-color: white;
   }
 
+  .form-group--demo {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 10px;
+    }
+  }
   .username {
     font-size: 14px;
     font-weight: bold;
@@ -23,13 +28,14 @@ body.body-butter {
     }
     @media (max-width: $screen-xs-max) {
       margin-top: -8px;
+      margin-bottom: 5px;
     }
     .top-row__title {
       font-size: 32px;
-      @media (max-width: $screen-xs-max) {
-        font-size: 14px;
-        line-height: 30px;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   font-size: 14px;
+      //   line-height: 30px;
+      // }
     }
     @media (max-width: $screen-xs-max) {
       .top-left {
@@ -55,15 +61,7 @@ body.body-butter {
       letter-spacing: normal;
       color: #0d0d0d;
       @media (max-width: $screen-sm-max) {
-        font-size: 12px;
-        background-color: white;
-        border: 1px solid $brand-primary-darker;
-        border-radius: 18px;
-        color: $brand-primary-darker;
-        padding: 4px 16px;
         margin: 0;
-        line-height: 20px;
-        vertical-align: middle;
       }
     }
   }
@@ -132,6 +130,7 @@ body.body-butter {
       align-items: center;
       @media (max-width: $screen-xs-max) {
         width: 100%;
+        padding-bottom: 20px;
       }
       span {
         word-break: keep-all;
@@ -245,6 +244,9 @@ body.body-butter {
 body.body-butter,
 body.body-butter-new {
   .editor-toolbar .custom-side-by-side {
+    // @media (max-width: $screen-xs-max) {
+    //   float: none;
+    // }
     float: right;
     width: 125px;
     height: 29px;
@@ -260,5 +262,22 @@ body.body-butter-new {
   }
   .fullscreen .custom-side-by-side::after {
     content: "돌아가기";
+  }
+
+  .butter-warning {
+    font-size: 14px;
+    line-height: 1.86;
+    letter-spacing: -0.88px;
+    color: #e82216 !important;
+  }
+
+  .butter-btn-group {
+    display: flex;
+    justify-content: space-between;
+    > div {
+      flex: 1;
+      justify-content: flex-end;
+      display: flex;
+    }
   }
 }

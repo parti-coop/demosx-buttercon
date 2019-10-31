@@ -1,5 +1,5 @@
-<textarea id="beforeContent">${before.content}</textarea>
-<textarea id="afterContent">${after.content}</textarea>
+<textarea id="beforeContent" style="display: none;">${before.content}</textarea>
+<textarea id="afterContent" style="display: none;">${after.content}</textarea>
 <script>
   $(function() {
     var initEditor = function() {

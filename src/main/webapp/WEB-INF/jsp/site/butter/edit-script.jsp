@@ -10,7 +10,7 @@ file="editor-script.jsp" %>
   }
   $(function() {
     $("input[name='excerpt'][type='radio']").change(function(e) {
-      $("input[name='excerpt'][type='text']").toggle();
+      $(".excerpt-toggle").toggle();
       $("input[name='excerpt'][type='text']").prop("disabled", function(i, v) {
         return !v;
       });

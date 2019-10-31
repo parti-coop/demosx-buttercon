@@ -22,14 +22,16 @@
         <input type="text" value="${before.excerpt}" disabled />
         <input type="text" name="excerpt" value="${after.excerpt}" disabled />
       </div>
-      <div class="form-action form-group-butter text-right">
-        <div class="inline-block">
-          <a
-            class="btn btn-default btn-lg butter-cancel"
-            href="<c:url value='/butter.do?id=${after.issue.id}'/>"
-            role="button"
-            >돌아가기</a
-          >
+      <div class="form-action form-group-butter">
+        <div class="butter-btn-group">
+          <div>
+            <a
+              class="btn btn-default btn-lg"
+              href="<c:url value='/butter.do?id=${after.issue.id}'/>"
+              role="button"
+              >돌아가기</a
+            >
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
   <head>
     <%@ include file="../shared/head.jsp" %>
   </head>
-  <body class="body-proposal body-proposal-form body-butter-new">
+  <body class="body-butter body-butter-new">
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
@@ -111,29 +111,29 @@
                     class="form-control demo-input"
                     value="${butter.slackChannel}"
                   />
+                  <input
+                    type="hidden"
+                    name="excerpt"
+                    placeholder="최초 버터"
+                    value="최초 버터"
+                  />
                 </div>
               </div>
             </div>
 
             <div class="form-action form-group-butter">
-              <input
-                type="hidden"
-                name="excerpt"
-                placeholder="최초 버터"
-                value="최초 버터"
-              />
-              <div class="inline-block">
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter-list.do'/>"
-                  role="button"
-                ></a>
+              <div class="butter-btn-group">
                 <button
                   type="submit"
                   class="btn btn-primary btn-lg butter-publish"
                 >
                   저장하기
                 </button>
+                <a
+                  class="btn btn-default btn-lg butter-cancel"
+                  href="<c:url value='/butter-list.do'/>"
+                  role="button"
+                ></a>
               </div>
             </div>
           </form>

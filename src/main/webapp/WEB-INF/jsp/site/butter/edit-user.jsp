@@ -96,9 +96,10 @@ ${butter.content}</textarea
                     type="text"
                     name="excerpt"
                     placeholder="큰 버터 추가"
+                    class="excerpt-toggle"
                   />
                 </div>
-                <p>
+                <p class="excerpt-toggle">
                   <span class="butter-warning"
                     >발행 히스토리를 입력해주세요.</span
                   >
@@ -116,27 +117,29 @@ ${butter.content}</textarea
                     name="slackChannel"
                     value="${butter.slackChannel}"
                   />
+                  <input
+                    type="hidden"
+                    name="recentHistoryId"
+                    value="${recentHistory.id}"
+                  />
                 </div>
               </div>
             </div>
             <div class="form-action form-group-butter text-right">
-              <div class="inline-block">
-                <input
-                  type="hidden"
-                  name="recentHistoryId"
-                  value="${recentHistory.id}"
-                />
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter.do?id=${butter.id}'/>"
-                  role="button"
-                ></a>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg butter-publish"
-                >
-                  버터 추가
-                </button>
+              <div class="butter-btn-group">
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg butter-publish"
+                  >
+                    버터 추가
+                  </button>
+                  <a
+                    class="btn btn-default btn-lg butter-cancel"
+                    href="<c:url value='/butter.do?id=${butter.id}'/>"
+                    role="button"
+                  ></a>
+                </div>
               </div>
             </div>
           </form>

@@ -125,9 +125,10 @@ ${butter.content}
                     type="text"
                     name="excerpt"
                     placeholder="큰 버터 추가"
+                    class="excerpt-toggle"
                   />
                 </div>
-                <p>
+                <p class="excerpt-toggle">
                   <span class="butter-warning"
                     >발행 히스토리를 입력해주세요.</span
                   >
@@ -145,13 +146,18 @@ ${butter.content}
                     name="slackChannel"
                     value="${butter.slackChannel}"
                   />
+                  <input
+                    type="hidden"
+                    name="recentHistoryId"
+                    value="${recentHistory.id}"
+                  />
                 </div>
               </div>
             </div>
 
             <div class="form-action form-group-butter">
               <label class="demo-form-label"></label>
-              <div class="inline-block">
+              <div class="butter-btn-group">
                 <button
                   type="button"
                   id="btn-butter-delete"
@@ -159,22 +165,19 @@ ${butter.content}
                 >
                   삭제
                 </button>
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter.do?id=${butter.id}'/>"
-                  role="button"
-                ></a>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg butter-publish"
-                >
-                  저장하기
-                </button>
-                <input
-                  type="hidden"
-                  name="recentHistoryId"
-                  value="${recentHistory.id}"
-                />
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg butter-publish"
+                  >
+                    버터 추가
+                  </button>
+                  <a
+                    class="btn btn-default btn-lg butter-cancel"
+                    href="<c:url value='/butter.do?id=${butter.id}'/>"
+                    role="button"
+                  ></a>
+                </div>
               </div>
             </div>
           </form>
