@@ -23,7 +23,7 @@
         <div class="butter-right">
           <form
             id="form-edit-butter"
-            class="form-group-butter demo-form js-form-dirrty"
+            class="demo-form js-form-dirrty"
           >
             <input type="hidden" name="id" value="${butter.id}" />
             <div class="butter-header">
