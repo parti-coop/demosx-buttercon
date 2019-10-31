@@ -2,10 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>버터나이프크루</title>
-    <script>
-      const READONLY = true;
-    </script>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-new">

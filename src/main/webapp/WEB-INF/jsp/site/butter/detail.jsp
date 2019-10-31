@@ -3,7 +3,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>${butter.title} - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-detail">
