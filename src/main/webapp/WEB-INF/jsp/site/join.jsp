@@ -20,8 +20,8 @@
     <div class="login-wrapper">
       <a href="<c:url value="/email-join.do"/>" class="login login-email"><img src="${pageContext.request.contextPath}/images/sign-email.png" alt="이메일로 가입"> 이메일로 가입</a>
       <a href="<c:url value="/social-login.do?provider=facebook"/>" class="login login-facebook"><img src="${pageContext.request.contextPath}/images/sign-facebook.png" alt="페이스북으로 가입"> 페이스북으로 가입</a>
-      <%-- <a href="<c:url value="/social-login.do?provider=naver"/>" class="login-email"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a> --%>
-      <a href="#" onClick="alert('준비 중입니다.')" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a>
+      <a href="<c:url value="/social-login.do?provider=naver"/>" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a>
+      <!-- <a href="#" onClick="alert('준비 중입니다.')" class="login login-naver"><img src="${pageContext.request.contextPath}/images/sign-naver.png" alt="네이버로 가입"> 네이버로 가입</a> -->
       <a href="<c:url value="/social-login.do?provider=google"/>" class="login login-google"><img src="${pageContext.request.contextPath}/images/sign-google.png" alt="구글로 가입"> 구글로 가입</a>
       <a href="<c:url value="/social-login.do?provider=kakao"/>" class="login login-kakao"><img src="${pageContext.request.contextPath}/images/sign-kakao.png" alt="카카오톡으로 가입"> 카카오톡으로 가입</a>
     </div>
