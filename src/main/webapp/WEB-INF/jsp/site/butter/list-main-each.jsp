@@ -41,7 +41,9 @@
         </c:forEach>
       </div>
       <c:if test="${item.butterMakers != null && item.butterMakers.size() > 3}">
-        <div class="butter-extra-maker"
+        <div
+          class="butter-extra-maker"
+          title="${item.butterMakers.subList(3, item.butterMakers.size()).stream().map(a -> a.getName()).toList().toString()}"
           >+${String.valueOf(item.butterMakers.size() - 3)}</div
         >
       </c:if>
