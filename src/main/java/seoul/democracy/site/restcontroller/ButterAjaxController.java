@@ -50,7 +50,7 @@ public class ButterAjaxController {
                 IssueHistoryDto.projectionForSite);
         if (!recentHistory.getId().equals(dto.getRecentHistoryId())) {
             Long afterId = issueHistoryService.saveTempHistory(dto).getId();
-            return ResultRedirectInfo.of("버터보드 추가 중 다른 버터보드와 충돌이 일어났습니다. '확인'을 눌러 수정을 완료하세요.",
+            return ResultRedirectInfo.of("다른 사람과 동시에 버터를 추가했습니다. '확인'을 눌러 다시 버터를 추가해주세요.",
                     "/butter-conflict.do?" + "afterId=" + afterId + "&beforeId=" + recentHistory.getId());
         }
         butterService.update(dto);
