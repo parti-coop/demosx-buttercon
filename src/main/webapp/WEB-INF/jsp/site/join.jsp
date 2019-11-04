@@ -29,7 +29,7 @@
       <p class="help">
         가입하기 버튼을 클릭하면 버터나이프크루의
         <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">이용약관</a>과
-        <a href="<c:url value="/terms.do"/>" target="_blank" class="text-danger text-underline">개인정보처리방침</a>에 동의하게 됩니다.
+        <a href="<c:url value="/privacy.do"/>" target="_blank" class="text-danger text-underline">개인정보처리방침</a>에 동의하게 됩니다.
       </p>
 
       <p class="help">

@@ -1,0 +1,155 @@
+.CodeMirror .CodeMirror-code {
+  line-height: 24px;
+  //
+  // Colors
+  //
+
+  // HTML tag and image alt
+  .cm-tag {
+    color: $smde-color-text-tag;
+  }
+  // HTML attribute key
+  .cm-attribute {
+    color: $smde-color-text-tag;
+  }
+  // HTML attribute value
+  .cm-string {
+    color: $color-text-muted;
+  }
+  // Url part can be muted since link is highlighted
+  .cm-url {
+    color: $color-text-muted;
+  }
+  .cm-hr {
+    color: $color-text-muted;
+  }
+  // Text that won't rendered should be muted
+  .cm-formatting-header,
+  .cm-formatting-em,
+  .cm-formatting-strong,
+  .cm-formatting-strikethrough,
+  .cm-formatting-code,
+  .cm-formatting-code-block {
+    color: $color-text-muted;
+  }
+
+  .cm-em {
+    font-style: italic;
+  }
+
+  //
+  // Typography
+  //
+
+  // Headings
+  .cm-header-1,
+  .cm-header-2,
+  .cm-header-3,
+  .cm-header-4,
+  .cm-header-5,
+  .cm-header-6 {
+    line-height: $line-height;
+    color: #eda35e;
+  }
+  .cm-header-1 {
+    font-size: $font-size;
+  }
+  .cm-header-2 {
+    font-size: $font-size;
+  }
+  .cm-header-3 {
+    font-size: $font-size;
+  }
+  .cm-header-4 {
+    font-size: $font-size;
+  }
+  .cm-header-5 {
+    font-size: $font-size;
+  }
+  .cm-header-6 {
+    font-size: $font-size;
+  }
+
+  .cm-variable,
+  .cm-variable-2,
+  .cm-variable-3 {
+    color: #6699cc;
+  }
+
+  .cm-header {
+    font-weight: $font-weight-bold;
+    color: #eda35e;
+  }
+
+  .cm-quote {
+    color: #b6c1d9;
+    font-style: italic;
+  }
+
+  .cm-strikethrough {
+    text-decoration: line-through;
+  }
+
+  .cm-negative {
+    color: #e06c75;
+  }
+
+  .cm-positive {
+    color: #e06c75;
+  }
+  .cm-builtin {
+    color: #e06c75;
+  }
+  .cm-keyword {
+    color: #c678dd;
+  }
+  .cm-def {
+    color: #e5c07b;
+  }
+  .cm-atom {
+    color: #d19a66;
+  }
+  .cm-number {
+    color: #d19a66;
+  }
+  .cm-property {
+    color: #56b6c2;
+  }
+  .cm-qualifier {
+    color: #d19a66;
+  }
+  .cm-operator {
+    color: #56b6c2;
+  }
+  .cm-meta {
+    color: #abb2bf;
+  }
+  .cm-bracket {
+    color: #abb2bf;
+  }
+  .cm-error,
+  .cm-minus {
+    color: #e06c75;
+  }
+  .cm-rangeinfo {
+    color: #c678dd;
+  }
+
+  // Code
+  .cm-comment {
+    background-color: $color-background-over;
+    font-family: $font-family-monospace;
+    font-size: $font-size-code;
+    padding: $padding-code;
+  }
+  span.CodeMirror-selectedtext.cm-comment {
+    background-color: $color-background-over;
+  }
+  .cm-link {
+    color: $color-text-link;
+  }
+  .cm-strong {
+    font-weight: $font-weight-bold;
+    color: white;
+  }
+}

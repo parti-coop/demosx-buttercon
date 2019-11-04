@@ -1,61 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!-- SimpleMDE -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ include
+file="editor-script.jsp" %>
 <script>
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
     $("input[name='slackChannel']").val(channel);
   }
-  function showSlack() {
-    $("#slack").show();
-  }
   $(function() {
-    function toggleFullscreen(simplemde) {
-      console.log(arguments);
-      console.log(simplemde);
-      console.log(simplemde.isFullscreenActive());
-      if (simplemde.isFullscreenActive()) {
-        simplemde.toggleFullScreen();
-      } else {
-        simplemde.toggleSideBySide();
-      }
-    }
-
-    // 편집기
-    var simplemde = new SimpleMDE({
-      element: document.getElementById("simplemde"),
-      spellChecker: false,
-      toolbar: [
-        "bold",
-        "italic",
-        "heading",
-        "strikethrough",
-        "|",
-        "quote",
-        "unordered-list",
-        "ordered-list",
-        "link",
-        "image",
-        "|",
-        "preview",
-        "fullscreen",
-        "guide",
-        {
-          name: "side-by-side",
-          action: toggleFullscreen,
-          className: "no-disable no-mobile custom-side-by-side",
-          title: "클릭"
-        }
-      ]
-    });
-    window.simplemde = simplemde;
-
     $(".maker-tagging").select2({
       language: "ko",
       tokenSeparators: [",", " "],
@@ -84,7 +34,11 @@
     var $formNewProposal = $("#form-new-proposal");
     $formNewProposal.parsley(parsleyConfig);
     $formNewProposal.on("submit", function(event) {
+      if ($formNewProposal.data("submitting") === true) {
+        return false;
+      }
       event.preventDefault();
+      $formNewProposal.data("submitting", true);
       var data = $formNewProposal.serializeObject();
       data.content = simplemde.value();
       $.ajax({
@@ -101,6 +55,7 @@
           window.location.href = data.url;
         },
         error: function(error) {
+          $formNewProposal.data("submitting", false);
           if (error.status === 400) {
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors

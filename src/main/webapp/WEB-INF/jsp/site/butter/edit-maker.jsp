@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>버터보드 - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-butter body-butter-edit body-butter-new">
@@ -17,7 +16,7 @@
 
       <div class="content-container clearfix">
         <div class="demo-side">
-          <h4 class="demo-side-title">버터보드 만들기</h4>
+          <h4 class="demo-side-title">버터보드 수정하기</h4>
         </div>
         <div class="demo-content demo-content-right">
           <form class="demo-form js-form-dirrty" id="form-edit-butter">
@@ -107,12 +106,7 @@ ${butter.content}
               <div class="butter-excerpt">
                 <div>
                   <div class="pretty p-default p-round">
-                    <input
-                      type="radio"
-                      id="minor"
-                      name="excerpt"
-                      value=""
-                    />
+                    <input type="radio" id="minor" name="excerpt" value="" />
                     <div class="state p-warning-o">
                       <label for="minor">작은 버터 추가입니다</label>
                     </div>
@@ -131,10 +125,13 @@ ${butter.content}
                     type="text"
                     name="excerpt"
                     placeholder="큰 버터 추가"
+                    class="excerpt-toggle"
                   />
                 </div>
-                <p>
-                  <span class="butter-warning">수정 내용을 입력해주세요.</span>
+                <p class="excerpt-toggle">
+                  <span class="butter-warning"
+                    >발행 히스토리를 입력해주세요.</span
+                  >
                 </p>
                 <div id="slack" style="display: none;">
                   <label>슬랙 url</label>
@@ -149,13 +146,18 @@ ${butter.content}
                     name="slackChannel"
                     value="${butter.slackChannel}"
                   />
+                  <input
+                    type="hidden"
+                    name="recentHistoryId"
+                    value="${recentHistory.id}"
+                  />
                 </div>
               </div>
             </div>
 
             <div class="form-action form-group-butter">
               <label class="demo-form-label"></label>
-              <div class="inline-block">
+              <div class="butter-btn-group">
                 <button
                   type="button"
                   id="btn-butter-delete"
@@ -163,22 +165,19 @@ ${butter.content}
                 >
                   삭제
                 </button>
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter.do?id=${butter.id}'/>"
-                  role="button"
-                ></a>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg butter-publish"
-                >
-                  저장하기
-                </button>
-                <input
-                  type="hidden"
-                  name="recentHistoryId"
-                  value="${recentHistory.id}"
-                />
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg butter-publish"
+                  >
+                    버터 추가
+                  </button>
+                  <a
+                    class="btn btn-default btn-lg butter-cancel"
+                    href="<c:url value='/butter.do?id=${butter.id}'/>"
+                    role="button"
+                  ></a>
+                </div>
               </div>
             </div>
           </form>

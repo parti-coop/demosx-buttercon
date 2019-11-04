@@ -5,6 +5,11 @@ body.body-butter {
     background-color: white;
   }
 
+  .form-group--demo {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 10px;
+    }
+  }
   .username {
     font-size: 14px;
     font-weight: bold;
@@ -23,13 +28,14 @@ body.body-butter {
     }
     @media (max-width: $screen-xs-max) {
       margin-top: -8px;
+      margin-bottom: 5px;
     }
     .top-row__title {
       font-size: 32px;
-      @media (max-width: $screen-xs-max) {
-        font-size: 14px;
-        line-height: 30px;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   font-size: 14px;
+      //   line-height: 30px;
+      // }
     }
     @media (max-width: $screen-xs-max) {
       .top-left {
@@ -55,15 +61,7 @@ body.body-butter {
       letter-spacing: normal;
       color: #0d0d0d;
       @media (max-width: $screen-sm-max) {
-        font-size: 12px;
-        background-color: white;
-        border: 1px solid $brand-primary-darker;
-        border-radius: 18px;
-        color: $brand-primary-darker;
-        padding: 4px 16px;
         margin: 0;
-        line-height: 20px;
-        vertical-align: middle;
       }
     }
   }
@@ -132,6 +130,7 @@ body.body-butter {
       align-items: center;
       @media (max-width: $screen-xs-max) {
         width: 100%;
+        padding-bottom: 20px;
       }
       span {
         word-break: keep-all;
@@ -157,6 +156,9 @@ body.body-butter {
         height: 126px;
         border: solid 1px $gray-lighter;
         background-color: white;
+        & + .butter-list-each {
+          border-top: none;
+        }
         .butter-each-1 {
           flex: 123;
           .butter-new {
@@ -204,9 +206,11 @@ body.body-butter {
     // margin-right: 20%;
     align-items: center;
     .butter-maker {
+      border-radius: 12px;
       width: 24px;
       height: 24px;
       display: block;
+      border-radius: 12px;
       background-size: contain;
       position: absolute;
       span {
@@ -241,6 +245,9 @@ body.body-butter {
 body.body-butter,
 body.body-butter-new {
   .editor-toolbar .custom-side-by-side {
+    // @media (max-width: $screen-xs-max) {
+    //   float: none;
+    // }
     float: right;
     width: 125px;
     height: 29px;
@@ -257,75 +264,21 @@ body.body-butter-new {
   .fullscreen .custom-side-by-side::after {
     content: "돌아가기";
   }
-  .editor-preview {
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1.03;
-      color: #000000;
-      margin-top: 40px;
-    }
-    h2 {
-      font-size: 28px;
-      font-weight: bold;
-      line-height: 1.18;
-      color: #000000;
-      margin-top: 40px;
-    }
 
-    h3 {
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1.17;
-      color: #000000;
-      margin-top: 40px;
-    }
+  .butter-warning {
+    font-size: 14px;
+    line-height: 1.86;
+    letter-spacing: -0.88px;
+    color: #e82216 !important;
+  }
 
-    h4 {
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.13;
-      color: #000000;
-      margin-top: 40px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-      color: #000000;
-      margin-top: 20px;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    a {
-      color: #1578f2;
-      text-decoration: underline;
-    }
-
-    blockquote {
-      margin-top: 18px;
-      padding: 0 4px;
-      margin: 0 0 10px;
-      font-size: 20px;
-      line-height: 1.4;
-      color: #595959;
-      border-left: 2px rgba(0, 0, 0, 0.5) solid;
-    }
-    ol {
-      padding-inline-start: 24px;
-    }
-    ul {
-      padding-inline-start: 17px;
-      margin-top: 20px;
-      li {
-        font-size: 16px;
-        line-height: 1.5;
-        letter-spacing: normal;
-        color: #000000;
-      }
+  .butter-btn-group {
+    display: flex;
+    justify-content: space-between;
+    > div {
+      flex: 1;
+      justify-content: flex-end;
+      display: flex;
     }
   }
 }

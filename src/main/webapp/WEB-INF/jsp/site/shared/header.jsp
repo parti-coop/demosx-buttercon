@@ -88,6 +88,9 @@
             <li class="dropdown-item">
               <a href="<c:url value='/butter.do?id=144'/>" class="dropdown-link">마크다운 문서 작성법</a>
             </li>
+            <li class="dropdown-item">
+              <a href="<c:url value='/butter.do?id=150'/>" class="dropdown-link">정책 제안을 위한 팀 대화 가이드</a>
+            </li>
           </ul>
         </li>
       </ul>

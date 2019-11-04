@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<title>
+  <c:if test="${environmentName ne 'production'}">DEV - </c:if>
+  <c:if test="${not empty butter and butter.title ne ''}">${butter.title} - </c:if>
+  <c:if test="${empty butter}">버터보드 - </c:if>
+  버터나이프크루
+</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +34,11 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+
 <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link href="${pageContext.request.contextPath}/css/main.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/application.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
 
@@ -78,6 +86,18 @@
 
 <!-- radio checkbox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
+
+<!-- EasyMDE -->
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendors/simplemde/simplemde-theme-dark.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+
+<!-- Codemirror with merge -->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.48.4/lib/codemirror.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/diff_match_patch.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/codemirror/merge.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
+
 
 <c:if test="${environmentName eq 'production'}">
 

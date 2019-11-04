@@ -1,12 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!-- SimpleMDE -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ include
+file="editor-script.jsp" %>
 <script>
   function setSlack(url, channel) {
     $("input[name='slackUrl']").val(url);
@@ -17,48 +10,11 @@
   }
   $(function() {
     $("input[name='excerpt'][type='radio']").change(function(e) {
-      $("input[name='excerpt'][type='text']").toggle();
+      $(".excerpt-toggle").toggle();
       $("input[name='excerpt'][type='text']").prop("disabled", function(i, v) {
         return !v;
       });
     });
-    function toggleFullscreen(simplemde) {
-      if (simplemde.isFullscreenActive()) {
-        simplemde.toggleFullScreen();
-      } else {
-        simplemde.toggleSideBySide();
-      }
-    }
-
-    // 편집기
-    var simplemde = new SimpleMDE({
-      element: document.getElementById("simplemde"),
-      spellChecker: false,
-      toolbar: [
-        "bold",
-        "italic",
-        "heading",
-        "strikethrough",
-        "|",
-        "quote",
-        "unordered-list",
-        "ordered-list",
-        "link",
-        "image",
-        "|",
-        "preview",
-        "fullscreen",
-        "guide",
-        {
-          name: "side-by-side",
-          action: toggleFullscreen,
-          className: "no-disable no-mobile custom-side-by-side",
-          title: "클릭"
-        }
-      ]
-    });
-    window.simplemde = simplemde;
-
     $(".maker-tagging").select2({
       language: "ko",
       tokenSeparators: [",", " "],
@@ -74,11 +30,13 @@
             return;
           }
           var results = $.map(data, function(item, index) {
+            console.log(item);
             return {
               id: item.id,
               text: item.name
             };
           });
+          console.log(results);
           return { results };
         }
       }
@@ -93,10 +51,14 @@
         data.excerpt == "" &&
         !$("input[type='text'][name='excerpt']").prop("disabled")
       ) {
-        alert("수정내용을 입력해주세요");
+        alert("발행 히스토리를 입력해주세요");
         $("input[type='text'][name='excerpt']").focus();
         return;
       }
+      if ($formEditButter.data("submitting") === true) {
+        return false;
+      }
+      $formEditButter.data("submitting", true);
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/butter/${butter.id}",
@@ -110,6 +72,7 @@
           window.location.href = data.url;
         },
         error: function(error) {
+          $formEditButter.data("submitting", false);
           if (error.status === 400) {
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors

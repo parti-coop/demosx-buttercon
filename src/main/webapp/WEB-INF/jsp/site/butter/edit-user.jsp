@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>버터보드 - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body
@@ -22,7 +21,10 @@
           <h4 class="butter-side-title">버터보드 수정</h4>
         </div>
         <div class="butter-right">
-          <form id="form-edit-butter" class="form-group-butter demo-form js-form-dirrty">
+          <form
+            id="form-edit-butter"
+            class="demo-form js-form-dirrty"
+          >
             <input type="hidden" name="id" value="${butter.id}" />
             <div class="butter-header">
               <div class="butter-tag-list">
@@ -75,12 +77,7 @@ ${butter.content}</textarea
               <div class="butter-excerpt">
                 <div>
                   <div class="pretty p-default p-round">
-                    <input
-                      type="radio"
-                      id="minor"
-                      name="excerpt"
-                      value=""
-                    />
+                    <input type="radio" id="minor" name="excerpt" value="" />
                     <div class="state p-warning-o">
                       <label for="minor">작은 버터 추가입니다</label>
                     </div>
@@ -99,10 +96,13 @@ ${butter.content}</textarea
                     type="text"
                     name="excerpt"
                     placeholder="큰 버터 추가"
+                    class="excerpt-toggle"
                   />
                 </div>
-                <p>
-                  <span class="butter-warning">수정 내용을 입력해주세요.</span>
+                <p class="excerpt-toggle">
+                  <span class="butter-warning"
+                    >발행 히스토리를 입력해주세요.</span
+                  >
                 </p>
                 <div id="slack" style="display: none;">
                   <label>슬랙 url</label>
@@ -117,27 +117,29 @@ ${butter.content}</textarea
                     name="slackChannel"
                     value="${butter.slackChannel}"
                   />
+                  <input
+                    type="hidden"
+                    name="recentHistoryId"
+                    value="${recentHistory.id}"
+                  />
                 </div>
               </div>
             </div>
             <div class="form-action form-group-butter text-right">
-              <div class="inline-block">
-                <input
-                  type="hidden"
-                  name="recentHistoryId"
-                  value="${recentHistory.id}"
-                />
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter.do?id=${butter.id}'/>"
-                  role="button"
-                ></a>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg butter-publish"
-                >
-                  버터 추가
-                </button>
+              <div class="butter-btn-group">
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg butter-publish"
+                  >
+                    버터 추가
+                  </button>
+                  <a
+                    class="btn btn-default btn-lg butter-cancel"
+                    href="<c:url value='/butter.do?id=${butter.id}'/>"
+                    role="button"
+                  ></a>
+                </div>
               </div>
             </div>
           </form>
