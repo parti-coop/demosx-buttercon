@@ -13,7 +13,7 @@ echo '-----------'
 echo 'UNPACK WAR'
 echo '-----------'
 cp /home/ubuntu/current/ROOT.war /tmp/ROOT.war
-sudo unzip /tmp/ROOT.war -d /home/ubuntu/docker/tomcat/webapps/ROOT
+sudo unzip -o /tmp/ROOT.war -d /home/ubuntu/docker/tomcat/webapps/ROOT
 
 # DOCKER 중단
 echo ' '
