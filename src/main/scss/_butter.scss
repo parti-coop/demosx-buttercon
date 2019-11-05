@@ -152,8 +152,28 @@ body.body-butter {
       }
       .butter-list-each {
         display: flex;
+        @media (max-width: $screen-xs-max) {
+          flex-direction: column;
+          align-items: flex-start;
+          padding-bottom: 10px;
+          padding-left: 20px;
+          > div .butter-each-1 {
+            flex: 1;
+          }
+          > div.butter-each-2 {
+            flex: 1;
+            padding: 0;
+          }
+          > div.butter-each-3 {
+            flex: 1;
+            padding-top: 10px;
+            > div {
+              padding: 0;
+            }
+          }
+        }
         flex-direction: row;
-        height: 126px;
+        min-height: 126px;
         border: solid 1px $gray-lighter;
         background-color: white;
         & + .butter-list-each {
