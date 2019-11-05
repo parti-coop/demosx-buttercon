@@ -155,10 +155,18 @@ body.body-butter {
         @media (max-width: $screen-xs-max) {
           flex-direction: column;
           align-items: flex-start;
+          padding-top: 10px;
           padding-bottom: 10px;
           padding-left: 20px;
-          > div .butter-each-1 {
+          > div.butter-each-1 {
             flex: 1;
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: flex-end;
+            > div.butter-slug {
+              padding: 0;
+              margin-right: 10px;
+            }
           }
           > div.butter-each-2 {
             flex: 1;
