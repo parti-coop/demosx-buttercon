@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import seoul.democracy.butter.dto.ButterDto;
 import seoul.democracy.butter.service.ButterService;
+import seoul.democracy.butter.service.MarkdownService;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.debate.dto.DebateCreateDto;
 import seoul.democracy.history.dto.IssueHistoryDto;
@@ -37,6 +38,8 @@ public class ButterController {
     private IssueService issueService;
     @Autowired
     private IssueHistoryService issueHistoryService;
+    @Autowired
+    private MarkdownService markdownService;
 
     @RequestMapping(value = "/butter-list.do", method = RequestMethod.GET)
     public String butterList(Model model) {
@@ -87,6 +90,8 @@ public class ButterController {
         } else {
             otherButters = allButters;
         }
+        String toc = markdownService.getTOC(butterDto.getContent());
+        model.addAttribute("toc", toc);
         model.addAttribute("otherButters", otherButters);
         return "/site/butter/detail";
     }
