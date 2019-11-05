@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.mail.internet.ContentType;
 
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;

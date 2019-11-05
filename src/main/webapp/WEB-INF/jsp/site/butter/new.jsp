@@ -123,17 +123,19 @@
 
             <div class="form-action form-group-butter">
               <div class="butter-btn-group">
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg butter-publish"
-                >
-                  저장하기
-                </button>
-                <a
-                  class="btn btn-default btn-lg butter-cancel"
-                  href="<c:url value='/butter-list.do'/>"
-                  role="button"
-                ></a>
+                <div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg butter-publish"
+                  >
+                    저장하기
+                  </button>
+                  <a
+                    class="btn btn-default btn-lg butter-cancel"
+                    href="<c:url value='/butter-list.do'/>"
+                    role="button"
+                  ></a>
+                </div>
               </div>
             </div>
           </form>
