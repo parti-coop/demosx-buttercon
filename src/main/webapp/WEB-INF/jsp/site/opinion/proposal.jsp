@@ -520,7 +520,7 @@ $(function () {
             var content = $$makeOpinionString(data.content[i]);
             $opinionList.append(content);
           }
-          if(data.content.length > 0) $('.js-demo-comments-container').show();
+          // if(data.content.length > 0) $('.js-demo-comments-container').show();
           $opinionList.css('height', 'auto');
           if (data.last) $opinionMore.addClass('hidden');
           else $opinionMore.removeClass('hidden');

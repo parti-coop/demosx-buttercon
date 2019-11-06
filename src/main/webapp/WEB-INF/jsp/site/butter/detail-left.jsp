@@ -18,4 +18,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       </c:forEach>
     </div>
   </div>
+  <div class="butter-toc">
+    <div class="butter-toc-label">제안 목차</div>
+    <div class="butter-toc-list">${toc}</div>
+  </div>
 </div>

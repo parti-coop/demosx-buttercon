@@ -103,10 +103,10 @@
 </div>
 <script>
 $(function(){
-  $(".discussion-comment-form").toggle();
+  $(".discussion-comment-form, .js-demo-comments-container").hide();
   $('#proposal-comment-btn').click(function () {
     $(this).toggleClass("btn-default btn-primary btn-outline active");
-    $(".discussion-comment-form").toggle();
+    $(".discussion-comment-form, .js-demo-comments-container").toggle();
   });
 });
 </script>

@@ -42,7 +42,7 @@ public class SocialAuthenticationProvider implements AuthenticationProvider {
                 Map<String, Object> map = JsonUtils.asStringToMap(res.getBody());
                 Map<String, Object> mapResponse = (Map<String, Object>) map.get("response");
                 id = mapResponse.get("id").toString();
-                name = mapResponse.get("name").toString();
+                name = mapResponse.get("nickname").toString();
                 photo = mapResponse.get("profile_image").toString();
             } catch (InterruptedException | ExecutionException | IOException e) {
                 throw new UsernameNotFoundException("Unknown connectd account id");

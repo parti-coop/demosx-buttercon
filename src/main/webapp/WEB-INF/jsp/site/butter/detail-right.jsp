@@ -15,7 +15,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           <a
             href="<c:url value='/butter-edit.do?id=${butter.id}'/>"
             class="btn btn-default btn-responsive-sm-md-md"
-            >내용 수정</a
+            >버터 추가</a
           >
         </div>
       </c:if>
