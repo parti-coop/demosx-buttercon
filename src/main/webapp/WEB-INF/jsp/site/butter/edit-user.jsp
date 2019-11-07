@@ -10,21 +10,14 @@
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
-      <div class="top-row clearfix">
-        <div class="top-left">
-          <h3 class="top-row__title">버터보드</h3>
-        </div>
-      </div>
+      <%@ include file="title-link.jsp" %>
 
       <div class="clearfix">
         <div class="butter-left">
           <h4 class="butter-side-title">버터보드 수정</h4>
         </div>
         <div class="butter-right">
-          <form
-            id="form-edit-butter"
-            class="demo-form js-form-dirrty"
-          >
+          <form id="form-edit-butter" class="demo-form js-form-dirrty">
             <input type="hidden" name="id" value="${butter.id}" />
             <div class="butter-header">
               <div class="butter-tag-list">
