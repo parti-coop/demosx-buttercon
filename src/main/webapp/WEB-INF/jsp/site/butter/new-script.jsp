@@ -49,6 +49,8 @@ file="editor-script.jsp" %>
         dataType: "json",
         data: JSON.stringify(data),
         success: function(data) {
+          clearInterval(intervalId);
+          localStorage.removeItem(keyName);
           alert(data.msg);
           $formNewProposal[0].reset();
           $formNewProposal.parsley().reset();

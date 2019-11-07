@@ -68,6 +68,8 @@ file="editor-script.jsp" %>
         data: JSON.stringify(data),
         success: function(data) {
           alert(data.msg);
+          clearInterval(intervalId);
+          localStorage.removeItem(keyName);
           // window.location.href = '/butter.do?id=' + ${butter.id};
           window.location.href = data.url;
         },
