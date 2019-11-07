@@ -128,7 +128,7 @@ ${butter.content}</textarea
                     버터 추가
                   </button>
                   <a
-                    class="btn btn-default btn-lg butter-cancel"
+                    class="btn btn-default btn-lg butter-cancel js-butter-cancel"
                     href="<c:url value='/butter.do?id=${butter.id}'/>"
                     role="button"
                   ></a>

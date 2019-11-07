@@ -127,7 +127,7 @@
                     저장하기
                   </button>
                   <a
-                    class="btn btn-default btn-lg butter-cancel"
+                    class="btn btn-default btn-lg butter-cancel js-butter-cancel"
                     href="<c:url value='/butter-list.do'/>"
                     role="button"
                   ></a>

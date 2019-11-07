@@ -67,10 +67,8 @@ file="editor-script.jsp" %>
         dataType: "json",
         data: JSON.stringify(data),
         success: function(data) {
+          $(".js-butter-cancel").trigger("click");
           alert(data.msg);
-          clearInterval(intervalId);
-          localStorage.removeItem(keyName);
-          // window.location.href = '/butter.do?id=' + ${butter.id};
           window.location.href = data.url;
         },
         error: function(error) {
@@ -101,6 +99,7 @@ file="editor-script.jsp" %>
           contentType: "application/json",
           dataType: "json",
           success: function(data) {
+            $("js-butter-cancel").trigger("click");
             alert(data.msg);
             window.location.href = data.url;
           },

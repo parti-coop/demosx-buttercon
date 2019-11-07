@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script>
-  var butterId = "${butter.id}".length > 0 ? "${butter.id}" : "new";
-  var keyName = "parti_ginger_butter_" + butterId;
-  var intervalId;
   $(function() {
     function toggleFullscreen(simplemde) {
       if (simplemde.isFullscreenActive()) {
@@ -47,6 +44,10 @@
     });
     simplemde.codemirror.setOption("lineNumbers", true);
     window.simplemde = simplemde;
+    var butterId = "${butter.id}".length > 0 ? "${butter.id}" : "new";
+    var recentHistoryId =
+      "${recentHistory.id}".length > 0 ? "_${recentHistory.id}" : "";
+    var keyName = "parti_ginger_butter_" + butterId + recentHistoryId;
 
     if (localStorage.getItem(keyName)) {
       if (confirm("자동저장 파일을 불러오겠습니까?")) {
@@ -55,13 +56,14 @@
         localStorage.removeItem(keyName);
       }
     }
-    intervalId = setInterval(() => {
+    var intervalId = setInterval(() => {
       localStorage.setItem(keyName, simplemde.value());
+      console.log("autosaving");
     }, 3000);
-    $(".butter-cancel").click(function() {
+    $(".js-butter-cancel").click(function() {
       clearInterval(intervalId);
       localStorage.removeItem(keyName);
-      console.log(localStorage.getItem(keyName));
+      console.log("canceling autosave");
     });
   });
 </script>
