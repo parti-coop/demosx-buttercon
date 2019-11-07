@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
   $(function() {
     function toggleFullscreen(simplemde) {
@@ -14,11 +14,34 @@
     var simplemde = new EasyMDE({
       element: document.getElementById("simplemde"),
       spellChecker: false,
-      // autosave: {
-      //   enabled: true,
-      //   uniqueId: "simplemde",
-      //   delay: 3000
-      // },
+      uploadImage: true,
+      imageUploadFunction: function(file, onSuccess, onError) {
+        switch (file.type) {
+          case "image/jpeg":
+          case "image/png":
+            break;
+          default:
+            return onError("png, jpeg 파일만 등록 가능합니다.");
+        }
+        var formdata = new FormData();
+        formdata.append("file", file);
+        formdata.append("type", "EDITOR");
+        return $.ajax({
+          url: "<c:url value='/ajax/mypage/files'/>",
+          type: "POST",
+          data: formdata,
+          headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
+          processData: false,
+          contentType: false,
+          success: function(result) {
+            onSuccess(result.url);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            // console.log(xhr, ajaxOptions, thrownError);
+            onError(xhr.responseJSON.msg);
+          }
+        });
+      },
       toolbar: [
         "bold",
         "italic",
@@ -29,7 +52,8 @@
         "unordered-list",
         "ordered-list",
         "link",
-        "image",
+        // "image",
+        "upload-image",
         "|",
         "preview",
         "fullscreen",
