@@ -9,11 +9,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
-      <div class="top-row clearfix">
-        <div class="top-left">
-          <h3 class="top-row__title">버터보드</h3>
-        </div>
-      </div>
+      <%@ include file="title-link.jsp" %>
       <div class="butter-container-detail">
         <%@ include file="detail-left.jsp" %> <%@ include
         file="detail-right.jsp" %>

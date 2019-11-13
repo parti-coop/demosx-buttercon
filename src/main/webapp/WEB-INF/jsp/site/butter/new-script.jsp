@@ -49,6 +49,7 @@ file="editor-script.jsp" %>
         dataType: "json",
         data: JSON.stringify(data),
         success: function(data) {
+          $(".js-butter-cancel").trigger("click");
           alert(data.msg);
           $formNewProposal[0].reset();
           $formNewProposal.parsley().reset();

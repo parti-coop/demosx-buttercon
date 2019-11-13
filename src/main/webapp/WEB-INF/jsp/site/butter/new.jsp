@@ -8,11 +8,7 @@
     <%@ include file="../shared/header.jsp" %>
 
     <div class="container">
-      <div class="top-row clearfix">
-        <div class="top-left">
-          <h3 class="top-row__title">버터보드</h3>
-        </div>
-      </div>
+      <%@ include file="title-link.jsp" %>
 
       <div class="content-container clearfix">
         <div class="demo-side">
@@ -131,7 +127,7 @@
                     저장하기
                   </button>
                   <a
-                    class="btn btn-default btn-lg butter-cancel"
+                    class="btn btn-default btn-lg butter-cancel js-butter-cancel"
                     href="<c:url value='/butter-list.do'/>"
                     role="button"
                   ></a>
