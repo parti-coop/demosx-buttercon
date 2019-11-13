@@ -126,6 +126,7 @@ body.body-butter-detail {
       .butter-contributor-list {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
       }
     }
     .butter-histories {
