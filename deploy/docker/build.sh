@@ -33,7 +33,7 @@ echo '-----------'
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --build democracy-nginx democracy-tomcat
 
 # 백업
-TIMESTAMP=`date +"%G%m%e%H%M"`
+TIMESTAMP=`date +"%G%m%d%H%M"`
 cp /home/ubuntu/current/ROOT.war /home/ubuntu/released/ROOT.war.$TIMESTAMP
 
 echo ' '
