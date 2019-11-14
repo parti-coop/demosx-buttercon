@@ -14,10 +14,8 @@ import seoul.democracy.salon.domain.Salon;
 import seoul.democracy.salon.dto.SalonDto;
 import seoul.democracy.issue.predicate.IssueTagPredicate;
 
-import static seoul.democracy.issue.domain.QCategory.category;
 import static seoul.democracy.issue.domain.QIssueStats.issueStats;
 import static seoul.democracy.salon.domain.QSalon.salon;
-import static seoul.democracy.user.domain.QUser.user;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
 

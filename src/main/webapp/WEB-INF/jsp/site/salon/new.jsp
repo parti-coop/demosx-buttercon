@@ -125,7 +125,7 @@
           var data = $formNewSalon.serializeObject();
           $.ajax({
             headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
-            url: "/ajax/salon",
+            url: "/ajax/salon/",
             type: "POST",
             contentType: "application/json",
             dataType: "json",

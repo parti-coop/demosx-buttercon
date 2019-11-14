@@ -25,8 +25,8 @@ public class SalonDto {
         public final static QBean<SalonDto> projection = Projections.fields(SalonDto.class, salon.id, salon.createdDate,
                         salon.modifiedDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
                         UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), salon.createdIp, salon.modifiedIp,
-                        salon.opinionType, CategoryDto.projection.as("category"), IssueStatsDto.projection.as("stats"),
-                        salon.salonType, salon.status, salon.process, salon.image, salon.title, salon.content);
+                        salon.opinionType, IssueStatsDto.projection.as("stats"), salon.salonType, salon.status,
+                        salon.image, salon.title, salon.content);
 
         /**
          * 사이트 리스트에서 사용
@@ -39,16 +39,14 @@ public class SalonDto {
          * 제안 상세에서 사용
          */
         public final static QBean<SalonDto> projectionForSiteDetail = Projections.fields(SalonDto.class, salon.id,
-                        salon.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
-                        CategoryDto.projection.as("category"), salon.statsId, IssueStatsDto.projection.as("stats"),
-                        salon.status, salon.process, salon.image, salon.title, salon.content);
+                        salon.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"), salon.statsId,
+                        IssueStatsDto.projection.as("stats"), salon.status, salon.image, salon.title, salon.content);
 
         /**
          * 마이페이지에서 사용
          */
         public final static QBean<SalonDto> projectionForMypageSalon = Projections.fields(SalonDto.class, salon.id,
-                        salon.createdDate, IssueStatsDto.projection.as("stats"), salon.status, salon.process,
-                        salon.title);
+                        salon.createdDate, IssueStatsDto.projection.as("stats"), salon.status, salon.title);
 
         /**
          * 나의 제안 수정 시 사용

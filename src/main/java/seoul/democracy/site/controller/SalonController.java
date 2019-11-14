@@ -49,7 +49,8 @@ public class SalonController {
 
     @RequestMapping(value = "/salon.do", method = RequestMethod.GET)
     public String salon(@RequestParam("id") Long id, Model model) {
-        SalonDto salonDto = salonService.getSalonSiteDetail(equalIdAndStatus(id, OPEN), projectionForSiteDetail);
+        SalonDto salonDto = salonService.getSalonSiteDetail(SalonPredicate.equalIdAndStatus(id, OPEN),
+                SalonDto.projectionForSiteDetail);
         if (salonDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
         model.addAttribute("salon", salonDto);
