@@ -14,6 +14,7 @@ import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.salon.domain.SalonSort;
 import seoul.democracy.salon.dto.SalonDto;
 import seoul.democracy.salon.dto.SalonEditDto;
+import seoul.democracy.salon.predicate.SalonPredicate;
 import seoul.democracy.salon.service.SalonService;
 import seoul.democracy.user.utils.UserUtils;
 
@@ -34,13 +35,12 @@ public class SalonController {
     }
 
     @RequestMapping(value = "/salon-list.do", method = RequestMethod.GET)
-    public String salonList(@RequestParam(value = "category", required = false) String category,
-            @RequestParam(value = "sort", defaultValue = "latest") SalonSort sort,
+    public String salonList(@RequestParam(value = "sort", defaultValue = "latest") SalonSort sort,
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Pageable pageable = new PageRequest(page - 1, 10, sort.getSort());
-        Page<SalonDto> salons = salonService.getSalonsWithIssueTags(predicateForSiteList(search, category), pageable,
-                projectionForSiteList);
+        Page<SalonDto> salons = salonService.getSalonsWithIssueTags(SalonPredicate.predicateForSiteList(search),
+                pageable, SalonDto.projectionForSiteList);
         model.addAttribute("page", salons);
         model.addAttribute("sort", sort);
         model.addAttribute("search", search);
@@ -57,12 +57,12 @@ public class SalonController {
         return "/site/salon/detail";
     }
 
-    @RequestMapping(value = "/new-salon.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/salon-new.do", method = RequestMethod.GET)
     public String newSalon(Model model) {
         return "/site/salon/new";
     }
 
-    @RequestMapping(value = "/edit-salon.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/salon-edit.do", method = RequestMethod.GET)
     public String editSalon(@RequestParam("id") Long id, Model model) {
 
         SalonDto salonDto = salonService.getSalonWithIssueTags(predicateForEdit(id, UserUtils.getUserId()),

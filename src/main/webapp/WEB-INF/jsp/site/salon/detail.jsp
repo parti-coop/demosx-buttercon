@@ -88,7 +88,7 @@
           </button>
           <c:if test="${salon.createdBy.id eq loginUser.id}">
             <div class="pull-right">
-              <a href="<c:url value='/edit-salon.do?id=${salon.id}'/>" class="btn btn-default btn-responsive-sm-md-md">수정</a>
+              <a href="<c:url value='/salon-edit.do?id=${salon.id}'/>" class="btn btn-default btn-responsive-sm-md-md">수정</a>
               <button type="button" class="btn btn-default btn-responsive-sm-md-md" id="delete-salon-btn">삭제</button>
             </div>
           </c:if>
@@ -118,7 +118,7 @@ $(function(){
 
         $.ajax({
           headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-          url: '/ajax/mypage/salons/${salon.id}',
+          url: '/ajax/salon/${salon.id}',
           type: 'DELETE',
           contentType: 'application/json',
           dataType: 'json',
@@ -152,7 +152,7 @@ $(function(){
         var that = $(this);
         $.ajax({
           headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-          url: '/ajax/mypage/salons/${salon.id}/' + (hasLike ? 'deselectLike' : 'selectLike'),
+          url: '/ajax/salon/${salon.id}/' + (hasLike ? 'deselectLike' : 'selectLike'),
           type: 'PUT',
           contentType: 'application/json',
           dataType: 'json',

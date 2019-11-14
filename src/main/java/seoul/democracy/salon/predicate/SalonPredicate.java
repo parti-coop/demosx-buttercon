@@ -5,7 +5,6 @@ import com.mysema.query.types.ExpressionUtils;
 import com.mysema.query.types.Predicate;
 import org.springframework.util.StringUtils;
 import seoul.democracy.issue.domain.Issue;
-import seoul.democracy.salon.domain.Salon;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,10 +28,6 @@ public class SalonPredicate {
         return ExpressionUtils.and(salon.id.eq(id), salon.status.eq(status));
     }
 
-    public static Predicate equalIdAndManagerId(Long id, Long managerId) {
-        return ExpressionUtils.and(salon.id.eq(id), salon.managerId.eq(managerId));
-    }
-
     public static Predicate predicateForRelationSelect(String search) {
         Predicate predicate = salon.status.eq(OPEN);
 
@@ -42,7 +37,7 @@ public class SalonPredicate {
         return ExpressionUtils.and(predicate, salon.title.contains(search));
     }
 
-    public static Predicate predicateForSiteList(String search, String category) {
+    public static Predicate predicateForSiteList(String search) {
         Predicate predicate = salon.status.eq(OPEN);
 
         if (StringUtils.hasText(search))
@@ -55,9 +50,6 @@ public class SalonPredicate {
                             ExpressionUtils.anyOf(salon.title.contains(search), salon.content.contains(search)));
                 }
             }
-
-        if (StringUtils.hasText(category))
-            predicate = ExpressionUtils.and(predicate, salon.category.name.eq(category));
 
         return predicate;
     }

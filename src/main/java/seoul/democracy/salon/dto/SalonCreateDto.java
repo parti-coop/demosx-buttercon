@@ -20,4 +20,5 @@ public class SalonCreateDto {
     private String content;
 
     private String[] issueTagNames;
+    private String image;
 }

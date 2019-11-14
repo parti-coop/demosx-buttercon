@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>아이디어 - 버터나이프크루</title>
+  <title>문화살롱 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="home body-salon">
@@ -12,27 +12,16 @@
 <div class="container">
   <div class="top-row clearfix">
     <div class="top-left">
-      <h3 class="top-row__title">아이디어</h3>
+      <h3 class="top-row__title">문화살롱</h3>
     </div>
     <div class="top-right">
-      <a href="<c:url value="/new-salon.do"/>" class="btn demo-btn demo-btn--primary btn-block demo-btn-salon">아이디어 제안</a>
+      <a href="<c:url value='/salon-new.do'/>" class="btn demo-btn demo-btn--primary btn-block demo-btn-salon">문화살롱 제안</a>
     </div>
   </div>
 
   <div class="sorting-tab sorting-tab--suggest content-container clearfix">
     <form name="search">
       <div class="sorting-tab-select-row">
-        <div class="sorting-tab__select sorting-tab__select-category">
-          <div class="select-container">
-            <select class="form-control" name="category">
-              <option value="" disabled>살롱 주제 선택</option>
-              <option value="">모든 살롱 주제</option>
-              <c:forEach var="item" items="${categories}">
-                <option value="${item.name}" <c:if test="${category eq item.name}">selected</c:if>>${item.name}</option>
-              </c:forEach>
-            </select>
-          </div>
-        </div>
         <div class="sorting-tab__select sorting-tab__select-sort">
           <div class="select-container">
             <select class="form-control" name="sort">

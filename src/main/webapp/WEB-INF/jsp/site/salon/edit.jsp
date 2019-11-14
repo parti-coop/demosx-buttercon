@@ -45,7 +45,7 @@
           <div id="${salonCategoryParsleyErrorsContainerId}" class="help-block-error-container"></div>
         </div>
 
-        <div class="form-group form-group--demo form-gruop-salon">
+        <div class="form-group form-group--demo form-gruop-salon">mypage
           <label class="demo-form-label" for="inputContent">내용<span class="required"> *</span></label>
           <c:set var="salonContentParsleyErrorsContainerId" scope="page"><%= java.util.UUID.randomUUID() %></c:set>
           <div class="textarea-tinymce-container">
@@ -87,7 +87,7 @@
       var data = $formEditSalon.serializeObject();
       $.ajax({
         headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-        url: '/ajax/mypage/salons/${editDto.id}',
+        url: '/ajax/salon/${editDto.id}',
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',

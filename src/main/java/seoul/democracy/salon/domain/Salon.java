@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.HtmlUtils;
-import seoul.democracy.common.converter.LocalDateTimeAttributeConverter;
-import seoul.democracy.common.exception.BadRequestException;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueLike;
@@ -17,7 +15,6 @@ import seoul.democracy.salon.dto.SalonUpdateDto;
 import seoul.democracy.user.domain.User;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -29,49 +26,15 @@ public class Salon extends Issue {
     protected String salonType = "Default";
     @Column(name = "ISSUE_PROCESS")
     protected String process = "Default";
+    @Column(name = "IMG_URL")
+    protected String image;
 
-    /**
-     * 관리자 댓글 일시
-     */
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    @Column(name = "ADMIN_COMMENT_DT")
-    protected LocalDateTime adminCommentDate;
-
-    /**
-     * 관리자 댓글
-     */
-    @Lob
-    @Column(name = "ADMIN_COMMENT")
-    protected String adminComment;
-
-    /**
-     * 매니저 - 담당자
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MANAGER_ID")
-    protected User manager;
-    @Column(name = "MANAGER_ID", insertable = false, updatable = false)
-    protected Long managerId;
-
-    /**
-     * 담당자 댓글 일시
-     */
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    @Column(name = "MANAGER_COMMENT_DT")
-    protected LocalDateTime managerCommentDate;
-
-    /**
-     * 담당자 댓글
-     */
-    @Lob
-    @Column(name = "MANAGER_COMMENT")
-    protected String managerComment;
-
-    public Salon(String title, String content) {
+    public Salon(String title, String content, String image) {
         this.stats = IssueStats.create();
         this.status = Status.OPEN;
         this.title = title;
         this.content = content;
+        this.image = image;
         updateExcerpt(this.content);
     }
 
@@ -83,7 +46,7 @@ public class Salon extends Issue {
     }
 
     public static Salon create(SalonCreateDto createDto) {
-        return new Salon(createDto.getTitle(), createDto.getContent());
+        return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage());
     }
 
     public Salon update(SalonUpdateDto updateDto) {
@@ -118,32 +81,6 @@ public class Salon extends Issue {
             throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.status = Status.OPEN;
-        return this;
-    }
-
-    public Salon editAdminComment(String comment) {
-        if (!status.isOpen())
-            throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
-
-        this.adminComment = comment;
-        this.adminCommentDate = LocalDateTime.now();
-        return this;
-    }
-
-    public Salon assignManager(User manager) {
-        if (!status.isOpen())
-            throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
-
-        if (!manager.isManager())
-            throw new BadRequestException("role", "error.role", "담당자로 지정되어 있지 않습니다.");
-
-        this.manager = manager;
-        return this;
-    }
-
-    public Salon editManagerComment(String comment) {
-        this.managerComment = comment;
-        this.managerCommentDate = LocalDateTime.now();
         return this;
     }
 

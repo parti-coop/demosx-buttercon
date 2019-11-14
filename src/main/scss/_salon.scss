@@ -7,17 +7,17 @@ body.body-salon {
 
   .top-row {
     margin-top: 70px;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       margin-top: -8px;
     }
     .top-row__title {
       font-size: 32px;
-      @media(max-width: $screen-xs-max) {
+      @media (max-width: $screen-xs-max) {
         font-size: 14px;
         line-height: 30px;
       }
     }
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       .top-left {
         width: auto;
         float: left;
@@ -33,7 +33,7 @@ body.body-salon {
       padding: 12px;
       margin-top: 14px;
 
-      @media(max-width: $screen-sm-max) {
+      @media (max-width: $screen-sm-max) {
         font-size: 12px;
         background-color: white;
         border: 1px solid $brand-primary-darker;
@@ -42,7 +42,7 @@ body.body-salon {
         padding: 4px 16px;
         margin: 0;
         line-height: 20px;
-        vertical-align: middle
+        vertical-align: middle;
       }
     }
   }
@@ -59,14 +59,14 @@ body.body-salon {
         }
         select {
           width: 100%;
-          @media(max-width: $screen-sm-max) {
+          @media (max-width: $screen-sm-max) {
             border-radius: 0;
             font-size: 14px;
             height: 42px;
           }
         }
       }
-      @media(max-width: $screen-sm-max) {
+      @media (max-width: $screen-sm-max) {
         display: flex;
         margin-left: 0;
         margin-right: 0;
@@ -78,7 +78,7 @@ body.body-salon {
           }
           &.sorting-tab__select-sort {
             width: 106px;
-            @media(max-width: $screen-sm-max) {
+            @media (max-width: $screen-sm-max) {
               width: 36%;
             }
           }
@@ -90,7 +90,7 @@ body.body-salon {
         -webkit-border-radius: 0;
       }
     }
-    @media(max-width: $screen-sm-max) {
+    @media (max-width: $screen-sm-max) {
       .sorting-right-form {
         width: 100%;
         padding-left: 0;
@@ -103,7 +103,7 @@ body.body-salon {
   .form-warning-text {
     margin-bottom: 40px;
     padding-bottom: 40px;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       margin-bottom: 15px;
       padding-bottom: 0;
     }
@@ -113,7 +113,7 @@ body.body-salon {
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 24px;
-      @media(max-width: $screen-xs-max) {
+      @media (max-width: $screen-xs-max) {
         font-size: 12px;
         color: #c28611;
         margin: 6px 0;
@@ -124,7 +124,7 @@ body.body-salon {
         position: relative;
         padding-left: 12px;
         &:before {
-          content: '.';
+          content: ".";
           position: absolute;
           top: -4px;
           left: 2px;
@@ -143,22 +143,30 @@ body.body-salon {
     padding-top: 40px;
     margin-top: 40px;
     margin-bottom: 30px;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       margin-bottom: 28px;
       margin-top: 6px;
       border-color: #e0e0e0;
       padding: 8px 0 0 0;
     }
+
+    .select-container {
+      min-height: 50px;
+      flex: 1;
+      ul.select2-selection__rendered {
+        line-height: 38px;
+      }
+    }
   }
 
   .demo-content .author-box {
     display: none;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       display: block;
       margin-top: 26px;
     }
 
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       .salon-title-author {
         position: relative;
         margin-bottom: 16px;
@@ -209,7 +217,7 @@ body.body-salon {
       font-weight: 400;
       display: inline-block;
       margin: 0;
-      @media(max-width: $screen-xs-max) {
+      @media (max-width: $screen-xs-max) {
         font-size: 14px;
       }
     }
@@ -222,7 +230,7 @@ body.body-salon {
     font-weight: normal;
     color: $text-color-lighter;
     display: none;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       display: none;
     }
   }
@@ -246,7 +254,7 @@ body.body-salon {
 
   .contents-box {
     padding: 35px 0;
-    @media(max-width: $screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       padding: 16px 0;
     }
     .contents-box-controls {
@@ -257,7 +265,7 @@ body.body-salon {
       margin-bottom: 20px;
       padding-bottom: 38px;
       border-bottom: 1px solid $gray-lighter-e0;
-      @media(max-width: $screen-xs-max) {
+      @media (max-width: $screen-xs-max) {
         margin-top: 32px;
         font-size: 12px;
         padding-bottom: 16px;

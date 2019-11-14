@@ -16,7 +16,7 @@
           <li class="nav-login-li"><span class="li-middle-line">&nbsp;</span></li>
         </c:if>
         <li class="nav-login-li"><a href="<c:url value="/mypage/info.do"/>" class="nav-login-li__link">
-          <div class="profile-circle profile-circle--nav" style="background-image: url(${loginUser.viewPhoto()})">
+          <div class="profile-circle profile-circle--nav" style="background-image: url('${loginUser.viewPhoto()}')">
             <p class="alt-text">${loginUser.name}프로필</p>
           </div>
           ${ loginUser.name}
@@ -70,9 +70,9 @@
         <%-- <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안
         </a></li> --%>
-        <!-- <li class="li-middle"><span class="li-middle-line">|</span></li> -->
-        <!-- <li class="demo-nav-li"><a href="#" onclick="alert('서비스를 시작하지 않았습니다')">버터보드 -->
-        <li class="demo-nav-li"><a href="<c:url value="/butter-list.do"/>">버터보드</a></li>
+        <!-- onclick="alert('서비스를 시작하지 않았습니다')" -->
+        <li class="demo-nav-li"><a href="<c:url value='/salon-list.do'/>" >문화살롱</a></li>
+        <li class="demo-nav-li"><a href="<c:url value='/butter-list.do'/>">버터보드</a></li>
         <li class="dropdown demo-nav-li">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             가이드

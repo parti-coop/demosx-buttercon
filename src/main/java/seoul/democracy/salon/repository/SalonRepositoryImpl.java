@@ -36,12 +36,9 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
         if (projection == SalonDto.projection) {
             query.innerJoin(salon.createdBy, createdBy);
             query.innerJoin(salon.modifiedBy, modifiedBy);
-            query.leftJoin(salon.category, category);
             query.innerJoin(salon.stats, issueStats);
-            query.leftJoin(salon.manager, user);
         } else if (projection == SalonDto.projectionForSiteList || projection == SalonDto.projectionForSiteDetail) {
             query.innerJoin(salon.createdBy, createdBy);
-            query.leftJoin(salon.category, category);
             query.innerJoin(salon.stats, issueStats);
         } else if (projection == SalonDto.projectionForMypageSalon) {
             query.innerJoin(salon.stats, issueStats);
