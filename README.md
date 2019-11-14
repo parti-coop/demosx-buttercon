@@ -31,7 +31,7 @@ globals.properties 파일의 프로퍼티가 기본값이고, 프로파일 값(s
 mysql > drop database demosx_buttercon_development
 mysql > create database `demosx_buttercon_development` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-$ mysqldump -uadmin -p**** -h database-buttercon.clpurnr5lyok.ap-northeast-2.rds.amazonaws.com demosx_buttercon | mysql -h **** -uroot -p**** demosx_buttercon_development
+$ mysqldump -uadmin -p`${비번 lastpass 작업Shared RDS에 있음}` -h database-buttercon.clpurnr5lyok.ap-northeast-2.rds.amazonaws.com demosx_buttercon | mysql -h `localhost` -uroot -p`${로컬서버 비번}` demosx_buttercon_development
 
 ### 패키징
 
