@@ -1,0 +1,294 @@
+body.body-salon {
+  background-color: $gray-background;
+  &.body-salon-form,
+  &.body-salon-detail {
+    background-color: white;
+  }
+
+  .top-row {
+    margin-top: 70px;
+    @media(max-width: $screen-xs-max) {
+      margin-top: -8px;
+    }
+    .top-row__title {
+      font-size: 32px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 14px;
+        line-height: 30px;
+      }
+    }
+    @media(max-width: $screen-xs-max) {
+      .top-left {
+        width: auto;
+        float: left;
+        margin: 0;
+      }
+      .top-right {
+        width: auto;
+        float: right;
+      }
+    }
+    .demo-btn-salon {
+      font-size: 18px;
+      padding: 12px;
+      margin-top: 14px;
+
+      @media(max-width: $screen-sm-max) {
+        font-size: 12px;
+        background-color: white;
+        border: 1px solid $brand-primary-darker;
+        border-radius: 18px;
+        color: $brand-primary-darker;
+        padding: 4px 16px;
+        margin: 0;
+        line-height: 20px;
+        vertical-align: middle
+      }
+    }
+  }
+
+  .sorting-tab {
+    .sorting-tab-select-row {
+      .sorting-tab__select {
+        &.sorting-tab__select-category {
+          width: 330px;
+          margin-right: 20px;
+        }
+        &.sorting-tab__select-sort {
+          width: 200px;
+        }
+        select {
+          width: 100%;
+          @media(max-width: $screen-sm-max) {
+            border-radius: 0;
+            font-size: 14px;
+            height: 42px;
+          }
+        }
+      }
+      @media(max-width: $screen-sm-max) {
+        display: flex;
+        margin-left: 0;
+        margin-right: 0;
+        .sorting-tab__select {
+          &.sorting-tab__select-category {
+            width: auto;
+            flex: 1;
+            margin-right: 8px;
+          }
+          &.sorting-tab__select-sort {
+            width: 106px;
+            @media(max-width: $screen-sm-max) {
+              width: 36%;
+            }
+          }
+        }
+      }
+      .form-control {
+        border-radius: 0;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+      }
+    }
+    @media(max-width: $screen-sm-max) {
+      .sorting-right-form {
+        width: 100%;
+        padding-left: 0;
+      }
+    }
+  }
+
+  // form
+
+  .form-warning-text {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    @media(max-width: $screen-xs-max) {
+      margin-bottom: 15px;
+      padding-bottom: 0;
+    }
+    border-bottom: 2px solid $gray-lighter-e0;
+    color: $text-color-dark;
+    .lead {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      @media(max-width: $screen-xs-max) {
+        font-size: 12px;
+        color: #c28611;
+        margin: 6px 0;
+      }
+    }
+    ul {
+      li {
+        position: relative;
+        padding-left: 12px;
+        &:before {
+          content: '.';
+          position: absolute;
+          top: -4px;
+          left: 2px;
+        }
+      }
+    }
+  }
+
+  .demo-submit-btn--submit {
+    width: 200px;
+  }
+
+  .content-container {
+    border-top: 2px solid $text-color-darker;
+    border-bottom: none;
+    padding-top: 40px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    @media(max-width: $screen-xs-max) {
+      margin-bottom: 28px;
+      margin-top: 6px;
+      border-color: #e0e0e0;
+      padding: 8px 0 0 0;
+    }
+  }
+
+  .demo-content .author-box {
+    display: none;
+    @media(max-width: $screen-xs-max) {
+      display: block;
+      margin-top: 26px;
+    }
+
+    @media(max-width: $screen-xs-max) {
+      .salon-title-author {
+        position: relative;
+        margin-bottom: 16px;
+        .title-author__name {
+          margin-left: 41px;
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-right: 0;
+          line-height: 32px;
+          margin-left: 40px;
+          display: inline-block;
+        }
+        .title-author__date {
+          line-height: 32px;
+        }
+      }
+    }
+  }
+
+  .discussion-comment-form {
+    padding-left: 0;
+    border-width: 0;
+    padding: 0;
+    .demo-comment-form {
+      padding: 0;
+    }
+    .demo-comment-textarea {
+      border-radius: 0;
+    }
+    .comment-count-text {
+      text-align: initial;
+    }
+    .profile-circle.profile-circle--comment-form {
+      display: none;
+    }
+    .demo-submit-btn--submit {
+      @extend .btn-default;
+    }
+  }
+
+  // detail
+
+  .detail-category-container {
+    display: inline-block;
+    .detail-category {
+      color: $text-color-yellow;
+      font-size: 20px;
+      font-weight: 400;
+      display: inline-block;
+      margin: 0;
+      @media(max-width: $screen-xs-max) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .detail-copy-url {
+    float: right;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    color: $text-color-lighter;
+    display: none;
+    @media(max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+
+  .detail-title-container {
+    width: 100%;
+    float: initial;
+    .detail-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      line-height: 34px;
+    }
+  }
+
+  .title-box {
+    padding-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .contents-box {
+    padding: 35px 0;
+    @media(max-width: $screen-xs-max) {
+      padding: 16px 0;
+    }
+    .contents-box-controls {
+      margin-bottom: 35px;
+    }
+    .contents-box-tags {
+      margin-top: 80px;
+      margin-bottom: 20px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid $gray-lighter-e0;
+      @media(max-width: $screen-xs-max) {
+        margin-top: 32px;
+        font-size: 12px;
+        padding-bottom: 16px;
+      }
+      .contents-box-tags-lead {
+        color: $text-color-dark;
+        i {
+          color: $text-color-light;
+        }
+      }
+      .contents-box-tags-link {
+        color: $text-color-dark;
+        margin-left: 8px;
+      }
+    }
+  }
+  button#salon-like-btn {
+    box-shadow: none;
+  }
+}
+
+.salon-title-author {
+  .title-author__name {
+    font-size: 14px;
+    color: $gray-light;
+    margin: 0;
+  }
+
+  .title-author__date {
+    font-size: 14px;
+    color: $gray-light;
+    margin: 0;
+  }
+}

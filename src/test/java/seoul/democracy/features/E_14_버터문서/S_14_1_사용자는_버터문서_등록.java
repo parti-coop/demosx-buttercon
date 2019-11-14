@@ -64,7 +64,7 @@ public class S_14_1_사용자는_버터문서_등록 {
     @WithUserDetails("user1@googl.co.kr")
     public void T_1_새로등록() {
         final String now = LocalDateTime.now().format(dateTimeFormatter);
-        ButterCreateDto createDto = ButterCreateDto.of("제안합니다.", "제안내용입니다.", "환경", now, null, null, null);
+        ButterCreateDto createDto = ButterCreateDto.of("제안합니다.", "제안내용입니다.", "환경", now, null, null, null, null, null);
         Butter butter = butterService.create(createDto);
         assertThat(butter.getId(), is(notNullValue()));
 

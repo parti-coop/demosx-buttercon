@@ -5,4 +5,5 @@ public enum IssueType {
     D,  // 토론, debate
     A,   // 실행, action
     B,   // 버터, butter
+    S,   // 문화살롱, salon
 }
