@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
   $(function() {
     $(".discussion-comment-form, .js-demo-comments-container").hide();
@@ -12,7 +13,7 @@
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url:
-          "/ajax/salon/${salon.id}/" +
+          "${pageContext.request.contextPath}/ajax/salon/${salon.id}/" +
           (hasLike ? "deselectLike" : "selectLike"),
         type: "PUT",
         contentType: "application/json",
@@ -60,7 +61,9 @@
       switch (mode) {
         case "facebook":
           return window.open(
-            "https://www.facebook.com/dialog/share?app_id=2383023648400938&display=popup&href=" +
+            "https://www.facebook.com/dialog/share?app_id=2383023648400938&display=popup&redirect_uri=" +
+              window.location.origin +
+              "/shared/${salon.id}&href=" +
               encodedHref
           );
         default:
@@ -89,6 +92,41 @@
           // This can happen if the user denies clipboard permissions:
           console.error("Could not copy text: ", err);
         });
+    });
+    Kakao.init("616b92217f3fe9b95560ede9e28fb756");
+    Kakao.Link.createDefaultButton({
+      container: "#kakao-link-btn",
+      objectType: "feed",
+      content: {
+        title: "${salon.title}",
+        description: "",
+        imageUrl: "${salon.image}",
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href
+        }
+      },
+      social: {
+        likeCount: Number("${salon.stats.likeCount}"),
+        commentCount: Number("${salon.stats.etcCount}"),
+        sharedCount: Number("${salon.stats.noCount}")
+      },
+      buttons: [
+        {
+          title: "웹으로 보기",
+          link: {
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com"
+          }
+        },
+        {
+          title: "앱으로 보기",
+          link: {
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com"
+          }
+        }
+      ]
     });
   });
 </script>

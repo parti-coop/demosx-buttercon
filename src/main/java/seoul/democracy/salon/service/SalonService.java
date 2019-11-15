@@ -184,4 +184,12 @@ public class SalonService {
         return like;
     }
 
+    /**
+     * 공유
+     */
+    @Transactional
+    public void shared(Long issueId) {
+        Salon salon = getSalon(issueId);
+        statsRepository.increaseNoOpinion(salon.getStatsId()); // 공유횟수 증가
+    }
 }

@@ -97,7 +97,7 @@
                     <a href="#" class="js-share" data-mode="twitter">트위터</a>
                   </li>
                   <li class="dropdown-item">
-                    <a href="#" class="js-share" data-mode="kakao">카카오톡</a>
+                    <a href="#" id="kakao-link-btn">카카오톡</a>
                   </li>
                   <li class="dropdown-item">
                     <a class="detail-copy-url js-detail-copy-url">
