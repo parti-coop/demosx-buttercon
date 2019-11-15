@@ -127,6 +127,7 @@ body.body-butter-detail {
         color: #303133;
       }
       .butter-contributor-list {
+        flex-wrap: wrap;
         display: flex;
         flex-direction: row;
       }
