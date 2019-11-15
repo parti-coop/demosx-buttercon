@@ -70,8 +70,9 @@
         <%-- <li class="li-middle"><span class="li-middle-line">|</span></li>
         <li class="demo-nav-li"><a href="<c:url value="/org-debate-list.do"/>">기관제안
         </a></li> --%>
-        <!-- onclick="alert('서비스를 시작하지 않았습니다')" -->
-        <li class="demo-nav-li"><a href="<c:url value='/salon-list.do'/>" >문화살롱</a></li>
+        
+        <li class="demo-nav-li"><a href="<c:url value='/salon-list.do'/>" onclick="alert('서비스를 시작하지 않았습니다'); return false;">문화살롱</a></li>
+        <!-- <li class="demo-nav-li"><a href="<c:url value='/salon-list.do'/>" >문화살롱</a></li> -->
         <li class="demo-nav-li"><a href="<c:url value='/butter-list.do'/>">버터보드</a></li>
         <li class="dropdown demo-nav-li">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">

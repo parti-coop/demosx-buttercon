@@ -55,6 +55,7 @@ public class Salon extends Issue {
 
         this.title = updateDto.getTitle();
         this.content = updateDto.getContent();
+        this.image = updateDto.getImage();
         updateExcerpt(this.content);
 
         return this;

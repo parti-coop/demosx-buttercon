@@ -224,14 +224,12 @@ body.body-salon {
   }
 
   .detail-copy-url {
-    float: right;
+    float: left;
     font-size: 14px;
     line-height: 22px;
     font-weight: normal;
     color: $text-color-lighter;
-    display: none;
     @media (max-width: $screen-xs-max) {
-      display: none;
     }
   }
 

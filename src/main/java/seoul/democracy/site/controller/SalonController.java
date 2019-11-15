@@ -71,7 +71,7 @@ public class SalonController {
         if (salonDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
-        SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(),
+        SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(), salonDto.getImage(),
                 salonDto.getIssueTags());
         model.addAttribute("editDto", updateDto);
         return "/site/salon/edit";

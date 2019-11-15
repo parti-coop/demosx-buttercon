@@ -8,7 +8,7 @@
     </div>
   </c:if>
   <div class="demo-card__link ">
-    <a href="<c:url value='/salon.do?id=${salon.id}'>">
+    <a href="<c:url value='/salon.do?id=${salon.id}' />">
       <div class="salon-title-author clearfix">
         <div class="demo-card__author pull-left">
           <div class="profile-circle profile-circle--title profile-circle--title-responsive"
@@ -29,7 +29,7 @@
       <div class="demo-card__tags <c:if test="${salon.issueTags.size() eq 0}">demo-card__tags-empty</c:if>">
         <div>
           <c:forEach var="issueTag" items="${salon.issueTags}">
-            <a href="<c:url value="/salon-list.do?search=%23${issueTag.name}"/>">#${issueTag.name}</a>
+            <a href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>">#${issueTag.name}</a>
           </c:forEach>
         </div>
       </div>
