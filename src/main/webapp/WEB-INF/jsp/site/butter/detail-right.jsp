@@ -35,7 +35,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   </div>
   <hr />
   <div class="butter-content simplemde-readonly">
-    <textarea id="simplemde-view" name="content">${butter.content}</textarea>
+    <!-- <textarea id="simplemde-view" name="content">${butter.content}</textarea> -->
+    <div class="editor-preview editor-preview-active">${html}</div>
   </div>
   <div class="butter-contribute">
     <p>
@@ -63,7 +64,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="butter-maker-each">
           <div
             class="butter-maker-photo"
-            style="background-image: url(${contributor.viewPhoto()})"
+            style="background-image: url('${contributor.viewPhoto()}')"
           >
           </div>
           <div class="butter-maker-name username">
@@ -89,7 +90,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="butter-maker-each">
           <div
             class="butter-maker-photo"
-            style="background-image: url(${history.createdBy.viewPhoto()})"
+            style="background-image: url('${history.createdBy.viewPhoto()}')"
           >
           </div>
         </div>
