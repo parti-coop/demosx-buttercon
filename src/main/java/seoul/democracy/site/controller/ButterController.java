@@ -5,6 +5,7 @@ import static seoul.democracy.butter.predicate.ButterPredicate.equalIdAndStatus;
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.mysema.query.types.Predicate;
@@ -90,8 +91,11 @@ public class ButterController {
         } else {
             otherButters = allButters;
         }
-        String toc = markdownService.getTOC(butterDto.getContent());
+        Map<String, String> res = markdownService.parseHtml(butterDto.getContent());
+        String html = res.get("html").replaceAll("(#[_a-zA-Z0-9ㄱ-ㅎ가-힣]*)", "<b class='tag'>$1</b>");
+        String toc = res.get("toc").replaceAll("([>\\s])(#[_a-zA-Z0-9ㄱ-ㅎ가-힣]*)", "$1<b class='tag'>$2</b>");
         model.addAttribute("toc", toc);
+        model.addAttribute("html", html);
         model.addAttribute("otherButters", otherButters);
         return "/site/butter/detail";
     }

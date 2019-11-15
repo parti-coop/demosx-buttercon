@@ -23,7 +23,9 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Slf4j
@@ -97,22 +99,41 @@ public class MarkdownService {
         String toc = TOC_HTML.getFrom(document);
         return toc;
     }
+    public Map<String,String> parseHtml(String md) {
+        Document document = PARSER.parse("[TOC levels=1-3] \n" + md);
+        String html = RENDERER.render(document);
+        String toc = TOC_HTML.getFrom(document);
+        Map<String,String> res = new HashMap<String, String>();
+        res.put("html", html);
+        res.put("toc", toc);
+        return res;
+    }
 
     // use the PARSER to parse and RENDERER to render with pegdown compatibility
     public static void main(String[] args) {
         // You can re-use parser and renderer instances
         Document document = PARSER.parse(
                 "" + "[TOC levels=1-3] \n" + "\n" + "# Heading **some bold** 1\n" + "## Heading 1.1 _some italic_\n"
-                        + "### Heading 1.1.1\n" + "### Heading 1.1.2  **_some bold italic_**\n" + "");
+                        + "### Heading 1.1.1\n ## #HEL_P \n" + "### Heading 1.1.2 #뭐지0_HELP  **_some bold italic_**\n #하하" + "");
         String html = RENDERER.render(document);
         String toc = TOC_HTML.getFrom(document);
+        String html2 = html.replaceAll("(#[_a-zA-Z0-9ㄱ-ㅎ가-힣]*)", "<b class='tag'>$1</b>");
+        String toc2 = toc.replaceAll("([>\\s])(#[_a-zA-Z0-9ㄱ-ㅎ가-힣]*)", "$1<b class='tag'>$2</b>");
+        // Pattern p1 = Pattern.compile("(#[a-zA-Z0-9ㄱ-ㅎ가-힣]*)");
+        // Matcher matcher = p1.matcher(html);
 
-        System.out.println("<div class=\"toc\">");
-        System.out.print(toc);
-        System.out.println("</div>");
+        System.out.println(html2);
+        System.out.println(toc2);
+        // if(matcher.find()){
+        //     // System.out.print(matcher.group(0));
+        //     System.out.print(matcher.group());
+        // }
+        // System.out.println("<div class=\"toc\">");
+        // System.out.print(toc);
+        // System.out.println("</div>");
 
-        System.out.println("<div class=\"body\">");
-        System.out.print(html);
-        System.out.println("</div>");
+        // System.out.println("<div class=\"body\">");
+        // System.out.print(html);
+        // System.out.println("</div>");
     }
 }
