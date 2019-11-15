@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
@@ -32,7 +33,7 @@ import java.util.Set;
 @Service
 public class MarkdownService {
     private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS,
-            Arrays.asList(TocExtension.create(), CustomExtension.create()));
+            Arrays.asList(TocExtension.create(), CustomExtension.create(), TablesExtension.create()));
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
     public static final DataKey<String> TOC_HTML = new DataKey<>("TOC_HTML", "");
