@@ -35,7 +35,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   </div>
   <hr />
   <div class="butter-content simplemde-readonly">
-    <!-- <textarea id="simplemde-view" name="content">${butter.content}</textarea> -->
     <div class="editor-preview editor-preview-active">${html}</div>
   </div>
   <div class="butter-contribute">
