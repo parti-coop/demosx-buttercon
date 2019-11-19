@@ -10,11 +10,53 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       }
     }
 
+    function syncSideBySidePreviewScroll(simplemde) {
+      var cm = simplemde.codemirror;
+      var preview = simplemde.codemirror.getWrapperElement().nextSibling;
+      if (simplemde.options.syncSideBySidePreviewScroll) {
+        simplemde.options.syncSideBySidePreviewScroll = false;
+        cm.off("scroll"); // doesn't work now
+        preview.onscroll = null;
+      } else {
+        simplemde.options.syncSideBySidePreviewScroll = true;
+        simplemde.createSideBySide();
+      }
+    }
+
+    function followCursor(simplemde) {
+      var cm = simplemde.codemirror;
+      var preview = simplemde.codemirror.getWrapperElement().nextSibling;
+      // var sc = cm.getScrollInfo();
+      // console.log(preview, c, sc);
+      function cursorEventHandler() {
+        var pos = cm.getCursor("start");
+        var stat = cm.getTokenAt(pos);
+        if (!stat.type) return {};
+        var types = stat.type.split(" ");
+        if (types.indexOf("header") > -1) {
+          var string = stat.state.streamSeen.string;
+          // console.log(string);
+          var newString = string.substr(string.indexOf(" ")).trim();
+          var hash = newString
+            .replace(/\s/g, "-")
+            .replace(/\%20/g, "-")
+            .replace(/[\,\.\"\'\!\@\#\$\%\^\&\*\(\)\=\`\~\?]/g, "");
+          var onscrollHandler = preview.onscroll;
+          preview.onscroll = null;
+          window.location.hash = "#" + hash;
+          preview.onscroll = onscrollHandler;
+          console.log(hash);
+        }
+      }
+      cm.on("cursorActivity", cursorEventHandler);
+    }
+
     // 편집기
     var simplemde = new EasyMDE({
       element: document.getElementById("simplemde"),
       spellChecker: false,
       uploadImage: true,
+      syncSideBySidePreviewScroll: false,
       imageUploadFunction: function(file, onSuccess, onError) {
         switch (file.type) {
           case "image/jpeg":
@@ -58,6 +100,18 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         "preview",
         "fullscreen",
         "guide",
+        // {
+        //   name: "syncSideBySidePreviewScroll",
+        //   action: syncSideBySidePreviewScroll,
+        //   className: "no-disable no-mobile fa fa-angle-double-down",
+        //   title: "스크롤 동기화"
+        // },
+        // {
+        //   name: "follow-cursor",
+        //   action: followCursor,
+        //   className: "fullscreen no-disable no-mobile fa fa-i-cursor",
+        //   title: "커서 스크롤 동기화"
+        // },
         {
           name: "side-by-side",
           action: toggleFullscreen,
@@ -67,6 +121,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       ]
     });
     simplemde.codemirror.setOption("lineNumbers", true);
+    followCursor(simplemde);
     window.simplemde = simplemde;
     var butterId = "${butter.id}".length > 0 ? "${butter.id}" : "new";
     var recentHistoryId =
