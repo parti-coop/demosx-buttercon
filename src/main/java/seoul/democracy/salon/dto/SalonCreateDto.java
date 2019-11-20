@@ -15,6 +15,9 @@ public class SalonCreateDto {
     @NotBlank
     @Size(max = 100)
     private String title;
+    
+    @Size(max = 100)
+    private String team;
 
     @NotBlank
     private String content;

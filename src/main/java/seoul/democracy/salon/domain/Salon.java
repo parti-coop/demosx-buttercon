@@ -28,13 +28,16 @@ public class Salon extends Issue {
     protected String process = "Default";
     @Column(name = "IMG_URL")
     protected String image;
+    @Column(name = "TEAM")
+    protected String team;
 
-    public Salon(String title, String content, String image) {
+    public Salon(String title, String content, String image, String team) {
         this.stats = IssueStats.create();
         this.status = Status.OPEN;
         this.title = title;
         this.content = content;
         this.image = image;
+        this.team = team;
         updateExcerpt(this.content);
     }
 
@@ -46,7 +49,7 @@ public class Salon extends Issue {
     }
 
     public static Salon create(SalonCreateDto createDto) {
-        return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage());
+        return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage(), createDto.getTeam());
     }
 
     public Salon update(SalonUpdateDto updateDto) {
@@ -56,6 +59,7 @@ public class Salon extends Issue {
         this.title = updateDto.getTitle();
         this.content = updateDto.getContent();
         this.image = updateDto.getImage();
+        this.team = updateDto.getTeam();
         updateExcerpt(this.content);
 
         return this;

@@ -1,4 +1,7 @@
 body.body-salon {
+  span.required {
+    color: $text-color-red;
+  }
   background-color: $gray-background;
   &.body-salon-form,
   &.body-salon-detail {
@@ -12,6 +15,7 @@ body.body-salon {
     }
     .top-row__title {
       font-size: 32px;
+
       @media (max-width: $screen-xs-max) {
         font-size: 14px;
         line-height: 30px;
@@ -159,28 +163,66 @@ body.body-salon {
     }
   }
 
-  .demo-content .author-box {
-    display: none;
-    @media (max-width: $screen-xs-max) {
-      display: block;
-      margin-top: 26px;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      .salon-title-author {
-        position: relative;
-        margin-bottom: 16px;
-        .title-author__name {
-          margin-left: 41px;
-          margin-top: 0;
+  .demo-content {
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      .demo-form-label {
+        @media (max-width: $screen-xs-max) {
+          width: 100%;
           margin-bottom: 0;
-          margin-right: 0;
-          line-height: 32px;
-          margin-left: 40px;
-          display: inline-block;
+          line-height: 30px;
         }
-        .title-author__date {
-          line-height: 32px;
+        width: 100px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 50px;
+        letter-spacing: -1px;
+        color: #595959;
+        span {
+          font-weight: normal;
+        }
+      }
+      > div {
+        flex: 1;
+        > span {
+          font-size: 14px;
+          line-height: 1.86;
+          letter-spacing: -0.88px;
+          color: #595959;
+        }
+        .select-container {
+          min-height: 50px;
+          flex: 1;
+          ul.select2-selection__rendered {
+            line-height: 38px;
+          }
+        }
+      }
+    }
+    .author-box {
+      display: none;
+      @media (max-width: $screen-xs-max) {
+        display: block;
+        margin-top: 26px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        .salon-title-author {
+          position: relative;
+          margin-bottom: 16px;
+          .title-author__name {
+            margin-left: 41px;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-right: 0;
+            line-height: 32px;
+            margin-left: 40px;
+            display: inline-block;
+          }
+          .title-author__date {
+            line-height: 32px;
+          }
         }
       }
     }

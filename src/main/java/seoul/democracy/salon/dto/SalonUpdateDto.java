@@ -20,6 +20,10 @@ public class SalonUpdateDto {
     @NotBlank
     @Size(max = 100)
     private String title;
+
+    @Size(max = 100)
+    private String team;
+
     private String image;
 
     private String content;
