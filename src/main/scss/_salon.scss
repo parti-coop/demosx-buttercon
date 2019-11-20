@@ -1,6 +1,15 @@
 body.body-salon {
+  .margin-20 {
+    margin: 20px;
+  }
+  .margin-top-40 {
+    margin-top: 40px;
+  }
   span.required {
     color: $text-color-red;
+  }
+  .font-black {
+    color: black;
   }
   .recommended {
     font-size: 14px;
@@ -31,6 +40,106 @@ body.body-salon {
   &.body-salon-detail {
     background-color: white;
   }
+  &.body-salon-detail {
+    > .container {
+      padding: 0;
+    }
+
+    .top-row {
+      padding: 0 15px;
+      margin-bottom: 0;
+      @media (max-width: $screen-xs-max) {
+        padding: 0;
+      }
+      .top-row__title {
+        @media (max-width: $screen-xs-max) {
+          margin-bottom: 0;
+          text-align: left;
+        }
+        margin-bottom: 38px;
+      }
+    }
+    .content-container {
+      border: 0;
+      margin-top: 0;
+      padding-left: 15px;
+      padding-right: 15px;
+      .contents-box {
+        padding: 0;
+      }
+    }
+    .demo-side {
+      height: inherit;
+    }
+    .demo-content {
+      min-height: auto;
+      @media (max-width: $screen-xs-max) {
+        padding: 0 15px;
+        margin-top: 40px;
+      }
+    }
+    .contents-box-tags-link {
+      width: 27px;
+      height: 20px;
+      border-radius: 10px;
+      background-color: #ffcf4d;
+      padding: 0 8px;
+      font-size: 12px;
+      line-height: 1.67;
+      letter-spacing: -0.3px;
+      color: #111111;
+    }
+    .detail-title {
+      height: 54px;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: -0.8px;
+      color: white;
+      margin: 0;
+    }
+    .detail-teamname {
+      height: 22px;
+      font-size: 14px;
+      line-height: 1.57;
+      letter-spacing: -0.26px;
+      color: white;
+      margin: 0;
+    }
+    .flex {
+      display: flex;
+    }
+    .btn-trans {
+      width: 106px;
+      height: 36px;
+      border-radius: 2px;
+      border: solid 1px rgba(216, 216, 216, 0.5);
+      background-color: rgba(0, 0, 0, 0.2);
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.43;
+      letter-spacing: -0.26px;
+      color: white;
+      margin-right: 8px;
+    }
+    .dropdown-toggle {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.43;
+      letter-spacing: -0.26px;
+      color: white;
+    }
+    .mobile {
+      display: none;
+      @media (max-width: $screen-xs-max) {
+        display: block;
+      }
+    }
+    .desktop {
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+  }
 
   .top-row {
     margin-top: 70px;
@@ -39,7 +148,6 @@ body.body-salon {
     }
     .top-row__title {
       font-size: 32px;
-
       @media (max-width: $screen-xs-max) {
         font-size: 14px;
         line-height: 30px;
@@ -72,6 +180,11 @@ body.body-salon {
         line-height: 20px;
         vertical-align: middle;
       }
+    }
+    .top-cover {
+      // width: 1140px;
+      height: 296px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 
