@@ -72,7 +72,7 @@ public class SalonController {
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
         SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(),
-                salonDto.getImage(), salonDto.getIssueTags());
+                salonDto.getImage(), salonDto.getIssueTags(), salonDto.getFiles());
         model.addAttribute("editDto", updateDto);
         return "/site/salon/edit";
     }

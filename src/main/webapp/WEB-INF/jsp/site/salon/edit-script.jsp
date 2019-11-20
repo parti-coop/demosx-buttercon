@@ -6,7 +6,7 @@
     $formEditSalon.on("submit", function(event) {
       event.preventDefault();
 
-      var data = $formEditSalon.serializeObject();
+      var data = $formEditSalon.serializeJSON({ useIntKeysAsArrayIndex: true });
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/salon/${editDto.id}",
@@ -35,16 +35,14 @@
         }
       });
     });
-    $("#fileupload")
+    $(".js-images")
       .fileupload({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" }
       })
       .bind("fileuploaddone", function(e, data) {
         var url = data.result.url;
-        // var img = $("<img src='"+url+"'>");
-        $(".js-top-image img").attr("src", url);
-        $(".js-top-image input").val(url);
-        $(".js-top-image").show();
+        var filename = data.result.filename;
+        e.target.nextElementSibling.value = url;
       });
     $("#delete-salon-btn").click(function() {
       if (!window.confirm("문화살롱를 삭제하시겠습니까?")) return;

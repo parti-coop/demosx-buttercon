@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
+import seoul.democracy.issue.dto.IssueFileDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.salon.domain.Salon;
 import seoul.democracy.salon.dto.SalonDto;
@@ -22,6 +23,7 @@ import static seoul.democracy.user.dto.UserDto.modifiedBy;
 import java.util.List;
 
 import static seoul.democracy.issue.domain.QIssueTag.issueTag;
+import static seoul.democracy.issue.domain.QIssueFile.issueFile;;
 
 public class SalonRepositoryImpl extends QueryDslRepositorySupport implements SalonRepositoryCustom {
 
@@ -70,7 +72,10 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
         if (withIssueTags) {
             List<IssueTagDto> issueTags = from(salon).innerJoin(salon.issueTags, issueTag).where(predicate)
                     .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
+            List<IssueFileDto> issueFiles = from(salon).innerJoin(salon.files, issueFile).where(predicate)
+                    .list(IssueFileDto.projection);
             salonDto.setIssueTags(issueTags);
+            salonDto.setFiles(issueFiles);
         }
 
         return salonDto;

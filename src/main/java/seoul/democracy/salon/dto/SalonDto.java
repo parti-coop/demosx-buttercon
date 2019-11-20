@@ -6,8 +6,8 @@ import com.mysema.query.types.Projections;
 import com.mysema.query.types.QBean;
 import lombok.Data;
 import seoul.democracy.issue.domain.Issue;
-import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.dto.CategoryDto;
+import seoul.democracy.issue.dto.IssueFileDto;
 import seoul.democracy.issue.dto.IssueStatsDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.opinion.domain.OpinionType;
@@ -69,7 +69,7 @@ public class SalonDto {
 
         private Long statsId;
         private IssueStatsDto stats;
-        private List<IssueFile> files;
+        private List<IssueFileDto> files;
 
         private Issue.Status status;
         private String process;

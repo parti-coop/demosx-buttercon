@@ -130,12 +130,12 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     type="text"
                     class="form-control"
                     onclick="$('#img-thumbnail').click();"
+                    name="image"
                     readonly
                   />
                   <span class="input-group-btn">
                     <button
                       class="btn btn-default"
-                      name="image"
                       type="button"
                       onclick="$('#img-thumbnail').click();"
                     >

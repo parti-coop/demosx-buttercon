@@ -20,6 +20,12 @@ body.body-salon {
     line-height: 32px;
     border-radius: 3px;
   }
+  .btn-remove {
+    width: 100px;
+    height: 56px;
+    line-height: 32px;
+    border-radius: 3px;
+  }
   background-color: $gray-background;
   &.body-salon-form,
   &.body-salon-detail {
