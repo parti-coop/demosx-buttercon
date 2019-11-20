@@ -2,6 +2,24 @@ body.body-salon {
   span.required {
     color: $text-color-red;
   }
+  .recommended {
+    font-size: 14px;
+    line-height: 1.86;
+    letter-spacing: -0.88px;
+    color: #6f6f6f;
+  }
+  .btn-save {
+    width: 200px;
+    height: 56px;
+    border-radius: 3px;
+  }
+  .btn-cancel {
+    width: 100px;
+    height: 56px;
+    margin-left: 20px;
+    line-height: 32px;
+    border-radius: 3px;
+  }
   background-color: $gray-background;
   &.body-salon-form,
   &.body-salon-detail {
@@ -185,6 +203,18 @@ body.body-salon {
       }
       > div {
         flex: 1;
+        .input-group {
+          height: 50px;
+          .form-control {
+            height: inherit;
+          }
+          .input-group-btn {
+            height: inherit;
+            .btn {
+              height: inherit;
+            }
+          }
+        }
         > span {
           font-size: 14px;
           line-height: 1.86;

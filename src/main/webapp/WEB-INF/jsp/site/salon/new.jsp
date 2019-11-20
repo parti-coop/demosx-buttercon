@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,39 +47,21 @@
               >
               <div>
                 <input
-                type="text"
-                class="form-control demo-input"
-                id="inputTeam"
-                placeholder=""
-                autocomplete="off"
-                name="team"
-                data-parsley-required="true"
-                data-parsley-maxlength="100"
+                  type="text"
+                  class="form-control demo-input"
+                  id="inputTeam"
+                  placeholder=""
+                  autocomplete="off"
+                  name="team"
+                  data-parsley-required="true"
+                  data-parsley-maxlength="100"
                 />
               </div>
             </div>
 
             <div class="form-group form-group-salon">
-              <label class="demo-form-label"
-                >상단 이미지<span class="required"> *</span></label
-              >
-              <div>
-                <input type="file" 
-                id="fileupload" 
-                name="file"
-                data-url="/ajax/mypage/files"
-                data-sequential-uploads="true"
-                data-form-data='{"script": "true", "type": "EDITOR"}'></input>
-                <div class="js-top-image" style="display: none;">
-                  <img  alt="preview" />
-                  <input type="hidden" name="image" value="" />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group form-group-salon">
               <label class="demo-form-label" for="category"
-                >살롱 주제<span class="required"> *</span></label
+                >분야<span class="required"> *</span></label
               >
               <div>
                 <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
@@ -124,28 +106,104 @@
                   id="${salonContentParsleyErrorsContainerId}"
                   class="help-block-error-container"
                 ></div>
+              </div>
             </div>
+
+            <div class="form-group form-group-salon">
+              <label class="demo-form-label"
+                >목록썸네일<span class="required"> *</span></label
+              >
+
+              <div>
+                <div class="input-group">
+                  <input
+                    id="img-thumbnail"
+                    type="file"
+                    class="js-images"
+                    name="file"
+                    data-url="/ajax/mypage/files"
+                    data-sequential-uploads="true"
+                    data-form-data='{"script": "true", "type": "EDITOR"}'
+                    style="display:none;"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    onclick="$('#img-thumbnail').click();"
+                    readonly
+                  />
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-default"
+                      name="image"
+                      type="button"
+                      onclick="$('#img-thumbnail').click();"
+                    >
+                      찾기
+                    </button>
+                  </span>
+                </div>
+                <div class="recommended">권장 이미지 사이즈 000x000px</div>
+              </div>
+            </div>
+
+            <div class="form-group form-group-salon">
+              <label class="demo-form-label"
+                >본문커버<span class="required"> *</span></label
+              >
+              <div>
+                <div class="input-group">
+                  <input type="hidden" name="files[0][name]" value="cover" />
+                  <input
+                    id="img-cover"
+                    type="file"
+                    class="js-images"
+                    name="file"
+                    data-url="/ajax/mypage/files"
+                    data-sequential-uploads="true"
+                    data-form-data='{"script": "true", "type": "EDITOR"}'
+                    style="display:none;"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="files[0][url]"
+                    readonly
+                    onclick="$('#img-cover').click();"
+                  />
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-default"
+                      type="button"
+                      onclick="$('#img-cover').click();"
+                    >
+                      찾기
+                    </button>
+                  </span>
+                </div>
+                <div class="recommended">권장 이미지 사이즈 000x000px</div>
+              </div>
             </div>
 
             <div class="form-action form-group-salon text-right ">
               <div class="inline-block">
+                <button type="submit" class="btn btn-primary btn-lg btn-save">
+                  등록
+                </button>
                 <a
                   role="button"
-                  class="btn btn-default btn-lg"
+                  class="btn btn-default btn-lg btn-cancel"
                   href="<c:url value='/salon-list.do'/>"
                   >취소</a
                 >
-                <button type="submit" class="btn btn-primary btn-lg">
-                  문화살롱 제안하기
-                </button>
               </div>
             </div>
           </form>
         </div>
       </div>
     </div>
-   
-    <%@ include file="new-script.jsp" %>
-    <%@ include file="../shared/footer.jsp" %>
+
+    <%@ include file="new-script.jsp" %> <%@ include file="../shared/footer.jsp"
+    %>
   </body>
 </html>

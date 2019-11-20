@@ -1,13 +1,15 @@
 package seoul.democracy.salon.dto;
 
+import seoul.democracy.issue.dto.IssueFileDto;
+
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import seoul.democracy.issue.dto.IssueTagDto;
 
 import org.hibernate.validator.constraints.NotBlank;
-
-import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,4 +30,5 @@ public class SalonEditDto {
     private String image;
 
     private List<IssueTagDto> issueTags;
+    private List<IssueFileDto> files;
 }

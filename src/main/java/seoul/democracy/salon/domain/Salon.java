@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.HtmlUtils;
+
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.issue.domain.Issue;
+import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.domain.IssueLike;
 import seoul.democracy.issue.domain.IssueStats;
 import seoul.democracy.opinion.domain.SalonOpinion;
@@ -13,6 +15,8 @@ import seoul.democracy.opinion.dto.OpinionCreateDto;
 import seoul.democracy.salon.dto.SalonCreateDto;
 import seoul.democracy.salon.dto.SalonUpdateDto;
 import seoul.democracy.user.domain.User;
+
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -31,13 +35,14 @@ public class Salon extends Issue {
     @Column(name = "TEAM")
     protected String team;
 
-    public Salon(String title, String content, String image, String team) {
+    public Salon(String title, String content, String image, String team, List<IssueFile> files) {
         this.stats = IssueStats.create();
         this.status = Status.OPEN;
         this.title = title;
         this.content = content;
         this.image = image;
         this.team = team;
+        this.files = files;
         updateExcerpt(this.content);
     }
 
@@ -49,7 +54,8 @@ public class Salon extends Issue {
     }
 
     public static Salon create(SalonCreateDto createDto) {
-        return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage(), createDto.getTeam());
+        return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage(), createDto.getTeam(),
+                IssueFile.create(createDto.getFiles()));
     }
 
     public Salon update(SalonUpdateDto updateDto) {
@@ -60,6 +66,7 @@ public class Salon extends Issue {
         this.content = updateDto.getContent();
         this.image = updateDto.getImage();
         this.team = updateDto.getTeam();
+        this.updateFiles(updateDto.getFiles());
         updateExcerpt(this.content);
 
         return this;
@@ -108,5 +115,4 @@ public class Salon extends Issue {
 
     public void deleteLike() {
     }
-
 }

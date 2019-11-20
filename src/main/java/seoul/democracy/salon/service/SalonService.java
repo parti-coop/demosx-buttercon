@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import seoul.democracy.common.exception.AlreadyExistsException;
 import seoul.democracy.common.exception.BadRequestException;
 import seoul.democracy.common.exception.NotFoundException;
+import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.domain.IssueLike;
 import seoul.democracy.issue.predicate.IssueLikePredicate;
 import seoul.democracy.issue.repository.IssueLikeRepository;
@@ -25,6 +26,8 @@ import seoul.democracy.user.utils.UserUtils;
 
 import static seoul.democracy.issue.predicate.IssueLikePredicate.equalUserIdAndIssueId;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 public class SalonService {
@@ -32,7 +35,6 @@ public class SalonService {
     private final SalonRepository salonRepository;
     private final IssueLikeRepository likeRepository;
     private final IssueStatsRepository statsRepository;
-
     private final IssueTagService issueTagService;
 
     @Autowired
@@ -96,9 +98,7 @@ public class SalonService {
     public Salon create(SalonCreateDto createDto) {
         Salon salon = Salon.create(createDto);
         salon = salonRepository.save(salon);
-
         issueTagService.changeIssueTags(salon.getId(), createDto.getIssueTagNames());
-
         return salon;
     }
 

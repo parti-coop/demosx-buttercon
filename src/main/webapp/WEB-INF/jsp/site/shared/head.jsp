@@ -60,6 +60,8 @@
 
 <!-- jquery serialize object -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+
 
 <!-- 파일 업로드 -->
 <link rel="stylesheet" type="text/css"

@@ -4,7 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
+import seoul.democracy.issue.dto.IssueFileDto;
 
+import java.util.List;
+
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 @Data
@@ -15,7 +19,7 @@ public class SalonCreateDto {
     @NotBlank
     @Size(max = 100)
     private String title;
-    
+
     @Size(max = 100)
     private String team;
 
@@ -24,4 +28,7 @@ public class SalonCreateDto {
 
     private String[] issueTagNames;
     private String image;
+
+    @Valid
+    private List<IssueFileDto> files;
 }

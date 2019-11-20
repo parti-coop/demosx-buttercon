@@ -5,7 +5,7 @@
     $formNewSalon.on("submit", function(event) {
       event.preventDefault();
 
-      var data = $formNewSalon.serializeObject();
+      var data = $formNewSalon.serializeJSON({useIntKeysAsArrayIndex: true});
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
         url: "/ajax/salon/",
@@ -36,16 +36,14 @@
         }
       });
     });
-    $("#fileupload")
+    $(".js-images")
       .fileupload({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" }
       })
       .bind("fileuploaddone", function(e, data) {
         var url = data.result.url;
-        // var img = $("<img src='"+url+"'>");
-        $(".js-top-image img").attr("src", url);
-        $(".js-top-image input").val(url);
-        $(".js-top-image").show();
+        var filename = data.result.filename;
+        e.target.nextElementSibling.value = url;
       });
   });
 </script>

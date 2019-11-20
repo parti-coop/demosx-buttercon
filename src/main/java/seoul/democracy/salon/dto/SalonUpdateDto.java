@@ -3,6 +3,9 @@ package seoul.democracy.salon.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import seoul.democracy.issue.dto.IssueFileDto;
+
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -29,4 +32,5 @@ public class SalonUpdateDto {
     private String content;
 
     private String[] issueTagNames;
+    private List<IssueFileDto> files;
 }
