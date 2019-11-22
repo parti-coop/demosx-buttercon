@@ -75,13 +75,14 @@ $(function() {
         hidden_input: false,
         uploadimage_default_img_class: 'tinymce-content-image',
         link_title: false,
-        plugins: ['autolink', 'autosave', 'textcolor', 'image', 'media', 'link', 'paste', 'autoresize'],
+        plugins: ['autolink', 'autosave', 'image', 'media', 'link', 'paste', 'autoresize'],
         toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | link media custom_image",
         mobile: {
           theme: 'silver',
         },
         branding: false,
         preview_styles: 'font-family font-size color',
+        // media_dimensions: false,
         body_class: 'tinymce-container',
         setup: function (editor) {
           if(!upload_url) {

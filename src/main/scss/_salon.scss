@@ -76,8 +76,14 @@ body.body-salon {
       }
       .top-row__title {
         @media (max-width: $screen-xs-max) {
-          margin-bottom: 0;
+          margin: 8px 16px;
           text-align: left;
+          height: 22px;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 1.38;
+          letter-spacing: -0.4px;
+          color: #090909;
         }
         margin-bottom: 38px;
       }
@@ -91,6 +97,7 @@ body.body-salon {
         padding: 0;
       }
       .demo-content {
+        overflow: hidden;
         min-height: auto;
       }
     }

@@ -1,5 +1,8 @@
 /* 에디터에서만 적용 */
 body.mce-content-body {
+  .mce-object-iframe {
+    width: 100%;
+  }
   min-height: 100px;
   height: auto;
   outline: none;
@@ -18,7 +21,8 @@ body.mce-content-body {
     margin-top: 0;
   }
 
-  ul, ol {
+  ul,
+  ol {
     position: relative;
   }
 }
@@ -42,11 +46,14 @@ body.tinymce-mobile.mce-content-body {
   h3 {
     font-size: $font-size-base;
   }
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     margin-top: 1.3em;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 24px;
   }
 
