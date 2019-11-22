@@ -30,63 +30,21 @@
               >
             </div>
           </c:if>
-          <div class="demo-side"></div>
-          <div class="demo-content">
-            <div class="contents-box-tags">
-              <span class="contents-box-tags-list">
-                <c:forEach var="issueTag" items="${salon.issueTags}">
-                  <a
-                    href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>"
-                    class="contents-box-tags-link"
-                    >${issueTag.name}</a
-                  >
-                </c:forEach>
-              </span>
-            </div>
-            <div class="title-row clearfix">
-              <h2 class="detail-title">${salon.title}</h2>
-              <h3 class="detail-teamname">팀이름 어째서 비정규직 여성</h3>
-              <div class="flex margin-top-40">
-                <button
-                  class="${salon.liked eq true ? 'btn-outline active' : 'btn-trans'}${empty loginUser ? ' show-login-modal' : ''}"
-                  id="salon-like-btn"
+          <div class="contents-box-tags">
+            <span class="contents-box-tags-list">
+              <c:forEach var="issueTag" items="${salon.issueTags}">
+                <a
+                  href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>"
+                  class="contents-box-tags-link"
+                  >${issueTag.name}</a
                 >
-                  <i class="fa fa-heart"></i> 공감
-                  <strong>${salon.stats.likeCount}</strong>개
-                </button>
-                <button id="native-share" class="btn-trans mobile">
-                  <i class="fa fa-share-alt"></i>
-                  공유하기
-                </button>
-                <button class="dropdown btn-trans desktop">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-share-alt"></i>
-                    공유하기
-                  </a>
-                  <ul class="dropdown-menu dopdown-menu-auto">
-                    <li class="dropdown-item">
-                      <a href="#" class="js-share" data-mode="facebook"
-                        >페이스북</a
-                      >
-                    </li>
-                    <li class="dropdown-item">
-                      <a href="#" class="js-share" data-mode="twitter"
-                        >트위터</a
-                      >
-                    </li>
-                    <li class="dropdown-item">
-                      <a href="#" id="kakao-link-btn">카카오톡</a>
-                    </li>
-                    <li class="dropdown-item">
-                      <a class="detail-copy-url js-detail-copy-url">
-                        url복사
-                        <i class="xi-share-alt"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </button>
-              </div>
-            </div>
+              </c:forEach>
+            </span>
+          </div>
+          <div class="title-row clearfix">
+            <h2 class="detail-title">${salon.title}</h2>
+            <h3 class="detail-teamname">팀이름 어째서 비정규직 여성</h3>
+            <%@ include file="detail-btns.jsp" %>
           </div>
         </section>
       </div>
@@ -103,7 +61,14 @@
           <div class="contents-box">
             <div class="contents-box__contents">${salon.content}</div>
           </div>
+          <hr />
+          <%@ include file="detail-btns.jsp" %>
         </div>
+      </div>
+      <hr class="thick-hr" />
+      <div class="other-projects">
+        <h2>다른 프로젝트 둘러보기</h2>
+
       </div>
       <!-- demo-row end  -->
     </div>
