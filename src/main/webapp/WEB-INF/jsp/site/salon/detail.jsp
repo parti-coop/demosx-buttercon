@@ -53,7 +53,7 @@
         <div class="demo-side">
           <div class="toc">
             <ul>
-              <li>1. go</li>
+              <li>개발중</li>
             </ul>
           </div>
         </div>
@@ -68,7 +68,7 @@
       <hr class="thick-hr" />
       <div class="other-projects">
         <h2>다른 프로젝트 둘러보기</h2>
-
+        <div>개발중</div>
       </div>
       <!-- demo-row end  -->
     </div>

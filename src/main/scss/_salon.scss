@@ -95,9 +95,9 @@ body.body-salon {
       padding-right: 15px;
       .contents-box {
         padding: 0;
+        overflow: hidden;
       }
       .demo-content {
-        overflow: hidden;
         min-height: auto;
       }
     }
