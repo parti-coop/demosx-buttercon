@@ -27,6 +27,9 @@
                 >제목<span class="required"> *</span></label
               >
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
                 <input
                   type="text"
                   class="form-control demo-input"
@@ -56,7 +59,6 @@
                     name="category"
                     title="분류"
                     data-parsley-required="true"
-                    data-parsley-errors-container="#${salonContentParsleyErrorsContainerId}"
                   >
                     <c:forEach var="category" items="${categories}">
                       <c:set var="selected" scope="page"></c:set>
@@ -69,14 +71,10 @@
                     </c:forEach>
                   </select>
                 </div>
-                <div
-                  id="${salonContentParsleyErrorsContainerId}"
-                  class="help-block-error-container"
-                ></div>
               </div>
             </div>
 
-            <div class="form-group  form-group-salon">
+            <div class="form-group form-group-salon">
               <label class="demo-form-label" for="issueTagNames[]">태그</label>
               <div class="select-container">
                 <select
@@ -91,6 +89,32 @@
                     >
                   </c:forEach>
                 </select>
+              </div>
+            </div>
+
+            <div class="form-group form-group-salon">
+              <label class="demo-form-label" for="inputExcerpt"
+                >프로젝트 소개<span class="required"> *</span></label
+              >
+              <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+                <input
+                  type="text"
+                  class="form-control demo-input"
+                  id="inputExcerpt"
+                  placeholder=""
+                  autocomplete="off"
+                  name="excerpt"
+                  value="${editDto.excerpt}"
+                  data-parsley-required="true"
+                  data-parsley-maxlength="300"
+                />
+                <div
+                  id="${salonCategoryParsleyErrorsContainerId}"
+                  class="help-block-error-container"
+                ></div>
               </div>
             </div>
 
@@ -128,6 +152,9 @@ ${editDto.content}</textarea
               >
 
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
                 <div class="input-group">
                   <input
                     id="img-thumbnail"
@@ -146,6 +173,7 @@ ${editDto.content}</textarea
                     value="${editDto.image}"
                     name="image"
                     readonly
+                    data-parsley-required="true"
                   />
                   <span class="input-group-btn">
                     <button
@@ -166,6 +194,9 @@ ${editDto.content}</textarea
                 >본문커버<span class="required"> *</span></label
               >
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
                 <div class="input-group">
                   <input type="hidden" name="files[0][name]" value="cover" />
                   <input
@@ -185,6 +216,7 @@ ${editDto.content}</textarea
                     value="${editDto.files[0].url}"
                     readonly
                     onclick="$('#img-cover').click();"
+                    data-parsley-required="true"
                   />
                   <span class="input-group-btn">
                     <button

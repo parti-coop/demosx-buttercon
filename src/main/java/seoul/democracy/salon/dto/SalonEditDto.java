@@ -29,6 +29,7 @@ public class SalonEditDto {
     private String content;
     private String image;
     private String category;
+    private String excerpt;
 
     private List<IssueTagDto> issueTags;
     private List<IssueFileDto> files;

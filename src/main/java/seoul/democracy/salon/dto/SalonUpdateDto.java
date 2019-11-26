@@ -32,6 +32,9 @@ public class SalonUpdateDto {
     @NotBlank
     private String content;
 
+    @NotBlank
+    private String excerpt;
+
     private String category;
 
     private String[] issueTagNames;

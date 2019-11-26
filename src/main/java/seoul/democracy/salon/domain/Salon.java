@@ -36,7 +36,7 @@ public class Salon extends Issue {
     @Column(name = "TEAM")
     protected String team;
 
-    public Salon(String title, String content, String image, String team, List<IssueFile> files) {
+    public Salon(String title, String content, String image, String team, List<IssueFile> files, String excerpt) {
         this.stats = IssueStats.create();
         this.status = Status.OPEN;
         this.title = title;
@@ -44,7 +44,8 @@ public class Salon extends Issue {
         this.image = image;
         this.team = team;
         this.files = files;
-        updateExcerpt(this.content);
+        this.excerpt = excerpt;
+        // updateExcerpt(this.content);
     }
 
     protected void updateExcerpt(String content) {
@@ -56,7 +57,7 @@ public class Salon extends Issue {
 
     public static Salon create(SalonCreateDto createDto) {
         return new Salon(createDto.getTitle(), createDto.getContent(), createDto.getImage(), createDto.getTeam(),
-                IssueFile.create(createDto.getFiles()));
+                IssueFile.create(createDto.getFiles()), createDto.getExcerpt());
     }
 
     public Salon update(SalonUpdateDto updateDto) {
@@ -68,7 +69,8 @@ public class Salon extends Issue {
         this.image = updateDto.getImage();
         this.team = updateDto.getTeam();
         this.updateFiles(updateDto.getFiles());
-        updateExcerpt(this.content);
+        this.excerpt = updateDto.getExcerpt();
+        // updateExcerpt(this.content);
 
         return this;
     }
@@ -96,7 +98,6 @@ public class Salon extends Issue {
         this.status = Status.OPEN;
         return this;
     }
-
 
     public Salon updateCategory(Category category) {
         this.category = category;

@@ -28,6 +28,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 >제목<span class="required"> *</span></label
               >
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
                 <input
                   type="text"
                   class="form-control demo-input"
@@ -46,6 +49,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 >팀 이름<span class="required"> *</span></label
               >
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
                 <input
                   type="text"
                   class="form-control demo-input"
@@ -61,7 +67,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
             <div class="form-group form-gruop-salon">
               <label class="demo-form-label" for="category"
-                >살롱 주제<span class="required"> *</span></label
+                >분야<span class="required"> *</span></label
               >
               <div>
                 <c:set
@@ -75,7 +81,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     name="category"
                     title="분류"
                     data-parsley-required="true"
-                    data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}"
                   >
                     <option value="">살롱 주제 선택...</option>
                     <c:forEach var="category" items="${categories}">
@@ -83,17 +88,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     </c:forEach>
                   </select>
                 </div>
-                <div
-                  id="${proposalCategoryParsleyErrorsContainerId}"
-                  class="help-block-error-container"
-                ></div>
               </div>
             </div>
 
             <div class="form-group form-group-salon">
-              <label class="demo-form-label" for="category"
-                >분야<span class="required"> *</span></label
-              >
+              <label class="demo-form-label" for="category">태그</label>
               <div>
                 <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
                   ><%= java.util.UUID.randomUUID() %></c:set
@@ -106,10 +105,27 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     data-width="100%"
                   ></select>
                 </div>
-                <div
-                  id="${salonCategoryParsleyErrorsContainerId}"
-                  class="help-block-error-container"
-                ></div>
+              </div>
+            </div>
+
+            <div class="form-group form-group-salon">
+              <label class="demo-form-label" for="inputExcerpt"
+                >프로젝트 소개<span class="required"> *</span></label
+              >
+              <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+                <input
+                  type="text"
+                  class="form-control demo-input"
+                  id="inputExcerpt"
+                  placeholder=""
+                  autocomplete="off"
+                  name="excerpt"
+                  data-parsley-required="true"
+                  data-parsley-maxlength="300"
+                />
               </div>
             </div>
 
@@ -146,6 +162,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               >
 
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+
                 <div class="input-group">
                   <input
                     id="img-thumbnail"
@@ -163,6 +183,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     onclick="$('#img-thumbnail').click();"
                     name="image"
                     readonly
+                    data-parsley-required="true"
                   />
                   <span class="input-group-btn">
                     <button
@@ -183,6 +204,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 >본문커버<span class="required"> *</span></label
               >
               <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+
                 <div class="input-group">
                   <input type="hidden" name="files[0][name]" value="cover" />
                   <input
@@ -200,6 +225,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     class="form-control"
                     name="files[0][url]"
                     readonly
+                    data-parsley-required="true"
                     onclick="$('#img-cover').click();"
                   />
                   <span class="input-group-btn">

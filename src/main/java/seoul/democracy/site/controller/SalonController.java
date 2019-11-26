@@ -89,7 +89,8 @@ public class SalonController {
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
         SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(),
-                salonDto.getImage(), salonDto.getCategory().getName(), salonDto.getIssueTags(), salonDto.getFiles());
+                salonDto.getImage(), salonDto.getCategory().getName(), salonDto.getExcerpt(), salonDto.getIssueTags(),
+                salonDto.getFiles());
         model.addAttribute("editDto", updateDto);
         List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
                 CategoryDto.projectionForFilter);
