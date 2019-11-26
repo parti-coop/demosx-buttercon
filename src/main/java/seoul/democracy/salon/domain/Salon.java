@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.HtmlUtils;
 
 import seoul.democracy.common.exception.NotFoundException;
+import seoul.democracy.issue.domain.Category;
 import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.IssueFile;
 import seoul.democracy.issue.domain.IssueLike;
@@ -93,6 +94,12 @@ public class Salon extends Issue {
             throw new NotFoundException("해당 아이디어를 찾을 수 없습니다.");
 
         this.status = Status.OPEN;
+        return this;
+    }
+
+
+    public Salon updateCategory(Category category) {
+        this.category = category;
         return this;
     }
 

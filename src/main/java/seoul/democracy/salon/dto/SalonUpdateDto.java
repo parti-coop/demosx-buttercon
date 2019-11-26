@@ -29,7 +29,10 @@ public class SalonUpdateDto {
 
     private String image;
 
+    @NotBlank
     private String content;
+
+    private String category;
 
     private String[] issueTagNames;
     private List<IssueFileDto> files;

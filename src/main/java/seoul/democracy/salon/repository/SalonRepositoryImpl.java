@@ -16,6 +16,7 @@ import seoul.democracy.salon.dto.SalonDto;
 import seoul.democracy.issue.predicate.IssueTagPredicate;
 
 import static seoul.democracy.issue.domain.QIssueStats.issueStats;
+import static seoul.democracy.issue.domain.QCategory.category;
 import static seoul.democracy.salon.domain.QSalon.salon;
 import static seoul.democracy.user.dto.UserDto.createdBy;
 import static seoul.democracy.user.dto.UserDto.modifiedBy;
@@ -33,16 +34,10 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
 
     private JPQLQuery getQuery(Expression<SalonDto> projection) {
         JPQLQuery query = from(salon);
-        if (projection == SalonDto.projection) {
-            query.innerJoin(salon.createdBy, createdBy);
-            query.innerJoin(salon.modifiedBy, modifiedBy);
-            query.innerJoin(salon.stats, issueStats);
-        } else if (projection == SalonDto.projectionForSiteList || projection == SalonDto.projectionForSiteDetail) {
-            query.innerJoin(salon.createdBy, createdBy);
-            query.innerJoin(salon.stats, issueStats);
-        } else if (projection == SalonDto.projectionForMypageSalon) {
-            query.innerJoin(salon.stats, issueStats);
-        }
+        query.innerJoin(salon.createdBy, createdBy);
+        query.innerJoin(salon.modifiedBy, modifiedBy);
+        query.innerJoin(salon.stats, issueStats);
+        query.leftJoin(salon.category, category);
         return query;
     }
 

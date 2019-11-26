@@ -26,6 +26,9 @@ public class SalonCreateDto {
     @NotBlank
     private String content;
 
+    @NotBlank
+    private String category;
+
     private String[] issueTagNames;
     private String image;
 

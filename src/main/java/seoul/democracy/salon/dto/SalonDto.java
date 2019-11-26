@@ -26,33 +26,29 @@ public class SalonDto {
                         salon.modifiedDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"),
                         UserDto.projectionForBasicByModifiedBy.as("modifiedBy"), salon.createdIp, salon.modifiedIp,
                         salon.opinionType, IssueStatsDto.projection.as("stats"), salon.salonType, salon.status,
-                        salon.image, salon.title, salon.content);
+                        salon.image, salon.title, salon.content, CategoryDto.projection.as("category"));
 
         /**
          * 사이트 리스트에서 사용
          */
         public final static QBean<SalonDto> projectionForSiteList = Projections.fields(SalonDto.class, salon.id,
                         salon.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"), salon.image,
-                        IssueStatsDto.projection.as("stats"), salon.status, salon.title, salon.excerpt);
+                        IssueStatsDto.projection.as("stats"), salon.status, salon.title, salon.excerpt,
+                        CategoryDto.projection.as("category"));
 
         /**
          * 제안 상세에서 사용
          */
         public final static QBean<SalonDto> projectionForSiteDetail = Projections.fields(SalonDto.class, salon.id,
                         salon.createdDate, UserDto.projectionForBasicByCreatedBy.as("createdBy"), salon.statsId,
-                        IssueStatsDto.projection.as("stats"), salon.status, salon.image, salon.title, salon.content);
-
-        /**
-         * 마이페이지에서 사용
-         */
-        public final static QBean<SalonDto> projectionForMypageSalon = Projections.fields(SalonDto.class, salon.id,
-                        salon.createdDate, IssueStatsDto.projection.as("stats"), salon.status, salon.title);
+                        IssueStatsDto.projection.as("stats"), salon.status, salon.image, salon.title, salon.content,
+                        CategoryDto.projection.as("category"));
 
         /**
          * 나의 제안 수정 시 사용
          */
         public final static QBean<SalonDto> projectionForSiteEdit = Projections.fields(SalonDto.class, salon.id,
-                        salon.title, salon.content, salon.image);
+                        salon.title, salon.content, salon.image, CategoryDto.projection.as("category"));
 
         private Long id;
         @JsonFormat(pattern = "yyyy-MM-dd")

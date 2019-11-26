@@ -12,11 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import seoul.democracy.common.exception.AlreadyExistsException;
 import seoul.democracy.common.exception.BadRequestException;
 import seoul.democracy.common.exception.NotFoundException;
-import seoul.democracy.issue.domain.IssueFile;
+import seoul.democracy.issue.domain.Category;
 import seoul.democracy.issue.domain.IssueLike;
 import seoul.democracy.issue.predicate.IssueLikePredicate;
 import seoul.democracy.issue.repository.IssueLikeRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
+import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.issue.service.IssueTagService;
 import seoul.democracy.salon.domain.Salon;
 import seoul.democracy.salon.dto.*;
@@ -26,8 +27,6 @@ import seoul.democracy.user.utils.UserUtils;
 
 import static seoul.democracy.issue.predicate.IssueLikePredicate.equalUserIdAndIssueId;
 
-import java.util.List;
-
 @Service
 @Transactional(readOnly = true)
 public class SalonService {
@@ -36,14 +35,16 @@ public class SalonService {
     private final IssueLikeRepository likeRepository;
     private final IssueStatsRepository statsRepository;
     private final IssueTagService issueTagService;
+    private final CategoryService categoryService;
 
     @Autowired
     public SalonService(SalonRepository salonRepository, IssueLikeRepository likeRepository,
-            IssueStatsRepository statsRepository, IssueTagService issueTagService) {
+            IssueStatsRepository statsRepository, IssueTagService issueTagService, CategoryService categoryService) {
         this.salonRepository = salonRepository;
         this.likeRepository = likeRepository;
         this.statsRepository = statsRepository;
         this.issueTagService = issueTagService;
+        this.categoryService = categoryService;
     }
 
     public SalonDto getSalonSiteDetail(Predicate predicate, Expression<SalonDto> projection) {
@@ -97,6 +98,8 @@ public class SalonService {
     @Transactional
     public Salon create(SalonCreateDto createDto) {
         Salon salon = Salon.create(createDto);
+        Category category = categoryService.getCategory(createDto.getCategory());
+        salon.updateCategory(category);
         salon = salonRepository.save(salon);
         issueTagService.changeIssueTags(salon.getId(), createDto.getIssueTagNames());
         return salon;
@@ -109,6 +112,10 @@ public class SalonService {
     @PostAuthorize("returnObject.createdById == authentication.principal.user.id || returnObject.createdBy == authentication.principal.user")
     public Salon update(SalonUpdateDto updateDto) {
         Salon salon = getSalon(updateDto.getId());
+        if (salon.getCategory() == null || !updateDto.getCategory().equals(salon.getCategory().getName())) {
+            Category category = categoryService.getCategory(updateDto.getCategory());
+            salon.updateCategory(category);
+        }
 
         issueTagService.changeIssueTags(salon.getId(), updateDto.getIssueTagNames());
 

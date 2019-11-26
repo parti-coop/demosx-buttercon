@@ -2,6 +2,7 @@ package seoul.democracy.site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import seoul.democracy.common.exception.NotFoundException;
+import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.salon.domain.SalonSort;
 import seoul.democracy.salon.dto.SalonDto;
@@ -19,19 +21,25 @@ import seoul.democracy.salon.service.SalonService;
 import seoul.democracy.user.utils.UserUtils;
 
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
-import static seoul.democracy.salon.dto.SalonDto.*;
 import static seoul.democracy.salon.predicate.SalonPredicate.*;
+
+import java.util.List;
+
+import seoul.democracy.issue.predicate.CategoryPredicate;
+import seoul.democracy.issue.dto.CategoryDto;
 
 @Controller
 public class SalonController {
 
     private final SalonService salonService;
     private final IssueService issueService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public SalonController(SalonService salonService, IssueService issueService) {
+    public SalonController(SalonService salonService, IssueService issueService, CategoryService categoryService) {
         this.salonService = salonService;
         this.issueService = issueService;
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = "/salon-list.do", method = RequestMethod.GET)
@@ -44,6 +52,11 @@ public class SalonController {
         model.addAttribute("page", salons);
         model.addAttribute("sort", sort);
         model.addAttribute("search", search);
+
+        List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
+                CategoryDto.projectionForFilter);
+        model.addAttribute("categories", categories);
+
         return "/site/salon/list";
     }
 
@@ -60,6 +73,10 @@ public class SalonController {
 
     @RequestMapping(value = "/salon-new.do", method = RequestMethod.GET)
     public String newSalon(Model model) {
+
+        List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
+                CategoryDto.projectionForFilter);
+        model.addAttribute("categories", categories);
         return "/site/salon/new";
     }
 
@@ -67,13 +84,16 @@ public class SalonController {
     public String editSalon(@RequestParam("id") Long id, Model model) {
 
         SalonDto salonDto = salonService.getSalonWithIssueTags(predicateForEdit(id, UserUtils.getUserId()),
-                projectionForSiteEdit);
+                SalonDto.projectionForSiteEdit);
         if (salonDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
         SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(),
-                salonDto.getImage(), salonDto.getIssueTags(), salonDto.getFiles());
+                salonDto.getImage(), salonDto.getCategory().getName(), salonDto.getIssueTags(), salonDto.getFiles());
         model.addAttribute("editDto", updateDto);
+        List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
+                CategoryDto.projectionForFilter);
+        model.addAttribute("categories", categories);
         return "/site/salon/edit";
     }
 

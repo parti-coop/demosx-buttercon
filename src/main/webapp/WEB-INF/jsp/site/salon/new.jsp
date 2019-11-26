@@ -59,6 +59,37 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </div>
 
+            <div class="form-group form-gruop-salon">
+              <label class="demo-form-label" for="category"
+                >살롱 주제<span class="required"> *</span></label
+              >
+              <div>
+                <c:set
+                  var="proposalCategoryParsleyErrorsContainerId"
+                  scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+                <div class="select-container">
+                  <select
+                    class="form-control demo-input"
+                    name="category"
+                    title="분류"
+                    data-parsley-required="true"
+                    data-parsley-errors-container="#${proposalCategoryParsleyErrorsContainerId}"
+                  >
+                    <option value="">살롱 주제 선택...</option>
+                    <c:forEach var="category" items="${categories}">
+                      <option value="${category.name}">${category.name}</option>
+                    </c:forEach>
+                  </select>
+                </div>
+                <div
+                  id="${proposalCategoryParsleyErrorsContainerId}"
+                  class="help-block-error-container"
+                ></div>
+              </div>
+            </div>
+
             <div class="form-group form-group-salon">
               <label class="demo-form-label" for="category"
                 >분야<span class="required"> *</span></label
