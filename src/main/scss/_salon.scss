@@ -51,6 +51,23 @@ body.body-salon {
     > .container {
       padding: 0;
     }
+    ul.toc {
+      list-style: none;
+      padding-inline-start: 0;
+      padding-right: 10px;
+      li {
+        margin-bottom: 40px;
+      }
+      a.H1 {
+        font-weight: bold;
+      }
+      a {
+        font-size: 12px;
+        line-height: 1.67;
+        letter-spacing: -0.3px;
+        color: #111111;
+      }
+    }
     .other-projects {
       h2 {
         height: 36px;
@@ -251,7 +268,13 @@ body.body-salon {
       }
     }
     .top-cover {
-      padding: 80px 0 40px 25%;
+      .top-cover-margin {
+        margin: 80px 0 40px 25%;
+        @media (max-width: $screen-xs-max) {
+          margin: 40px 0 20px 16px;
+        }
+      }
+      overflow: hidden;
       height: 296px;
       background-color: rgba(0, 0, 0, 0.5);
       @media (max-width: $screen-xs-max) {

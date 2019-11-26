@@ -2,11 +2,27 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
   $(function() {
+    /** 해더태그 목록 toc */
+    var toc = "";
+    var headers = $(".contents-box :header");
+    headers.each(function(index) {
+      el = $(this);
+      el.attr("id", index);
+      title = el.text();
+      link = "#" + index;
+      newLine = "<li><a class='"+this.tagName+"' href='" + link + "'>" + title + "</a></li>";
+      toc += newLine;
+    });
+    $(".toc").html(toc);
+
+    /** 댓글 창 숨김 */
     $(".discussion-comment-form, .js-demo-comments-container").hide();
     $("#salon-comment-btn").click(function() {
       $(this).toggleClass("btn-default btn-primary btn-outline active");
       $(".discussion-comment-form, .js-demo-comments-container").toggle();
     });
+
+    /** 공감 버튼 */
     $("#salon-like-btn").click(function() {
       var hasLike = $(this).hasClass("active");
       var that = $(this);
