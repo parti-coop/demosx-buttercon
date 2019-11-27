@@ -1,7 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 <script>
   $(function() {
+    /** 다른 프로젝트 보기 swiper */
+    new Swiper(".swiper-container", {
+      loop: true,
+      width: 240,
+      centeredSlides: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      }
+    });
+   
     /** 해더태그 목록 toc */
     var toc = "";
     var headers = $(".contents-box :header");
@@ -10,7 +23,14 @@
       el.attr("id", index);
       title = el.text();
       link = "#" + index;
-      newLine = "<li><a class='"+this.tagName+"' href='" + link + "'>" + title + "</a></li>";
+      newLine =
+        "<li><a class='" +
+        this.tagName +
+        "' href='" +
+        link +
+        "'>" +
+        title +
+        "</a></li>";
       toc += newLine;
     });
     $(".toc").html(toc);

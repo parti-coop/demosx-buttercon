@@ -19,7 +19,7 @@
         </div>
         <section
           class="top-cover"
-          style="background-image: url(${salon.files[0].url}); background-repeat: no-repeat; background-position: center; background-size: cover;"
+          style="background-image: url(${salon.files[0].url});"
         >
           <c:if test="${salon.createdBy.id eq loginUser.id}">
             <div class="pull-right margin-20">
@@ -44,7 +44,7 @@
             </div>
             <div class="title-row clearfix">
               <h2 class="detail-title">${salon.title}</h2>
-              <h3 class="detail-teamname">팀이름 어째서 비정규직 여성</h3>
+              <h3 class="detail-teamname">${salon.team}</h3>
               <%@ include file="detail-btns.jsp" %>
             </div>
           </div>
@@ -67,9 +67,36 @@
         </div>
       </div>
       <hr class="thick-hr" />
-      <div class="other-projects">
+      <div class="other-projects swiper-container">
         <h2>다른 프로젝트 둘러보기</h2>
-        <div>개발중</div>
+        <!-- href="<c:url value='/salon.do?id=${each.id}'/>" -->
+        <ul class="swiper-wrapper">
+          <c:forEach var="each" items="${salons}">
+            <li class="salon-project swiper-slide">
+              <div
+                class="cover"
+                style="background-image: url(${each.image});"
+              ></div>
+              <div class="desc">
+                <div class="contents-box-tags">
+                  <span class="contents-box-tags-list">
+                    <c:forEach var="issueTag" items="${each.issueTags}">
+                      <a
+                        href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>"
+                        class="contents-box-tags-link"
+                        >${issueTag.name}</a
+                      >
+                    </c:forEach>
+                  </span>
+                </div>
+                <h2 class="title">${each.title}</h2>
+                <h3 class="teamname">${each.team}</h3>
+              </div>
+            </li>
+          </c:forEach>
+        </ul>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
       <!-- demo-row end  -->
     </div>
