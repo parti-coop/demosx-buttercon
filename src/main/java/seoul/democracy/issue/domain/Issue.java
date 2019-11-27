@@ -186,7 +186,7 @@ public abstract class Issue {
       referencedColumnName = "TAG_ID"))
     private Set<IssueTag> issueTags = new HashSet<>();
 
-    protected void updateFiles(List<IssueFileDto> updateFiles) {
+    public void updateFiles(List<IssueFileDto> updateFiles) {
         if(CollectionUtils.isEmpty(this.files) && CollectionUtils.isEmpty(updateFiles)) return;
 
         List<IssueFileDto> files = this.files.stream()

@@ -22,9 +22,13 @@
 
         <intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/ajax/mypage/**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/ajax/butter/**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/ajax/salon/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/new-proposal.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-new.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-edit.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/salon-new.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/salon-edit.do" access="hasRole('ROLE_USER')"/>
 
         <form-login login-page="/email-login.do"
                     username-parameter="id"
