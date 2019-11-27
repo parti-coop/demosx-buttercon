@@ -31,7 +31,7 @@
             </div>
           </c:if>
           <div class="top-cover-margin">
-            <div class="contents-box-tags">
+            <!-- <div class="contents-box-tags">
               <span class="contents-box-tags-list">
                 <c:forEach var="issueTag" items="${salon.issueTags}">
                   <a
@@ -41,8 +41,9 @@
                   >
                 </c:forEach>
               </span>
-            </div>
+            </div> -->
             <div class="title-row clearfix">
+              <span class="category">${salon.category.name}</span>
               <h2 class="detail-title">${salon.title}</h2>
               <h3 class="detail-teamname">${salon.team}</h3>
               <%@ include file="detail-btns.jsp" %>

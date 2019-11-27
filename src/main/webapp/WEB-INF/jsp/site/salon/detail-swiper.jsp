@@ -28,19 +28,11 @@
             style="background-image: url(${each.image});"
           ></div>
           <div class="desc">
-            <div class="contents-box-tags">
-              <span class="contents-box-tags-list">
-                <c:forEach var="issueTag" items="${each.issueTags}">
-                  <a
-                    href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>"
-                    class="contents-box-tags-link"
-                    >${issueTag.name}</a
-                  >
-                </c:forEach>
-              </span>
+            <div class="text-ellipse">
+              <span class="category">${salon.category.name}</span>
             </div>
             <h2 class="title">${each.title}</h2>
-            <h3 class="teamname">${each.team}</h3>
+            <h3 class="team text-ellipse">${each.team}</h3>
           </div>
         </li>
       </c:forEach>
