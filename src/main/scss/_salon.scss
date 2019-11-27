@@ -2,6 +2,9 @@ body.body-salon {
   .thick-hr {
     border-top: solid 2px #303133;
     margin: 40px 0;
+    @media (max-width: $screen-xs-max) {
+      margin: 20px 0;
+    }
   }
   .margin-20 {
     margin: 20px;
@@ -84,17 +87,27 @@ body.body-salon {
           color: #090909;
         }
       }
+      .swiper-button-next,
+      .swiper-button-prev {
+        @media (max-width: $screen-xs-max) {
+          display: none;
+        }
+      }
       // > div {
       //   padding: 0 60px;
       // }
       ul {
         // margin: 40px 60px;
         margin-top: 40px;
+        @media (max-width: $screen-xs-max) {
+          margin-top: 20px;
+        }
         list-style: none;
         height: 282px;
         > li {
-          margin: 10px;
-          width: 240px;
+          // margin: 10px;
+          // width: 240px;
+          box-sizing: border-box;
           border: solid 1px #d8d8d8;
           background-color: white;
           .cover {

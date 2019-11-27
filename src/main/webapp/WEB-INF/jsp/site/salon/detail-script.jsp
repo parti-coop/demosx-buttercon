@@ -4,17 +4,6 @@
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 <script>
   $(function() {
-    /** 다른 프로젝트 보기 swiper */
-    new Swiper(".swiper-container", {
-      loop: true,
-      width: 240,
-      centeredSlides: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-      }
-    });
-   
     /** 해더태그 목록 toc */
     var toc = "";
     var headers = $(".contents-box :header");
