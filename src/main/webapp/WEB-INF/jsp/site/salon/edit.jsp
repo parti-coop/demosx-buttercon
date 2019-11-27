@@ -45,6 +45,28 @@
             </div>
 
             <div class="form-group form-group-salon">
+              <label class="demo-form-label" for="inputTeam"
+                >팀 이름<span class="required"> *</span></label
+              >
+              <div>
+                <c:set var="salonCategoryParsleyErrorsContainerId" scope="page"
+                  ><%= java.util.UUID.randomUUID() %></c:set
+                >
+                <input
+                  type="text"
+                  class="form-control demo-input"
+                  id="inputTeam"
+                  placeholder=""
+                  autocomplete="off"
+                  name="team"
+                  value="${editDto.team}"
+                  data-parsley-required="true"
+                  data-parsley-maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="form-group form-group-salon">
               <label class="demo-form-label" for="category"
                 >살롱 주제<span class="required"> *</span></label
               >
@@ -62,7 +84,7 @@
                   >
                     <c:forEach var="category" items="${categories}">
                       <c:set var="selected" scope="page"></c:set>
-                      <c:if test="${editDto.category eq category.name}">
+                      <c:if test="${editDto.category.name eq category.name}">
                         <c:set var="selected" scope="page">selected</c:set>
                       </c:if>
                       <option value="${category.name}" ${selected}

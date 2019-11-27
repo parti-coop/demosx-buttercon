@@ -15,12 +15,11 @@ import seoul.democracy.issue.service.CategoryService;
 import seoul.democracy.issue.service.IssueService;
 import seoul.democracy.salon.domain.SalonSort;
 import seoul.democracy.salon.dto.SalonDto;
-import seoul.democracy.salon.dto.SalonEditDto;
 import seoul.democracy.salon.predicate.SalonPredicate;
 import seoul.democracy.salon.service.SalonService;
 import seoul.democracy.user.utils.UserUtils;
+import seoul.democracy.issue.domain.Issue.Status;
 
-import static seoul.democracy.issue.domain.Issue.Status.OPEN;
 import static seoul.democracy.salon.predicate.SalonPredicate.*;
 
 import java.util.List;
@@ -62,12 +61,15 @@ public class SalonController {
 
     @RequestMapping(value = "/salon.do", method = RequestMethod.GET)
     public String salon(@RequestParam("id") Long id, Model model) {
-        SalonDto salonDto = salonService.getSalonSiteDetail(SalonPredicate.equalIdAndStatus(id, OPEN),
+        SalonDto salonDto = salonService.getSalonSiteDetail(SalonPredicate.equalIdAndStatus(id, Status.OPEN),
                 SalonDto.projectionForSiteDetail);
         if (salonDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
-        model.addAttribute("salon", salonDto);
+        List<SalonDto> salons = salonService.getSalonsWithIssueTags(SalonPredicate.equalStatus(Status.OPEN),
+                SalonDto.projectionForSiteList);
         issueService.increaseViewCount(salonDto.getStatsId());
+        model.addAttribute("salon", salonDto);
+        model.addAttribute("salons", salons);
         return "/site/salon/detail";
     }
 
@@ -88,10 +90,7 @@ public class SalonController {
         if (salonDto == null)
             throw new NotFoundException("해당 내용을 찾을 수 없습니다.");
 
-        SalonEditDto updateDto = SalonEditDto.of(salonDto.getId(), salonDto.getTitle(), salonDto.getContent(),
-                salonDto.getImage(), salonDto.getCategory().getName(), salonDto.getExcerpt(), salonDto.getIssueTags(),
-                salonDto.getFiles());
-        model.addAttribute("editDto", updateDto);
+        model.addAttribute("editDto", salonDto);
         List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
                 CategoryDto.projectionForFilter);
         model.addAttribute("categories", categories);

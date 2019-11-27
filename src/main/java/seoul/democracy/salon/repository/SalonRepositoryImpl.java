@@ -59,6 +59,17 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
     }
 
     @Override
+    public List<SalonDto> findAll(Predicate predicate, Expression<SalonDto> projection) {
+        SearchResults<SalonDto> results = getQuery(projection).where(predicate).listResults(projection);
+        for (SalonDto result : results.getResults()) {
+            List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
+                    .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
+            result.setIssueTags(issueTags);
+        }
+        return results.getResults();
+    }
+
+    @Override
     public SalonDto findOne(Predicate predicate, Expression<SalonDto> projection, boolean withIssueTags) {
         SalonDto salonDto = getQuery(projection).where(predicate).uniqueResult(projection);
         if (salonDto == null)

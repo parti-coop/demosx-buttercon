@@ -27,6 +27,8 @@ import seoul.democracy.user.utils.UserUtils;
 
 import static seoul.democracy.issue.predicate.IssueLikePredicate.equalUserIdAndIssueId;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 public class SalonService {
@@ -82,6 +84,10 @@ public class SalonService {
             Expression<SalonDto> projection) {
         boolean withIssueTags = true;
         return salonRepository.findAll(predicate, pageable, projection, withIssueTags);
+    }
+
+    public List<SalonDto> getSalonsWithIssueTags(Predicate predicate, Expression<SalonDto> projection) {
+        return salonRepository.findAll(predicate, projection);
     }
 
     private Salon getSalon(Long salonId) {
