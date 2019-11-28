@@ -61,7 +61,15 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <section class="projects">
       <div class="container">
-        <h4>프로젝트</h4>
+        <h4 id="프로젝트">프로젝트</h4>
+        <div class="categories">
+          <a href="?category=#프로젝트" class="category <c:if test="${category == null or category eq ''}">selected</c:if> ">전체</a>
+          <c:forEach var="cate" items="${categories}">
+            <a 
+              href="?category=${cate.name}#프로젝트"
+              class="category <c:if test="${category eq cate.name}">selected</c:if> ">${cate.name}</a>
+          </c:forEach>
+        </div>
         <div class="card-wrapper">
           <div class="row">
             <c:forEach var="item" items="${page.content}">

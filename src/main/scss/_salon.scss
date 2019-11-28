@@ -110,6 +110,34 @@ body.body-salon {
     .projects {
       background-color: #f5f5f5;
       .container {
+        .categories {
+          margin: 40px 0;
+          .category {
+            &.selected {
+              font-weight: bold;
+              background-color: #ffcf4d;
+              border: none;
+            }
+            @media (max-width: $screen-xs-max) {
+              height: 20px;
+              font-size: 12px;
+              line-height: 1.6;
+              padding: 0 8px;
+            }
+            border: solid 1px #c2c2c2;
+            background-color: white;
+            margin-top: 8px;
+            margin-right: 8px;
+            padding: 0 16px;
+            display: inline-block;
+            height: 33px;
+            border-radius: 15.5px;
+            color: #111111;
+            font-size: 16px;
+            line-height: 2.1;
+            letter-spacing: -0.4px;
+          }
+        }
         .card-wrapper-mobile {
           display: none;
           @media (max-width: $screen-xs-max) {
