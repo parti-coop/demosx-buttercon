@@ -319,6 +319,7 @@ body.body-salon {
   &.body-salon-detail {
     > .container {
       padding: 0;
+      overflow: hidden;
     }
     ul.toc {
       padding-right: 10px;
@@ -517,6 +518,9 @@ body.body-salon {
       font-weight: bold;
       line-height: 1.43;
       letter-spacing: -0.26px;
+      display: block;
+      text-align: center;
+      padding: 7px;
       color: white;
       margin-right: 8px;
       @media (max-width: $screen-xs-max) {
@@ -538,7 +542,7 @@ body.body-salon {
       margin-left: auto;
       align-self: center;
     }
-    .dropdown-toggle {
+    .dropdown-share {
       font-size: 14px;
       font-weight: bold;
       line-height: 1.43;
@@ -610,7 +614,8 @@ body.body-salon {
           margin: 40px 0 20px 16px;
         }
       }
-      overflow: hidden;
+      // overflow: hidden;
+      // position: relative;
       height: 296px;
       background-color: rgba(0, 0, 0, 0.5);
       @media (max-width: $screen-xs-max) {
@@ -846,7 +851,6 @@ body.body-salon {
   }
 
   .detail-copy-url {
-    float: left;
     font-size: 14px;
     line-height: 22px;
     font-weight: normal;

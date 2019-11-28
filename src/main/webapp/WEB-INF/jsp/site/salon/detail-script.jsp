@@ -106,6 +106,13 @@
               "/shared/${salon.id}&href=" +
               encodedHref
           );
+        case "twitter":
+          return window.open(
+            "https://twitter.com/intent/tweet?text=버터공유&hashtags=버터나이프크루&" +
+              window.location.origin +
+              "/shared/${salon.id}&url=" +
+              encodedHref
+          );
         default:
           console.log(this);
       }
@@ -126,6 +133,7 @@
       navigator.clipboard
         .writeText(window.location.href)
         .then(() => {
+          alert("주소가 복사되었습니다.");
           console.log("Text copied to clipboard");
         })
         .catch(err => {
@@ -139,7 +147,7 @@
       objectType: "feed",
       content: {
         title: "${salon.title}",
-        description: "",
+        description: "${salon.excerpt}",
         imageUrl: "${salon.image}",
         link: {
           mobileWebUrl: window.location.href,
@@ -155,17 +163,18 @@
         {
           title: "웹으로 보기",
           link: {
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com"
-          }
-        },
-        {
-          title: "앱으로 보기",
-          link: {
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com"
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href
           }
         }
+        // ,
+        // {
+        //   title: "앱으로 보기",
+        //   link: {
+        //     mobileWebUrl: "https://developers.kakao.com",
+        //     webUrl: "https://developers.kakao.com"
+        //   }
+        // }
       ]
     });
   });
