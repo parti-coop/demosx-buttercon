@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="flex margin-top-40">
   <button
-    class="${salon.liked eq true ? 'btn-outline active' : 'btn-trans'}${empty loginUser ? ' show-login-modal' : ''}"
-    id="salon-like-btn"
+    class="${salon.liked eq true ? 'btn-outline active' : 'btn-trans'} js-salon-like-btn"
   >
-    <i class="fa fa-heart-o"></i> 공감 <strong>${salon.stats.likeCount}</strong>개
+    <i class="fa ${salon.liked eq true ? 'fa-heart' : 'fa-heart-o'}"></i> 공감
+    <strong>${salon.stats.likeCount}</strong>개
   </button>
   <button id="native-share" class="btn-trans mobile">
     <i class="fa fa-share-alt"></i>

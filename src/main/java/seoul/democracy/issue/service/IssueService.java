@@ -23,8 +23,7 @@ public class IssueService {
     private final IssueStatsRepository statsRepository;
 
     @Autowired
-    public IssueService(IssueRepository issueRepository,
-                        IssueStatsRepository statsRepository) {
+    public IssueService(IssueRepository issueRepository, IssueStatsRepository statsRepository) {
         this.issueRepository = issueRepository;
         this.statsRepository = statsRepository;
     }
@@ -34,13 +33,17 @@ public class IssueService {
     }
 
     public void validateRelations(List<Long> relations) {
-        if (!CollectionUtils.isEmpty(relations) &&
-                issueRepository.count(equalIdIn(relations)) != relations.size())
+        if (!CollectionUtils.isEmpty(relations) && issueRepository.count(equalIdIn(relations)) != relations.size())
             throw new BadRequestException("relations", "error.relations", "연관 항목을 확인해 주세요.");
     }
 
     @Transactional
     public void increaseViewCount(Long statsId) {
         statsRepository.increaseViewCount(statsId);
+    }
+
+    @Transactional
+    public void increaseLikeCount(Long statsId) {
+        statsRepository.selectLikeProposal(statsId);
     }
 }

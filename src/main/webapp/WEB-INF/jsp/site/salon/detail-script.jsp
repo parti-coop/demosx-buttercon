@@ -2,6 +2,11 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script></script>
+<script>
+  window.hasLoginUser = false;
+  <c:if test="{not empty loginUser}">window.hasLoginUser = true;</c:if>;
+</script>
 <script>
   $(function() {
     /** 해더태그 목록 toc */
@@ -32,14 +37,22 @@
     });
 
     /** 공감 버튼 */
-    $("#salon-like-btn").click(function() {
+    $(".js-salon-like-btn").click(function() {
       var hasLike = $(this).hasClass("active");
+      var those = $(".js-salon-like-btn");
       var that = $(this);
+      var url =
+        "${pageContext.request.contextPath}/ajax/salon/${salon.id}/" +
+        (hasLike ? "deselectLike" : "selectLike");
+      if (!hasLoginUser) {
+        if (hasLike) {
+          return alert("이미 공감 하였습니다.");
+        }
+        url = "${pageContext.request.contextPath}/ajax/like/${salon.id}";
+      }
       $.ajax({
         headers: { "X-CSRF-TOKEN": "${_csrf.token}" },
-        url:
-          "${pageContext.request.contextPath}/ajax/salon/${salon.id}/" +
-          (hasLike ? "deselectLike" : "selectLike"),
+        url: url,
         type: "PUT",
         contentType: "application/json",
         dataType: "json",
@@ -47,23 +60,25 @@
           alert(data.msg);
           var count = +$("strong", that).text();
           if (hasLike) {
-            that.removeClass("active");
-            that.removeClass("btn-primary");
-            that.removeClass("btn-outline");
-            that.addClass("btn-default");
-            if (count !== 0) $("strong", that).text(count - 1);
+            those
+              .find(".fa")
+              .addClass("fa-heart-o")
+              .removeClass("fa-heart");
+            those.removeClass("active");
+            if (count !== 0) $("strong", those).text(count - 1);
           } else {
-            that.addClass("active");
-            that.addClass("btn-primary");
-            that.addClass("btn-outline");
-            that.removeClass("btn-default");
-            $("strong", that).text(count + 1);
+            those
+              .find(".fa")
+              .removeClass("fa-heart-o")
+              .addClass("fa-heart");
+            those.addClass("active");
+            $("strong", those).text(count + 1);
           }
         },
         error: function(error) {
           if (error.status === 400) {
-            if (hasLike) that.removeClass("active");
-            else that.addClass("active");
+            if (hasLike) those.removeClass("active");
+            else those.addClass("active");
             if (error.responseJSON.fieldErrors) {
               var msg = error.responseJSON.fieldErrors
                 .map(function(item) {
