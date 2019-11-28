@@ -73,6 +73,9 @@ body.body-salon {
       }
       > hr {
         border-top: solid 2px white;
+        @media (max-width: $screen-xs-max) {
+          margin: 10px 0;
+        }
       }
       > h4 {
         font-size: 24px;
@@ -107,18 +110,80 @@ body.body-salon {
     .projects {
       background-color: #f5f5f5;
       .container {
-        > h4 {
-          font-size: 24px;
-          font-weight: bold;
-          letter-spacing: -1px;
-          color: #0d0d0d;
-          margin: 44px 0;
+        .card-wrapper-mobile {
+          display: none;
+          @media (max-width: $screen-xs-max) {
+            display: block;
+            .demo-card-salon {
+              height: 304px;
+              .cover {
+                height: 182px;
+                background-image: linear-gradient(
+                  to bottom,
+                  rgba(255, 255, 255, 0),
+                  rgba(0, 0, 0, 0.3) 44%,
+                  rgba(0, 0, 0, 0.9)
+                );
+                padding: 16px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                .category {
+                  height: 16px;
+                  border-radius: 10px;
+                  background-color: #ffcf4d;
+                  height: 14px;
+                  font-size: 11px;
+                  line-height: 1.27;
+                  letter-spacing: -0.28px;
+                  color: #111111;
+                  padding: 0 6px;
+                }
+                .title {
+                  height: 48px;
+                  font-size: 18px;
+                  font-weight: bold;
+                  line-height: 1.33;
+                  letter-spacing: -0.8px;
+                  color: white;
+                  overflow: hidden;
+                  margin: 4px 0;
+                }
+                .team {
+                  height: 20px;
+                  font-size: 12px;
+                  line-height: 1.67;
+                  letter-spacing: -0.3px;
+                  color: #d8d8d8;
+                }
+              }
+              .desc {
+                padding: 16px;
+                .tags {
+                  overflow: hidden;
+                  height: 28px;
+                  font-size: 10px;
+                  line-height: 1.4;
+                  letter-spacing: -0.25px;
+                  color: #d58c00;
+                }
+                .excerpt {
+                  overflow: hidden;
+                  height: 54px;
+                  font-size: 12px;
+                  line-height: 1.5;
+                  letter-spacing: -0.23px;
+                  color: #111111;
+                }
+              }
+            }
+          }
         }
-        .demo-card {
-          height: 390px;
-          border: solid 1px #d8d8d8;
-          background-color: white;
-          cursor: pointer;
+        .card-wrapper {
+          @media (max-width: $screen-xs-max) {
+            display: none;
+          }
           .cover {
             height: 224px;
             overflow: hidden;
@@ -150,6 +215,20 @@ body.body-salon {
               color: white;
             }
           }
+        }
+        > h4 {
+          font-size: 24px;
+          font-weight: bold;
+          letter-spacing: -1px;
+          color: #0d0d0d;
+          margin: 44px 0;
+        }
+        .demo-card {
+          height: 390px;
+          border: solid 1px #d8d8d8;
+          background-color: white;
+          cursor: pointer;
+
           .desc {
             padding: 16px;
             .category {
@@ -483,15 +562,12 @@ body.body-salon {
 
       @media (max-width: $screen-xs-max) {
         font-size: 10px;
-        line-height: 1.4;
+        line-height: 1.2;
         letter-spacing: -0.25px;
         width: 80px;
         height: 26px;
         border-radius: 3px;
-        // padding: 4px 16px;
-        // margin: 0;
-        // line-height: 20px;
-        // vertical-align: middle;
+        vertical-align: middle;
       }
     }
     .top-cover {

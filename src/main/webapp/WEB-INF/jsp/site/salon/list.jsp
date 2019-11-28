@@ -72,6 +72,16 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             </c:forEach>
           </div>
         </div>
+        <div class="card-wrapper-mobile">
+          <div class="row">
+            <c:forEach var="item" items="${page.content}">
+              <c:set var="salon" value="${item}" scope="request" />
+              <div class="col-sm-4 demo-card-wrapper">
+                <jsp:include page="card-mobile.jsp" />
+              </div>
+            </c:forEach>
+          </div>
+        </div>
       </div>
     </section>
     <%@ include file="../shared/footer.jsp" %>
