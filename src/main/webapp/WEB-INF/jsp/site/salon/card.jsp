@@ -24,7 +24,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <h5 class="title">${salon.title}</h5>
     <p class="team text-ellipse">${salon.team}</p>
     <div class="like">
-      <i class="fa fa-heart"></i> 공감
+      <i class="fa fa-heart-o"></i> 공감
       <strong>${salon.stats.likeCount}</strong>개
     </div>
   </section>

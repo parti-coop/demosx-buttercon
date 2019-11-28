@@ -4,7 +4,7 @@
     class="${salon.liked eq true ? 'btn-outline active' : 'btn-trans'}${empty loginUser ? ' show-login-modal' : ''}"
     id="salon-like-btn"
   >
-    <i class="fa fa-heart"></i> 공감 <strong>${salon.stats.likeCount}</strong>개
+    <i class="fa fa-heart-o"></i> 공감 <strong>${salon.stats.likeCount}</strong>개
   </button>
   <button id="native-share" class="btn-trans mobile">
     <i class="fa fa-share-alt"></i>
