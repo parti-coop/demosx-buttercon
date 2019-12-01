@@ -14,6 +14,7 @@ import seoul.democracy.common.exception.BadRequestException;
 import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.issue.domain.Category;
 import seoul.democracy.issue.domain.IssueLike;
+import seoul.democracy.issue.dto.CategoryDto;
 import seoul.democracy.issue.predicate.IssueLikePredicate;
 import seoul.democracy.issue.repository.IssueLikeRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
@@ -204,5 +205,9 @@ public class SalonService {
     public void shared(Long issueId) {
         Salon salon = getSalon(issueId);
         statsRepository.increaseNoOpinion(salon.getStatsId()); // 공유횟수 증가
+    }
+
+    public List<CategoryDto> getAllSalonCategories(Predicate predicate, Expression<CategoryDto> projection) {
+        return salonRepository.getAllSalonCategories(predicate, projection);
     }
 }

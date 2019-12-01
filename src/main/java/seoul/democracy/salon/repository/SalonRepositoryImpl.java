@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
+import seoul.democracy.issue.dto.CategoryDto;
 import seoul.democracy.issue.dto.IssueFileDto;
 import seoul.democracy.issue.dto.IssueTagDto;
 import seoul.democracy.salon.domain.Salon;
@@ -86,4 +87,10 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
 
         return salonDto;
     }
+
+    @Override
+    public List<CategoryDto> getAllSalonCategories(Predicate predicate, Expression<CategoryDto> projection) {
+        return from(salon).innerJoin(salon.category, category).where(predicate).list(projection);
+    }
+
 }

@@ -24,6 +24,7 @@ import seoul.democracy.issue.domain.Issue.Status;
 import static seoul.democracy.salon.predicate.SalonPredicate.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seoul.democracy.issue.predicate.CategoryPredicate;
 import seoul.democracy.issue.dto.CategoryDto;
@@ -48,14 +49,21 @@ public class SalonController {
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Pageable pageable = new PageRequest(page - 1, 10, sort.getSort());
+
         Page<SalonDto> salons = salonService.getSalonsWithIssueTags(
                 SalonPredicate.predicateForSiteList(search, category), pageable, SalonDto.projectionForSiteList);
         model.addAttribute("page", salons);
         model.addAttribute("sort", sort);
         model.addAttribute("search", search);
 
-        List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
+        // List<CategoryDto> categories =
+        // categoryService.getCategories(CategoryPredicate.enabled(),
+        // CategoryDto.projectionForFilter);
+        List<CategoryDto> categories = salonService.getAllSalonCategories(CategoryPredicate.enabled(),
                 CategoryDto.projectionForFilter);
+        // List<CategoryDto> categories =
+        // salons.getContent().stream().map(SalonDto::getCategory).distinct()
+        // .collect(Collectors.toList());
         model.addAttribute("categories", categories);
         model.addAttribute("category", category);
 
