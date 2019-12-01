@@ -1,79 +1,97 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>문화살롱 - 버터나이프크루</title>
-  <%@ include file="../shared/head.jsp" %>
-</head>
-<body class="home body-salon">
-<%@ include file="../shared/header.jsp" %>
+  <head>
+    <title>문화살롱 - 버터나이프크루</title>
+    <%@ include file="../shared/head.jsp" %>
+  </head>
+  <body class="home body-salon">
+    <%@ include file="../shared/header.jsp" %>
 
-<div class="container">
-  <div class="top-row clearfix">
-    <div class="top-left">
-      <h3 class="top-row__title">문화살롱</h3>
-    </div>
-    <div class="top-right">
-      <a href="<c:url value='/salon-new.do'/>" class="btn demo-btn demo-btn--primary btn-block demo-btn-salon">문화살롱 제안</a>
-    </div>
-  </div>
+    <div class="container">
+      <div class="top-row">
+        <h3 class="top-row__title">문화살롱</h3>
+        <a
+          href="<c:url value='/salon-new.do'/>"
+          class="btn demo-btn--primary demo-btn-salon"
+          >프로젝트 쓰기</a
+        >
+      </div>
 
-  <div class="sorting-tab sorting-tab--suggest content-container clearfix">
-    <form name="search">
-      <div class="sorting-tab-select-row">
-        <div class="sorting-tab__select sorting-tab__select-sort">
-          <div class="select-container">
-            <select class="form-control" name="sort">
-              <option value="latest" <c:if test="${sort eq 'latest'}">selected</c:if>>최신순</option>
-              <option value="like" <c:if test="${sort eq 'like'}">selected</c:if>>공감순</option>
-              <option value="opinion" <c:if test="${sort eq 'opinion'}">selected</c:if>>의견 많은 순</option>
-            </select>
+      <hr class="thick-hr" />
+
+      <h4>버터나이프크루 문화살롱</h4>
+      <article>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
+        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
+        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
+        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
+        nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis
+        magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam.
+        Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales
+        nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
+        odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at
+        ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare
+        accumsan, blandit sed diam.
+      </article>
+      <section>
+        <div class="youtube">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/MV6ippM9HBw"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="youtube">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/ulbYo9eeLAE"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    </div>
+
+    <section class="projects">
+      <div class="container">
+        <h4 id="프로젝트">프로젝트</h4>
+        <div class="categories">
+          <a href="?category=#프로젝트" class="category <c:if test="${empty category or category eq ''}">selected</c:if> ">전체</a>
+          <c:forEach var="cate" items="${categories}">
+            <a 
+              href="?category=${cate.name}#프로젝트"
+              class="category <c:if test="${category eq cate.name}">selected</c:if> ">${cate.name}</a>
+          </c:forEach>
+        </div>
+        <div class="card-wrapper">
+          <div class="row">
+            <c:forEach var="item" items="${page.content}">
+              <c:set var="salon" value="${item}" scope="request" />
+              <div class="col-sm-4 demo-card-wrapper">
+                <jsp:include page="card.jsp" />
+              </div>
+            </c:forEach>
+          </div>
+        </div>
+        <div class="card-wrapper-mobile">
+          <div class="row">
+            <c:forEach var="item" items="${page.content}">
+              <c:set var="salon" value="${item}" scope="request" />
+              <div class="col-sm-4 demo-card-wrapper">
+                <jsp:include page="card-mobile.jsp" />
+              </div>
+            </c:forEach>
           </div>
         </div>
       </div>
-
-      <div class="sorting-right-form">
-        <div class="sorting-right-form__group">
-          <label class="demo-form-label sr-only" for="inputSearch">이름</label>
-          <input type="text" class="form-control demo-input" id="inputSearch" name="search" placeholder="검색"
-                 value="${search}">
-          <button type="submit" class="search-submit-btn">
-            <i class="xi-search"><span class="sr-only">돋보기</span></i>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="card-wrapper">
-    <div class="row">
-      <c:forEach var="item" items="${page.content}">
-        <c:set var="salon" value="${item}" scope="request"/>
-        <div class="col-sm-6 demo-card-wrapper">
-          <jsp:include page="card.jsp"/>
-        </div>
-      </c:forEach>
-    </div>
-  </div>
-
-  <jsp:include page="../shared/pagination.jsp">
-    <jsp:param name="totalPages" value="${page.totalPages}"/>
-    <jsp:param name="current" value="${page.number + 1}"/>
-  </jsp:include>
-</div>
-
-<script>
-  $(function () {
-    $('select[name=category]').change(function () {
-      $('form[name=search]').submit();
-    });
-    $('select[name=sort]').change(function () {
-      $('form[name=search]').submit();
-    });
-  });
-</script>
-
-<%@ include file="../shared/footer.jsp" %>
-</body>
+    </section>
+    <%@ include file="../shared/footer.jsp" %>
+  </body>
 </html>

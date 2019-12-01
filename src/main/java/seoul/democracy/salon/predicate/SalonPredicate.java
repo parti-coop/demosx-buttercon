@@ -37,7 +37,7 @@ public class SalonPredicate {
         return ExpressionUtils.and(predicate, salon.title.contains(search));
     }
 
-    public static Predicate predicateForSiteList(String search) {
+    public static Predicate predicateForSiteList(String search, String category) {
         Predicate predicate = salon.status.eq(OPEN);
 
         if (StringUtils.hasText(search))
@@ -50,6 +50,9 @@ public class SalonPredicate {
                             ExpressionUtils.anyOf(salon.title.contains(search), salon.content.contains(search)));
                 }
             }
+
+        if (StringUtils.hasText(category))
+            predicate = ExpressionUtils.and(predicate, salon.category.name.eq(category));
 
         return predicate;
     }

@@ -18,7 +18,7 @@
           </h3>
         </div>
         <section
-          class="top-cover"
+          class="top-cover clearfix"
           style="background-image: url(${salon.files[0].url});"
         >
           <c:if test="${salon.createdBy.id eq loginUser.id}">
@@ -31,19 +31,9 @@
             </div>
           </c:if>
           <div class="top-cover-margin">
-            <div class="contents-box-tags">
-              <span class="contents-box-tags-list">
-                <c:forEach var="issueTag" items="${salon.issueTags}">
-                  <a
-                    href="<c:url value='/salon-list.do?search=%23${issueTag.name}'/>"
-                    class="contents-box-tags-link"
-                    >${issueTag.name}</a
-                  >
-                </c:forEach>
-              </span>
-            </div>
             <div class="title-row clearfix">
-              <h2 class="detail-title">${salon.title}</h2>
+              <span class="category">${salon.category.name}</span>
+              <h2 class="detail-title text-ellipse">${salon.title}</h2>
               <h3 class="detail-teamname">${salon.team}</h3>
               <%@ include file="detail-btns.jsp" %>
             </div>

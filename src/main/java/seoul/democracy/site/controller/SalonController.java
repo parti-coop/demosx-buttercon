@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import seoul.democracy.issue.domain.Issue.Status;
 import static seoul.democracy.salon.predicate.SalonPredicate.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seoul.democracy.issue.predicate.CategoryPredicate;
 import seoul.democracy.issue.dto.CategoryDto;
@@ -43,18 +45,27 @@ public class SalonController {
 
     @RequestMapping(value = "/salon-list.do", method = RequestMethod.GET)
     public String salonList(@RequestParam(value = "sort", defaultValue = "latest") SalonSort sort,
+            @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Pageable pageable = new PageRequest(page - 1, 10, sort.getSort());
-        Page<SalonDto> salons = salonService.getSalonsWithIssueTags(SalonPredicate.predicateForSiteList(search),
-                pageable, SalonDto.projectionForSiteList);
+
+        Page<SalonDto> salons = salonService.getSalonsWithIssueTags(
+                SalonPredicate.predicateForSiteList(search, category), pageable, SalonDto.projectionForSiteList);
         model.addAttribute("page", salons);
         model.addAttribute("sort", sort);
         model.addAttribute("search", search);
 
-        List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
+        // List<CategoryDto> categories =
+        // categoryService.getCategories(CategoryPredicate.enabled(),
+        // CategoryDto.projectionForFilter);
+        List<CategoryDto> categories = salonService.getAllSalonCategories(CategoryPredicate.enabled(),
                 CategoryDto.projectionForFilter);
+        // List<CategoryDto> categories =
+        // salons.getContent().stream().map(SalonDto::getCategory).distinct()
+        // .collect(Collectors.toList());
         model.addAttribute("categories", categories);
+        model.addAttribute("category", category);
 
         return "/site/salon/list";
     }
@@ -97,8 +108,8 @@ public class SalonController {
         return "/site/salon/edit";
     }
 
-    @RequestMapping(value = "/shared", method = RequestMethod.GET)
-    public String shared(@RequestParam("id") Long id, Model model) {
+    @RequestMapping(value = "/shared/{id}", method = RequestMethod.GET)
+    public String shared(@PathVariable("id") Long id, Model model) {
         salonService.shared(id);
         return "/site/salon/shared";
     }
