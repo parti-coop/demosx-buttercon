@@ -35,8 +35,7 @@
       </li>
       <li class="dropdown-item">
         <a href="javascript:void(0)" class="detail-copy-url js-detail-copy-url">
-          url복사
-          <i class="xi-share-alt"></i>
+          URL 복사
         </a>
       </li>
     </ul>

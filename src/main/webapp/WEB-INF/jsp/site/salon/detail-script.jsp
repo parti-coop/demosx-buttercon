@@ -108,7 +108,7 @@
           );
         case "twitter":
           return window.open(
-            "https://twitter.com/intent/tweet?text=버터공유&hashtags=버터나이프크루&" +
+            "https://twitter.com/intent/tweet?hashtags=버터나이프크루&" +
               window.location.origin +
               "/shared/${salon.id}&url=" +
               encodedHref
