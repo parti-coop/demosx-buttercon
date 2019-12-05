@@ -1,5 +1,5 @@
 body.body-butter-detail {
-  b.tag{
+  b.tag {
     color: #c28611;
   }
   .butter-container-detail {
@@ -11,6 +11,7 @@ body.body-butter-detail {
     float: left;
     width: 20%;
     overflow: hidden;
+    padding-right: 20px;
     @media (max-width: $screen-xs-max) {
       width: 100%;
     }
