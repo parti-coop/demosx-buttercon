@@ -91,7 +91,7 @@ $(function() {
 
           var $editor = editor;
           var $upload_control;
-          $upload_control = $("<input type=\"file\" name=\"file\" class=\"hidden\" accept=\"image/*\">");
+          $upload_control = $("<input type=\"file\" name=\"file\" class=\"hidden\" accept=\"image/*\" id='js-hidden-file-input'>");
           $('body').append($upload_control);
 
           $upload_control.fileupload({
@@ -102,6 +102,7 @@ $(function() {
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             maxFileSize: 10485760,
             dataType: 'json',
+            formData: {"type": "EDITOR"},
             done: function (e, data) {
               $editor.execCommand('mceInsertContent', false, '<img src="' + data.result.url + '" alt="' + data.result.filename  + '"/>');
             },
@@ -122,8 +123,8 @@ $(function() {
             title: '이미지삽입',
             icon: 'image',
             onAction: function() {
-              if($upload_control) {
-                $upload_control.click();
+              if($("#js-hidden-file-input")) {
+                $("#js-hidden-file-input").click();
               } else {
                 alert("앗! 뭔가 잘못되었습니다. 페이지를 새로고침하세요.");
               }
