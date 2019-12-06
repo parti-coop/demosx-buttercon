@@ -99,7 +99,9 @@ public class ButterService {
         issueHistoryRepository.save(butter.createHistory(butter.getContent(), dto.getExcerpt()));
         statsRepository.increaseYesOpinion(butter.getId()); // 버터 추가횟수 증가
         issueTagService.changeIssueTags(butter.getId(), dto.getIssueTagNames());
-        String msg = "버터 등록: *<" + this.host + "/butter.do?id=" + butter.getId() + "|" + butter.getTitle() + ">*";
+        String msg = "*" + UserUtils.getLoginUser().getName() + "* 님이 _<" + this.host + "/butter.do?id="
+                + butter.getId() + "|" + butter.getTitle() + ">_ 버터를 만들었어요.\n> <" + this.host + "/butter.do?id="
+                + butter.getId() + "&user=" + UserUtils.getLoginUser().getName() + "#댓글|버터를 더해준 크루에게 감사 인사를 전해보세요.>";
         sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
         return butter;
     }
@@ -169,9 +171,10 @@ public class ButterService {
             butter = butter.update(dto, wasMaker);
             /** 요약이 없으면 발행이력에는 넣지만 슬랙은 쏘지 않는다. */
             if (hasExcerpt) {
-                String msg = "버터 수정: *<" + this.host + "/butter.do?id=" + butter.getId() + "|" + butter.getTitle()
-                        + ">*\n> <" + this.host + "/butter-history.do?id=" + history.getId() + "|"
-                        + history.getExcerpt() + ">";
+                String msg = "*" + UserUtils.getLoginUser().getName() + "* 님이 _<" + this.host + "/butter-history.do?id="
+                        + history.getId() + "|" + history.getExcerpt() + ">_ 버터를 추가했어요.\n> <" + this.host
+                        + "/butter.do?id=" + butter.getId() + "&user=" + UserUtils.getLoginUser().getName()
+                        + "#댓글|버터를 더해준 크루에게 감사 인사를 전해보세요.>";
                 sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
             }
             statsRepository.increaseYesOpinion(butter.getId()); // 수정횟수 증가
@@ -191,7 +194,7 @@ public class ButterService {
         Boolean wasMaker = butter.getButterMakers().stream().anyMatch(u -> u.getId().equals(UserUtils.getUserId()));
         if (wasMaker) {
             butter.delete();
-            String msg = "버터 삭제: *" + butter.getTitle() + "*";
+            String msg = "*" + UserUtils.getLoginUser().getName() + "* 님이 _" + butter.getTitle() + "_ 버터를 삭제했습니다.";
             sendSlackWebHook(butter.getSlackUrl(), butter.getSlackChannel(), msg);
         } else {
             throw new NotFoundException("해당 버터의 메이커가 아닙니다.");

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.util.StringUtils;
 import com.mysema.query.types.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class ButterController {
     }
 
     @RequestMapping(value = "/butter.do", method = RequestMethod.GET)
-    public String butter(@RequestParam("id") Long id, Model model) {
+    public String butter(@RequestParam("id") Long id, @RequestParam(value = "user", required = false) String user,
+            Model model) {
 
         Predicate predicate = equalIdAndStatus(id, OPEN);
         ButterDto butterDto = butterService.getButter(predicate, projectionForSiteDetail);
@@ -73,6 +75,9 @@ public class ButterController {
                 .collect(Collectors.toList());
         issueService.increaseViewCount(butterDto.getStatsId());
         model.addAttribute("butter", butterDto);
+        if (StringUtils.hasText(user)) {
+            model.addAttribute("user", user);
+        }
         model.addAttribute("histories", histories);
         model.addAttribute("contributors", contributors);
 

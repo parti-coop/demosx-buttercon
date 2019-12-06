@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="discussion-comment-form" id="댓글작성">
-  <h4>댓글</h4>
+  <h4 id="댓글">댓글</h4>
   <c:if test="${param.closed ne true}">
   <div class="demo-comment-form clearfix">
     <c:if test="${empty loginUser}">
@@ -21,7 +21,7 @@
       </form>
     </c:if>
     <c:if test="${not empty loginUser}">
-      <div class="profile-circle profile-circle--comment-form" style="background-image: url(${loginUser.viewPhoto()})">
+      <div class="profile-circle profile-circle--comment-form" style="background-image: url('${loginUser.viewPhoto()}')">
         <p class="alt-text">${loginUser.name}프로필</p>
       </div>
       <form id="form-opinion">
@@ -29,7 +29,9 @@
         <input type="hidden" name="vote" value="ETC">
         <div class="form-group">
           <textarea class="form-control demo-comment-textarea" rows="5" name="content"
-                    data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
+            <c:if test="${not empty user}">autofocus</c:if>
+            data-parsley-required="true" data-parsley-maxlength="1000"><c:if test="${not empty user}">@${user}</c:if>
+          </textarea>
         </div>
         <div class="comment-action-group row">
           <div class="comment-count col-xs-6"><p class="comment-count-text"><span id="opinion-length">0</span>/1000자</p>
@@ -56,7 +58,9 @@
               <div class="form-group form-group--demo">
                 <label class="demo-form-label" for="inputContent">수정</label>
                 <textarea class="form-control" name="content" id="inputContent" rows="8"
-                          data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
+                  <c:if test="${not empty user}">autofocus</c:if>
+                  data-parsley-required="true" data-parsley-maxlength="1000"><c:if test="${not empty user}">@${user}</c:if>
+                </textarea>
               </div>
             </div>
             <div class="form-action text-right">
@@ -82,7 +86,9 @@
               <div class="form-group form-group--demo">
                 <label class="demo-form-label" for="inputContent">댓글 등록</label>
                 <textarea class="form-control" name="content" id="inputContent" rows="8"
-                          data-parsley-required="true" data-parsley-maxlength="1000"></textarea>
+                  <c:if test="${not empty user}">autofocus</c:if>
+                  data-parsley-required="true" data-parsley-maxlength="1000"><c:if test="${not empty user}">@${user}</c:if>
+                </textarea>
               </div>
             </div>
             <div class="form-action text-right">

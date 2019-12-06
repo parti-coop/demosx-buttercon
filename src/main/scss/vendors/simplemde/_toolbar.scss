@@ -12,6 +12,7 @@
   padding: 0 $width-gap;
   position: relative;
   user-select: none;
+  overflow: hidden;
   background-color: transparent;
 
   &::before,
