@@ -7,14 +7,17 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   class="demo-card demo-card-salon position-relative"
   onclick="location.href = '${link}'"
 >
-  <section class="cover" style="background-image: url(${salon.image});">
-    <div class="tags">
-      <c:forEach var="issueTag" items="${salon.issueTags}">
-        <span>${issueTag.name}</span>
-      </c:forEach>
-    </div>
-    <div class="excerpt">
-      ${salon.excerpt}
+  <section class="cover">
+    <img src="${salon.image}" alt="카드이미지" />
+    <div class="cover-hover">
+      <div class="tags">
+        <c:forEach var="issueTag" items="${salon.issueTags}">
+          <span>${issueTag.name}</span>
+        </c:forEach>
+      </div>
+      <div class="excerpt">
+        ${salon.excerpt}
+      </div>
     </div>
   </section>
   <section class="desc">

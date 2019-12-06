@@ -17,10 +17,8 @@
             >
           </h3>
         </div>
-        <section
-          class="top-cover clearfix"
-          style="background-image: url(${salon.files[0].url});"
-        >
+        <section class="top-cover clearfix">
+          <img src="${salon.files[0].url}" alt="커버이미지" />
           <c:if test="${salon.createdBy.id eq loginUser.id}">
             <div class="pull-right margin-20">
               <a

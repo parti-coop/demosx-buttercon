@@ -18,22 +18,32 @@
 </script>
 <div class="other-projects">
   <h2>다른 프로젝트 둘러보기</h2>
-  <!-- href="<c:url value='/salon.do?id=${each.id}'/>" -->
   <div class="swiper-container">
     <ul class="swiper-wrapper">
       <c:forEach var="each" items="${salons}">
         <li class="salon-project swiper-slide">
-          <div
-            class="cover"
-            style="background-image: url(${each.image});"
-          ></div>
-          <div class="desc">
-            <div class="text-ellipse">
-              <span class="category">${salon.category.name}</span>
+          <a href="<c:url value='/salon.do?id=${each.id}'/>">
+            <div class="cover">
+              <img src="${each.image}" alt="카드이미지" />
+              <div class="cover-hover">
+                <div class="tags">
+                  <c:forEach var="issueTag" items="${each.issueTags}">
+                    <span>${issueTag.name}</span>
+                  </c:forEach>
+                </div>
+                <div class="excerpt">
+                  ${each.excerpt}
+                </div>
+              </div>
             </div>
-            <h2 class="title">${each.title}</h2>
-            <h3 class="team text-ellipse">${each.team}</h3>
-          </div>
+            <div class="desc">
+              <div class="text-ellipse">
+                <span class="category">${salon.category.name}</span>
+              </div>
+              <h2 class="title">${each.title}</h2>
+              <h3 class="team text-ellipse">${each.team}</h3>
+            </div>
+          </a>
         </li>
       </c:forEach>
     </ul>
