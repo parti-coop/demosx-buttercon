@@ -16,6 +16,12 @@ body.body-butter {
     line-height: 1.57;
     letter-spacing: -0.5px;
     color: $text-color-yellow;
+    @media (max-width: $screen-xs-max) {
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.83;
+      letter-spacing: -0.43px;
+    }
   }
 
   .top-row {
@@ -27,15 +33,23 @@ body.body-butter {
       float: right;
     }
     @media (max-width: $screen-xs-max) {
-      margin-top: -8px;
-      margin-bottom: 5px;
+      margin-top: -15px;
+      // margin-bottom: 5px;
+      margin: 0;
+      padding: 0;
+      padding-top: 9px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid #e0e0e0;
     }
     .top-row__title {
       font-size: 32px;
-      // @media (max-width: $screen-xs-max) {
-      //   font-size: 14px;
-      //   line-height: 30px;
-      // }
+      @media (max-width: $screen-xs-max) {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.86;
+        letter-spacing: -0.62px;
+        color: #212121;
+      }
     }
     @media (max-width: $screen-xs-max) {
       .top-left {
@@ -84,8 +98,20 @@ body.body-butter {
     font-weight: 600;
     font-size: 18px;
     line-height: 1.22;
+    @media (max-width: $screen-xs-max) {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.38;
+      letter-spacing: -1px;
+    }
   }
   .butter-info {
+    @media (max-width: $screen-xs-max) {
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 1;
+      color: #757575;
+    }
     span {
       margin-left: 5px;
       color: #37383a;

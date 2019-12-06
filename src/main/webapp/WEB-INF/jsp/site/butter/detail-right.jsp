@@ -7,7 +7,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <span
           href="<c:url value='/butter-list.do?search=%23${issueTag.name}'/>"
           class="butter-tag"
-          >#${issueTag.name}</span
+          >${issueTag.name}</span
         >
       </c:forEach>
       <c:if test="${butter.isMaker()}">
@@ -34,6 +34,38 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
   </div>
   <hr />
+  <div class="butter-left">
+    <div class="butter-makers">
+      <div class="butter-maker-label">버터보드 메이커</div>
+      <div class="butter-maker-list-column">
+        <c:forEach var="maker" items="${butter.butterMakers}">
+          <div class="butter-maker-each">
+            <div
+              class="butter-maker-photo"
+              style="background-image: url('${maker.viewPhoto()}')"
+            >
+            </div>
+            <div class="butter-maker-name username">
+              ${maker.name}
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+    </div>
+    <div class="dropdown butter-toc">
+      </button>
+      <a class="btn dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        제안 목차
+        <i class="xi-angle-down-thin"></i>
+      </a>
+      <div
+        class="dropdown-menu js-dropdown-menu butter-toc-list-a"
+        aria-labelledby="dropdownMenuButton"
+      >
+        ${toc}
+      </div>
+    </div>
+  </div>
   <div class="butter-content simplemde-readonly">
     <div class="editor-preview editor-preview-active">${html}</div>
   </div>
@@ -48,7 +80,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         class="btn btn-default btn-responsive-sm-md-md"
         >버터 추가하기</a
       >
-      <a href="#댓글작성" class="js-focus btn btn-default btn-responsive-sm-md-md" data-focus="#form-opinion textarea[name=content]"
+      <a
+        href="#댓글작성"
+        class="js-focus btn btn-default btn-responsive-sm-md-md"
+        data-focus="#form-opinion textarea[name=content]"
         >버터 댓글달기</a
       >
     </p>
@@ -56,7 +91,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <hr />
   <div class="butter-contributors">
     <div class="butter-contributor-label">
-      <h4>버터를 추가한 크루입니다</h4>
+      버터를 추가한 크루입니다
     </div>
     <div class="butter-contributor-list">
       <c:forEach var="contributor" items="${contributors}">
@@ -81,6 +116,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         >${String.valueOf(histories != null ? histories.size() : 0)}</i
       >
     </div>
+    <div  class="butter-history-group">
     <c:forEach var="history" items="${histories}" varStatus="status">
       <a
         class="butter-history-list ${status.index >= 3 ? 'collapse js-history-list-collapsable' : ''}"
@@ -95,6 +131,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
         <div class="butter-history-right">
           <div class="butter-history-info">
+            <img
+              class="butter-maker-photo"
+              src="${history.createdBy.viewPhoto()}"
+              alt="프로필"
+            />
             <span class="username">${history.createdBy.name}</span>
             <span class="butter-history-date"
               >${history.createdDate.toLocalDate()}</span
@@ -102,24 +143,28 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
           <div class="butter-history-excerpt">
             <c:if test="${empty history.excerpt}">
-              <span class='text-muted minor'>작은 버터 추가</span>
+              <span class="text-muted minor">작은 버터 추가</span>
             </c:if>
             ${history.excerpt}
           </div>
         </div>
       </a>
     </c:forEach>
-
+    </div>
     <c:if test="${histories.size() > 3}">
       <div class="text-center">
-        <button class="butter-history-more btn btn-link text-none-decoration" data-toggle="collapse" data-target=".js-history-list-collapsable">
+        <button
+          class="butter-history-more btn btn-link text-none-decoration"
+          data-toggle="collapse"
+          data-target=".js-history-list-collapsable"
+        >
           더 보기
           <i class="xi-angle-down-thin"></i>
         </button>
       </div>
     </c:if>
   </div>
-  <hr />
+  <hr class="thick-hr" />
 
   <jsp:include page="../opinion/butter.jsp">
     <jsp:param name="id" value="${butter.id}" />

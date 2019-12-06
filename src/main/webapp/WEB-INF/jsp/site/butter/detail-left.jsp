@@ -8,7 +8,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="butter-maker-each">
           <div
             class="butter-maker-photo"
-            style="background-image: url(${maker.viewPhoto()})"
+            style="background-image: url('${maker.viewPhoto()}')"
           >
           </div>
           <div class="butter-maker-name username">
