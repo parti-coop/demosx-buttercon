@@ -97,7 +97,7 @@
                     <c:if test="${loginUser.isManager() or proposal.status.isDelete()}">
                       <p class="form-control-static">${proposal.status.msg}</p>
                     </c:if>
-                    <c:if test="${loginUser.isAdmin() and proposal.status ne 'DELETE'}">
+                    <c:if test="${loginUser.isManager() and proposal.status ne 'DELETE'}">
                       <select class="form-control input-sm" id="status-select">
                         <option value="OPEN" <c:if test="${proposal.status.isOpen()}">selected</c:if>>공개</option>
                         <option value="CLOSED" <c:if test="${proposal.status.isClosed()}">selected</c:if>>비공개</option>

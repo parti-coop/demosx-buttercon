@@ -223,7 +223,7 @@ public class User implements Serializable {
     }
 
     public boolean isAdmin() {
-        return this.role.isAdmin() || this.role.isManager();
+        return this.role.isAdmin();
     }
 
     public boolean isManager() {
