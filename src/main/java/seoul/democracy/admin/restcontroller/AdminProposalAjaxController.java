@@ -32,15 +32,11 @@ public class AdminProposalAjaxController {
 
     @RequestMapping(method = RequestMethod.GET)
     public Page<ProposalDto> getProposals(@RequestParam(value = "search") String search,
-                                          @RequestParam(value = "category", required = false) String category,
-                                          @RequestParam(value = "process", required = false) Proposal.Process process,
-                                          @RequestParam(value = "proposalType", required = false) ProposalType proposalType,
-                                          @PageableDefault Pageable pageable) {
-        User user = UserUtils.getLoginUser();
-        Predicate predicate = user.isAdmin() ?
-                                  predicateForAdminList(search, category, process, proposalType) :
-                                  predicateForManagerList(user.getId(), search, category, process, proposalType);
-
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "process", required = false) Proposal.Process process,
+            @RequestParam(value = "proposalType", required = false) ProposalType proposalType,
+            @PageableDefault Pageable pageable) {
+        Predicate predicate = predicateForAdminList(search, category, process, proposalType);
         return proposalService.getProposals(predicate, pageable, projectionForAdminList);
     }
 
@@ -49,13 +45,13 @@ public class AdminProposalAjaxController {
      */
     @RequestMapping(value = "/select", method = RequestMethod.GET)
     public Page<ProposalDto> getProposalsForSelect(@RequestParam(value = "search", required = false) String search,
-                                                   @PageableDefault Pageable pageable) {
+            @PageableDefault Pageable pageable) {
         return proposalService.getProposals(predicateForRelationSelect(search), pageable, projectionForAdminSelect);
     }
 
     @RequestMapping(value = "/{proposalId}/category", method = RequestMethod.PATCH)
     public ResultInfo updateCategory(@PathVariable("proposalId") Long proposalId,
-                                     @RequestBody @Valid ProposalCategoryUpdateDto updateDto) {
+            @RequestBody @Valid ProposalCategoryUpdateDto updateDto) {
 
         proposalService.updateCategory(updateDto);
 
@@ -64,7 +60,7 @@ public class AdminProposalAjaxController {
 
     @RequestMapping(value = "/{proposalId}/proposalType", method = RequestMethod.PATCH)
     public ResultInfo updateProposalType(@PathVariable("proposalId") Long proposalId,
-                                         @RequestBody @Valid ProposalTypeUpdateDto updateDto) {
+            @RequestBody @Valid ProposalTypeUpdateDto updateDto) {
 
         proposalService.updateProposalType(updateDto);
 
@@ -87,7 +83,7 @@ public class AdminProposalAjaxController {
 
     @RequestMapping(value = "/{proposalId}/adminComment", method = RequestMethod.PATCH)
     public ResultInfo adminComment(@PathVariable("proposalId") Long proposalId,
-                                   @RequestBody @Valid ProposalAdminCommentEditDto editDto) {
+            @RequestBody @Valid ProposalAdminCommentEditDto editDto) {
 
         proposalService.editAdminComment(editDto);
 
@@ -96,7 +92,7 @@ public class AdminProposalAjaxController {
 
     @RequestMapping(value = "/{proposalId}/assignManager", method = RequestMethod.PATCH)
     public ProposalDto assignManager(@PathVariable("proposalId") Long proposalId,
-                                     @RequestBody @Valid ProposalManagerAssignDto assignDto) {
+            @RequestBody @Valid ProposalManagerAssignDto assignDto) {
 
         Proposal proposal = proposalService.assignManager(assignDto);
 
@@ -105,7 +101,7 @@ public class AdminProposalAjaxController {
 
     @RequestMapping(value = "/{proposalId}/managerComment", method = RequestMethod.PATCH)
     public ResultInfo managerComment(@PathVariable("proposalId") Long proposalId,
-                                     @RequestBody @Valid ProposalManagerCommentEditDto editDto) {
+            @RequestBody @Valid ProposalManagerCommentEditDto editDto) {
 
         proposalService.editManagerComment(editDto);
 

@@ -85,12 +85,12 @@
             <span>회원 관리</span>
           </a>
         </li>
-        <%-- <li>
+        <li>
           <a href="<c:url value="/admin/users/manager.do"/>">
             <i class="fa fa-id-card" aria-hidden="true"></i>
             <span>담당자 관리</span>
           </a>
-        </li> --%>
+        </li> 
 
         <%-- <li class="header">게시판</li>
         <li>
