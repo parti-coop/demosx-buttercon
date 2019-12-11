@@ -30,8 +30,7 @@ public class AdminProposalController {
     private final ProposalService proposalService;
 
     @Autowired
-    public AdminProposalController(CategoryService categoryService,
-                                   ProposalService proposalService) {
+    public AdminProposalController(CategoryService categoryService, ProposalService proposalService) {
         this.categoryService = categoryService;
         this.proposalService = proposalService;
     }
@@ -53,17 +52,10 @@ public class AdminProposalController {
      * 관리자 > 시민제안 > 제안관리 > 상세
      */
     @RequestMapping(value = "/proposal-detail.do", method = RequestMethod.GET)
-    public String proposalDetail(@RequestParam("id") Long id,
-                                 Model model) {
-
-        User user = UserUtils.getLoginUser();
-        Predicate predicate = user.isAdmin() ?
-                                  equalId(id) :
-                                  ProposalPredicate.equalIdAndManagerId(id, user.getId());
-
+    public String proposalDetail(@RequestParam("id") Long id, Model model) {
+        Predicate predicate = equalId(id);
         ProposalDto proposalDto = proposalService.getProposal(predicate, ProposalDto.projectionForAdminDetail);
         model.addAttribute("proposal", proposalDto);
-
         return "/admin/proposal/detail";
     }
 }

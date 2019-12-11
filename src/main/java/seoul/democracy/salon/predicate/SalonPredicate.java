@@ -57,6 +57,25 @@ public class SalonPredicate {
         return predicate;
     }
 
+    public static Predicate predicateForAdminList(String search, String category) {
+        Predicate predicate = null;
+        if (StringUtils.hasText(search))
+            for (String word : search.split("\\s")) {
+                if (word.startsWith("#")) {
+                    predicate = ExpressionUtils.and(predicate, salon.issueTags.any().in(new JPASubQuery().from(issueTag)
+                            .where(issueTag.name.eq(word.substring(1))).list(issueTag)));
+                } else {
+                    predicate = ExpressionUtils.and(predicate,
+                            ExpressionUtils.anyOf(salon.title.contains(search), salon.content.contains(search)));
+                }
+            }
+
+        if (StringUtils.hasText(category))
+            predicate = ExpressionUtils.and(predicate, salon.category.name.eq(category));
+
+        return predicate;
+    }
+
     public static Predicate predicateForMypageSalon(Long userId, String search) {
         Predicate predicate = ExpressionUtils.and(salon.createdById.eq(userId), salon.status.eq(OPEN));
 

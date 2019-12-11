@@ -133,7 +133,19 @@
         <li>
           <a href="<c:url value="/admin/issue/proposal.do"/>">
             <i class="fa fa-picture-o"></i>
-            <span>제안 관리</span>
+            <span>아이디어 관리</span>
+          </a>
+        </li>
+        <li>
+          <a href="<c:url value="/admin/issue/butter.do"/>">
+            <i class="fa fa-picture-o"></i>
+            <span>정책살롱 관리</span>
+          </a>
+        </li>
+        <li>
+          <a href="<c:url value="/admin/issue/salon.do"/>">
+            <i class="fa fa-picture-o"></i>
+            <span>문화살롱 관리</span>
           </a>
         </li>
       </ul>

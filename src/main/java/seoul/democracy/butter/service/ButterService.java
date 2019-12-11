@@ -17,6 +17,8 @@ import com.mysema.query.types.Predicate;
 
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -66,6 +68,10 @@ public class ButterService {
 
     public List<ButterDto> getButters(Predicate predicate, Expression<ButterDto> projection) {
         return butterRepository.findAll(predicate, projection);
+    }
+
+    public Page<ButterDto> getButters(Predicate predicate, Pageable pageable, Expression<ButterDto> projection) {
+        return butterRepository.findAll(predicate, pageable, projection);
     }
 
     public List<ButterDto> getButters(Expression<ButterDto> projection) {

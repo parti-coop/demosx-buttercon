@@ -94,10 +94,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">공개여부</label>
                   <div class="col-sm-2">
-                    <c:if test="${loginUser.isManager() or proposal.status.isDelete()}">
+                    <c:if test="${proposal.status.isDelete()}">
                       <p class="form-control-static">${proposal.status.msg}</p>
                     </c:if>
-                    <c:if test="${loginUser.isManager() and proposal.status ne 'DELETE'}">
+                    <c:if test="${proposal.status ne 'DELETE'}">
                       <select class="form-control input-sm" id="status-select">
                         <option value="OPEN" <c:if test="${proposal.status.isOpen()}">selected</c:if>>공개</option>
                         <option value="CLOSED" <c:if test="${proposal.status.isClosed()}">selected</c:if>>비공개</option>
@@ -205,165 +205,163 @@
     });
   </script>
 </c:if>
-<c:if test="${loginUser.isAdmin()}">
-  <script>
-    $(function () {
-      var $selectManagerInput = $('#select-manager-input');
-      $selectManagerInput.select2({
-        language: 'ko',
-        theme: 'bootstrap',
-        width: '100%',
-        ajax: {
-          headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
-          url: '/admin/ajax/users/role-manager',
-          type: 'GET',
-          dataType: 'json',
-          data: function (params) {
-            return {
-              search: params.term
-            };
-          },
-          processResults: function (data) {
-            return {
-              results: data.content.map(function (item) {
-                return {
-                  id: item.id,
-                  text: item.name + ' ( ' + item.department1 + ' / ' + item.department2 + ' / ' + item.department3 + ' )',
-                  item: item
-                }
-              })
-            };
-          }
+<script>
+  $(function () {
+    var $selectManagerInput = $('#select-manager-input');
+    $selectManagerInput.select2({
+      language: 'ko',
+      theme: 'bootstrap',
+      width: '100%',
+      ajax: {
+        headers: { 'X-CSRF-TOKEN': '${_csrf.token}' },
+        url: '/admin/ajax/users/role-manager',
+        type: 'GET',
+        dataType: 'json',
+        data: function (params) {
+          return {
+            search: params.term
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.content.map(function (item) {
+              return {
+                id: item.id,
+                text: item.name + ' ( ' + item.department1 + ' / ' + item.department2 + ' / ' + item.department3 + ' )',
+                item: item
+              }
+            })
+          };
+        }
+      }
+    });
+
+    // 담당자 지정
+    $('#assign-manager-btn').click(function () {
+      var selectedData = $selectManagerInput.select2('data');
+      if (selectedData.length === 0) {
+        alert('선택된 항목이 없습니다.');
+        return;
+      }
+
+      adminAjax({
+        csrf: '${_csrf.token}',
+        url: '/admin/ajax/issue/proposals/${proposal.id}/assignManager',
+        type: 'PATCH',
+        data: {
+          proposalId: ${proposal.id},
+          managerId: selectedData[0].id
+        },
+        success: function (data) {
+          $('#assigned-manager').text(selectedData[0].text);
+          $selectManagerInput.val(null).trigger('change');
+        },
+        error: function () {
         }
       });
+    });
+  });
 
-      // 담당자 지정
-      $('#assign-manager-btn').click(function () {
-        var selectedData = $selectManagerInput.select2('data');
-        if (selectedData.length === 0) {
-          alert('선택된 항목이 없습니다.');
-          return;
+
+  $(function () {
+    // 관리자 댓글 저장
+    $('#admin-comment-btn').click(function () {
+      if (!window.confirm('관리자 댓글을 저장할까요?')) return;
+
+      var comment = $('#admin-comment-textarea').val();
+      adminAjax({
+        csrf: '${_csrf.token}',
+        url: '/admin/ajax/issue/proposals/${proposal.id}/adminComment',
+        type: 'PATCH',
+        data: {
+          proposalId: ${proposal.id},
+          comment: comment
+        },
+        success: function () {
+        },
+        error: function () {
         }
-
-        adminAjax({
-          csrf: '${_csrf.token}',
-          url: '/admin/ajax/issue/proposals/${proposal.id}/assignManager',
-          type: 'PATCH',
-          data: {
-            proposalId: ${proposal.id},
-            managerId: selectedData[0].id
-          },
-          success: function (data) {
-            $('#assigned-manager').text(selectedData[0].text);
-            $selectManagerInput.val(null).trigger('change');
-          },
-          error: function () {
-          }
-        });
       });
     });
 
+    // 분류 수정
+    var categoryValue = '${proposal.category.name}';
+    var $categorySelect = $('#category-select');
+    $categorySelect.change(function () {
+      if (!confirm('분류를 변경할까요?')) {
+        $(this).val(categoryValue);
+        return;
+      }
 
-    $(function () {
-      // 관리자 댓글 저장
-      $('#admin-comment-btn').click(function () {
-        if (!window.confirm('관리자 댓글을 저장할까요?')) return;
-
-        var comment = $('#admin-comment-textarea').val();
-        adminAjax({
-          csrf: '${_csrf.token}',
-          url: '/admin/ajax/issue/proposals/${proposal.id}/adminComment',
-          type: 'PATCH',
-          data: {
-            proposalId: ${proposal.id},
-            comment: comment
-          },
-          success: function () {
-          },
-          error: function () {
-          }
-        });
-      });
-
-      // 분류 수정
-      var categoryValue = '${proposal.category.name}';
-      var $categorySelect = $('#category-select');
-      $categorySelect.change(function () {
-        if (!confirm('분류를 변경할까요?')) {
-          $(this).val(categoryValue);
-          return;
+      adminAjax({
+        csrf: '${_csrf.token}',
+        url: '/admin/ajax/issue/proposals/${proposal.id}/category',
+        type: 'PATCH',
+        data: {
+          proposalId: ${proposal.id},
+          category: $(this).val()
+        },
+        success: function () {
+          categoryValue = $categorySelect.val();
+        },
+        error: function () {
+          $categorySelect.val(categoryValue);
         }
-
-        adminAjax({
-          csrf: '${_csrf.token}',
-          url: '/admin/ajax/issue/proposals/${proposal.id}/category',
-          type: 'PATCH',
-          data: {
-            proposalId: ${proposal.id},
-            category: $(this).val()
-          },
-          success: function () {
-            categoryValue = $categorySelect.val();
-          },
-          error: function () {
-            $categorySelect.val(categoryValue);
-          }
-        });
       });
-
-      // 타입 수정
-      var proposalTypeValue = '${proposal.proposalType}';
-      var $proposalTypeSelect = $('#proposal-type-select');
-      $proposalTypeSelect.change(function () {
-        if (!confirm('타입을 변경할까요?')) {
-          $(this).val(proposalTypeValue);
-          return;
-        }
-
-        adminAjax({
-          csrf: '${_csrf.token}',
-          url: '/admin/ajax/issue/proposals/${proposal.id}/proposalType',
-          type: 'PATCH',
-          data: {
-            proposalId: ${proposal.id},
-            proposalType: $(this).val()
-          },
-          success: function () {
-            proposalTypeValue = $proposalTypeSelect.val();
-          },
-          error: function () {
-            $proposalTypeSelect.val(proposalTypeValue);
-          }
-        });
-      });
-
-      // 공개여부 수정
-      var statusValue = '${proposal.status}';
-      var $statusSelect = $('#status-select');
-      $statusSelect.change(function () {
-        var status = $(this).val();
-        if (!confirm((status === 'OPEN' ? '공개' : '비공개') + '로 변경할까요?')) {
-          $(this).val(statusValue);
-          return;
-        }
-
-        adminAjax({
-          csrf: '${_csrf.token}',
-          url: '/admin/ajax/issue/proposals/${proposal.id}/' + status.toLowerCase(),
-          type: 'PATCH',
-          data: null,
-          success: function () {
-            statusValue = $statusSelect.val();
-            window.location.reload();
-          },
-          error: function () {
-            $statusSelect.val(statusValue);
-          }
-        });
-      });
-
     });
-  </script>
-</c:if>
+
+    // 타입 수정
+    var proposalTypeValue = '${proposal.proposalType}';
+    var $proposalTypeSelect = $('#proposal-type-select');
+    $proposalTypeSelect.change(function () {
+      if (!confirm('타입을 변경할까요?')) {
+        $(this).val(proposalTypeValue);
+        return;
+      }
+
+      adminAjax({
+        csrf: '${_csrf.token}',
+        url: '/admin/ajax/issue/proposals/${proposal.id}/proposalType',
+        type: 'PATCH',
+        data: {
+          proposalId: ${proposal.id},
+          proposalType: $(this).val()
+        },
+        success: function () {
+          proposalTypeValue = $proposalTypeSelect.val();
+        },
+        error: function () {
+          $proposalTypeSelect.val(proposalTypeValue);
+        }
+      });
+    });
+
+    // 공개여부 수정
+    var statusValue = '${proposal.status}';
+    var $statusSelect = $('#status-select');
+    $statusSelect.change(function () {
+      var status = $(this).val();
+      if (!confirm((status === 'OPEN' ? '공개' : '비공개') + '로 변경할까요?')) {
+        $(this).val(statusValue);
+        return;
+      }
+
+      adminAjax({
+        csrf: '${_csrf.token}',
+        url: '/admin/ajax/issue/proposals/${proposal.id}/' + status.toLowerCase(),
+        type: 'PATCH',
+        data: null,
+        success: function () {
+          statusValue = $statusSelect.val();
+          window.location.reload();
+        },
+        error: function () {
+          $statusSelect.val(statusValue);
+        }
+      });
+    });
+
+  });
+</script>
 </body>
 </html>

@@ -148,7 +148,7 @@ public class ProposalService {
      * 제안 블럭
      */
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
     public Proposal closed(Long proposalId) {
         Proposal proposal = getProposal(proposalId);
         return proposal.block();
@@ -158,7 +158,7 @@ public class ProposalService {
      * 제안 공개
      */
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
     public Proposal open(Long proposalId) {
         Proposal proposal = getProposal(proposalId);
         return proposal.open();

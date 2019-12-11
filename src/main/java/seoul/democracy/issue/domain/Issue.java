@@ -13,6 +13,7 @@ import seoul.democracy.common.annotation.CreatedIp;
 import seoul.democracy.common.annotation.ModifiedIp;
 import seoul.democracy.common.converter.LocalDateTimeAttributeConverter;
 import seoul.democracy.common.exception.BadRequestException;
+import seoul.democracy.common.exception.NotFoundException;
 import seoul.democracy.common.listener.AuditingIpListener;
 import seoul.democracy.history.domain.IssueHistory;
 import seoul.democracy.issue.dto.IssueFileDto;
@@ -38,7 +39,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @Entity(name = "TB_ISSUE")
-@EntityListeners({AuditingEntityListener.class, AuditingIpListener.class})
+@EntityListeners({ AuditingEntityListener.class, AuditingIpListener.class })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "ISSUE_DTYPE", columnDefinition = "char(1)")
 public abstract class Issue {
@@ -171,45 +172,39 @@ public abstract class Issue {
      */
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "TB_ISSUE_RELATION", joinColumns = {
-        @JoinColumn(name = "ISSUE_ID", referencedColumnName = "ISSUE_ID")
-    })
+            @JoinColumn(name = "ISSUE_ID", referencedColumnName = "ISSUE_ID") })
     protected List<IssueRelation> relations = new ArrayList<>();
 
     /**
      * 태그
      */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "TB_ISSUE_TAGGING",
-      joinColumns = @JoinColumn(name = "ISSUE_ID",
-      referencedColumnName = "ISSUE_ID"),
-      inverseJoinColumns = @JoinColumn(name = "TAG_ID",
-      referencedColumnName = "TAG_ID"))
+    @JoinTable(name = "TB_ISSUE_TAGGING", joinColumns = @JoinColumn(name = "ISSUE_ID", referencedColumnName = "ISSUE_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
     private Set<IssueTag> issueTags = new HashSet<>();
 
     public void updateFiles(List<IssueFileDto> updateFiles) {
-        if(CollectionUtils.isEmpty(this.files) && CollectionUtils.isEmpty(updateFiles)) return;
+        if (CollectionUtils.isEmpty(this.files) && CollectionUtils.isEmpty(updateFiles))
+            return;
 
-        List<IssueFileDto> files = this.files.stream()
-                                       .sorted(Comparator.comparing(IssueFile::getSeq))
-                                       .map(file -> IssueFileDto.of(file.getName(), file.getUrl()))
-                                       .collect(Collectors.toList());
-        if (files.equals(updateFiles)) return;
+        List<IssueFileDto> files = this.files.stream().sorted(Comparator.comparing(IssueFile::getSeq))
+                .map(file -> IssueFileDto.of(file.getName(), file.getUrl())).collect(Collectors.toList());
+        if (files.equals(updateFiles))
+            return;
 
         this.files = IssueFile.create(updateFiles);
     }
 
     protected void updateRelations(List<Long> updateRelations) {
-        if(CollectionUtils.isEmpty(this.relations) && CollectionUtils.isEmpty(updateRelations)) return;
+        if (CollectionUtils.isEmpty(this.relations) && CollectionUtils.isEmpty(updateRelations))
+            return;
 
-        List<Long> relations = this.relations.stream()
-                                   .sorted(Comparator.comparing(IssueRelation::getSeq))
-                                   .map(IssueRelation::getIssueId)
-                                   .collect(Collectors.toList());
-        if (relations.equals(updateRelations)) return;
+        List<Long> relations = this.relations.stream().sorted(Comparator.comparing(IssueRelation::getSeq))
+                .map(IssueRelation::getIssueId).collect(Collectors.toList());
+        if (relations.equals(updateRelations))
+            return;
 
         this.relations = IssueRelation.create(updateRelations);
     }
-
 
     public IssueHistory createHistory(String content) {
         if (this instanceof Proposal)
@@ -225,9 +220,9 @@ public abstract class Issue {
     @Getter
     @RequiredArgsConstructor
     public enum Status {
-        OPEN("공개"),       // 공개
-        CLOSED("비공개"),     // 비공개, 제안 비공개
-        DELETE("삭제");     // 삭제
+        OPEN("공개"), // 공개
+        CLOSED("비공개"), // 비공개, 제안 비공개
+        DELETE("삭제"); // 삭제
 
         private final String msg;
 
@@ -264,8 +259,26 @@ public abstract class Issue {
      * 태그 모두 삭제
      */
     public void removeTagAll() {
-        this.issueTags.forEach(issueTag -> { issueTag.getIssues().remove(this); });
+        this.issueTags.forEach(issueTag -> {
+            issueTag.getIssues().remove(this);
+        });
         this.issueTags.clear();
+    }
+
+    public Issue block() {
+        if (!status.isOpen())
+            throw new NotFoundException("해당 정보를 찾을 수 없습니다.");
+
+        this.status = Status.CLOSED;
+        return this;
+    }
+
+    public Issue open() {
+        if (status.isDelete())
+            throw new NotFoundException("해당 정보를 찾을 수 없습니다.");
+
+        this.status = Status.OPEN;
+        return this;
     }
 
 }

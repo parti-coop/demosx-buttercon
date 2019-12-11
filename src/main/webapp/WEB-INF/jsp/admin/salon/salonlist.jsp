@@ -3,7 +3,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>제안 관리 - 버터나이프크루</title>
+    <title>문화살롱 관리 - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="hold-transition skin-black-light fixed sidebar-mini admin">
@@ -12,7 +12,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
       <div class="content-wrapper">
         <section class="content-header">
-          <h1>제안 관리</h1>
+          <h1>문화살롱 관리</h1>
         </section>
 
         <section class="content">
@@ -69,16 +69,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           table.draw();
         });
 
-        var $process = $("select[name=process]");
-        $process.change(function() {
-          table.draw();
-        });
-
-        var $proposalType = $("select[name=proposalType");
-        $proposalType.change(function() {
-          table.draw();
-        });
-
         var table = $("#list")
           .on("preXhr.dt", function(e, settings, data) {
             data["page"] = data.start / data.length + 1;
@@ -90,12 +80,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
             var category = $category.val();
             if (category) data["category"] = category;
-
-            var process = $process.val();
-            if (process) data["process"] = process;
-
-            var proposalType = $proposalType.val();
-            if (proposalType) data["proposalType"] = proposalType;
 
             delete data["draw"];
             delete data["columns"];
@@ -139,7 +123,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             order: [[0, "desc"]],
             serverSide: true,
             ajax: {
-              url: "/admin/ajax/issue/proposals",
+              url: "/admin/ajax/issue/salons",
               type: "GET",
               error: function(e) {
                 if (e.status === 401 || e.status === 403)
@@ -158,7 +142,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               {
                 data: function(item) {
                   return (
-                    '<a href="/admin/issue/proposal-detail.do?id=' +
+                    '<a href="/admin/issue/salon-detail.do?id=' +
                     item.id +
                     '">' +
                     item.title +

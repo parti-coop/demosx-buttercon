@@ -3,10 +3,12 @@ package seoul.democracy.issue.service;
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import seoul.democracy.common.exception.BadRequestException;
+import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.dto.IssueDto;
 import seoul.democracy.issue.repository.IssueRepository;
 import seoul.democracy.issue.repository.IssueStatsRepository;
@@ -45,5 +47,25 @@ public class IssueService {
     @Transactional
     public void increaseLikeCount(Long statsId) {
         statsRepository.selectLikeProposal(statsId);
+    }
+
+    /**
+     * 제안 블럭
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
+    public Issue closed(Long id) {
+        Issue issue = issueRepository.getOne(id);
+        return issue.block();
+    }
+
+    /**
+     * 제안 공개
+     */
+    @Transactional
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
+    public Issue open(Long id) {
+        Issue issue = issueRepository.getOne(id);
+        return issue.open();
     }
 }

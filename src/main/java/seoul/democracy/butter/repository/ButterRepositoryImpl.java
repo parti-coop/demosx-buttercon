@@ -14,6 +14,9 @@ import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import seoul.democracy.butter.domain.Butter;
@@ -65,6 +68,14 @@ public class ButterRepositoryImpl extends QueryDslRepositorySupport implements B
             result.setButterMakers(butterMakers);
         }
         return butters.getResults();
+    }
+
+    @Override
+    public Page<ButterDto> findAll(Predicate predicate, Pageable pageable,Expression<ButterDto> projection) {
+        JPQLQuery query = getQuery();
+        SearchResults<ButterDto> results = query.orderBy(butter.modifiedDate.desc()).where(predicate).distinct()
+                .listResults(projection);
+        return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }
 
     @Override

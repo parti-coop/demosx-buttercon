@@ -3,7 +3,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>제안 관리 - 버터나이프크루</title>
+    <title>정책살롱 관리 - 버터나이프크루</title>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="hold-transition skin-black-light fixed sidebar-mini admin">
@@ -12,7 +12,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
       <div class="content-wrapper">
         <section class="content-header">
-          <h1>제안 관리</h1>
+          <h1>정책살롱 관리</h1>
         </section>
 
         <section class="content">
@@ -28,21 +28,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     <thead>
                       <tr>
                         <th>작성일</th>
-                        <th>
-                          <select
-                            name="category"
-                            aria-controls="list"
-                            class="form-control input-sm"
-                            title="분류"
-                          >
-                            <option value="">분류선택</option>
-                            <c:forEach var="category" items="${categories}">
-                              <option value="${category.name}"
-                                >${category.name}</option
-                              >
-                            </c:forEach>
-                          </select>
-                        </th>
                         <th>제목</th>
                         <th>작성자</th>
                         <th>조회수</th>
@@ -69,16 +54,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           table.draw();
         });
 
-        var $process = $("select[name=process]");
-        $process.change(function() {
-          table.draw();
-        });
-
-        var $proposalType = $("select[name=proposalType");
-        $proposalType.change(function() {
-          table.draw();
-        });
-
         var table = $("#list")
           .on("preXhr.dt", function(e, settings, data) {
             data["page"] = data.start / data.length + 1;
@@ -87,15 +62,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               sortColumn[data["order"][0].column] + "," + data["order"][0].dir
             ];
             data["search"] = data["search"].value;
-
-            var category = $category.val();
-            if (category) data["category"] = category;
-
-            var process = $process.val();
-            if (process) data["process"] = process;
-
-            var proposalType = $proposalType.val();
-            if (proposalType) data["proposalType"] = proposalType;
 
             delete data["draw"];
             delete data["columns"];
@@ -139,7 +105,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             order: [[0, "desc"]],
             serverSide: true,
             ajax: {
-              url: "/admin/ajax/issue/proposals",
+              url: "/admin/ajax/issue/butters",
               type: "GET",
               error: function(e) {
                 if (e.status === 401 || e.status === 403)
@@ -151,14 +117,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               { data: "createdDate" },
               {
                 data: function(item) {
-                  return item.category ? item.category.name : "-";
-                },
-                orderable: false
-              },
-              {
-                data: function(item) {
                   return (
-                    '<a href="/admin/issue/proposal-detail.do?id=' +
+                    '<a href="/admin/issue/butter-detail.do?id=' +
                     item.id +
                     '">' +
                     item.title +

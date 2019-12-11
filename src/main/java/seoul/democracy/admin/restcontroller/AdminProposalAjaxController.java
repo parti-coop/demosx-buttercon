@@ -11,8 +11,6 @@ import seoul.democracy.proposal.domain.Proposal;
 import seoul.democracy.proposal.domain.ProposalType;
 import seoul.democracy.proposal.dto.*;
 import seoul.democracy.proposal.service.ProposalService;
-import seoul.democracy.user.domain.User;
-import seoul.democracy.user.utils.UserUtils;
 
 import javax.validation.Valid;
 
