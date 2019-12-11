@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>제안 관리 상세 - 버터나이프크루</title>
+  <title>아이디어 관리 상세 - 버터나이프크루</title>
   <%@ include file="../shared/head.jsp" %>
 </head>
 <body class="hold-transition skin-black-light fixed sidebar-mini admin">
@@ -13,7 +13,7 @@
 
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>제안 관리 상세</h1>
+      <h1>아이디어 관리 상세</h1>
     </section>
 
     <section class="content">
