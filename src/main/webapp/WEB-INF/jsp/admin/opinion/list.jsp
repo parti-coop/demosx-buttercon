@@ -1,22 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table id="opinion" class="table table-bordered table-striped" width="100%">
   <thead>
-  <tr>
-    <th>작성일</th>
-    <th>공감수</th>
-    <th>투표</th>
-    <th>의견</th>
-    <th>작성자</th>
-    <th>공개여부</th>
-  </tr>
+    <tr>
+      <th>작성일</th>
+      <th>공감수</th>
+      <th>투표</th>
+      <th>의견</th>
+      <th>작성자</th>
+      <th>공개여부</th>
+    </tr>
   </thead>
 </table>
 <style>
-.js-status{
-  color: blue;
-  font-weight: bold;
-}
+  .js-status {
+    color: blue;
+    font-weight: bold;
+  }
 </style>
 <script>
   $(function () {
@@ -91,7 +91,10 @@
           { data: 'content', orderable: false },
           { data: 'createdBy.name', orderable: false },
           { data: function(item){
-            return "<a href='javascript:void(0)' data-id='"+item.id+"'>"+item.status+"</a>" 
+            var status = "공개"
+            if (item.status === "DELETE") status = "삭제";
+            if (item.status === "BLOCK") status = "비공개";
+            return "<a href='javascript:void(0)' data-id='"+item.id+"' data-status='"+item.status+"'>"+status+"</a>"
           }, orderable: false, className: "js-status"}
         ]
       }).on("click", ".js-status", function(event){
@@ -99,7 +102,7 @@
         if(id == null){
           return false;
         }
-        var status = $(event.target).text();
+        var status = $(event.target).data("status");
         if(status == "OPEN"){
           if(confirm("댓글을 비공개 하시겠습니까?")){
             adminAjax({
@@ -158,7 +161,12 @@
   });
 </script>
 <style>
-  .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > thead > tr > th {
     vertical-align: middle;
   }
 </style>
