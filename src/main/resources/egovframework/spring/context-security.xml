@@ -10,15 +10,17 @@
     <global-method-security pre-post-annotations="enabled"/>
     <http auto-config="true" use-expressions="true" entry-point-ref="authenticationEntryPoint">
 
+        <intercept-url pattern="/debate-history-edit.do" access="hasRole('ROLE_ADMIN')"/>
+
         <intercept-url pattern="/admin/ajax/issue/proposals" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/ajax/issue/proposals/**/managerComment" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/ajax/opinions" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/index.do" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/issue/proposal.do" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/issue/proposal-detail.do" access="hasRole('ROLE_MANAGER')"/>
-
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_MANAGER')"/>
-        <intercept-url pattern="/debate-history-edit.do" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/salon-new.do" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/salon-edit.do" access="hasRole('ROLE_MANAGER')"/>
 
         <intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/ajax/mypage/**" access="hasRole('ROLE_USER')"/>
@@ -27,8 +29,7 @@
         <intercept-url pattern="/new-proposal.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-new.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-edit.do" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/salon-new.do" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/salon-edit.do" access="hasRole('ROLE_USER')"/>
+        
 
         <form-login login-page="/email-login.do"
                     username-parameter="id"
