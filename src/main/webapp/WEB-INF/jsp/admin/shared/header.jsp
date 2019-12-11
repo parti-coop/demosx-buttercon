@@ -64,11 +64,11 @@ contentType="text/html;charset=UTF-8" language="java" %>
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">시민 제안</li>
+        <li class="header">게시물 관리</li>
         <li>
           <a href="<c:url value='/admin/issue/proposal.do'/>">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            <span>제안 관리</span>
+            <span>아이디어 관리</span>
           </a>
         </li>
         <li>
@@ -113,7 +113,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">시민제안</li>
+        <li class="header">게시물 관리</li>
         <li>
           <a href="<c:url value='/admin/issue/proposal.do'/>">
             <i class="fa fa-picture-o"></i>
