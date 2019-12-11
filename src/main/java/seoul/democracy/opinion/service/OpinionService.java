@@ -169,7 +169,7 @@ public class OpinionService {
      * 의견 블럭
      */
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
     public Opinion blockOpinion(Long opinionId) {
         Opinion opinion = getOpinion(opinionId);
         opinion.block();
@@ -184,7 +184,7 @@ public class OpinionService {
      * 의견 공개
      */
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_MANAGER')")
     public Opinion openOpinion(Long opinionId) {
         Opinion opinion = getOpinion(opinionId);
 

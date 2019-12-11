@@ -130,7 +130,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               { data: "createdBy.name", orderable: false },
               { data: "stats.viewCount", orderable: false },
               { data: "stats.likeCount", orderable: false },
-              { data: "stats.opinionCount", orderable: false },
+              { data: "stats.etcCount", orderable: false },
               {
                 data: function(item) {
                   if (item.status === "CLOSED") return "비공개";

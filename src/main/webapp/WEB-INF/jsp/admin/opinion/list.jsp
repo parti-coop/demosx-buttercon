@@ -8,9 +8,16 @@
     <th>투표</th>
     <th>의견</th>
     <th>작성자</th>
+    <th>공개여부</th>
   </tr>
   </thead>
 </table>
+<style>
+.js-status{
+  color: blue;
+  font-weight: bold;
+}
+</style>
 <script>
   $(function () {
     var sortColumn = ['createdDate'];
@@ -82,9 +89,44 @@
             }, orderable: false
           },
           { data: 'content', orderable: false },
-          { data: 'createdBy.name', orderable: false }
+          { data: 'createdBy.name', orderable: false },
+          { data: function(item){
+            return "<a href='javascript:void(0)' data-id='"+item.id+"'>"+item.status+"</a>" 
+          }, orderable: false, className: "js-status"}
         ]
+      }).on("click", ".js-status", function(event){
+        var id = $(event.target).data("id");
+        if(id == null){
+          return false;
+        }
+        var status = $(event.target).text();
+        if(status == "OPEN"){
+          if(confirm("댓글을 비공개 하시겠습니까?")){
+            adminAjax({
+              csrf: '${_csrf.token}',
+              url: '/admin/ajax/opinions/'+id+"/block",
+              type: 'PATCH',
+              data: null,
+              success: function(d) {alert(d.msg);table.draw();},
+              error: function(d) {alert(d.msg)},
+            });
+          }
+        }
+        else{
+          if(confirm("댓글을 공개 하시겠습니까?")){
+            adminAjax({
+              csrf: '${_csrf.token}',
+              url: '/admin/ajax/opinions/'+id+"/open",
+              type: 'PATCH',
+              data: null,
+              success: function(d) {alert(d.msg);table.draw();},
+              error: function(d) {alert(d.msg)},
+            });
+          }
+        }
       });
+
+
 
     <c:if test="${param.opinionType eq 'PROPOSAL'}">
     table.column(2).visible(false);

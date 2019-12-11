@@ -35,7 +35,7 @@ public class AdminOpinionAjaxController {
 
         opinionService.blockOpinion(opinionId);
 
-        return ResultInfo.of("비공개 상태입니다.");
+        return ResultInfo.of("비공개 적용하였습니다.");
     }
 
     @RequestMapping(value = "/{opinionId}/open", method = RequestMethod.PATCH)
@@ -43,6 +43,6 @@ public class AdminOpinionAjaxController {
 
         opinionService.openOpinion(opinionId);
 
-        return ResultInfo.of("공개 상태입니다.");
+        return ResultInfo.of("공개 적용하였습니다.");
     }
 }
