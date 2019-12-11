@@ -30,7 +30,7 @@ public class UserDto {
         user.id, user.createdDate, user.role, user.status, user.email, user.provider, user.name, user.loginDate, user.loginIp);
 
     public final static QBean<UserDto> projectionForAdminManager = Projections.fields(UserDto.class,
-        user.id, user.role, user.status, user.email, user.name,
+        user.id, user.role, user.status, user.email, user.name, user.provider, 
         CategoryDto.projectionForFilter.as("category"),
         user.department.department1.as("department1"), user.department.department2.as("department2"), user.department.department3.as("department3"));
 

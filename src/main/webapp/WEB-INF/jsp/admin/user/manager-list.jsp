@@ -42,9 +42,7 @@
                 <tr>
                   <th>이름</th>
                   <th>이메일</th>
-                  <th>소속</th>
-                  <th>실국</th>
-                  <th>부서</th>
+                  <th>SNS</th>
                   <th>분류</th>
                   <th>수정하기</th>
                 </tr>
@@ -306,9 +304,7 @@
         columns: [
           { data: 'name', orderable: false },
           { data: 'email', orderable: false },
-          { data: 'department1', orderable: false },
-          { data: 'department2', orderable: false },
-          { data: 'department3', orderable: false },
+          { data: 'provider', orderable: false },
           { data: 'category.name', orderable: false },
           {
             data: function (item) {

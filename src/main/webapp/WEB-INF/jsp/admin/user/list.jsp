@@ -27,6 +27,7 @@
                   <th>가입일</th>
                   <th>이름</th>
                   <th>이메일</th>
+                  <th>SNS</th>
                   <th>마지막 로그인 IP</th>
                   <th>마지막 로그인 일시</th>
                 </tr>
@@ -106,6 +107,7 @@
           { data: 'createdDate' },
           { data: 'name', orderable: false },
           { data: 'email', orderable: false },
+          { data: 'provider', orderable: false },
           {
             data: function (item) {
               return item.loginIp || '';
