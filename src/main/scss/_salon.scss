@@ -490,6 +490,9 @@ body.body-salon {
       .contents-box {
         padding: 0;
         overflow: hidden;
+        iframe{
+          width: 100% !important;
+        }
       }
       .demo-content {
         min-height: auto;
