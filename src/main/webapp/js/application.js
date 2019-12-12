@@ -75,6 +75,7 @@ $(function() {
         hidden_input: false,
         uploadimage_default_img_class: 'tinymce-content-image',
         link_title: false,
+        default_link_target: "_blank",
         plugins: ['autolink', 'autosave', 'image', 'media', 'link', 'paste', 'autoresize'],
         toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | link media custom_image",
         mobile: {
