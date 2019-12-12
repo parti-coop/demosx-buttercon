@@ -12,7 +12,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="cover-hover">
       <div class="tags">
         <c:forEach var="issueTag" items="${salon.issueTags}">
-          <span>${issueTag.name}</span>
+          <span>#${issueTag.name}</span>
         </c:forEach>
       </div>
       <div class="excerpt">

@@ -7,7 +7,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <span
           href="<c:url value='/butter-list.do?search=%23${issueTag.name}'/>"
           class="butter-tag"
-          >${issueTag.name}</span
+          >#${issueTag.name}</span
         >
       </c:forEach>
       <c:if test="${butter.isMaker()}">

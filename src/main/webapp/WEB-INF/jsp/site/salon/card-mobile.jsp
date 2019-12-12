@@ -17,7 +17,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <section class="desc">
     <div class="tags">
       <c:forEach var="issueTag" items="${salon.issueTags}">
-        <span>${issueTag.name}</span>
+        <span>#${issueTag.name}</span>
       </c:forEach>
     </div>
     <div class="excerpt">

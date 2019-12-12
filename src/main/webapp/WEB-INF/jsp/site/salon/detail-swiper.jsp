@@ -28,7 +28,7 @@
               <div class="cover-hover">
                 <div class="tags">
                   <c:forEach var="issueTag" items="${each.issueTags}">
-                    <span>${issueTag.name}</span>
+                    <span>#${issueTag.name}</span>
                   </c:forEach>
                 </div>
                 <div class="excerpt">

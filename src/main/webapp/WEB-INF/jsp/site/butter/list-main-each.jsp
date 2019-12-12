@@ -9,7 +9,7 @@
   <div class="butter-each-2">
     <div class="butter-tag-list">
       <c:forEach var="tag" items="${item.issueTags}">
-        <span class="butter-tag">${tag.name}</span>
+        <span class="butter-tag">#${tag.name}</span>
       </c:forEach>
     </div>
     <div class="butter-title">${item.title}</div>
