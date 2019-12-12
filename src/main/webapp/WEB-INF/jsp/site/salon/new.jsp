@@ -195,7 +195,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     </button>
                   </span>
                 </div>
-                <div class="recommended">권장 이미지 사이즈 000x000px</div>
+                <div class="recommended">권장 이미지 사이즈 352x224px</div>
               </div>
             </div>
 
@@ -238,7 +238,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     </button>
                   </span>
                 </div>
-                <div class="recommended">권장 이미지 사이즈 000x000px</div>
+                <div class="recommended">권장 이미지 사이즈 1140x296px</div>
               </div>
             </div>
 
