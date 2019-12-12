@@ -516,14 +516,14 @@ body.body-salon {
       }
     }
     .detail-title {
-      height: 54px;
+      // height: 54px;
       font-size: 36px;
       font-weight: bold;
       letter-spacing: -0.8px;
       color: white;
       margin: 0;
       @media (max-width: $screen-xs-max) {
-        height: 36px;
+        // height: 36px;
         font-size: 24px;
         letter-spacing: -1px;
       }
@@ -666,11 +666,11 @@ body.body-salon {
           margin: 40px 0 20px 16px;
         }
       }
-      height: 296px;
+      // height: 296px;
       background-color: rgba(0, 0, 0, 0.5);
-      @media (max-width: $screen-xs-max) {
-        height: 174px;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   height: 174px;
+      // }
       position: relative;
       img {
         position: absolute;

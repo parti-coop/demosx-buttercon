@@ -31,7 +31,7 @@
           <div class="top-cover-margin">
             <div class="title-row clearfix">
               <span class="category">${salon.category.name}</span>
-              <h2 class="detail-title text-ellipse">${salon.title}</h2>
+              <h2 class="detail-title">${salon.title}</h2>
               <h3 class="detail-teamname">${salon.team}</h3>
               <%@ include file="detail-btns.jsp" %>
             </div>
