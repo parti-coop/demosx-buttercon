@@ -29,6 +29,11 @@
         <intercept-url pattern="/new-proposal.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-new.do" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/butter-edit.do" access="hasRole('ROLE_USER')"/>
+
+        <intercept-url pattern="/butter-list.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/butter.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/proposal-list.do" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/proposal.do" access="hasRole('ROLE_USER')"/>
         
 
         <form-login login-page="/email-login.do"
