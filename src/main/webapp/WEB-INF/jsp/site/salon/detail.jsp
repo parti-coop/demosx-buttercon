@@ -1,8 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
     <title>${salon.title} - 버터나이프크루</title>
+    <meta property="og:title" content="${salon.title}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="${salon.image}" />
+    <meta property="og:description" content="${salon.excerpt}" />
+    <c:forEach var="issueTag" items="${salon.issueTags}">
+    <meta property="article:tag" content="${issueTag.name}" />
+    </c:forEach>
     <%@ include file="../shared/head.jsp" %>
   </head>
   <body class="body-salon body-salon-detail">
@@ -42,7 +50,6 @@
       <div class="content-container clearfix">
         <div class="demo-side">
           <nav role="navigation" class="table-of-contents">
-            <!-- <h2>${salon.title}</h2> -->
             <ul class="toc"></ul>
           </nav>
         </div>
