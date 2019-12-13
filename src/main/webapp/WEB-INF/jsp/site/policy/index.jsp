@@ -42,7 +42,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/i-5hX0LDI9w"
+            src="https://www.youtube.com/embed/athlPwsuWAw"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -52,7 +52,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/JnrTcIsTlpU"
+            src="https://www.youtube.com/embed/f6MlZxDP04Y"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
