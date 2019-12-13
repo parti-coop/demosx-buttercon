@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import seoul.democracy.common.exception.AlreadyExistsException;
 import seoul.democracy.email.service.EmailService;
 import seoul.democracy.user.domain.User;
 import seoul.democracy.user.dto.UserCreateDto;
@@ -97,16 +96,19 @@ public class LoginController {
                        Model model) {
         if (UserUtils.isLogin()) return "redirect:/index.do";
         if (result.hasErrors()) return "/site/join";
+        
+        /** 회원가입 막는다 */
+        return "redirect:/index.do";
 
-        try {
-            userService.create(createDto);
-        } catch (AlreadyExistsException e) {
-            result.rejectValue("email", "email.error", e.getLocalizedMessage());
-            return "/site/join";
-        }
+        // try {
+        //     userService.create(createDto);
+        // } catch (AlreadyExistsException e) {
+        //     result.rejectValue("email", "email.error", e.getLocalizedMessage());
+        //     return "/site/join";
+        // }
 
-        model.addAttribute("joinSuccess", true);
-        return "/site/join";
+        // model.addAttribute("joinSuccess", true);
+        // return "/site/join";
     }
 
     /**

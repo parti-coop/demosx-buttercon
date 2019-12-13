@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,8 @@ import static seoul.democracy.user.predicate.UserPredicate.equalEmail;
 
 import java.util.List;
 
+import javax.security.auth.message.AuthException;
+
 @Service
 @Transactional(readOnly = true)
 public class UserService {
@@ -36,10 +39,8 @@ public class UserService {
     private final CategoryService categoryService;
 
     @Autowired
-    public UserService(UserRepository userRepository,
-                       UserLoginRepository loginRepository,
-                       PasswordEncoder passwordEncoder,
-                       CategoryService categoryService) {
+    public UserService(UserRepository userRepository, UserLoginRepository loginRepository,
+            PasswordEncoder passwordEncoder, CategoryService categoryService) {
         this.userRepository = userRepository;
         this.loginRepository = loginRepository;
         this.passwordEncoder = passwordEncoder;
@@ -53,6 +54,7 @@ public class UserService {
     public Page<UserDto> getUsers(Predicate predicate, Pageable pageable, QBean<UserDto> projection) {
         return userRepository.findAll(predicate, pageable, projection);
     }
+
     public List<UserDto> getUsers(Predicate predicate, QBean<UserDto> projection) {
         return userRepository.findAll(predicate, projection);
     }
@@ -71,7 +73,8 @@ public class UserService {
 
     @Transactional
     public User create(UserCreateDto createDto) {
-        if (existsEmail(createDto.getEmail())) throw new AlreadyExistsException("이미 사용중인 이메일입니다.");
+        if (existsEmail(createDto.getEmail()))
+            throw new AlreadyExistsException("이미 사용중인 이메일입니다.");
 
         String encodedPassword = passwordEncoder.encode(createDto.getPassword());
         createDto.setPassword(encodedPassword);
@@ -147,7 +150,8 @@ public class UserService {
     @Transactional
     public User initPassword(String email) {
         User user = userRepository.findOne(equalEmail(email));
-        if (user == null) return null;
+        if (user == null)
+            return null;
 
         return user.initPassword();
     }
@@ -163,11 +167,12 @@ public class UserService {
     }
 
     @Transactional
-    public User getUserBySocial(String provider, String id, String name, String photo) {
+    public User getUserBySocial(String provider, String id, String name, String photo) throws UsernameNotFoundException {
         User user = userRepository.findOne(UserPredicate.equalProviderAndId(provider, id));
         if (user == null) {
-            user = User.create(UserSocialCreateDto.of(id, provider, name, photo));
-            return userRepository.save(user);
+            throw new UsernameNotFoundException("2019 버터나이프크루 모집이 종료되었습니다.");
+            // user = User.create(UserSocialCreateDto.of(id, provider, name, photo));
+            // return userRepository.save(user);
         }
         return user;
     }
