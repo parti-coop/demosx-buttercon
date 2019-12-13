@@ -48,7 +48,7 @@
       </button>
       <a class="navbar-brand navbar-brand--demo" href="<c:url value='/index.do'/>">
         <img src="${pageContext.request.contextPath}/images/butttercon-kr-logo.png">
-        <span class="beta">beta</span>
+        <!-- <span class="beta">beta</span> -->
       </a>
     </div>
 
@@ -60,7 +60,7 @@
       <ul class="nav navbar-nav navbar-right demo-nav">
         <li class="demo-nav-li"><a href="<c:url value='/intro.do'/>">버터나이프크루</a></li>
         <li class="li-middle"><span class="li-middle-line">&nbsp;</span></li>
-        <li class="demo-nav-li <c:if test="${controllerName eq 'Butter'}">active</c:if>"><a href="<c:url value='/butter-list.do'/>">정책살롱</a></li>
+        <li class="demo-nav-li <c:if test="${controllerName eq 'Policy'}">active</c:if>"><a href="<c:url value='/policy.do'/>">정책살롱</a></li>
 
         <c:if test="${not empty loginUser}">
         <li class="demo-nav-li <c:if test="${controllerName eq 'Proposal'}">active</c:if>"><a href="<c:url value='/proposal-list.do'/>">아이디어</a></li>
