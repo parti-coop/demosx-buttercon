@@ -7,7 +7,7 @@
       <div class="col-sm-3 col-sm-push-9 term-links">
         <%-- <p class="term-link-p"><a class="term-link" href="<c:url value="/notice-list.do"/>"><i
             class="xi-angle-right-min"></i> 공지사항</a></p> --%>
-        <p class="term-link-p"><a class="term-link" href="https://event-us.kr/butterknife/event/list" target="_blank">살롱 일정</a></p>
+        <!-- <p class="term-link-p"><a class="term-link" href="https://event-us.kr/butterknife/event/list" target="_blank">살롱 일정</a></p> -->
         <p class="term-link-p"><a class="term-link" href="<c:url value="/terms.do"/>">이용약관</a></p>
         <p class="term-link-p"><a class="term-link" href="<c:url value="/privacy.do"/>">개인정보처리방침</a></p>
       </div>
