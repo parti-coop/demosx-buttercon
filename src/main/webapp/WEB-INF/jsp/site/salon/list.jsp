@@ -25,17 +25,15 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
       <h4>버터나이프크루 문화살롱</h4>
       <article>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-        nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis
-        magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam.
-        Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales
-        nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
-        odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at
-        ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare
-        accumsan, blandit sed diam.
+        버터나이프크루의 문화살롱은 청년의 달라진 삶을 다양한 콘텐츠로 나타내는 문화혁신사업입니다.
+        <br />
+        청년의 다양한 삶을 성평등의 관점으로 나타낼 수 있는 아이디어를 도전 의지와 열정으로 실현시키고자 하는 분들을 지원했습니다. 
+        <br />
+        또한 문화살롱에 참여하는 서로 서로가 연결되어 네트워크가 되기를 기대했습니다. 
+        <br />
+        <br />
+        2019 버터나이프크루 문화살롱은 주거・가족・일・지역・건강・대중문화・성인지 교육 등을 주제로
+        수도권・순천・김해・부산・제주 5개 지역에서 청년의 달라진 삶을 영상, 웹툰, 책자, 연구 보고서 등 다양한 콘텐츠로 표현하였습니다.
       </article>
       <section>
         <div class="youtube">
@@ -69,7 +67,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           <c:forEach var="cate" items="${categories}">
             <a 
               href="?category=${cate.name}#프로젝트"
-              class="category <c:if test="${category eq cate.name}">selected</c:if> ">${cate.name}</a>
+              class="category <c:if test='${category eq cate.name}'>selected</c:if> ">${cate.name}</a>
           </c:forEach>
         </div>
         <div class="card-wrapper">
