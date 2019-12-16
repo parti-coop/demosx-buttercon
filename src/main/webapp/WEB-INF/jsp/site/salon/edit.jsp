@@ -68,7 +68,7 @@
 
             <div class="form-group form-group-salon">
               <label class="demo-form-label" for="category"
-                >살롱 주제<span class="required"> *</span></label
+                >분야<span class="required"> *</span></label
               >
               <div>
                 <c:set var="salonContentParsleyErrorsContainerId" scope="page"

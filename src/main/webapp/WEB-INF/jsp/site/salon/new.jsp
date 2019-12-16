@@ -82,7 +82,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                     title="분류"
                     data-parsley-required="true"
                   >
-                    <option value="">살롱 주제 선택...</option>
+                    <option value="">분야 선택...</option>
                     <c:forEach var="category" items="${categories}">
                       <option value="${category.name}">${category.name}</option>
                     </c:forEach>
