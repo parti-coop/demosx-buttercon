@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import static seoul.democracy.issue.domain.Issue.Status.OPEN;
 import static seoul.democracy.salon.domain.QSalon.salon;
 import static seoul.democracy.issue.domain.QIssueTag.issueTag;
+import static seoul.democracy.issue.domain.QCategory.category;
 
 public class SalonPredicate {
 
@@ -100,5 +101,9 @@ public class SalonPredicate {
 
     public static Predicate equalStatusAndLikeCountOver(Issue.Status status, long likeCount) {
         return ExpressionUtils.and(salon.status.eq(status), salon.stats.likeCount.goe(likeCount));
+    }
+
+    public static Predicate distinctSalonCategories() {
+        return ExpressionUtils.allOf(category.enabled.eq(true), salon.status.eq(OPEN));
     }
 }

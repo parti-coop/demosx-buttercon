@@ -90,7 +90,7 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
 
     @Override
     public List<CategoryDto> getAllSalonCategories(Predicate predicate, Expression<CategoryDto> projection) {
-        return from(salon).innerJoin(salon.category, category).where(predicate).list(projection);
+        return from(salon).innerJoin(salon.category, category).where(predicate).distinct().list(projection);
     }
 
 }
