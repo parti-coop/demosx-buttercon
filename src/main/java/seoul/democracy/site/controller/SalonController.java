@@ -47,7 +47,7 @@ public class SalonController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        Pageable pageable = new PageRequest(page - 1, 10, sort.getSort());
+        Pageable pageable = new PageRequest(page - 1, 30, sort.getSort());
 
         Page<SalonDto> salons = salonService.getSalonsWithIssueTags(
                 SalonPredicate.predicateForSiteList(search, category), pageable, SalonDto.projectionForSiteList);
