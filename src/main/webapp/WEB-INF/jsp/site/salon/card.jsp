@@ -4,7 +4,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:url value="/salon.do?id=${salon.id}" />
 </c:set>
 <div
-  class="demo-card demo-card-salon position-relative"
+  class="demo-card-salon position-relative"
   onclick="location.href = '${link}'"
 >
   <section class="cover">
