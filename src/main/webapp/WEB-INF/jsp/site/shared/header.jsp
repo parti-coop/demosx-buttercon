@@ -54,7 +54,7 @@
 
     <!-- 모바일 펼쳐진 메뉴 -->
     <div class="demo-collapse collapse navbar-collapse" id="demo-navbar-collapse">
-      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="#">
+      <a class="visible-xs navbar-brand navbar-brand--demo navbar-brand--demo--collapse" href="<c:url value='/index.do'/>">
         <img src="${pageContext.request.contextPath}/images/butttercon-kr-logo.png">
       </a>
       <ul class="nav navbar-nav navbar-right demo-nav">
