@@ -86,7 +86,7 @@ body.body-salon {
         margin-top: 40px;
         margin-bottom: 27px;
         @media (max-width: $screen-xs-max) {
-          margin-top: 160px;
+          margin-top: 80px;
           font-size: 14px;
           letter-spacing: -0.26px;
         }
@@ -1015,11 +1015,12 @@ body.body-salon {
 }
 
 .body-salon.body-policy.home {
-  background-position-y: 50px;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      white 60%
-    ),
-    url(/images/policy.jpg);
+  background-position-y: 110px;
+  background-color: #432500;
+  background-repeat: no-repeat;
+  background-image: url(/images/policy.jpg);
+  @media (max-width: $screen-xs-max) {
+    background-position-y: 50px;
+    background-image: url(/images/policy-mobile.jpg);
+  }
 }
