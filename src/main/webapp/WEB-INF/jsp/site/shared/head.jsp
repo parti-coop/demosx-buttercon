@@ -100,6 +100,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/diff_match_patch.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/codemirror/merge.js?v=<spring:eval expression="@pomProperties['version']" />"></script>
 
+<!-- Instagram embed -->
+<script async src="//www.instagram.com/embed.js"></script>
 
 <c:if test="${environmentName eq 'production'}">
 
