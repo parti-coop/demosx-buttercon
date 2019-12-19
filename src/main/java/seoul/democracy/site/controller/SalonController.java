@@ -42,7 +42,7 @@ public class SalonController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(value = "/salon-list.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content-list.do", method = RequestMethod.GET)
     public String salonList(@RequestParam(value = "sort", defaultValue = "latest") SalonSort sort,
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "search", required = false) String search,
@@ -63,7 +63,7 @@ public class SalonController {
         return "/site/salon/list";
     }
 
-    @RequestMapping(value = "/salon.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content.do", method = RequestMethod.GET)
     public String salon(@RequestParam("id") Long id, Model model) {
         SalonDto salonDto = salonService.getSalonSiteDetail(SalonPredicate.equalIdAndStatus(id, Status.OPEN),
                 SalonDto.projectionForSiteDetail);
@@ -77,7 +77,7 @@ public class SalonController {
         return "/site/salon/detail";
     }
 
-    @RequestMapping(value = "/salon-new.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content-new.do", method = RequestMethod.GET)
     public String newSalon(Model model) {
 
         List<CategoryDto> categories = categoryService.getCategories(CategoryPredicate.enabled(),
@@ -86,7 +86,7 @@ public class SalonController {
         return "/site/salon/new";
     }
 
-    @RequestMapping(value = "/salon-edit.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content-edit.do", method = RequestMethod.GET)
     public String editSalon(@RequestParam("id") Long id, Model model) {
 
         SalonDto salonDto = salonService.getSalonWithIssueTags(predicateForEdit(id, UserUtils.getUserId()),

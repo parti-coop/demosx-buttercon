@@ -14,7 +14,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <h3 class="top-row__title">문화살롱</h3>
         <c:if test="${loginUser.isManager() or loginUser.isAdmin()}">
           <a
-            href="<c:url value='/salon-new.do'/>"
+            href="<c:url value='/content-new.do'/>"
             class="btn demo-btn--primary demo-btn-salon"
             >프로젝트 쓰기</a
           >

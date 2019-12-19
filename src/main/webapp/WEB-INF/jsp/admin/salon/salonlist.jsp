@@ -142,7 +142,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               {
                 data: function(item) {
                   return (
-                    '<a href="/admin/issue/salon-detail.do?id=' +
+                    '<a href="/admin/issue/content-detail.do?id=' +
                     item.id +
                     '">' +
                     item.title +

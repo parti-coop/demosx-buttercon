@@ -22,7 +22,7 @@
     <ul class="swiper-wrapper">
       <c:forEach var="each" items="${salons}">
         <li class="salon-project swiper-slide">
-          <a href="<c:url value='/salon.do?id=${each.id}'/>">
+          <a href="<c:url value='/content.do?id=${each.id}'/>">
             <div class="cover">
               <img src="${each.image}" alt="카드이미지" />
               <div class="cover-hover">

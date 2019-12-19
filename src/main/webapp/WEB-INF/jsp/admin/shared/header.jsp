@@ -78,7 +78,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
           </a>
         </li>
         <li>
-          <a href="<c:url value='/admin/issue/salon.do'/>">
+          <a href="<c:url value='/admin/issue/content.do'/>">
             <i class="fa fa-picture-o"></i>
             <span>문화살롱 관리</span>
           </a>
@@ -127,7 +127,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
           </a>
         </li>
         <li>
-          <a href="<c:url value='/admin/issue/salon.do'/>">
+          <a href="<c:url value='/admin/issue/content.do'/>">
             <i class="fa fa-picture-o"></i>
             <span>문화살롱 관리</span>
           </a>

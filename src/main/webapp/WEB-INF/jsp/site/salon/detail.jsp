@@ -20,7 +20,7 @@
       <div class="top-row clearfix">
         <div class="">
           <h3 class="top-row__title">
-            <a href="<c:url value='/salon-list.do'/>" class="font-black"
+            <a href="<c:url value='/content-list.do'/>" class="font-black"
               >문화살롱</a
             >
           </h3>
@@ -30,7 +30,7 @@
           <c:if test="${salon.createdBy.id eq loginUser.id}">
             <div class="pull-right margin-20">
               <a
-                href="<c:url value='/salon-edit.do?id=${salon.id}'/>"
+                href="<c:url value='/content-edit.do?id=${salon.id}'/>"
                 class="btn btn-default btn-responsive-sm-md-md"
                 >내용수정</a
               >

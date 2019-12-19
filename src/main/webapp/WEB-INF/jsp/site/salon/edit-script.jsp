@@ -16,7 +16,7 @@
         data: JSON.stringify(data),
         success: function(data) {
           alert(data.msg);
-          window.location.href = "/salon.do?id=" + "${editDto.id}";
+          window.location.href = "/content.do?id=" + "${editDto.id}";
         },
         error: function(error) {
           if (error.status === 400) {
@@ -54,7 +54,7 @@
         dataType: "json",
         success: function(data) {
           alert(data.msg);
-          window.location.href = "/salon-list.do";
+          window.location.href = "/content-list.do";
         },
         error: function(error) {
           if (error.status === 400) {

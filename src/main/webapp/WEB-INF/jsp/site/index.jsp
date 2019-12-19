@@ -153,7 +153,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </div>
             <a
-              href="<c:url value='/salon-list.do'/>"
+              href="<c:url value='/content-list.do'/>"
               class="main-card-list-lead-button"
             >
               문화살롱 자세히보기 <i class="xi-angle-right"></i>
@@ -181,7 +181,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
         </div>
         <div class="button-mobile">
-          <a href="<c:url value='/salon-list.do'/>">
+          <a href="<c:url value='/content-list.do'/>">
             문화살롱 자세히보기
           </a>
         </div>

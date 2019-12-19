@@ -40,7 +40,7 @@
       </li>
     </ul>
   </div>
-  <a href="<c:url value='/salon-list.do' />" alt="목록" class="link-to-list"
+  <a href="<c:url value='/content-list.do' />" alt="목록" class="link-to-list"
     >목록 <i class="fa fa-chevron-right"></i
   ></a>
 </div>

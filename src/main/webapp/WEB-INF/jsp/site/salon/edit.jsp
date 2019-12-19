@@ -273,7 +273,7 @@ ${editDto.content}</textarea
                   </button>
                   <a
                     class="btn btn-default btn-lg btn-cancel"
-                    href="<c:url value='/salon-list.do'/>"
+                    href="<c:url value='/content-list.do'/>"
                     role="button"
                     >취소</a
                   >

@@ -67,7 +67,7 @@
         <li class="demo-nav-li <c:if test="${controllerName eq 'Butter'}">active</c:if>"><a href="<c:url value='/butter-list.do'/>">버터보드</a></li>
         </c:if>
         
-        <li class="demo-nav-li <c:if test="${controllerName eq 'Salon'}">active</c:if>"><a href="<c:url value='/salon-list.do'/>" >문화살롱</a></li>
+        <li class="demo-nav-li <c:if test="${controllerName eq 'Salon'}">active</c:if>"><a href="<c:url value='/content-list.do'/>" >문화살롱</a></li>
       </ul>
 
       <div class="nav-login-m">

@@ -26,7 +26,7 @@ public class SalonAjaxController {
     public ResultRedirectInfo newSalon(@RequestBody @Valid SalonCreateDto createDto) throws Exception {
         Salon salon = salonService.create(createDto);
 
-        return ResultRedirectInfo.of("아이디어를 등록하였습니다.", "/salon.do?id=" + salon.getId());
+        return ResultRedirectInfo.of("아이디어를 등록하였습니다.", "/content.do?id=" + salon.getId());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

@@ -48,7 +48,7 @@ public class AdminSalonController {
         return "/admin/salon/butterlist";
     }
 
-    @RequestMapping(value = "/salon.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content.do", method = RequestMethod.GET)
     public String salonList() {
         return "/admin/salon/salonlist";
     }
@@ -60,7 +60,7 @@ public class AdminSalonController {
         return "/admin/salon/butterdetail";
     }
 
-    @RequestMapping(value = "/salon-detail.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/content-detail.do", method = RequestMethod.GET)
     public String salonDetail(@RequestParam("id") Long id, Model model) {
         SalonDto dto = salonService.getSalon(SalonPredicate.equalId(id), SalonDto.projection);
         model.addAttribute("dto", dto);

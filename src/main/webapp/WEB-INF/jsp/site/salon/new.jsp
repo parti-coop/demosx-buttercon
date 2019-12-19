@@ -250,7 +250,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <a
                   role="button"
                   class="btn btn-default btn-lg btn-cancel"
-                  href="<c:url value='/salon-list.do'/>"
+                  href="<c:url value='/content-list.do'/>"
                   >취소</a
                 >
               </div>

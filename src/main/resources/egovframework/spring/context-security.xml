@@ -19,8 +19,8 @@
         <intercept-url pattern="/admin/issue/proposal.do" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/issue/proposal-detail.do" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_MANAGER')"/>
-        <intercept-url pattern="/salon-new.do" access="hasRole('ROLE_MANAGER')"/>
-        <intercept-url pattern="/salon-edit.do" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/content-new.do" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/content-edit.do" access="hasRole('ROLE_MANAGER')"/>
 
         <intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/ajax/mypage/**" access="hasRole('ROLE_USER')"/>
