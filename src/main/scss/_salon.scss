@@ -798,11 +798,16 @@ body.body-salon {
         }
       }
       > img {
+        padding: 40px;
+        padding-bottom: 80px;
         @media (max-width: $screen-xs-max) {
           display: none;
         }
       }
     }
+  }
+  .demo-footer {
+    margin-top: 0;
   }
 }
 

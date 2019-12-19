@@ -15,13 +15,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         우리가 변화의 흐름을 만든다
       </div>
       <div class="key-subtitle">
-        버터나이프크루는
+        버터나이프크루는 우리의 달라진 삶에 필요한 정책을 제안하고(정책살롱)
         <br />
-        우리의 달라진 삶에 필요한 정책을 제안하고(정책살롱)
-        <br />
-        우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을
-        <br class="visible-xs" />
-        진행하는 청년참여플랫폼입니다.
+        우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을 진행하는
+        청년참여플랫폼입니다.
       </div>
       <div class="key-visual">
         <img src="<c:url value='/images/key-visual-butter.png'/>" />

@@ -2,19 +2,29 @@ body.body-home {
   .section-main-key-visual {
     margin-top: -40px;
     background-color: $brand-background;
-    @media (min-width: $screen-sm-min) {
-      background-image: url(/images/key-visual-butter.png);
-      background-size: 30%;
-      background-repeat: no-repeat;
-      background-position-y: 55%;
-      background-position-x: 90%;
+    position: relative;
+    &::before {
+      @media (min-width: $screen-sm-min) {
+        content: " ";
+        position: absolute;
+        width: 385px;
+        height: 370px;
+        opacity: 0.4;
+        background-image: url(/images/key-visual-butter.png);
+        background-size: contain;
+        top: 74px;
+        left: 55%;
+        background-repeat: no-repeat;
+      }
     }
     .key-title {
-      font-size: 48px;
+      font-size: 52px;
+      letter-spacing: -2.9px;
       font-weight: bold;
       color: white;
-      margin-top: 150px;
-      margin-bottom: 27px;
+      margin-top: 80px;
+      margin-bottom: 40px;
+      line-height: 1.21;
       @media (max-width: $screen-xs-max) {
         font-size: 24px;
         margin-top: 100px;
@@ -33,7 +43,7 @@ body.body-home {
       font-size: 18px;
       padding: 18px 60px;
       font-weight: 600;
-      margin-bottom: 150px;
+      margin-bottom: 80px;
       @media (max-width: $screen-xs-max) {
         display: block;
         font-size: 14px;
