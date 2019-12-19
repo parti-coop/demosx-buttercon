@@ -88,6 +88,23 @@ body.body-salon {
           letter-spacing: -0.26px;
         }
       }
+      > h3 {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        color: #0d0d0d;
+        margin-top: 75px;
+        margin-bottom: 44px;
+        @media (max-width: $screen-xs-max) {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 1.38;
+          letter-spacing: -0.4px;
+          color: #111111;
+          margin-top: 40px;
+          margin-bottom: 15px;
+        }
+      }
       > article {
         font-size: 16px;
         line-height: 1.44;
