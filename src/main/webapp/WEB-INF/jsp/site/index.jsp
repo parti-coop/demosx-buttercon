@@ -16,7 +16,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       </div>
       <div class="key-subtitle">
         버터나이프크루는 우리의 달라진 삶에 필요한 정책을 제안하고(정책살롱)
-        <br class="visible-md" />
+        <br class="visible-md visible-lg" />
         우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을 진행하는
         청년참여플랫폼입니다.
       </div>
