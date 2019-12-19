@@ -16,6 +16,7 @@ public interface SalonRepositoryCustom {
             boolean withIssueTags);
 
     List<SalonDto> findAll(Predicate predicate, Expression<SalonDto> projection);
+    List<SalonDto> findRandom(Predicate predicate, Expression<SalonDto> projection, int limit);
     List<CategoryDto> getAllSalonCategories(Predicate predicate, Expression<CategoryDto> projection);
 
     SalonDto findOne(Predicate predicate, Expression<SalonDto> projection, boolean withIssueTags);

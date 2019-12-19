@@ -2,6 +2,7 @@ package seoul.democracy.salon.service;
 
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -85,6 +86,11 @@ public class SalonService {
             Expression<SalonDto> projection) {
         boolean withIssueTags = true;
         return salonRepository.findAll(predicate, pageable, projection, withIssueTags);
+    }
+
+    public List<SalonDto> getRandomSalonsWithIssueTags(Predicate predicate, Expression<SalonDto> projection,
+            int limit) {
+        return salonRepository.findRandom(predicate, projection, limit);
     }
 
     public List<SalonDto> getSalonsWithIssueTags(Predicate predicate, Expression<SalonDto> projection) {
@@ -210,4 +216,5 @@ public class SalonService {
     public List<CategoryDto> getAllSalonCategories(Predicate predicate, Expression<CategoryDto> projection) {
         return salonRepository.getAllSalonCategories(predicate, projection);
     }
+
 }

@@ -2,8 +2,11 @@ package seoul.democracy.salon.repository;
 
 import com.mysema.query.SearchResults;
 import com.mysema.query.jpa.JPQLQuery;
+import com.mysema.query.support.Expressions;
 import com.mysema.query.types.Expression;
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.NumberExpression;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -68,6 +71,18 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
             result.setIssueTags(issueTags);
         }
         return results.getResults();
+    }
+
+    @Override
+    public List<SalonDto> findRandom(Predicate predicate, Expression<SalonDto> projection, int limit) {
+        List<SalonDto> results = getQuery(projection).where(predicate).orderBy(issueStats.viewCount.asc()).limit(limit)
+                .list(projection);
+        for (SalonDto result : results) {
+            List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
+                    .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
+            result.setIssueTags(issueTags);
+        }
+        return results;
     }
 
     @Override

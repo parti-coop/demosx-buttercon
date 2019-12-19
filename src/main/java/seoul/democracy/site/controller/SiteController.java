@@ -1,26 +1,16 @@
 package seoul.democracy.site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import seoul.democracy.issue.domain.Issue;
 import seoul.democracy.issue.domain.Issue.Status;
-import seoul.democracy.proposal.dto.ProposalDto;
-import seoul.democracy.proposal.service.ProposalService;
 import seoul.democracy.salon.dto.SalonDto;
 import seoul.democracy.salon.predicate.SalonPredicate;
 import seoul.democracy.salon.service.SalonService;
-
-import static seoul.democracy.proposal.dto.ProposalDto.projectionForSiteList;
-import static seoul.democracy.proposal.predicate.ProposalPredicate.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,13 +27,9 @@ public class SiteController {
      */
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String index(Model model) {
-        List<SalonDto> salons = salonService.getSalonsWithIssueTags(SalonPredicate.equalStatus(Status.OPEN),
-                SalonDto.projectionForSiteList);
-        Random rand = new Random();
-        while (salons.size() > 3) {
-            int n = rand.nextInt(salons.size());
-            salons.remove(n);
-        }
+        int limit = 3;
+        List<SalonDto> salons = salonService.getRandomSalonsWithIssueTags(SalonPredicate.equalStatus(Status.OPEN),
+                SalonDto.projectionForSiteList, limit);
         model.addAttribute("salons", salons);
         return "/site/index";
     }
