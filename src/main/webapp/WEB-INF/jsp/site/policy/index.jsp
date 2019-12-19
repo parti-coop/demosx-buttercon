@@ -36,8 +36,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         오프라인에서 나눈 대화의 맥락에 맞게 온라인에서 개인의 아이디어를
         제안하고, 버터보드(정책제안)를 공동으로 작업하며 전국에서 모인
         정책추진단이 지역과 거리를 넘어서 의견을 소통했습니다. 이러한 과정을
-        통하여 건강, 성평등 교육, 미디어, 일, 지역, 주거, 가족의 주제로 15개
-        팀이 청년의 달라진 삶을 반영하는 정책을 제안했습니다.
+        통하여 건강 ・ 성평등 교육 ・ 미디어 ・ 일 ・ 지역 ・ 주거 ・ 가족의
+        주제로 15개 팀이 청년의 달라진 삶을 반영하는 정책을 제안했습니다.
       </article>
       <section>
         <div class="youtube">
@@ -66,7 +66,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <section class="projects">
       <div class="container policy-article-div">
         <h4 id="정책살롱타임라인">정책살롱 타임라인</h4>
-        <img src="<c:url value='/images/policy2.png' />" alt="정책살롱 굽은선" />
+        <img
+          src="<c:url value='/images/policy2.png' />"
+          alt="정책살롱 굽은선"
+        />
         <div class="flex-row">
           <div class="yellow-line">
             <div class="flex-row start">
