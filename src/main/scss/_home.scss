@@ -2,7 +2,6 @@ body.body-home {
   .section-main-key-visual {
     margin-top: -40px;
     background-color: $brand-background;
-    position: relative;
     &::before {
       @media (min-width: $screen-sm-min) {
         content: " ";
@@ -12,7 +11,7 @@ body.body-home {
         opacity: 0.4;
         background-image: url(/images/key-visual-butter.png);
         background-size: contain;
-        top: 74px;
+        top: 184px;
         left: 55%;
         background-repeat: no-repeat;
       }
@@ -95,7 +94,7 @@ body.body-home {
   }
   .section-proposals {
     padding-top: 100px;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
     margin-top: 4px;
     margin-bottom: -80px;
     background-color: $gray-background;

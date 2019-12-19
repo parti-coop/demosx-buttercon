@@ -1,9 +1,15 @@
 body.body-intro {
   .content-container {
     border-top: 2px solid $text-color-darker;
+    @media (max-width: $screen-xs-max) {
+      border-top: 0;
+    }
   }
   .top-row {
     margin-top: 60px;
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
   }
   .demo-content {
     text-align: left;
@@ -169,7 +175,7 @@ body.body-intro {
         padding-right: 7.5px;
       }
       &:nth-child(even) {
-          padding-left: 7.5px;
+        padding-left: 7.5px;
       }
     }
   }

@@ -756,6 +756,12 @@ body.body-salon {
       }
     }
   }
+  .demo-footer {
+    margin-top: 0;
+    @media (max-width: $screen-xs-max) {
+      margin-top: 0;
+    }
+  }
 }
 
 .salon-title-author {
@@ -799,20 +805,17 @@ body.body-salon {
       }
       > img {
         padding: 40px;
-        padding-bottom: 80px;
         @media (max-width: $screen-xs-max) {
           display: none;
         }
       }
     }
   }
-  .demo-footer {
-    margin-top: 0;
-  }
 }
 
 .projects {
   background-color: #f5f5f5;
+  padding-bottom: 80px;
   h4 {
     color: #0d0d0d;
   }
