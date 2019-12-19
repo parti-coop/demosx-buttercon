@@ -137,6 +137,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
         </div>
+        <div class="button-mobile">
+          <a href="<c:url value='/policy.do'/>">
+            정책살롱 자세히보기
+          </a>
+        </div>
       </article>
       <article class="projects">
         <div class="main-card-list">
@@ -174,6 +179,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </c:forEach>
           </div>
+        </div>
+        <div class="button-mobile">
+          <a href="<c:url value='/salon-list.do'/>">
+            문화살롱 자세히보기
+          </a>
         </div>
       </article>
     </div>

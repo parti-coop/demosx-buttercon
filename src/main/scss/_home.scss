@@ -93,6 +93,10 @@ body.body-home {
       padding-top: 40px;
       padding-bottom: 40px;
       margin-bottom: -30px;
+      .container {
+        margin: 0;
+        padding: 0;
+      }
     }
     .main-card-list-lead {
       margin-bottom: 40px;
@@ -102,13 +106,15 @@ body.body-home {
       align-items: flex-end;
       @media (max-width: $screen-xs-max) {
         margin-bottom: 30px;
+        padding: 0 16px;
       }
       .main-card-list-lead-title {
         font-size: 30px;
         font-weight: bold;
         color: $text-color-darker;
         @media (max-width: $screen-xs-max) {
-          font-size: 18px;
+          font-size: 24px;
+          letter-spacing: -1px;
         }
       }
       .main-card-list-lead-button {
@@ -117,7 +123,7 @@ body.body-home {
         letter-spacing: -0.26px;
         color: $text-color-darker;
         @media (max-width: $screen-xs-max) {
-          font-size: 12px;
+          display: none;
         }
       }
       .main-card-list-lead-subtitle {
@@ -127,6 +133,8 @@ body.body-home {
         color: #595959;
         @media (max-width: $screen-xs-max) {
           font-size: 12px;
+          letter-spacing: -0.23px;
+          color: #595959;
         }
       }
     }
@@ -135,18 +143,33 @@ body.body-home {
       width: 550px;
       height: 350px;
       object-fit: contain;
+      @media (max-width: $screen-xs-max) {
+        height: auto;
+        width: 100%;
+      }
     }
     .policy-article {
       margin-top: 40px;
       overflow: hidden;
+      @media (max-width: $screen-xs-max) {
+        margin-top: 20px;
+      }
     }
-    .projects{
+    .projects {
       margin-top: 100px;
-
+      @media (max-width: $screen-xs-max) {
+        margin-top: 80px;
+        .card-wrapper-mobile {
+          padding: 0 16px;
+        }
+      }
     }
     .policy-article-div {
       padding-left: 40px;
       overflow: hidden;
+      @media (max-width: $screen-xs-max) {
+        padding: 0 16px;
+      }
       h3 {
         margin-top: 30px;
         margin-bottom: 20px;
@@ -154,18 +177,34 @@ body.body-home {
         font-weight: bold;
         letter-spacing: -1px;
         color: #111111;
+        @media (max-width: $screen-xs-max) {
+          font-size: 18px;
+          letter-spacing: -0.8px;
+          color: #0f0f0f;
+          margin: 20px 0;
+        }
       }
       .desc {
         font-size: 16px;
         line-height: 1.44;
         letter-spacing: -0.3px;
         color: #0f0f0f;
+        @media (max-width: $screen-xs-max) {
+          font-size: 12px;
+          letter-spacing: -0.23px;
+          color: #111111;
+          margin: 20px 0;
+        }
       }
       .flex-row {
         display: flex;
         flex-direction: row;
         align-items: center;
         margin-top: 9px;
+        @media (max-width: $screen-xs-max) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
         &:first-child {
           margin-top: 0;
           margin-bottom: 20px;
@@ -183,7 +222,7 @@ body.body-home {
         border-radius: 6px;
         border: solid 1px #c28611;
         background-color: #f5f5f5;
-        & .first {
+        &.first {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -231,7 +270,29 @@ body.body-home {
           position: absolute;
           border-left: solid 1px #c28611;
         }
+        @media (max-width: $screen-xs-max) {
+          margin: 20px 0;
+          transform: translateX(10px);
+        }
       }
+    }
+  }
+  .button-mobile {
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+    width: 140px;
+    height: 39px;
+    border-radius: 2px;
+    border: solid 1px #c2c2c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    > a {
+      font-size: 12px;
+      letter-spacing: -0.23px;
+      color: #595959;
     }
   }
 }
