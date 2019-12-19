@@ -1,9 +1,4 @@
 body.body-salon {
-  .text-ellipse {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
   .thick-hr {
     border-top: solid 2px #303133;
     margin: 40px 0;
@@ -52,14 +47,15 @@ body.body-salon {
   }
   background-color: $gray-background;
   &.home {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0),
-        white 40%
-      ),
-      url(/images/salon.JPG);
+    background-image: url(/images/img-culture.jpg);
     background-size: contain;
-    background-position-y: 50px;
+    background-position-y: 110px;
+    background-color: #432500;
+    background-repeat: no-repeat;
+    @media (max-width: $screen-xs-max) {
+      background-position-y: 50px;
+      background-image: url(/images/img-culture-mobile.jpg);
+    }
     .container {
       color: white;
       .top-row {
@@ -118,246 +114,8 @@ body.body-salon {
         }
       }
     }
-    .projects {
-      background-color: #f5f5f5;
-      .container {
-        .categories {
-          margin: 40px 0;
-          @media (max-width: $screen-xs-max) {
-            margin: 16px 10px;
-          }
-          .category {
-            &.selected {
-              font-weight: bold;
-              background-color: #ffcf4d;
-              border: none;
-            }
-            @media (max-width: $screen-xs-max) {
-              height: 20px;
-              font-size: 12px;
-              line-height: 1.6;
-              padding: 0 8px;
-            }
-            border: solid 1px #c2c2c2;
-            background-color: white;
-            margin-top: 8px;
-            margin-right: 8px;
-            padding: 0 16px;
-            display: inline-block;
-            height: 33px;
-            border-radius: 15.5px;
-            color: #111111;
-            font-size: 16px;
-            line-height: 2.1;
-            letter-spacing: -0.4px;
-          }
-        }
-        .card-wrapper-mobile {
-          display: none;
-          @media (max-width: $screen-xs-max) {
-            display: block;
-            .demo-card-salon {
-              height: 304px;
-              .cover {
-                height: 182px;
-                position: relative;
-                display: flex;
-                img {
-                  position: absolute;
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  z-index: 0;
-                }
-                .cover-hover {
-                  padding: 16px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: flex-end;
-                  overflow: hidden;
-                  position: relative;
-                  background-image: linear-gradient(
-                    to bottom,
-                    rgba(255, 255, 255, 0),
-                    rgba(0, 0, 0, 0.3) 44%,
-                    rgba(0, 0, 0, 0.9)
-                  );
-                }
-                .category {
-                  height: 16px;
-                  border-radius: 10px;
-                  background-color: #ffcf4d;
-                  height: 14px;
-                  font-size: 11px;
-                  line-height: 1.27;
-                  letter-spacing: -0.28px;
-                  color: #111111;
-                  padding: 0 6px;
-                }
-                .title {
-                  height: 48px;
-                  font-size: 18px;
-                  font-weight: bold;
-                  line-height: 1.33;
-                  letter-spacing: -0.8px;
-                  color: white;
-                  overflow: hidden;
-                  margin: 4px 0;
-                }
-                .team {
-                  height: 20px;
-                  font-size: 12px;
-                  line-height: 1.67;
-                  letter-spacing: -0.3px;
-                  color: #d8d8d8;
-                }
-              }
-              .desc {
-                padding: 16px;
-                .tags {
-                  overflow: hidden;
-                  height: 28px;
-                  font-size: 10px;
-                  line-height: 1.4;
-                  letter-spacing: -0.25px;
-                  color: #d58c00;
-                }
-                .excerpt {
-                  overflow: hidden;
-                  height: 54px;
-                  font-size: 12px;
-                  line-height: 1.5;
-                  letter-spacing: -0.23px;
-                  color: #111111;
-                }
-              }
-            }
-          }
-        }
-        .card-wrapper {
-          @media (max-width: $screen-xs-max) {
-            display: none;
-          }
-          .cover {
-            height: 224px;
-            overflow: hidden;
-            position: relative;
-            img {
-              position: absolute;
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-            &:hover {
-              .cover-hover {
-                display: flex;
-              }
-            }
-            .cover-hover {
-              background-color: rgba(0, 0, 0, 0.7);
-              position: absolute;
-              display: none;
-              width: 100%;
-              height: 100%;
-              padding: 22px 16px;
-              overflow: hidden;
-              flex-direction: column;
-            }
-            .tags {
-              flex: 0 1 auto;
-              padding-bottom: 8px;
-              > span {
-                font-size: 12px;
-                line-height: 1.67;
-                letter-spacing: -0.3px;
-                color: #ffcf4d;
-              }
-            }
-            .excerpt {
-              flex: 1 1 auto;
-              font-size: 14px;
-              line-height: 1.57;
-              letter-spacing: -0.26px;
-              color: white;
-              overflow: hidden;
-            }
-          }
-        }
-        > h4 {
-          font-size: 24px;
-          font-weight: bold;
-          letter-spacing: -1px;
-          color: #0d0d0d;
-          margin: 44px 0;
-          @media (max-width: $screen-xs-max) {
-            font-size: 14px;
-            letter-spacing: -0.26px;
-            margin-bottom: 16px;
-            margin-top: 32px;
-            font-weight: normal;
-          }
-        }
-        .demo-card-salon {
-          height: 390px;
-          border: solid 1px #d8d8d8;
-          background-color: white;
-          cursor: pointer;
-
-          .desc {
-            padding: 16px;
-            .category {
-              height: 20px;
-              font-size: 12px;
-              font-weight: bold;
-              line-height: 1.67;
-              letter-spacing: -0.3px;
-              color: #111111;
-              border-radius: 10px;
-              background-color: #ffcf4d;
-              padding: 0 8px;
-              @media (max-width: $screen-xs-max) {
-                height: 16px;
-                font-size: 11px;
-              }
-            }
-            .title {
-              height: 48px;
-              overflow: hidden;
-              margin-top: 8px;
-              margin-bottom: 4px;
-              font-size: 18px;
-              font-weight: bold;
-              line-height: 1.33;
-              letter-spacing: -0.8px;
-              color: #0f0f0f;
-            }
-            .team {
-              height: 20px;
-              font-size: 12px;
-              line-height: 1.33;
-              letter-spacing: -0.3px;
-              color: #9e9e9e;
-              margin-bottom: 16px;
-              overflow: hidden;
-            }
-            .like {
-              width: 72px;
-              height: 22px;
-              border-radius: 2px;
-              border: solid 1px #d8d8d8;
-              background-color: #f5f5f5;
-              font-size: 11px;
-              font-weight: bold;
-              line-height: 1.82;
-              letter-spacing: -0.28px;
-              padding: 0 8px;
-              color: #0f0f0f;
-            }
-          }
-        }
-      }
-    }
   }
+
   &.body-salon-form,
   &.body-salon-detail {
     background-color: white;
@@ -1022,5 +780,243 @@ body.body-salon {
   @media (max-width: $screen-xs-max) {
     background-position-y: 50px;
     background-image: url(/images/policy-mobile.jpg);
+  }
+}
+
+.projects {
+  background-color: #f5f5f5;
+  .categories {
+    margin: 40px 0;
+    @media (max-width: $screen-xs-max) {
+      margin: 16px 10px;
+    }
+    .category {
+      &.selected {
+        font-weight: bold;
+        background-color: #ffcf4d;
+        border: none;
+      }
+      @media (max-width: $screen-xs-max) {
+        height: 20px;
+        font-size: 12px;
+        line-height: 1.6;
+        padding: 0 8px;
+      }
+      border: solid 1px #c2c2c2;
+      background-color: white;
+      margin-top: 8px;
+      margin-right: 8px;
+      padding: 0 16px;
+      display: inline-block;
+      height: 33px;
+      border-radius: 15.5px;
+      color: #111111;
+      font-size: 16px;
+      line-height: 2.1;
+      letter-spacing: -0.4px;
+    }
+  }
+  .card-wrapper-mobile {
+    display: none;
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      .demo-card-salon {
+        height: 304px;
+        .cover {
+          height: 182px;
+          position: relative;
+          display: flex;
+          img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+          }
+          .cover-hover {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            position: relative;
+            background-image: linear-gradient(
+              to bottom,
+              rgba(255, 255, 255, 0),
+              rgba(0, 0, 0, 0.3) 44%,
+              rgba(0, 0, 0, 0.9)
+            );
+          }
+          .category {
+            height: 16px;
+            border-radius: 10px;
+            background-color: #ffcf4d;
+            height: 14px;
+            font-size: 11px;
+            line-height: 1.27;
+            letter-spacing: -0.28px;
+            color: #111111;
+            padding: 0 6px;
+          }
+          .title {
+            height: 48px;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.33;
+            letter-spacing: -0.8px;
+            color: white;
+            overflow: hidden;
+            margin: 4px 0;
+          }
+          .team {
+            height: 20px;
+            font-size: 12px;
+            line-height: 1.67;
+            letter-spacing: -0.3px;
+            color: #d8d8d8;
+          }
+        }
+        .desc {
+          padding: 16px;
+          .tags {
+            overflow: hidden;
+            height: 28px;
+            font-size: 10px;
+            line-height: 1.4;
+            letter-spacing: -0.25px;
+            color: #d58c00;
+          }
+          .excerpt {
+            overflow: hidden;
+            height: 54px;
+            font-size: 12px;
+            line-height: 1.5;
+            letter-spacing: -0.23px;
+            color: #111111;
+          }
+        }
+      }
+    }
+  }
+  .card-wrapper {
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+    .cover {
+      height: 224px;
+      overflow: hidden;
+      position: relative;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      &:hover {
+        .cover-hover {
+          display: flex;
+        }
+      }
+      .cover-hover {
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        padding: 22px 16px;
+        overflow: hidden;
+        flex-direction: column;
+      }
+      .tags {
+        flex: 0 1 auto;
+        padding-bottom: 8px;
+        > span {
+          font-size: 12px;
+          line-height: 1.67;
+          letter-spacing: -0.3px;
+          color: #ffcf4d;
+        }
+      }
+      .excerpt {
+        flex: 1 1 auto;
+        font-size: 14px;
+        line-height: 1.57;
+        letter-spacing: -0.26px;
+        color: white;
+        overflow: hidden;
+      }
+    }
+  }
+  > h4 {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #0d0d0d;
+    margin: 44px 0;
+    @media (max-width: $screen-xs-max) {
+      font-size: 14px;
+      letter-spacing: -0.26px;
+      margin-bottom: 16px;
+      margin-top: 32px;
+      font-weight: normal;
+    }
+  }
+  .demo-card-salon {
+    height: 390px;
+    border: solid 1px #d8d8d8;
+    background-color: white;
+    cursor: pointer;
+
+    .desc {
+      padding: 16px;
+      .category {
+        height: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1.67;
+        letter-spacing: -0.3px;
+        color: #111111;
+        border-radius: 10px;
+        background-color: #ffcf4d;
+        padding: 0 8px;
+        @media (max-width: $screen-xs-max) {
+          height: 16px;
+          font-size: 11px;
+        }
+      }
+      .title {
+        height: 48px;
+        overflow: hidden;
+        margin-top: 8px;
+        margin-bottom: 4px;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.33;
+        letter-spacing: -0.8px;
+        color: #0f0f0f;
+      }
+      .team {
+        height: 20px;
+        font-size: 12px;
+        line-height: 1.33;
+        letter-spacing: -0.3px;
+        color: #9e9e9e;
+        margin-bottom: 16px;
+        overflow: hidden;
+      }
+      .like {
+        width: 72px;
+        height: 22px;
+        border-radius: 2px;
+        border: solid 1px #d8d8d8;
+        background-color: #f5f5f5;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1.82;
+        letter-spacing: -0.28px;
+        padding: 0 8px;
+        color: #0f0f0f;
+      }
+    }
   }
 }

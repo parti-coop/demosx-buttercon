@@ -1,6 +1,11 @@
 a:hover {
   text-decoration: none;
 }
+.text-ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .text-nowrap {
   white-space: nowrap;
