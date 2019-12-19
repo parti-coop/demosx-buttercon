@@ -781,10 +781,36 @@ body.body-salon {
     background-position-y: 50px;
     background-image: url(/images/policy-mobile.jpg);
   }
+  .projects {
+    h4 {
+      margin: 40px 0 20px;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: -0.4px;
+      color: #111111;
+    }
+    .policy-article-div {
+      display: block;
+      .flex-row {
+        display: none;
+        @media (max-width: $screen-xs-max) {
+          display: flex;
+        }
+      }
+      > img {
+        @media (max-width: $screen-xs-max) {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .projects {
   background-color: #f5f5f5;
+  h4 {
+    color: #0d0d0d;
+  }
   .categories {
     margin: 40px 0;
     @media (max-width: $screen-xs-max) {
