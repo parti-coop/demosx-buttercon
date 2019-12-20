@@ -66,10 +66,12 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <section class="projects">
       <div class="container policy-article-div">
         <h4 id="정책살롱타임라인">정책살롱 타임라인</h4>
-        <img
-          src="<c:url value='/images/policy2.png' />"
-          alt="정책살롱 굽은선"
-        />
+        <div class="image-container">
+          <img
+            src="<c:url value='/images/policy2.png' />"
+            alt="정책살롱 굽은선"
+          />
+        </div>
         <div class="flex-row">
           <div class="yellow-line">
             <div class="flex-row start">

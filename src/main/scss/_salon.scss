@@ -807,11 +807,17 @@ body.body-salon {
   }
   .projects {
     h4 {
-      margin: 40px 0 20px;
-      font-size: 16px;
+      margin: 80px 0 40px;
+      font-size: 24px;
       font-weight: bold;
-      letter-spacing: -0.4px;
-      color: #111111;
+      letter-spacing: -1px;
+      color: #0d0d0d;
+      @media (max-width: $screen-xs-max) {
+        margin: 40px 0 20px;
+        font-size: 16px;
+        letter-spacing: -0.4px;
+        color: #111111;
+      }
     }
     .policy-article-div {
       display: block;
@@ -821,10 +827,13 @@ body.body-salon {
           display: flex;
         }
       }
-      > img {
-        padding: 40px;
-        @media (max-width: $screen-xs-max) {
-          display: none;
+      .image-container {
+        text-align: center;
+        img {
+          padding: 40px;
+          @media (max-width: $screen-xs-max) {
+            display: none;
+          }
         }
       }
     }
