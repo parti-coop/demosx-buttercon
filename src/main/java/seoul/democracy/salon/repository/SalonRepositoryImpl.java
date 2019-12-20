@@ -63,20 +63,20 @@ public class SalonRepositoryImpl extends QueryDslRepositorySupport implements Sa
 
     @Override
     public List<SalonDto> findAll(Predicate predicate, Expression<SalonDto> projection) {
-        SearchResults<SalonDto> results = getQuery(projection).where(predicate).listResults(projection);
-        for (SalonDto result : results.getResults()) {
+        List<SalonDto> results = getQuery(projection).where(predicate)
+                .orderBy(Expressions.numberTemplate(Double.class, "RAND()").asc()).list(projection);
+        for (SalonDto result : results) {
             List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
                     .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);
             result.setIssueTags(issueTags);
         }
-        return results.getResults();
+        return results;
     }
 
     @Override
     public List<SalonDto> findRandom(Predicate predicate, Expression<SalonDto> projection, int limit) {
         List<SalonDto> results = getQuery(projection).where(predicate)
-                .orderBy(Expressions.numberTemplate(Double.class, "RAND()").asc()).limit(limit)
-                .list(projection);
+                .orderBy(Expressions.numberTemplate(Double.class, "RAND()").asc()).limit(limit).list(projection);
         for (SalonDto result : results) {
             List<IssueTagDto> issueTags = from(issueTag).where(IssueTagPredicate.containsIssueId(result.getId()))
                     .orderBy(issueTag.name.asc()).list(IssueTagDto.projection);

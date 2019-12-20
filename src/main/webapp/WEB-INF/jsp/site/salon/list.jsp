@@ -73,7 +73,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
         <div class="card-wrapper">
           <div class="row">
-            <c:forEach var="item" items="${page.content}">
+            <c:forEach var="item" items="${salons}">
               <c:set var="salon" value="${item}" scope="request" />
               <div class="col-sm-4 demo-card-wrapper">
                 <jsp:include page="card.jsp" />
@@ -83,7 +83,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
         <div class="card-wrapper-mobile">
           <div class="row">
-            <c:forEach var="item" items="${page.content}">
+            <c:forEach var="item" items="${salons}">
               <c:set var="salon" value="${item}" scope="request" />
               <div class="col-sm-4 demo-card-wrapper">
                 <jsp:include page="card-mobile.jsp" />

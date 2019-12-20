@@ -43,22 +43,17 @@ public class SalonController {
     }
 
     @RequestMapping(value = "/content-list.do", method = RequestMethod.GET)
-    public String salonList(@RequestParam(value = "sort", defaultValue = "latest") SalonSort sort,
-            @RequestParam(value = "category", required = false) String category,
-            @RequestParam(value = "search", required = false) String search,
-            @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-        Pageable pageable = new PageRequest(page - 1, 30, sort.getSort());
+    public String salonList(@RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "category", required = false) String category, Model model) {
 
-        Page<SalonDto> salons = salonService.getSalonsWithIssueTags(
-                SalonPredicate.predicateForSiteList(search, category), pageable, SalonDto.projectionForSiteList);
-        model.addAttribute("page", salons);
-        model.addAttribute("sort", sort);
-        model.addAttribute("search", search);
+        List<SalonDto> salons = salonService.getSalonsWithIssueTags(
+                SalonPredicate.predicateForSiteList(search, category), SalonDto.projectionForSiteList);
 
         List<CategoryDto> categories = salonService.getAllSalonCategories(SalonPredicate.distinctSalonCategories(),
                 CategoryDto.projectionForFilter);
         model.addAttribute("categories", categories);
         model.addAttribute("category", category);
+        model.addAttribute("salons", salons);
 
         return "/site/salon/list";
     }
