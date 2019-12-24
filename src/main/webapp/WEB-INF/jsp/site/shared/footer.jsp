@@ -33,7 +33,7 @@
           <h3 class="demo-detail-title demo-detail-title-sm demo-detail-title-noborder">로그인</h3>
           <div class="terms-wrapper text-center">
             <p class="muted">
-              어서 오세요. 로그인 방법을 선택하세요.
+              로그인 방법을 선택하세요.<br />2019 버터나이프크루만 로그인 가능합니다.
             </p>
           </div>
           <div class="login-wrapper">
