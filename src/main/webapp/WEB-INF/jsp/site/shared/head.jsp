@@ -88,9 +88,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
 
 <!-- EasyMDE -->
-<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/easymde.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vendors/simplemde/simplemde-theme-dark.css?v=<spring:eval expression="@pomProperties['version']" />" rel="stylesheet">
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/easymde.min.js"></script>
 
 
 <!-- Codemirror with merge -->

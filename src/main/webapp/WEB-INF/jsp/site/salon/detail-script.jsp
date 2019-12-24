@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.min.css" />
+<script src="${pageContext.request.contextPath}/js/swiper.min.js"></script>
 <script></script>
 <script>
   window.hasLoginUser = false;

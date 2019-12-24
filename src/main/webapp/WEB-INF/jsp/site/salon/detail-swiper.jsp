@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.min.css" />
+<script src="${pageContext.request.contextPath}/js/swiper.min.js"></script>
 <script>
   $(function() {
     /** 다른 프로젝트 보기 swiper */
