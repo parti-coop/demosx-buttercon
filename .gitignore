@@ -13,3 +13,4 @@ target/
 
 globals-override-*.properties
 hotswap-agent.properties
+.DS_Store
