@@ -367,10 +367,10 @@
   display: block;
   background-color: #f8e817;
   text-align: center;
-  // img {
-  //   height: 100px;
-  //   object-fit: cover;
-  // }
+  img {
+    height: 100px;
+    object-fit: cover;
+  }
   @media (max-width: 767px) {
     display:none;
   }
