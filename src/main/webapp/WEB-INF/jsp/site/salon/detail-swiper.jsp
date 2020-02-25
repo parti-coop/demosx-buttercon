@@ -38,7 +38,7 @@
             </div>
             <div class="desc">
               <div class="text-ellipse">
-                <span class="category">${salon.category.name}</span>
+                <span class="category">${each.category.name}</span>
               </div>
               <h2 class="title">${each.title}</h2>
               <h3 class="team text-ellipse">${each.team}</h3>
