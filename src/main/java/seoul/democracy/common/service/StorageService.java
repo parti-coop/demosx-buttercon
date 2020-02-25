@@ -30,6 +30,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
@@ -109,9 +110,9 @@ public class StorageService {
             }
             String url = "/files/" + uploadPath + "/" + filename;
            
-            
             try {
                 PutObjectRequest request = new PutObjectRequest(bucketName, url.substring(1), iStream, metadata);
+                request.setCannedAcl(CannedAccessControlList.PublicRead);
                 s3client.putObject(request);
             } catch (Exception e) {
                 log.error(e.getMessage());
