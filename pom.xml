@@ -218,7 +218,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.2</version>
+            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
         <!-- Lombok 라이브러리 end -->
@@ -328,9 +328,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <excludes>
+                <!-- <excludes>
                     <exclude>*.xml</exclude>
-                </excludes>
+                </excludes> -->
             </resource>
         </resources>
         <plugins>
