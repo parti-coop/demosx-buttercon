@@ -30,6 +30,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       >
     </div>
   </section>
+  <c:if test="${not SHOW_BANNER}">
   <section class="section-banner">
     <div class="container">
       <div class="key-banner">
@@ -44,6 +45,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </div>
   </section>
+  </c:if>
   <section class="section-proposals">
     <div class="container">
       <div class="main-card-list">
