@@ -47,7 +47,7 @@ $ mysqldump -uadmin -p`${비번 lastpass 작업Shared RDS에 있음}` -h databas
     * globals-override-main.properties 의 각 값을 테스트 환경에 맞춰 오버라이드 해야할 때 사용
 * `globals-override-test.properties` 파일의 `Globals.Url` 부분에 새로운 디비스키마를 만들어 주는 것이 좋다.
     * `globals-override-development.properties` 와 같은 디비 스키마를 바라볼 경우, 로컬에서 수동 테스트 데이타와 충돌하여, 자동 테스트 실패.
-    * 로컬 디비에 테스트 스키마를 새로 만든다. `create schema buttercontest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
+    * 로컬 디비에 테스트 스키마를 새로 만든다. `create schema buttercontest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 
 `globals-override-test.properties` 예:
 ```
@@ -68,8 +68,8 @@ Globals.Password=swain
 Globals.Url=jdbc:mysql://127.0.0.1:3306/buttercon?useSSL=false
 ```
 
-* 로컬 디비에 개발 스키마를 새로 만든다. `create schema buttercon DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
-* 톰켓 환경에 자바 변수를 넣어준다. `-Dspring.profiles.active=development`
+* 로컬 디비에 개발 스키마를 새로 만든다. `create schema buttercon DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+* 톰켓 환경에 (jvm.options) 자바 변수를 넣어준다. `-Dspring.profiles.active=development`
 * `globals.properties`에 있는 변수 중 `ENC(...)`로 묶여있는 암호화 변수는 모두 `globals-override-development.properties`파일에서 다른 수로 덮어야 한다.
     * `Globals.kakaoClientId=a` 도커파일에 있는 암호 `-Dorg.demosx.master.password=needtochange` 가 아닌 다른 비밀번호로 암호화 되어 있기 때문에, 변경하지 않으면 구동이 되지 않는다.
 
@@ -136,6 +136,23 @@ Host parti-butter-prod
     * ~~버전에 따라 도커 내에서 WAR 파일이 안풀리는 경우 발견. 톰켓 권한이 문제로 추정.~~
     * `build.sh` 에서 WAR를 unzip한다.
 
+
+##### docker mysql
+
+```
+# docker pull mysql:5
+# mkdir -p $HOME/docker/volumes/mysql
+# docker run --rm --name mysql \
+  -e MYSQL_ROOT_PASSWORD=docker \
+  -e MYSQL_DATABASE=buttercon \
+  -e MYSQL_USER=swain \
+  -e MYSQL_PASSWORD=swain \
+  -d -p 3306:3306 \
+  -v $HOME/docker/volumes/mysql:/var/lib/mysql \
+  mysql:5 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+# brew install mysql-client@5.7
+# mysql -h 127.0.0.1 -P 3306 -u swain -p
+```
 
 ## 할일
 

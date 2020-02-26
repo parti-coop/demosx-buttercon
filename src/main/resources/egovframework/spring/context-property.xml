@@ -18,6 +18,8 @@
                 <entry key="facebookClientSecret" value="${Globals.facebookClientSecret}"/>
                 <entry key="googleClientId" value="${Globals.googleClientId}"/>
                 <entry key="googleClientSecret" value="${Globals.googleClientSecret}"/>
+                <entry key="AWS_ACCESS_KEY" value="${Globals.AWS_ACCESS_KEY}"/>
+                <entry key="AWS_SECRET_KEY" value="${Globals.AWS_SECRET_KEY}"/>
             </map>
         </property>
     </bean>

@@ -3,9 +3,11 @@ package seoul.democracy.site.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.HandlerMapping;
 
 import seoul.democracy.issue.domain.Issue.Status;
 import seoul.democracy.salon.dto.SalonDto;
@@ -15,6 +17,9 @@ import seoul.democracy.salon.service.SalonService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class SiteController {
@@ -31,6 +36,18 @@ public class SiteController {
                 SalonDto.projectionForSiteList, limit);
         model.addAttribute("salons", salons);
         return "/site/index";
+    }
+
+    @RequestMapping(value = "/files/**", method = RequestMethod.GET)
+    public void img_redirect(HttpServletRequest request, HttpServletResponse httpServletResponse) {
+        final String path = request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString();
+        final String bestMatchingPattern = request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE)
+                .toString();
+        String arguments = new AntPathMatcher().extractPathWithinPattern(bestMatchingPattern, path);
+
+        httpServletResponse.setHeader("Location",
+                "https://butterknifecrew.s3.ap-northeast-2.amazonaws.com/files/" + arguments);
+        httpServletResponse.setStatus(302);
     }
 
     /**

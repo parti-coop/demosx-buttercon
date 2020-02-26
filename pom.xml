@@ -320,6 +320,12 @@
             <artifactId>flexmark-all</artifactId>
             <version>0.50.42</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.163</version>
+        </dependency>
     </dependencies>
 
     <build>
