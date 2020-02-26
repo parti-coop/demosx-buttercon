@@ -198,7 +198,5 @@ Host parti-butter-prod
 
 ### ENVIRONMENT VARIABLES
 
-회원가입 금지
-```
-BLOCK_NEW_USER=true
-```
+* 회원가입 금지 `BLOCK_NEW_USER=true`
+* 배너 보이기 `SHOW_BANNER=true`

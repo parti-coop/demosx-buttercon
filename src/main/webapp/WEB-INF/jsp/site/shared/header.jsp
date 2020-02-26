@@ -3,8 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="nav-login-bar">
+  <c:if test="${SHOW_BANNER}">
   <div class="header-banner-img-pc">
-    <a href="https://2019.butterknifecrew.kr">
+    <a href="https://2019.butterknifecrew.kr" rel="noopener noreferrer" target="_blank">
       <img 
         src="/images/onlinereport-bn-pc.jpg" 
         srcset="/images/onlinereport-bn-pc@2x.jpg 2x,
@@ -12,6 +13,7 @@
         alt="banner" />
     </a>
   </div>
+  </c:if>
   <div class="container">
     <ul class="nav-login-ul list-inline text-right">
       <c:if test="${empty loginUser}">
@@ -47,8 +49,9 @@
   </div>
 </div>
 <nav class="navbar navbar-default navbar-default--demo">
+  <c:if test="${SHOW_BANNER}">
   <div class="header-banner-img-mobile">
-    <a href="https://2019.butterknifecrew.kr">
+    <a href="https://2019.butterknifecrew.kr" rel="noopener noreferrer" target="_blank">
       <img 
         src="/images/onlinereport-bn-mobile.jpg"
         srcset="/images/onlinereport-bn-mobile@2x.jpg 2x,
@@ -56,6 +59,7 @@
         alt="banner" />
     </a>
   </div>
+  </c:if>
   <div class="container">
     <div class="navbar-header navbar-header--demo">
       <button type="button" class="navbar-toggle navbar-toggle--demo collapsed" data-toggle="collapse"
