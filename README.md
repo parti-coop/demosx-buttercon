@@ -139,6 +139,7 @@ Globals.facebookClientSecret=페이스북ClientSecret
 * test 환경: 역시 globals.properties 파일의 프로퍼티가 기본값, 이를 테스트 환경에 맞게 오버라이드하는 globals-override-test.properties
 
 
-## 서버 설치 
+## 서버 배포
 
-2020년 2월 28일 beanstalk 사용으로 변경, ROOT.war 파일을 빈즈톡에 업로드한다.
+2020년 2월 28일 beanstalk 사용으로 변경, ROOT.war 파일을 빈즈톡에 수동으로 업로드한다.
+`eb deploy` 의 경우 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-configuration.html 의 Deploying an Artifact instead of the project folder 를 참고한다.
