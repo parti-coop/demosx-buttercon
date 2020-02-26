@@ -145,10 +145,12 @@ public class LoginController {
 
     @RequestMapping(value = "/reset-password.do", method = RequestMethod.GET)
     public String resetPassword(@RequestParam("token") String token,
+                                @RequestParam("email") String email,
                                 Model model) {
         if (UserUtils.isLogin()) return "redirect:/index.do";
 
         model.addAttribute("token", token);
+        model.addAttribute("email", email);
         return "/site/reset-password";
     }
 }

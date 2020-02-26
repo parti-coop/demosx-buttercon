@@ -15,6 +15,7 @@
     <div class="form-group form-group--demo">
       <label class="demo-form-label" for="inputEmail">이메일</label>
       <input type="email" class="form-control demo-input" name="email" id="inputEmail" placeholder="이메일을 입력해 주세요."
+             value="${email}" readonly
              data-parsley-required="true" data-parsley-type="email"
              data-parsley-error-message="이메일을 적어주세요.">
     </div>

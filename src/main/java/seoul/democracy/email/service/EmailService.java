@@ -79,7 +79,7 @@ public class EmailService {
      * 비밀번호 찾기
      */
     public void resetPassword(String email, String token) throws MessagingException {
-        String content = String.format(resetPasswordEmailContent, host + "/reset-password.do?token=" + token);
+        String content = String.format(resetPasswordEmailContent, host + "/reset-password.do?token=" + token + "&email=" + email);
         sendEmail(email, "[버터나이프크루] 비밀번호를 설정해 주세요.", content);
     }
 
