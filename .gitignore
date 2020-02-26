@@ -12,6 +12,7 @@ target/
 .vscode
 
 globals-override-*.properties
+!globals-override-staging.properties
 hotswap-agent.properties
 .DS_Store
 # Elastic Beanstalk Files
