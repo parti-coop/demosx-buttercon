@@ -363,3 +363,28 @@
   vertical-align: middle;
 }
 
+.header-banner-img-pc{
+  display: block;
+  background-color: #f8e817;
+  text-align: center;
+  img {
+    height: 100px;
+    object-fit: cover;
+  }
+  @media (max-width: 767px) {
+    display:none;
+  }
+}
+
+.header-banner-img-mobile{
+  display: none;
+  @media (max-width: 767px) {
+    background-color: #f8e817;
+    display:block;
+    text-align: center;
+    // img {
+    //   height: 120px;
+    //   object-fit: cover;
+    // }
+  }
+}
