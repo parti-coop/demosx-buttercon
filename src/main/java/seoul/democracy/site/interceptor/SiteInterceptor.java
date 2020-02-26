@@ -37,5 +37,6 @@ public class SiteInterceptor extends HandlerInterceptorAdapter {
         modelAndView.addObject("controllerName", controllerName );
         modelAndView.addObject("actionName", actionName );
         modelAndView.addObject("environmentName", System.getProperty("spring.profiles.active", "default"));
+        modelAndView.addObject("BLOCK_NEW_USER", System.getProperty("BLOCK_NEW_USER", "true").equals("true"));
     }
 }
