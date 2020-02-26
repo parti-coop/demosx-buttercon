@@ -195,3 +195,10 @@ Host parti-butter-prod
 1. 예: 빠띠 워크스페이스 https://hooks.slack.com/services/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
 1. 버터 등록/수정 페이지, 브라우저 개발자 콘솔에서 `$("#slack").show();` 입력하면 숨겨진 필드 나온다.
 1. url과 채널명 등록하고 저장.
+
+### ENVIRONMENT VARIABLES
+
+회원가입 금지
+```
+BLOCK_NEW_USER=true
+```

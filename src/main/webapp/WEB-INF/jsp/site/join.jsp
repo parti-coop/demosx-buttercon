@@ -58,9 +58,15 @@
 <script>
   $(function () {
     $('#createDto').parsley(parsleyConfig);
+  });
+</script>
+<c:if test="${BLOCK_NEW_USER}">
+<script>
+  $(function () {
     alert('2019 버터나이프크루 모집이 종료되었습니다.');
     window.history.back();
   });
 </script>
+</c:if>
 </body>
 </html>

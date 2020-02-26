@@ -27,18 +27,18 @@ import static seoul.democracy.user.predicate.UserPredicate.equalEmail;
 
 import java.util.List;
 
-import javax.security.auth.message.AuthException;
-
 @Service
 @Transactional(readOnly = true)
-public class UserService {
 
+public class UserService {
     private final UserRepository userRepository;
     private final UserLoginRepository loginRepository;
     private final PasswordEncoder passwordEncoder;
     private final CategoryService categoryService;
+    private final String BLOCK_NEW_USER = System.getProperty("BLOCK_NEW_USER", "true");
 
     @Autowired
+
     public UserService(UserRepository userRepository, UserLoginRepository loginRepository,
             PasswordEncoder passwordEncoder, CategoryService categoryService) {
         this.userRepository = userRepository;
@@ -167,12 +167,15 @@ public class UserService {
     }
 
     @Transactional
-    public User getUserBySocial(String provider, String id, String name, String photo) throws UsernameNotFoundException {
+    public User getUserBySocial(String provider, String id, String name, String photo)
+            throws UsernameNotFoundException {
         User user = userRepository.findOne(UserPredicate.equalProviderAndId(provider, id));
         if (user == null) {
-            throw new UsernameNotFoundException("2019 버터나이프크루 모집이 종료되었습니다.");
-            // user = User.create(UserSocialCreateDto.of(id, provider, name, photo));
-            // return userRepository.save(user);
+            if (BLOCK_NEW_USER.equals("true")) {
+                throw new UsernameNotFoundException("2019 버터나이프크루 모집이 종료되었습니다.");
+            }
+            user = User.create(UserSocialCreateDto.of(id, provider, name, photo));
+            return userRepository.save(user);
         }
         return user;
     }
