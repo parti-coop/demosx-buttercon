@@ -12,7 +12,7 @@ $ mysqldump -uadmin -p`${비번 lastpass 작업Shared RDS에 있음}` -h databas
 ### 패키징
 
 ```bash
-maven clean package
+mvn clean package
 // 테스트 없이 패키징
 mvn package -Dmaven.test.skip=true
 ```
@@ -23,7 +23,7 @@ mvn package -Dmaven.test.skip=true
     * globals-override-main.properties 의 각 값을 테스트 환경에 맞춰 오버라이드 해야할 때 사용
 * `globals-override-test.properties` 파일의 `Globals.Url` 부분에 새로운 디비스키마를 만들어 주는 것이 좋다.
     * `globals-override-development.properties` 와 같은 디비 스키마를 바라볼 경우, 로컬에서 수동 테스트 데이타와 충돌하여, 자동 테스트 실패.
-    * 로컬 디비에 테스트 스키마를 새로 만든다. `create schema buttercontest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+    * 로컬 디비에 테스트 스키마를 새로 만든다. `create schema demosx_buttercon_test DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 
 `globals-override-test.properties` 예:
 ```
