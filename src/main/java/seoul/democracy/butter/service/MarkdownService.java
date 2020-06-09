@@ -1,7 +1,5 @@
 package seoul.democracy.butter.service;
 
-import lombok.extern.slf4j.Slf4j;
-
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
@@ -29,13 +27,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@Slf4j
 @Service
 public class MarkdownService {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS,
+    private final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS,
             Arrays.asList(TocExtension.create(), CustomExtension.create(), TablesExtension.create()));
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
+    final Parser PARSER = Parser.builder(OPTIONS).build();
+    final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
     public static final DataKey<String> TOC_HTML = new DataKey<>("TOC_HTML", "");
 
     static class CustomNodeRenderer implements NodeRenderer {
@@ -100,22 +97,23 @@ public class MarkdownService {
         String toc = TOC_HTML.getFrom(document);
         return toc;
     }
-    public Map<String,String> parseHtml(String md) {
+
+    public Map<String, String> parseHtml(String md) {
         Document document = PARSER.parse("[TOC levels=1-3] \n" + md);
         String html = RENDERER.render(document);
         String toc = TOC_HTML.getFrom(document);
-        Map<String,String> res = new HashMap<String, String>();
+        Map<String, String> res = new HashMap<String, String>();
         res.put("html", html);
         res.put("toc", toc);
         return res;
     }
 
     // use the PARSER to parse and RENDERER to render with pegdown compatibility
-    public static void main(String[] args) {
+    public void main(String[] args) {
         // You can re-use parser and renderer instances
-        Document document = PARSER.parse(
-                "" + "[TOC levels=1-3] \n" + "\n" + "# Heading **some bold** 1\n" + "## Heading 1.1 _some italic_\n"
-                        + "### Heading 1.1.1\n ## #HEL_P \n" + "### Heading 1.1.2 #뭐지0_HELP  **_some bold italic_**\n #하하" + "");
+        Document document = PARSER.parse("" + "[TOC levels=1-3] \n" + "\n" + "# Heading **some bold** 1\n"
+                + "## Heading 1.1 _some italic_\n" + "### Heading 1.1.1\n ## #HEL_P \n"
+                + "### Heading 1.1.2 #뭐지0_HELP  **_some bold italic_**\n #하하" + "");
         String html = RENDERER.render(document);
         String toc = TOC_HTML.getFrom(document);
         String html2 = html.replaceAll("(#[_a-zA-Z0-9ㄱ-ㅎ가-힣]*)", "<b class='tag'>$1</b>");
@@ -126,8 +124,8 @@ public class MarkdownService {
         System.out.println(html2);
         System.out.println(toc2);
         // if(matcher.find()){
-        //     // System.out.print(matcher.group(0));
-        //     System.out.print(matcher.group());
+        // // System.out.print(matcher.group(0));
+        // System.out.print(matcher.group());
         // }
         // System.out.println("<div class=\"toc\">");
         // System.out.print(toc);
