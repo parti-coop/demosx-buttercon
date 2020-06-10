@@ -10,17 +10,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <section class="section-main-key-visual">
     <div class="container">
       <div class="key-title">
-        나와 우리의 삶에 버터 한 덩어리를 나누며
+        나와 우리의 삶에 <br class="visible-xs"/>버터 한 덩어리를 나누며
         <br />
         성평등한 사회의 모습을 그려간다
       </div>
       <div class="key-subtitle">
         버터나이프크루는 청년 스스로 성평등한 문화를 만들어가기 위해 고민하고 제안하는 모둠입니다.
-        <br class="visible-md visible-lg" />
+        <br />
         2020년 버터나이프크루 2기 활동이 곧 업데이트 될 예정입니다.
-      </div>
-      <div class="key-visual">
-        <img src="<c:url value='/images/key-visual-butter.png'/>" />
       </div>
     </div>
   </section>

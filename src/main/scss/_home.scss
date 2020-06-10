@@ -1,42 +1,61 @@
 body.body-home {
   .section-main-key-visual {
-    margin-top: -40px;
     background-color: $brand-background;
+    position: relative;
     &::before {
+      content: "" ;
+      background-image: url(/images/key-visual-butter.png);
+      position: absolute;
+      opacity: 0.4;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 0;
       @media (min-width: $screen-sm-min) {
-        content: " ";
-        position: absolute;
         width: 385px;
         height: 370px;
-        opacity: 0.4;
-        background-image: url(/images/key-visual-butter.png);
-        background-size: contain;
-        // top: 184px;
         transform: translateY(74px);
         left: 55%;
-        background-repeat: no-repeat;
+      }
+      @media (max-width: $screen-xs-max) {
+        top: 16px;
+        right: 16px;
+        opacity: 0.4;
+        width: 158px;
+        height: 150px;
+      }
+    }
+    > .container{
+      z-index: 1;
+      position: relative;
+      @media (min-width: $screen-sm-min) {
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
       }
     }
     .key-title {
       font-size: 52px;
-      letter-spacing: -2.9px;
+      letter-spacing: -1px;
       font-weight: bold;
       color: white;
-      margin-top: 80px;
+      // margin-top: 80px;
       margin-bottom: 40px;
       line-height: 1.21;
       @media (max-width: $screen-xs-max) {
         font-size: 24px;
-        margin-top: 100px;
+        margin-top: 40px;
+        margin-bottom: 16px;
       }
     }
     .key-subtitle {
       font-size: 18px;
       color: $gray-lighter;
-      margin-bottom: 180px;
+      // margin-bottom: 180px;
       @media (max-width: $screen-xs-max) {
         font-size: 12px;
-        margin-bottom: 12px;
+        margin-bottom: 40px;
       }
     }
     .key-btn {
@@ -49,16 +68,6 @@ body.body-home {
         font-size: 14px;
         padding: 14px 0;
         margin-bottom: 35px;
-      }
-    }
-    .key-visual {
-      margin-bottom: 16px;
-      margin-left: 60px;
-      margin-right: 60px;
-      opacity: 0.4;
-      text-align: center;
-      @media (min-width: $screen-sm-min) {
-        display: none;
       }
     }
   }

@@ -80,7 +80,7 @@
         <img src="${pageContext.request.contextPath}/images/butttercon-kr-logo.png">
       </a>
       <ul class="nav navbar-nav navbar-right demo-nav">
-        <li class="demo-nav-li"><a href="<c:url value='/intro.do'/>">버터나이프크루</a></li>
+        <li class="demo-nav-li"><a href="<c:url value='/intro.do'/>">1기 버터나이프크루</a></li>
         <li class="li-middle"><span class="li-middle-line">&nbsp;</span></li>
         <li class="demo-nav-li <c:if test="${controllerName eq 'Policy'}">active</c:if>"><a href="<c:url value='/policy.do'/>">1기 정책살롱</a></li>
 

@@ -1933,10 +1933,6 @@ i.mce-ico {
     font-family: 'tinymce', Arial, serif !important;
 }
 
-.header-no-margin .navbar {
-    margin-bottom: 40px;
-}
-
 @media (max-width: 767px) {
     .header-no-margin .navbar {
         margin-bottom: 0;
