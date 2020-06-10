@@ -82,14 +82,14 @@
       <ul class="nav navbar-nav navbar-right demo-nav">
         <li class="demo-nav-li"><a href="<c:url value='/intro.do'/>">버터나이프크루</a></li>
         <li class="li-middle"><span class="li-middle-line">&nbsp;</span></li>
-        <li class="demo-nav-li <c:if test="${controllerName eq 'Policy'}">active</c:if>"><a href="<c:url value='/policy.do'/>">정책살롱</a></li>
+        <li class="demo-nav-li <c:if test="${controllerName eq 'Policy'}">active</c:if>"><a href="<c:url value='/policy.do'/>">1기 정책살롱</a></li>
 
         <c:if test="${not empty loginUser}">
         <li class="demo-nav-li <c:if test="${controllerName eq 'Proposal'}">active</c:if>"><a href="<c:url value='/proposal-list.do'/>">아이디어</a></li>
         <li class="demo-nav-li <c:if test="${controllerName eq 'Butter'}">active</c:if>"><a href="<c:url value='/butter-list.do'/>">버터보드</a></li>
         </c:if>
         
-        <li class="demo-nav-li <c:if test="${controllerName eq 'Salon'}">active</c:if>"><a href="<c:url value='/content-list.do'/>" >문화살롱</a></li>
+        <li class="demo-nav-li <c:if test="${controllerName eq 'Salon'}">active</c:if>"><a href="<c:url value='/content-list.do'/>" >1기 문화살롱</a></li>
       </ul>
 
       <div class="nav-login-m">

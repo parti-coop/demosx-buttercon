@@ -11,7 +11,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="container">
       <div class="top-row">
-        <h3 class="top-row__title">문화살롱</h3>
+        <h3 class="top-row__title">1기 문화살롱</h3>
         <c:if test="${loginUser.isManager() or loginUser.isAdmin()}">
           <a
             href="<c:url value='/content-new.do'/>"

@@ -11,7 +11,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="container">
       <div class="top-row">
-        <h3 class="top-row__title">정책살롱</h3>
+        <h3 class="top-row__title">1기 정책살롱</h3>
       </div>
 
       <hr class="thick-hr" />

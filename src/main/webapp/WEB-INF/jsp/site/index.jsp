@@ -10,24 +10,18 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <section class="section-main-key-visual">
     <div class="container">
       <div class="key-title">
-        나의 삶은 달라지고 있고,
+        나와 우리의 삶에 버터 한 덩어리를 나누며
         <br />
-        우리가 변화의 흐름을 만든다
+        성평등한 사회의 모습을 그려간다
       </div>
       <div class="key-subtitle">
-        버터나이프크루는 우리의 달라진 삶에 필요한 정책을 제안하고(정책살롱)
+        버터나이프크루는 청년 스스로 성평등한 문화를 만들어가기 위해 고민하고 제안하는 모둠입니다.
         <br class="visible-md visible-lg" />
-        우리의 달라진 삶을 반영하는 문화혁신사업(문화살롱)을 진행하는
-        청년참여플랫폼입니다.
+        2020년 버터나이프크루 2기 활동이 곧 업데이트 될 예정입니다.
       </div>
       <div class="key-visual">
         <img src="<c:url value='/images/key-visual-butter.png'/>" />
       </div>
-      <a
-        href="<c:url value='/intro.do'/>"
-        class="btn demo-btn demo-btn--primary key-btn"
-        >자세히보기</a
-      >
     </div>
   </section>
   <c:if test="${not SHOW_BANNER}">
@@ -51,7 +45,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       <div class="main-card-list">
         <div class="main-card-list-lead">
           <div class="main-card-list-lead-title-container">
-            <div class="main-card-list-lead-title">정책살롱</div>
+            <div class="main-card-list-lead-title">1기 정책살롱</div>
             <div class="main-card-list-lead-subtitle">
               청년의 달라진 삶에 필요한 정책제안
             </div>
@@ -146,7 +140,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="main-card-list">
           <div class="main-card-list-lead">
             <div class="main-card-list-lead-title-container">
-              <div class="main-card-list-lead-title">문화살롱</div>
+              <div class="main-card-list-lead-title">1기 문화살롱</div>
               <div class="main-card-list-lead-subtitle">
                 청년의 달라진 삶을 콘텐츠로 표현하는 문화혁신사업
               </div>
