@@ -18,7 +18,7 @@
 <div class="container">
   <div class="top-row clearfix">
     <div class="top-left">
-      <h3 class="top-row__title">1기 버터나이프크루</h3>
+      <h3 class="top-row__title">버터나이프크루 1기</h3>
     </div>
   </div>
 
