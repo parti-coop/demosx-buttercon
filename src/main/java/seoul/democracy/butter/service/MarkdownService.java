@@ -22,10 +22,10 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 @Service
 public class MarkdownService {
@@ -34,6 +34,7 @@ public class MarkdownService {
     final Parser PARSER = Parser.builder(OPTIONS).build();
     final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
     public static final DataKey<String> TOC_HTML = new DataKey<>("TOC_HTML", "");
+    private static final Map<String, String> res = new WeakHashMap<String, String>();
 
     static class CustomNodeRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
@@ -102,7 +103,6 @@ public class MarkdownService {
         Document document = PARSER.parse("[TOC levels=1-3] \n" + md);
         String html = RENDERER.render(document);
         String toc = TOC_HTML.getFrom(document);
-        Map<String, String> res = new HashMap<String, String>();
         res.put("html", html);
         res.put("toc", toc);
         return res;

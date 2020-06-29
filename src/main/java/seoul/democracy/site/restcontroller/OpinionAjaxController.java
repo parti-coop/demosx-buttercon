@@ -23,17 +23,19 @@ import static seoul.democracy.opinion.predicate.OpinionPredicate.equalIssueIdAnd
 import static seoul.democracy.opinion.predicate.OpinionPredicate.predicateForParentOpinionList;
 import static seoul.democracy.opinion.predicate.OpinionPredicate.equalId;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 @RestController
 public class OpinionAjaxController {
 
     private final OpinionService opinionService;
+    private final Map<String, Object> content;
 
     @Autowired
     public OpinionAjaxController(OpinionService opinionService) {
         this.opinionService = opinionService;
+        content = new WeakHashMap<String, Object>();
     }
 
     @RequestMapping(value = "/ajax/opinions", method = RequestMethod.GET)
@@ -52,8 +54,6 @@ public class OpinionAjaxController {
     @RequestMapping(value = "/ajax/mypage/opinions/{id}", method = RequestMethod.PUT)
     public ResultInfo updateOpinion(@RequestBody @Valid OpinionUpdateDto updateDto) {
         Opinion opinion = opinionService.updateOpinion(updateDto);
-
-        Map<String, Object> content = new HashMap<String, Object>();
         content.put("opinion", opinionService.getOpinion(equalId(opinion.getId()), projectionForIssueDetail));
         return ResultInfo.of("의견을 등록하였습니다.", content);
     }
@@ -68,8 +68,6 @@ public class OpinionAjaxController {
     @RequestMapping(value = "/ajax/mypage/opinions/{id}/child-opinion", method = RequestMethod.POST)
     public ResultInfo createOpinion(@RequestBody @Valid ChildOpinionCreateDto childOpinionCreateDto) {
         Opinion opinion = opinionService.createOpinion(childOpinionCreateDto);
-
-        Map<String, Object> content = new HashMap<String, Object>();
         content.put("opinion", opinionService.getOpinion(equalId(opinion.getId()), projectionForIssueDetail));
         return ResultInfo.of("의견을 등록하였습니다.", content);
     }

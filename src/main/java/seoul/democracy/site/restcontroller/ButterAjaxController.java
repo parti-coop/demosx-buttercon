@@ -41,20 +41,29 @@ public class ButterAjaxController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResultRedirectInfo newButter(@RequestBody @Valid ButterCreateDto createDto) throws Exception {
         Butter butter = butterService.create(createDto);
-        return ResultRedirectInfo.of("보드가 개설되었습니다.", "/butter.do?id=" + butter.getId());
+        try {
+            return ResultRedirectInfo.of("보드가 개설되었습니다.", "/butter.do?id=" + butter.getId());
+        } catch (Error error) {
+            return ResultRedirectInfo.of(error.getMessage(), null);
+        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResultRedirectInfo editButter(@PathVariable("id") Long id, @RequestBody @Valid ButterUpdateDto dto) {
-        IssueHistoryDto recentHistory = issueHistoryService.getHistory(IssueHistoryPredicate.byIssueId(id),
-                IssueHistoryDto.projectionForSite);
-        if (!recentHistory.getId().equals(dto.getRecentHistoryId())) {
-            Long afterId = issueHistoryService.saveTempHistory(dto).getId();
-            return ResultRedirectInfo.of("다른 사람과 동시에 버터를 추가했습니다. '확인'을 눌러 다시 버터를 추가해주세요.",
-                    "/butter-conflict.do?" + "afterId=" + afterId + "&beforeId=" + recentHistory.getId());
+        try {
+            IssueHistoryDto recentHistory = issueHistoryService.getHistory(IssueHistoryPredicate.byIssueId(id),
+                    IssueHistoryDto.projectionForSite);
+            if (!recentHistory.getId().equals(dto.getRecentHistoryId())) {
+                Long afterId = issueHistoryService.saveTempHistory(dto).getId();
+                return ResultRedirectInfo.of("다른 사람과 동시에 버터를 추가했습니다. '확인'을 눌러 다시 버터를 추가해주세요.",
+                        "/butter-conflict.do?" + "afterId=" + afterId + "&beforeId=" + recentHistory.getId());
+            }
+            butterService.update(dto);
+            return ResultRedirectInfo.of("보드가 수정되었습니다.", "/butter.do?id=" + id);
+        } catch (Error error) {
+            return ResultRedirectInfo.of(error.getMessage(), null);
         }
-        butterService.update(dto);
-        return ResultRedirectInfo.of("보드가 수정되었습니다.", "/butter.do?id=" + id);
+
     }
 
     @RequestMapping(value = "/maker", method = RequestMethod.GET)
@@ -64,7 +73,11 @@ public class ButterAjaxController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResultRedirectInfo deleteButter(@PathVariable("id") Long id) {
-        butterService.remove(id);
-        return ResultRedirectInfo.of("버터를 삭제하였습니다.", "/butter-list.do");
+        try {
+            butterService.remove(id);
+            return ResultRedirectInfo.of("버터를 삭제하였습니다.", "/butter-list.do");
+        } catch (Error error) {
+            return ResultRedirectInfo.of(error.getMessage(), null);
+        }
     }
 }
