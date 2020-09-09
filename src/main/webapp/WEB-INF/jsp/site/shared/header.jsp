@@ -6,8 +6,8 @@
   <c:if test="${SHOW_BANNER}">
   <div class="header-banner-img-pc">
     <a href="https://2019.butterknifecrew.kr" rel="noopener noreferrer" target="_blank">
-      <img 
-        src="/images/onlinereport-bn-pc.jpg" 
+      <img
+        src="/images/onlinereport-bn-pc.jpg"
         srcset="/images/onlinereport-bn-pc@2x.jpg 2x,
                 /images/onlinereport-bn-pc@3x.jpg 3x"
         alt="banner" />
@@ -52,7 +52,7 @@
   <c:if test="${SHOW_BANNER}">
   <div class="header-banner-img-mobile">
     <a href="https://2019.butterknifecrew.kr" rel="noopener noreferrer" target="_blank">
-      <img 
+      <img
         src="/images/onlinereport-bn-mobile.jpg"
         srcset="/images/onlinereport-bn-mobile@2x.jpg 2x,
                 /images/onlinereport-bn-mobile@3x.jpg 3x"
@@ -88,7 +88,7 @@
         <li class="demo-nav-li <c:if test="${controllerName eq 'Proposal'}">active</c:if>"><a href="<c:url value='/proposal-list.do'/>">아이디어</a></li>
         <li class="demo-nav-li <c:if test="${controllerName eq 'Butter'}">active</c:if>"><a href="<c:url value='/butter-list.do'/>">버터보드</a></li>
         </c:if>
-        
+
         <li class="demo-nav-li <c:if test="${controllerName eq 'Salon'}">active</c:if>"><a href="<c:url value='/content-list.do'/>" >1기 문화살롱</a></li>
       </ul>
 
