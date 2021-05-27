@@ -29,7 +29,7 @@
     <repositories>
         <repository>
             <id>mvn2</id>
-            <url>http://repo1.maven.org/maven2/</url>
+            <url>https://repo1.maven.org/maven2/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -39,7 +39,7 @@
         </repository>
         <repository>
             <id>egovframe</id>
-            <url>http://www.egovframe.go.kr/maven/</url>
+            <url>https://www.egovframe.go.kr/maven/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -49,7 +49,7 @@
         </repository>
         <repository>
             <id>egovframe2</id>
-            <url>http://maven.egovframe.kr:8080/maven/</url>
+            <url>https://maven.egovframe.kr:8080/maven/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -218,7 +218,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
         <!-- Lombok 라이브러리 end -->
@@ -349,6 +349,11 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
             </plugin>
             <plugin>
                 <groupId>com.mysema.maven</groupId>
